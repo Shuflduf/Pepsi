@@ -9,6 +9,11 @@ func _ready() -> void:
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _process(delta: float) -> void:
+    $UI/AnimatedSprite2D.play(&"default")
+    $UI/AnimatedSprite2D.animation_finished.connect(func():
+        $UI/TextureProgressBar.show()
+        $UI/AnimatedSprite2D.hide()
+    )
     pepsi_bar.value -= delta * 10
 
 func is_on_floor() -> bool:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://x5imp75aoum8"]
+[gd_scene load_steps=23 format=3 uid="uid://x5imp75aoum8"]
 
 [ext_resource type="Texture2D" uid="uid://bn8wfhbs1omgo" path="res://assets/Dark/texture_08.png" id="1_f3sb7"]
 [ext_resource type="Texture2D" uid="uid://dkt0twn82vf1n" path="res://assets/SkyHDR.hdr" id="1_fj7yv"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://d1pngnbnlosda" path="res://player.gd" id="3_dwbse"]
 [ext_resource type="Texture2D" uid="uid://cc1v7urw42nfy" path="res://label.png" id="4_dwbse"]
 [ext_resource type="Texture2D" uid="uid://cnay37dnqewaa" path="res://justpepsi.png" id="5_pkg7o"]
+[ext_resource type="Texture2D" uid="uid://bqojouv1yet5h" path="res://pepsi-reload.png" id="7_pkg7o"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_tlwt5"]
 panorama = ExtResource("1_fj7yv")
@@ -24,6 +25,77 @@ albedo_texture = ExtResource("1_f3sb7")
 uv1_triplanar = true
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_f3sb7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pkg7o"]
+atlas = ExtResource("7_pkg7o")
+region = Rect2(0, 0, 192, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbfbk"]
+atlas = ExtResource("7_pkg7o")
+region = Rect2(192, 0, 192, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ioo17"]
+atlas = ExtResource("7_pkg7o")
+region = Rect2(384, 0, 192, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wse8f"]
+atlas = ExtResource("7_pkg7o")
+region = Rect2(576, 0, 192, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ic0uy"]
+atlas = ExtResource("7_pkg7o")
+region = Rect2(768, 0, 192, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3n1d"]
+atlas = ExtResource("7_pkg7o")
+region = Rect2(960, 0, 192, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2o6r5"]
+atlas = ExtResource("7_pkg7o")
+region = Rect2(1152, 0, 192, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70uel"]
+atlas = ExtResource("7_pkg7o")
+region = Rect2(1344, 0, 192, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hiqwa"]
+atlas = ExtResource("7_pkg7o")
+region = Rect2(1536, 0, 192, 108)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2u3nc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pkg7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbfbk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ioo17")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wse8f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ic0uy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3n1d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2o6r5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70uel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hiqwa")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
 
 [node name="World" type="Node3D"]
 
@@ -63,6 +135,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="RigidBody3D/UI"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -76,3 +149,9 @@ nine_patch_stretch = true
 texture_under = ExtResource("3_036b0")
 texture_over = ExtResource("4_dwbse")
 texture_progress = ExtResource("5_pkg7o")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody3D/UI"]
+scale = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_2u3nc")
+autoplay = "default"
+centered = false
