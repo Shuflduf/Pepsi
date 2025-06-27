@@ -1,12 +1,14 @@
-[gd_scene load_steps=23 format=3 uid="uid://x5imp75aoum8"]
+[gd_scene load_steps=29 format=3 uid="uid://x5imp75aoum8"]
 
 [ext_resource type="Texture2D" uid="uid://bn8wfhbs1omgo" path="res://assets/Dark/texture_08.png" id="1_f3sb7"]
 [ext_resource type="Texture2D" uid="uid://dkt0twn82vf1n" path="res://assets/SkyHDR.hdr" id="1_fj7yv"]
-[ext_resource type="Texture2D" uid="uid://dc17exomgurud" path="res://bottle.png" id="3_036b0"]
 [ext_resource type="Script" uid="uid://d1pngnbnlosda" path="res://player.gd" id="3_dwbse"]
-[ext_resource type="Texture2D" uid="uid://cc1v7urw42nfy" path="res://label.png" id="4_dwbse"]
-[ext_resource type="Texture2D" uid="uid://cnay37dnqewaa" path="res://justpepsi.png" id="5_pkg7o"]
+[ext_resource type="Texture2D" uid="uid://dg533gdwtw26c" path="res://pepsi-main-bot.png" id="4_gbfbk"]
+[ext_resource type="Texture2D" uid="uid://67e0nm3qrtbk" path="res://pepsi-main-top.png" id="5_ioo17"]
+[ext_resource type="Texture2D" uid="uid://ca2x7o7cqojsr" path="res://pepsi-main-mid.png" id="6_wse8f"]
 [ext_resource type="Texture2D" uid="uid://bqojouv1yet5h" path="res://pepsi-reload.png" id="7_pkg7o"]
+[ext_resource type="Texture2D" uid="uid://dpj0i26fceapb" path="res://pepsi-main.png" id="8_gbfbk"]
+[ext_resource type="Texture2D" uid="uid://b1o773b0l7l3a" path="res://pepsi-throw.png" id="9_ioo17"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_tlwt5"]
 panorama = ExtResource("1_fj7yv")
@@ -62,6 +64,22 @@ region = Rect2(1344, 0, 192, 108)
 atlas = ExtResource("7_pkg7o")
 region = Rect2(1536, 0, 192, 108)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2u3nc"]
+atlas = ExtResource("9_ioo17")
+region = Rect2(0, 0, 192, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_udxuc"]
+atlas = ExtResource("9_ioo17")
+region = Rect2(192, 0, 192, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ikiii"]
+atlas = ExtResource("9_ioo17")
+region = Rect2(384, 0, 192, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbp6q"]
+atlas = ExtResource("9_ioo17")
+region = Rect2(576, 0, 192, 108)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_2u3nc"]
 animations = [{
 "frames": [{
@@ -91,9 +109,29 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hiqwa")
+}, {
+"duration": 1.2,
+"texture": ExtResource("8_gbfbk")
 }],
 "loop": false,
-"name": &"default",
+"name": &"reload",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2u3nc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_udxuc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ikiii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbp6q")
+}],
+"loop": false,
+"name": &"throw",
 "speed": 12.0
 }]
 
@@ -134,7 +172,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="RigidBody3D/UI"]
+[node name="PepsiBar" type="TextureProgressBar" parent="RigidBody3D/UI"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -143,15 +182,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 step = 0.0
-value = 70.0
+value = 61.0
 fill_mode = 3
 nine_patch_stretch = true
-texture_under = ExtResource("3_036b0")
-texture_over = ExtResource("4_dwbse")
-texture_progress = ExtResource("5_pkg7o")
+texture_under = ExtResource("4_gbfbk")
+texture_over = ExtResource("5_ioo17")
+texture_progress = ExtResource("6_wse8f")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody3D/UI"]
+[node name="PepsiAnim" type="AnimatedSprite2D" parent="RigidBody3D/UI"]
+unique_name_in_owner = true
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_2u3nc")
-autoplay = "default"
+animation = &"throw"
+frame = 3
+frame_progress = 1.0
 centered = false
+
+[connection signal="animation_finished" from="RigidBody3D/UI/PepsiAnim" to="RigidBody3D" method="_on_pepsi_anim_animation_finished"]
