@@ -4,9 +4,14 @@ extends RigidBody3D
 
 @export var mouse_sens: float = 0.01
 
+enum PepsiState {
+    Melee,
+    Ranged
+}
+
 var is_pepsi_ready = false
 var ammo = 100
-
+var current_state = PepsiState.Ranged
 
 func _ready() -> void:
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -37,10 +42,22 @@ func is_on_floor() -> bool:
 
 func _unhandled_key_input(event: InputEvent) -> void:
     if event.is_pressed():
+        if event.is_action_pressed("switch"):
+            switch_state()
         if event.is_action_pressed("jump") and is_on_floor():
             apply_central_impulse(Vector3.UP * 5)
         if event.is_action_pressed("ui_cancel"):
             Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED else Input.MOUSE_MODE_CAPTURED
+
+func switch_state():
+    is_pepsi_ready = false
+    match current_state:
+        PepsiState.Ranged:
+            %PepsiAnim.play(&"switch_melee")
+            current_state = PepsiState.Melee
+        PepsiState.Melee:
+            %PepsiAnim.play(&"switch_ranged")
+            current_state = PepsiState.Ranged
 
 func _input(event: InputEvent) -> void:
     if event is InputEventMouseMotion:
@@ -58,3 +75,7 @@ func _on_pepsi_anim_animation_finished() -> void:
             %PepsiAnim.hide()
         &"throw":
             %PepsiAnim.play(&"reload")
+        &"switch_melee":
+            is_pepsi_ready = true
+        &"switch_ranged":
+            is_pepsi_ready = true
