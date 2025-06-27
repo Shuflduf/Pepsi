@@ -54,9 +54,7 @@ func _on_pepsi_anim_animation_finished() -> void:
     match %PepsiAnim.animation:
         &"reload":
             is_pepsi_ready = true
-
             %PepsiBar.show()
             %PepsiAnim.hide()
         &"throw":
-
             %PepsiAnim.play(&"reload")
