@@ -1,16 +1,18 @@
-[gd_scene load_steps=41 format=3 uid="uid://x5imp75aoum8"]
+[gd_scene load_steps=44 format=3 uid="uid://x5imp75aoum8"]
 
-[ext_resource type="Texture2D" uid="uid://bn8wfhbs1omgo" path="res://assets/Dark/texture_08.png" id="1_f3sb7"]
-[ext_resource type="Texture2D" uid="uid://dkt0twn82vf1n" path="res://assets/SkyHDR.hdr" id="1_fj7yv"]
+[ext_resource type="Texture2D" uid="uid://bn8wfhbs1omgo" path="res://Assets/Proto/Dark/texture_08.png" id="1_f3sb7"]
+[ext_resource type="Texture2D" uid="uid://dkt0twn82vf1n" path="res://Assets/Proto/SkyHDR.hdr" id="1_fj7yv"]
 [ext_resource type="Script" uid="uid://d1pngnbnlosda" path="res://player.gd" id="3_dwbse"]
-[ext_resource type="Texture2D" uid="uid://dg533gdwtw26c" path="res://pepsi-main-bot.png" id="4_gbfbk"]
-[ext_resource type="Texture2D" uid="uid://67e0nm3qrtbk" path="res://pepsi-main-top.png" id="5_ioo17"]
-[ext_resource type="Texture2D" uid="uid://ca2x7o7cqojsr" path="res://pepsi-main-mid.png" id="6_wse8f"]
-[ext_resource type="Texture2D" uid="uid://bqojouv1yet5h" path="res://pepsi-reload.png" id="7_pkg7o"]
-[ext_resource type="Texture2D" uid="uid://dpj0i26fceapb" path="res://pepsi-main.png" id="8_gbfbk"]
-[ext_resource type="Texture2D" uid="uid://dxp802ixqp22u" path="res://pepsi-switch-melee.png" id="9_ic0uy"]
-[ext_resource type="Texture2D" uid="uid://b1o773b0l7l3a" path="res://pepsi-throw.png" id="9_ioo17"]
-[ext_resource type="Texture2D" uid="uid://dspixngjnh5ld" path="res://pepsi-switch_ranged.png" id="10_k3n1d"]
+[ext_resource type="Texture2D" uid="uid://dg533gdwtw26c" path="res://Assets/Pepsi/Ranged/ranged_bottom.png" id="4_gbfbk"]
+[ext_resource type="Texture2D" uid="uid://67e0nm3qrtbk" path="res://Assets/Pepsi/Ranged/ranged_top.png" id="5_ioo17"]
+[ext_resource type="Texture2D" uid="uid://ca2x7o7cqojsr" path="res://Assets/Pepsi/Ranged/ranged_progress.png" id="6_wse8f"]
+[ext_resource type="Texture2D" uid="uid://kki6ye2t3td8" path="res://Assets/Pepsi/Melee/melee_top.png" id="7_2o6r5"]
+[ext_resource type="Texture2D" uid="uid://bqojouv1yet5h" path="res://Assets/Pepsi/reload_catch.png" id="7_pkg7o"]
+[ext_resource type="Texture2D" uid="uid://fx0hj5prfmvd" path="res://Assets/Pepsi/Melee/melee_bottom.png" id="8_70uel"]
+[ext_resource type="Texture2D" uid="uid://dbrre64pa558e" path="res://Assets/Pepsi/Melee/melee_progress.png" id="9_hiqwa"]
+[ext_resource type="Texture2D" uid="uid://dxp802ixqp22u" path="res://Assets/Pepsi/switch_melee.png" id="9_ic0uy"]
+[ext_resource type="Texture2D" uid="uid://b1o773b0l7l3a" path="res://Assets/Pepsi/reload_throw.png" id="9_ioo17"]
+[ext_resource type="Texture2D" uid="uid://dspixngjnh5ld" path="res://Assets/Pepsi/switch_ranged.png" id="10_k3n1d"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_tlwt5"]
 panorama = ExtResource("1_fj7yv")
@@ -65,6 +67,8 @@ region = Rect2(1344, 0, 192, 108)
 [sub_resource type="AtlasTexture" id="AtlasTexture_hiqwa"]
 atlas = ExtResource("7_pkg7o")
 region = Rect2(1536, 0, 192, 108)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wse8f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_26xuy"]
 atlas = ExtResource("9_ic0uy")
@@ -153,7 +157,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_hiqwa")
 }, {
 "duration": 1.2,
-"texture": ExtResource("8_gbfbk")
+"texture": SubResource("CompressedTexture2D_wse8f")
 }],
 "loop": false,
 "name": &"reload",
@@ -232,21 +236,23 @@ use_collision = true
 size = Vector3(30, 1000, 30)
 material = SubResource("StandardMaterial3D_fj7yv")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
+[node name="Player" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 1.3, 0)
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("3_dwbse")
+ranged_textures = Array[Texture2D]([ExtResource("4_gbfbk"), ExtResource("5_ioo17"), ExtResource("6_wse8f")])
+melee_textures = Array[Texture2D]([ExtResource("7_2o6r5"), ExtResource("8_70uel"), ExtResource("9_hiqwa")])
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 shape = SubResource("CylinderShape3D_f3sb7")
 
-[node name="CamPivot" type="Node3D" parent="RigidBody3D"]
+[node name="CamPivot" type="Node3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
-[node name="Camera3D" type="Camera3D" parent="RigidBody3D/CamPivot"]
+[node name="Camera3D" type="Camera3D" parent="Player/CamPivot"]
 
-[node name="UI" type="Control" parent="RigidBody3D"]
+[node name="UI" type="Control" parent="Player"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -254,7 +260,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PepsiBar" type="TextureProgressBar" parent="RigidBody3D/UI"]
+[node name="PepsiBar" type="TextureProgressBar" parent="Player/UI"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -267,15 +273,12 @@ step = 0.0
 value = 61.0
 fill_mode = 3
 nine_patch_stretch = true
-texture_under = ExtResource("4_gbfbk")
-texture_over = ExtResource("5_ioo17")
-texture_progress = ExtResource("6_wse8f")
 
-[node name="PepsiAnim" type="AnimatedSprite2D" parent="RigidBody3D/UI"]
+[node name="PepsiAnim" type="AnimatedSprite2D" parent="Player/UI"]
 unique_name_in_owner = true
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_2u3nc")
-animation = &"throw"
+animation = &"switch_melee"
 centered = false
 
-[connection signal="animation_finished" from="RigidBody3D/UI/PepsiAnim" to="RigidBody3D" method="_on_pepsi_anim_animation_finished"]
+[connection signal="animation_finished" from="Player/UI/PepsiAnim" to="Player" method="_on_pepsi_anim_animation_finished"]

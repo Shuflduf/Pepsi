@@ -1,8 +1,10 @@
 extends RigidBody3D
 
 @onready var ui: Control = $UI
-
 @export var mouse_sens: float = 0.01
+
+@export var ranged_textures: Array[Texture2D]
+@export var melee_textures: Array[Texture2D]
 
 enum PepsiState {
     Melee,
@@ -14,6 +16,7 @@ var ammo = 100
 var current_state = PepsiState.Ranged
 
 func _ready() -> void:
+    switch_texture_set(PepsiState.Ranged)
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
     %PepsiAnim.play(&"reload")
 
@@ -22,6 +25,12 @@ func _process(delta: float) -> void:
         ammo -= delta * 50
         check_ammo()
     refresh_pepsi_bar()
+
+func switch_texture_set(state: PepsiState):
+    var texture_set = ranged_textures if state == PepsiState.Ranged else melee_textures
+    %PepsiBar.texture_under = texture_set[0]
+    %PepsiBar.texture_over = texture_set[1]
+    %PepsiBar.texture_progress = texture_set[2]
 
 func check_ammo():
     if ammo < 0:
@@ -51,6 +60,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 func switch_state():
     is_pepsi_ready = false
+    print("switching")
     match current_state:
         PepsiState.Ranged:
             %PepsiAnim.play(&"switch_melee")
@@ -77,5 +87,9 @@ func _on_pepsi_anim_animation_finished() -> void:
             %PepsiAnim.play(&"reload")
         &"switch_melee":
             is_pepsi_ready = true
+            %PepsiBar.show()
+            %PepsiAnim.hide()
         &"switch_ranged":
             is_pepsi_ready = true
+            %PepsiBar.show()
+            %PepsiAnim.hide()
