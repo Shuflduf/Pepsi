@@ -17,11 +17,37 @@ var current_state = PepsiState.Ranged
 
 func _ready() -> void:
     switch_texture_set(PepsiState.Ranged)
+    print(test())
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
     %PepsiAnim.play(&"reload")
 
+func test():
+    var img = %PepsiBar.texture_progress.get_image()
+
+    var width = img.get_width()
+    var height = img.get_height()
+
+
+    var min_y = height
+    var max_y = 0
+    var has_visible_pixel = false
+
+    for y in range(height):
+        for x in range(width):
+            var color = img.get_pixel(x, y)
+
+            if color.a > 0:
+                has_visible_pixel = true
+                min_y = min(min_y, y)
+                max_y = max(max_y, y)
+
+    if not has_visible_pixel:
+        return [0, 0]
+
+    return [min_y, max_y]
+
 func _process(delta: float) -> void:
-    if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and is_pepsi_ready:
+    if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and is_pepsi_ready and current_state == PepsiState.Ranged:
         ammo -= delta * 50
         check_ammo()
     refresh_pepsi_bar()
@@ -61,6 +87,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func switch_state():
     is_pepsi_ready = false
     print("switching")
+    %PepsiBar.hide()
+    %PepsiAnim.show()
     match current_state:
         PepsiState.Ranged:
             %PepsiAnim.play(&"switch_melee")
@@ -89,7 +117,9 @@ func _on_pepsi_anim_animation_finished() -> void:
             is_pepsi_ready = true
             %PepsiBar.show()
             %PepsiAnim.hide()
+            switch_texture_set(PepsiState.Melee)
         &"switch_ranged":
             is_pepsi_ready = true
             %PepsiBar.show()
             %PepsiAnim.hide()
+            switch_texture_set(PepsiState.Ranged)
