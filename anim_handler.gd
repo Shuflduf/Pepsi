@@ -1,10 +1,18 @@
-extends Node2D
+extends Control
 
-var value = 80
+signal animation_finished(anim_name: StringName)
+
+@export_range(0.0, 100.0, 1.0) var value = 80:
+    set(new):
+        value = new
+        calc_progress_value()
 
 var top_pixel = 0
 var bottom_pixel = 0
 var reg_height = 0
+
+func play_anim(anim_name: StringName):
+    %Sprites.play(anim_name)
 
 func calc_progress_value():
     var progress_height = bottom_pixel - top_pixel
@@ -17,19 +25,25 @@ func _on_animated_sprite_2d_frame_changed() -> void:
         %Sprites.animation,
         %Sprites.frame,
     )
+
+    if tex == null:
+        %Bar.texture_under = null
+        %Bar.texture_over = null
+        %Bar.texture_progress = null
+        return
+
     var atlas = AtlasTexture.new()
     atlas.atlas = tex
 
-    reg_height = tex.get_height() / 3
+    reg_height = tex.get_height() / 3.0
     var reg_width = tex.get_width()
     var textures: Array[AtlasTexture] = []
     textures.resize(3)
 
     for i in 3:
         var start = Vector2i(0, reg_height * i)
-        var size = Vector2i(reg_width, reg_height)
-        #var region = img.get_region()
-        atlas.region = Rect2i(start, size)
+        var reg_size = Vector2i(reg_width, reg_height)
+        atlas.region = Rect2i(start, reg_size)
         textures[i] = atlas.duplicate()
         var is_progress_layer = i == 1
         if is_progress_layer:
@@ -59,3 +73,7 @@ func get_bounds(atlas_tex: AtlasTexture):
             if color.a > 0:
                 top_pixel = min(top_pixel, y)
                 bottom_pixel = max(bottom_pixel, y)
+
+
+func _on_sprites_animation_finished() -> void:
+    animation_finished.emit(%Sprites.animation)

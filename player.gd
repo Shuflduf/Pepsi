@@ -1,6 +1,5 @@
 extends RigidBody3D
 
-@onready var ui: Control = $UI
 @export var mouse_sens: float = 0.01
 
 @export var ranged_textures: Array[Texture2D]
@@ -12,62 +11,27 @@ enum PepsiState {
 }
 
 var is_pepsi_ready = false
-var ammo = 100
+var ammo = 100:
+    set(value):
+        %AnimHandler.value = value
+    get():
+        return %AnimHandler.value
+
 var current_state = PepsiState.Ranged
 
 func _ready() -> void:
-    switch_texture_set(PepsiState.Ranged)
-    print(test())
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-    %PepsiAnim.play(&"reload")
-
-func test():
-    var img = %PepsiBar.texture_progress.get_image()
-
-    var width = img.get_width()
-    var height = img.get_height()
-
-
-    var min_y = height
-    var max_y = 0
-    var has_visible_pixel = false
-
-    for y in range(height):
-        for x in range(width):
-            var color = img.get_pixel(x, y)
-
-            if color.a > 0:
-                has_visible_pixel = true
-                min_y = min(min_y, y)
-                max_y = max(max_y, y)
-
-    if not has_visible_pixel:
-        return [0, 0]
-
-    return [min_y, max_y]
+    %AnimHandler.play_anim(&"reload_catch")
 
 func _process(delta: float) -> void:
     if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and is_pepsi_ready and current_state == PepsiState.Ranged:
         ammo -= delta * 50
         check_ammo()
-    refresh_pepsi_bar()
-
-func switch_texture_set(state: PepsiState):
-    var texture_set = ranged_textures if state == PepsiState.Ranged else melee_textures
-    %PepsiBar.texture_under = texture_set[0]
-    %PepsiBar.texture_over = texture_set[1]
-    %PepsiBar.texture_progress = texture_set[2]
 
 func check_ammo():
     if ammo < 0:
         is_pepsi_ready = false
-        ammo = 100
-        %PepsiBar.hide()
-        %PepsiAnim.show()
-        %PepsiAnim.play(&"throw")
-
-func refresh_pepsi_bar():
-    %PepsiBar.value = ammo * 0.6
+        %AnimHandler.play_anim(&"reload_throw")
 
 func is_on_floor() -> bool:
     if test_move(transform, Vector3.DOWN*0.1 * get_physics_process_delta_time() ):
@@ -77,24 +41,24 @@ func is_on_floor() -> bool:
 
 func _unhandled_key_input(event: InputEvent) -> void:
     if event.is_pressed():
-        if event.is_action_pressed("switch"):
+        if event.is_action_pressed(&"switch"):
             switch_state()
-        if event.is_action_pressed("jump") and is_on_floor():
+        if event.is_action_pressed(&"jump") and is_on_floor():
             apply_central_impulse(Vector3.UP * 5)
-        if event.is_action_pressed("ui_cancel"):
+        if event.is_action_pressed(&"ui_cancel"):
             Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED else Input.MOUSE_MODE_CAPTURED
 
 func switch_state():
     is_pepsi_ready = false
     print("switching")
-    %PepsiBar.hide()
-    %PepsiAnim.show()
     match current_state:
         PepsiState.Ranged:
-            %PepsiAnim.play(&"switch_melee")
+            %AnimHandler.play_anim(&"melee")
+            #%PepsiAnim.play(&"switch_melee")
             current_state = PepsiState.Melee
         PepsiState.Melee:
-            %PepsiAnim.play(&"switch_ranged")
+            %AnimHandler.play_anim(&"ranged")
+            #%PepsiAnim.play(&"switch_ranged")
             current_state = PepsiState.Ranged
 
 func _input(event: InputEvent) -> void:
@@ -105,21 +69,15 @@ func _input(event: InputEvent) -> void:
         $CamPivot.rotation.x = clamp($CamPivot.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 
 
-func _on_pepsi_anim_animation_finished() -> void:
-    match %PepsiAnim.animation:
-        &"reload":
+func _on_anim_handler_animation_finished(anim_name: StringName) -> void:
+    match anim_name:
+        &"reload_catch":
+            %AnimHandler.play_anim(&"ranged")
             is_pepsi_ready = true
-            %PepsiBar.show()
-            %PepsiAnim.hide()
-        &"throw":
-            %PepsiAnim.play(&"reload")
+        &"reload_throw":
+            ammo = 100
+            %AnimHandler.play_anim(&"reload_catch")
         &"switch_melee":
             is_pepsi_ready = true
-            %PepsiBar.show()
-            %PepsiAnim.hide()
-            switch_texture_set(PepsiState.Melee)
         &"switch_ranged":
             is_pepsi_ready = true
-            %PepsiBar.show()
-            %PepsiAnim.hide()
-            switch_texture_set(PepsiState.Ranged)
