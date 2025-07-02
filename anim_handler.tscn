@@ -1,11 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://cdiyjjw6fkmhl"]
+[gd_scene load_steps=16 format=3 uid="uid://cdiyjjw6fkmhl"]
 
-[ext_resource type="Script" uid="uid://bv80f8k3cco7a" path="res://anim_test.gd" id="1_mmt7a"]
+[ext_resource type="Script" uid="uid://bv80f8k3cco7a" path="res://anim_handler.gd" id="1_mmt7a"]
 [ext_resource type="Texture2D" uid="uid://dg533gdwtw26c" path="res://Assets/Pepsi/Ranged/ranged_bottom.png" id="2_awqen"]
 [ext_resource type="Texture2D" uid="uid://mvosktqkh4yy" path="res://Assets/Pepsi/New/reload_catch.png" id="2_mmt7a"]
 [ext_resource type="Texture2D" uid="uid://67e0nm3qrtbk" path="res://Assets/Pepsi/Ranged/ranged_top.png" id="3_mmt7a"]
 [ext_resource type="Texture2D" uid="uid://ca2x7o7cqojsr" path="res://Assets/Pepsi/Ranged/ranged_progress.png" id="4_5ipex"]
-[ext_resource type="Texture2D" uid="uid://bccy565r0nm8n" path="res://icon.svg" id="6_5ipex"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ipex"]
 atlas = ExtResource("2_mmt7a")
@@ -75,10 +74,10 @@ animations = [{
 }],
 "loop": true,
 "name": &"reload_catch",
-"speed": 1.0
+"speed": 12.0
 }]
 
-[node name="AnimTest" type="Node2D"]
+[node name="AnimHandler" type="Node2D"]
 script = ExtResource("1_mmt7a")
 
 [node name="Sprites" type="AnimatedSprite2D" parent="."]
@@ -87,7 +86,7 @@ visible = false
 sprite_frames = SubResource("SpriteFrames_d0fyo")
 animation = &"reload_catch"
 autoplay = "reload_catch"
-frame_progress = 0.0422516
+frame_progress = 0.559336
 centered = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -102,22 +101,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(6, 6)
 value = 48.0
 fill_mode = 3
 texture_under = ExtResource("2_awqen")
 texture_over = ExtResource("3_mmt7a")
 texture_progress = ExtResource("4_5ipex")
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Temp" type="Sprite2D" parent="."]
-scale = Vector2(9, 0.101563)
-texture = ExtResource("6_5ipex")
-centered = false
 
 [connection signal="frame_changed" from="Sprites" to="." method="_on_animated_sprite_2d_frame_changed"]
