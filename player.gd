@@ -5,6 +5,8 @@ extends RigidBody3D
 @export var ranged_textures: Array[Texture2D]
 @export var melee_textures: Array[Texture2D]
 
+var pepsi_pos = Vector2.ZERO
+
 enum PepsiState {
     Melee,
     Ranged
@@ -24,6 +26,7 @@ func _ready() -> void:
     %AnimHandler.play_anim(&"reload_catch")
 
 func _process(delta: float) -> void:
+    %AnimHandler.offset = lerp(%AnimHandler.offset, Vector2.ZERO, delta * 20)
     if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and is_pepsi_ready and current_state == PepsiState.Ranged:
         ammo -= delta * 50
         check_ammo()
@@ -53,16 +56,18 @@ func switch_state():
     print("switching")
     match current_state:
         PepsiState.Ranged:
-            %AnimHandler.play_anim(&"melee")
+            %AnimHandler.play_anim(&"switch_melee")
             #%PepsiAnim.play(&"switch_melee")
             current_state = PepsiState.Melee
         PepsiState.Melee:
-            %AnimHandler.play_anim(&"ranged")
+            %AnimHandler.play_anim(&"switch_ranged")
             #%PepsiAnim.play(&"switch_ranged")
             current_state = PepsiState.Ranged
 
 func _input(event: InputEvent) -> void:
     if event is InputEventMouseMotion:
+        %AnimHandler.offset -= event.relative
+
         rotate_y(-event.relative.x * mouse_sens)
 
         $CamPivot.rotate_x(-event.relative.y * mouse_sens)
@@ -79,5 +84,7 @@ func _on_anim_handler_animation_finished(anim_name: StringName) -> void:
             %AnimHandler.play_anim(&"reload_catch")
         &"switch_melee":
             is_pepsi_ready = true
+            %AnimHandler.play_anim(&"melee")
         &"switch_ranged":
             is_pepsi_ready = true
+            %AnimHandler.play_anim(&"ranged")

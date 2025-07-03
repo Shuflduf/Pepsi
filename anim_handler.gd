@@ -10,6 +10,10 @@ signal animation_finished(anim_name: StringName)
 var top_pixel = 0
 var bottom_pixel = 0
 var reg_height = 0
+var offset = Vector2.ZERO:
+    set(new):
+        offset = new
+        %Bar.position = new
 
 func play_anim(anim_name: StringName):
     %Sprites.play(anim_name)
