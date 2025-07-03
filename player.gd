@@ -1,7 +1,7 @@
 extends RigidBody3D
 
 @export var mouse_sens: float = 0.01
-
+@export var jump_height = 5.0
 @export var walking_speed = 4500.0
 @export var max_speed = 8.5
 @export var max_air_speed = 6.5
@@ -49,13 +49,12 @@ func _unhandled_key_input(event: InputEvent) -> void:
         if event.is_action_pressed(&"switch"):
             switch_state()
         if event.is_action_pressed(&"jump") and is_on_floor():
-            apply_central_impulse(Vector3.UP * 5)
+            apply_central_impulse(Vector3.UP * jump_height)
         if event.is_action_pressed(&"ui_cancel"):
             Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED else Input.MOUSE_MODE_CAPTURED
 
 func switch_state():
     is_pepsi_ready = false
-    print("switching")
     match current_state:
         PepsiState.Ranged:
             %AnimHandler.play_anim(&"switch_melee")
