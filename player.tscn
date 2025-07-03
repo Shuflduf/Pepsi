@@ -14,6 +14,7 @@
 [node name="Player" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 0, 0)
 axis_lock_angular_x = true
+axis_lock_angular_y = true
 axis_lock_angular_z = true
 script = ExtResource("1_dw050")
 ranged_textures = Array[Texture2D]([ExtResource("2_b26j0"), ExtResource("3_n7ghd"), ExtResource("4_nvl01")])
