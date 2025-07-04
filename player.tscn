@@ -1,9 +1,44 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwf57bj3pkrc2"]
+[gd_scene load_steps=11 format=3 uid="uid://dwf57bj3pkrc2"]
 
 [ext_resource type="Script" uid="uid://d1pngnbnlosda" path="res://player.gd" id="1_dw050"]
 [ext_resource type="PackedScene" uid="uid://cdiyjjw6fkmhl" path="res://anim_handler.tscn" id="8_606se"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_f3sb7"]
+
+[sub_resource type="Curve" id="Curve_onrkg"]
+_data = [Vector2(0, 0.0250001), 0.0, 0.0, 0, 0, Vector2(0.103734, 0.752809), 0.0, 0.0, 0, 0, Vector2(0.858921, 0.764045), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_i3pqv"]
+curve = SubResource("Curve_onrkg")
+
+[sub_resource type="Curve" id="Curve_i3pqv"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.481328, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_hqtel"]
+curve = SubResource("Curve_i3pqv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_onrkg"]
+direction = Vector3(0, 0, -1)
+spread = 1.0
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+alpha_curve = SubResource("CurveTexture_i3pqv")
+emission_curve = SubResource("CurveTexture_hqtel")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_onrkg"]
+transparency = 3
+alpha_hash_scale = 1.0
+alpha_antialiasing_mode = 0
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.215686, 0.145098, 0.219608, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_i3pqv"]
+material = SubResource("StandardMaterial3D_onrkg")
+radius = 0.1
+height = 0.2
 
 [node name="Player" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 0, 0)
@@ -22,6 +57,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CamPivot"]
 unique_name_in_owner = true
+
+[node name="Particles" type="GPUParticles3D" parent="CamPivot/Camera3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.999717, -0.023804, 0, 0.023804, 0.999717, 0.3, -0.1, -0.6)
+emitting = false
+amount = 128
+fixed_fps = 60
+visibility_aabb = AABB(-0.540257, -5.59772, -20.0785, 1.08778, 5.80083, 20.2681)
+process_material = SubResource("ParticleProcessMaterial_onrkg")
+draw_pass_1 = SubResource("SphereMesh_i3pqv")
 
 [node name="AnimHandler" parent="." instance=ExtResource("8_606se")]
 unique_name_in_owner = true

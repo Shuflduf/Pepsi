@@ -167,7 +167,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_mcdbq")
 }],
 "loop": false,
-"name": &"aiming",
+"name": &"firing",
 "speed": 12.0
 }, {
 "frames": [{
@@ -326,7 +326,7 @@ script = ExtResource("1_40lbf")
 unique_name_in_owner = true
 visible = false
 sprite_frames = SubResource("SpriteFrames_d0fyo")
-animation = &"unaim"
+animation = &"firing"
 centered = false
 
 [node name="Bar" type="TextureProgressBar" parent="."]
