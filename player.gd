@@ -33,6 +33,9 @@ func _process(delta: float) -> void:
         ammo -= delta * 50
         check_ammo()
 
+    if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+        swing()
+
 func check_ammo():
     if ammo < 0:
         is_pepsi_ready = false
@@ -58,12 +61,19 @@ func switch_state():
     match current_state:
         PepsiState.Ranged:
             %AnimHandler.play_anim(&"switch_melee")
-            #%PepsiAnim.play(&"switch_melee")
             current_state = PepsiState.Melee
         PepsiState.Melee:
             %AnimHandler.play_anim(&"switch_ranged")
-            #%PepsiAnim.play(&"switch_ranged")
             current_state = PepsiState.Ranged
+
+func swing():
+    if current_state != PepsiState.Melee:
+        return
+    if !is_pepsi_ready:
+        return
+
+    is_pepsi_ready = false
+    %AnimHandler.play_anim(&"swing")
 
 func _input(event: InputEvent) -> void:
     if event is InputEventMouseMotion:
@@ -89,6 +99,10 @@ func _on_anim_handler_animation_finished(anim_name: StringName) -> void:
         &"switch_ranged":
             is_pepsi_ready = true
             %AnimHandler.play_anim(&"ranged")
+        &"swing":
+            is_pepsi_ready = true
+            %AnimHandler.play_anim(&"melee")
+
 
 func _physics_process(delta: float) -> void:
     var input_dir = Input.get_vector(&"left", &"right", &"forward", &"backward")
