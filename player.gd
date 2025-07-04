@@ -11,7 +11,8 @@ var pepsi_pos = Vector2.ZERO
 
 enum PepsiState {
     Melee,
-    Ranged
+    Ranged,
+    Aiming,
 }
 
 var is_pepsi_ready = false
@@ -35,6 +36,11 @@ func _process(delta: float) -> void:
 
     if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
         swing()
+
+    if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+        aim()
+    else:
+        unaim()
 
 func check_ammo():
     if ammo < 0:
@@ -65,6 +71,26 @@ func switch_state():
         PepsiState.Melee:
             %AnimHandler.play_anim(&"switch_ranged")
             current_state = PepsiState.Ranged
+
+func aim():
+    if current_state != PepsiState.Ranged:
+        return
+    if !is_pepsi_ready:
+        return
+
+    current_state = PepsiState.Aiming
+    is_pepsi_ready = false
+    %AnimHandler.play_anim(&"aim")
+
+func unaim():
+    if current_state != PepsiState.Aiming:
+        return
+    if !is_pepsi_ready:
+        return
+
+    current_state = PepsiState.Ranged
+    is_pepsi_ready = false
+    %AnimHandler.play_anim(&"unaim")
 
 func swing():
     if current_state != PepsiState.Melee:
@@ -102,6 +128,12 @@ func _on_anim_handler_animation_finished(anim_name: StringName) -> void:
         &"swing":
             is_pepsi_ready = true
             %AnimHandler.play_anim(&"melee")
+        &"aim":
+            is_pepsi_ready = true
+            %AnimHandler.play_anim(&"aiming")
+        &"unaim":
+            is_pepsi_ready = true
+            %AnimHandler.play_anim(&"ranged")
 
 
 func _physics_process(delta: float) -> void:

@@ -1,15 +1,29 @@
-[gd_scene load_steps=43 format=3 uid="uid://cdiyjjw6fkmhl"]
+[gd_scene load_steps=48 format=3 uid="uid://cdiyjjw6fkmhl"]
 
 [ext_resource type="Script" uid="uid://bv80f8k3cco7a" path="res://anim_handler.gd" id="1_40lbf"]
 [ext_resource type="Texture2D" uid="uid://bxm2un4ij0skq" path="res://Assets/Pepsi/New/base.png" id="2_3m31n"]
 [ext_resource type="Texture2D" uid="uid://mvosktqkh4yy" path="res://Assets/Pepsi/New/reload_catch.png" id="2_84h4r"]
+[ext_resource type="Texture2D" uid="uid://b4gfs0mctu78a" path="res://Assets/Pepsi/New/aim.png" id="2_xui24"]
 [ext_resource type="Texture2D" uid="uid://dg533gdwtw26c" path="res://Assets/Pepsi/Ranged/ranged_bottom.png" id="3_3m31n"]
 [ext_resource type="Texture2D" uid="uid://cbfuoki86vuq2" path="res://Assets/Pepsi/New/reload_throw.png" id="3_84h4r"]
+[ext_resource type="Texture2D" uid="uid://cqr82mlobgoua" path="res://Assets/Pepsi/New/aiming.png" id="3_us4gn"]
 [ext_resource type="Texture2D" uid="uid://67e0nm3qrtbk" path="res://Assets/Pepsi/Ranged/ranged_top.png" id="4_1g0po"]
 [ext_resource type="Texture2D" uid="uid://csywlja6tnf3i" path="res://Assets/Pepsi/New/swing.png" id="5_kwl8m"]
 [ext_resource type="Texture2D" uid="uid://ddljhaqq8pbu0" path="res://Assets/Pepsi/New/switch_melee.png" id="5_nmq1k"]
 [ext_resource type="Texture2D" uid="uid://ca2x7o7cqojsr" path="res://Assets/Pepsi/Ranged/ranged_progress.png" id="5_u3j2m"]
 [ext_resource type="Texture2D" uid="uid://cxcpm8ka6gyal" path="res://Assets/Pepsi/New/switch_ranged.png" id="6_kwl8m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u44s7"]
+atlas = ExtResource("2_xui24")
+region = Rect2(0, 0, 192, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4s4we"]
+atlas = ExtResource("2_xui24")
+region = Rect2(192, 0, 192, 324)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcdbq"]
+atlas = ExtResource("3_us4gn")
+region = Rect2(0, 0, 192, 324)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nmq1k"]
 atlas = ExtResource("2_3m31n")
@@ -137,6 +151,25 @@ region = Rect2(768, 0, 192, 324)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_d0fyo"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u44s7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4s4we")
+}],
+"loop": false,
+"name": &"aim",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mcdbq")
+}],
+"loop": false,
+"name": &"aiming",
+"speed": 12.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_nmq1k")
@@ -267,6 +300,17 @@ animations = [{
 "loop": false,
 "name": &"switch_ranged",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4s4we")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u44s7")
+}],
+"loop": false,
+"name": &"unaim",
+"speed": 12.0
 }]
 
 [node name="AnimHandler" type="Control"]
@@ -282,7 +326,7 @@ script = ExtResource("1_40lbf")
 unique_name_in_owner = true
 visible = false
 sprite_frames = SubResource("SpriteFrames_d0fyo")
-animation = &"swing"
+animation = &"unaim"
 centered = false
 
 [node name="Bar" type="TextureProgressBar" parent="."]
