@@ -23,10 +23,17 @@ var ammo = 100:
         return %AnimHandler.value
 
 var current_state = PepsiState.Ranged
+var vision_system: VisionSystem
 
 func _ready() -> void:
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
     %AnimHandler.play_anim(&"reload_catch")
+    
+    # Initialize vision system
+    vision_system = VisionSystem.new()
+    add_child(vision_system)
+    vision_system.object_detected.connect(_on_object_detected)
+    vision_system.object_lost.connect(_on_object_lost)
 
 func _process(delta: float) -> void:
     %AnimHandler.offset = lerp(%AnimHandler.offset, Vector2.ZERO, delta * 20)
@@ -45,6 +52,55 @@ func _process(delta: float) -> void:
         aim()
     else:
         unaim()
+    
+    # Debug vision system
+    if vision_system:
+        _debug_vision_system()
+
+func _debug_vision_system():
+    if not vision_system:
+        return
+    
+    var detected_objects = vision_system.get_detected_objects()
+    DebugDraw2D.begin_text_group("vision_debug", 200, Color.CYAN, false)
+    DebugDraw2D.set_text("=== VISION SYSTEM ===", "", 0)
+    DebugDraw2D.set_text("Status", "Active", 1)
+    DebugDraw2D.set_text("Objects Detected", str(detected_objects.size()), 2)
+    DebugDraw2D.set_text("FOV Angle", str(vision_system.fov_angle) + "°", 3)
+    DebugDraw2D.set_text("Max Range", str(vision_system.max_range) + "m", 4)
+    DebugDraw2D.set_text("Press V", "Toggle visualization", 5)
+    DebugDraw2D.set_text("", "", 6)
+    
+    for i in range(min(detected_objects.size(), 5)):  # Show max 5 objects
+        var obj = detected_objects[i]
+        if obj and is_instance_valid(obj):
+            var distance = global_position.distance_to(obj.global_position)
+            DebugDraw2D.set_text("• " + obj.name, 
+                "%.1fm" % distance, 7 + i)
+    
+    DebugDraw2D.end_text_group()
+    
+    # Also show help text
+    DebugDraw2D.begin_text_group("controls", 1000, Color.WHITE, false)
+    DebugDraw2D.set_text("=== CONTROLS ===", "", 0)
+    DebugDraw2D.set_text("WASD", "Move", 1)
+    DebugDraw2D.set_text("Mouse", "Look around", 2)
+    DebugDraw2D.set_text("Space", "Jump", 3)
+    DebugDraw2D.set_text("V", "Toggle vision debug", 4)
+    DebugDraw2D.set_text("E", "Switch weapon mode", 5)
+    DebugDraw2D.set_text("Mouse L/R", "Attack/Aim", 6)
+    DebugDraw2D.end_text_group()
+
+func _on_object_detected(object: Node3D, distance: float):
+    print("Vision: Detected ", object.name, " at distance ", distance)
+
+func _on_object_lost(object: Node3D):
+    print("Vision: Lost ", object.name)
+
+func toggle_vision_debug():
+    if vision_system:
+        vision_system.show_debug_visualization = !vision_system.show_debug_visualization
+        print("Vision debug visualization: ", "ON" if vision_system.show_debug_visualization else "OFF")
 
 func check_ammo():
     if ammo < 0:
@@ -66,6 +122,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
             apply_central_impulse(Vector3.UP * jump_height)
         if event.is_action_pressed(&"ui_cancel"):
             Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED else Input.MOUSE_MODE_CAPTURED
+        if event.keycode == KEY_V:
+            toggle_vision_debug()
 
 func switch_state():
     if !is_pepsi_ready:
