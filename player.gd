@@ -87,8 +87,10 @@ func _debug_vision_system():
     DebugDraw2D.set_text("Mouse", "Look around", 2)
     DebugDraw2D.set_text("Space", "Jump", 3)
     DebugDraw2D.set_text("V", "Toggle vision debug", 4)
-    DebugDraw2D.set_text("E", "Switch weapon mode", 5)
-    DebugDraw2D.set_text("Mouse L/R", "Attack/Aim", 6)
+    DebugDraw2D.set_text("[ ]", "Adjust FOV", 5)
+    DebugDraw2D.set_text("- =", "Adjust range", 6)
+    DebugDraw2D.set_text("E", "Switch weapon mode", 7)
+    DebugDraw2D.set_text("Mouse L/R", "Attack/Aim", 8)
     DebugDraw2D.end_text_group()
 
 func _on_object_detected(object: Node3D, distance: float):
@@ -101,6 +103,16 @@ func toggle_vision_debug():
     if vision_system:
         vision_system.show_debug_visualization = !vision_system.show_debug_visualization
         print("Vision debug visualization: ", "ON" if vision_system.show_debug_visualization else "OFF")
+
+func adjust_fov(delta_fov: float):
+    if vision_system:
+        vision_system.fov_angle = clamp(vision_system.fov_angle + delta_fov, 10.0, 180.0)
+        print("FOV adjusted to: ", vision_system.fov_angle, "°")
+
+func adjust_range(delta_range: float):
+    if vision_system:
+        vision_system.max_range = clamp(vision_system.max_range + delta_range, 5.0, 50.0)
+        print("Range adjusted to: ", vision_system.max_range, "m")
 
 func check_ammo():
     if ammo < 0:
@@ -124,6 +136,14 @@ func _unhandled_key_input(event: InputEvent) -> void:
             Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED else Input.MOUSE_MODE_CAPTURED
         if event.keycode == KEY_V:
             toggle_vision_debug()
+        if event.keycode == KEY_BRACKETLEFT:
+            adjust_fov(-5.0)
+        if event.keycode == KEY_BRACKETRIGHT:
+            adjust_fov(5.0)
+        if event.keycode == KEY_MINUS:
+            adjust_range(-2.0)
+        if event.keycode == KEY_EQUAL:
+            adjust_range(2.0)
 
 func switch_state():
     if !is_pepsi_ready:
