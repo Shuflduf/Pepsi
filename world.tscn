@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://x5imp75aoum8"]
+[gd_scene load_steps=15 format=3 uid="uid://x5imp75aoum8"]
 
 [ext_resource type="Texture2D" uid="uid://bn8wfhbs1omgo" path="res://Assets/Proto/Dark/texture_08.png" id="1_f3sb7"]
 [ext_resource type="Texture2D" uid="uid://dkt0twn82vf1n" path="res://Assets/Proto/SkyHDR.hdr" id="1_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://dwf57bj3pkrc2" path="res://player.tscn" id="3_tlwt5"]
 [ext_resource type="Texture2D" uid="uid://hu5rfl6qr2nv" path="res://Assets/Proto/Red/texture_09.png" id="4_aqk2v"]
+[ext_resource type="PackedScene" uid="uid://c4ouniiwlgaal" path="res://enemy.tscn" id="5_036b0"]
+[ext_resource type="Texture2D" uid="uid://djg8y25y06h5n" path="res://Assets/Proto/Green/texture_09.png" id="6_dwbse"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_tlwt5"]
 panorama = ExtResource("1_fj7yv")
@@ -17,15 +19,25 @@ sky = SubResource("Sky_aqk2v")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_aqk2v"]
+friction = 0.0
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_036b0"]
+vertices = PackedVector3Array(-4.33606, 0.5, -8, -4.08606, 0.5, -11.75, -4.33606, 0.5, -14.25, -14.3361, 0.5, -14.25, -14.3361, 0.5, -5.75, -11.0861, 0.5, -5.75, 0.913944, 0.5, -12, 1.66394, 0.5, -10.25, 2.16394, 0.5, -11.75, 3.16394, 0.5, -12.75, 7.91394, 0.5, -10.25, 7.66394, 0.5, -9, 14.1639, 0.5, -9, 14.1639, 0.5, -14.25, 4.16394, 0.5, -12.75, 2.91394, 2.5, -9.75, 4.91394, 2.5, -8.25, 5.41394, 2.5, -8.25, 6.16394, 2.5, -9.5, 4.16394, 2.5, -11, 3.41394, 2.5, -10.75, -2.83606, 1.5, -10.5, -2.83606, 1.5, -8.75, -0.0860558, 1.5, -8.75, -0.0860558, 1.5, -10.5, 5.91394, 0.5, -6.5, 4.66394, 0.5, 5, 5.41394, 0.5, 5.5, 14.1639, 0.5, 6.75, 5.41394, 0.5, 7, 4.91394, 0.5, -6.5, -3.83606, 0.5, 4.75, -3.58606, 0.5, 5, -2.08606, 0.5, 5, -1.58606, 0.5, 5.5, -1.58606, 0.5, 7.25, -1.33606, 0.5, 7.25, -1.33606, 0.5, 5.5, -0.836056, 0.5, 5, 0.913944, 0.5, -7.25, -3.58606, 0.5, -7.25, 1.66394, 0.5, -8.5, -10.5861, 0.5, -5.5, -10.8361, 0.75, -4.25, -16.0861, 2.25, -4.25, -16.0861, 2.25, 0.25, -10.8361, 0.75, 0.25, -10.5861, 0.5, 1.25, -4.33606, 0.5, 5.5, -10.8361, 0.5, 1.75, -3.58606, 0.5, 14.25, -3.58606, 0.5, 9.75, -4.33606, 0.5, 9.25, -14.3361, 0.5, 14.25, -14.3361, 0.5, 1.75, -2.83606, 4.5, 6.5, -2.83606, 4.5, 8.25, -0.0860558, 4.5, 8.25, -0.0860558, 4.5, 6.5, 1.41394, 3.5, 6.5, 1.41394, 3.5, 8.25, 3.91394, 3.5, 8.25, 3.91394, 3.5, 6.5, 5.41394, 0.5, 9.25, 4.66394, 0.5, 9.75, 4.66394, 0.5, 14.25, 14.1639, 0.5, 14.25, -1.33606, 0.5, 9.25, -1.58606, 0.5, 9.25, -0.836056, 0.5, 9.75, -2.08606, 0.5, 9.75)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 5), PackedInt32Array(2, 5, 4), PackedInt32Array(2, 4, 3), PackedInt32Array(8, 7, 6), PackedInt32Array(9, 8, 6), PackedInt32Array(1, 2, 6), PackedInt32Array(6, 2, 9), PackedInt32Array(12, 11, 10), PackedInt32Array(12, 10, 13), PackedInt32Array(13, 10, 14), PackedInt32Array(9, 2, 14), PackedInt32Array(14, 2, 13), PackedInt32Array(20, 19, 15), PackedInt32Array(15, 19, 16), PackedInt32Array(16, 19, 17), PackedInt32Array(17, 19, 18), PackedInt32Array(24, 23, 21), PackedInt32Array(21, 23, 22), PackedInt32Array(11, 12, 25), PackedInt32Array(25, 12, 26), PackedInt32Array(26, 12, 27), PackedInt32Array(27, 12, 28), PackedInt32Array(28, 29, 27), PackedInt32Array(26, 30, 25), PackedInt32Array(33, 32, 31), PackedInt32Array(37, 36, 34), PackedInt32Array(34, 36, 35), PackedInt32Array(38, 31, 26), PackedInt32Array(26, 31, 30), PackedInt32Array(30, 31, 39), PackedInt32Array(39, 31, 40), PackedInt32Array(34, 33, 37), PackedInt32Array(37, 33, 38), PackedInt32Array(39, 41, 30), PackedInt32Array(38, 33, 31), PackedInt32Array(42, 5, 0), PackedInt32Array(46, 45, 43), PackedInt32Array(43, 45, 44), PackedInt32Array(43, 42, 47), PackedInt32Array(47, 42, 0), PackedInt32Array(47, 0, 40), PackedInt32Array(47, 40, 31), PackedInt32Array(43, 47, 46), PackedInt32Array(32, 48, 31), PackedInt32Array(31, 48, 49), PackedInt32Array(31, 49, 47), PackedInt32Array(52, 51, 50), PackedInt32Array(49, 48, 52), PackedInt32Array(49, 52, 54), PackedInt32Array(54, 52, 50), PackedInt32Array(54, 50, 53), PackedInt32Array(58, 57, 55), PackedInt32Array(55, 57, 56), PackedInt32Array(62, 61, 59), PackedInt32Array(59, 61, 60), PackedInt32Array(64, 63, 65), PackedInt32Array(65, 63, 66), PackedInt32Array(66, 63, 28), PackedInt32Array(63, 29, 28), PackedInt32Array(68, 35, 67), PackedInt32Array(67, 35, 36), PackedInt32Array(64, 65, 69), PackedInt32Array(69, 65, 50), PackedInt32Array(67, 69, 68), PackedInt32Array(68, 69, 70), PackedInt32Array(70, 69, 50), PackedInt32Array(50, 51, 70)]
+agent_height = 2.0
+agent_radius = 0.75
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fj7yv"]
 albedo_texture = ExtResource("1_f3sb7")
 uv1_triplanar = true
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_aqk2v"]
-friction = 0.0
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_036b0"]
 albedo_texture = ExtResource("4_aqk2v")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pkg7o"]
+albedo_texture = ExtResource("6_dwbse")
 uv1_triplanar = true
 
 [node name="World" type="Node3D"]
@@ -37,23 +49,60 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_036b0")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="Player" parent="." instance=ExtResource("3_tlwt5")]
+transform = Transform3D(1, 0, 0, 0, 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 1.3, 0)
+physics_material_override = SubResource("PhysicsMaterial_aqk2v")
+
+[node name="Enemy" parent="." instance=ExtResource("5_036b0")]
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Node3D"]
+navigation_mesh = SubResource("NavigationMesh_036b0")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D/NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -500, 0)
 use_collision = true
 size = Vector3(30, 1000, 30)
 material = SubResource("StandardMaterial3D_fj7yv")
 
-[node name="Player" parent="." instance=ExtResource("3_tlwt5")]
-transform = Transform3D(1, 0, 0, 0, 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 1.3, 0)
-physics_material_override = SubResource("PhysicsMaterial_aqk2v")
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+[node name="CSGBox3D2" type="CSGBox3D" parent="Node3D/NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.5, -9.6)
 use_collision = true
 size = Vector3(4, 1, 3)
 material = SubResource("StandardMaterial3D_036b0")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+[node name="CSGBox3D5" type="CSGBox3D" parent="Node3D/NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 7.4)
+use_collision = true
+size = Vector3(1, 3, 3)
+material = SubResource("StandardMaterial3D_pkg7o")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Node3D/NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.5, 7.4)
+use_collision = true
+size = Vector3(1, 3, 3)
+material = SubResource("StandardMaterial3D_pkg7o")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Node3D/NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 3.5, 7.4)
+use_collision = true
+size = Vector3(4, 1, 3)
+material = SubResource("StandardMaterial3D_pkg7o")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Node3D/NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2.5, 7.4)
+use_collision = true
+size = Vector3(4, 1, 3)
+material = SubResource("StandardMaterial3D_pkg7o")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Node3D/NavigationRegion3D"]
+transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, -12.3796, 0.269263, -1.95931)
+use_collision = true
+size = Vector3(9.47705, 1, 5.65625)
+material = SubResource("StandardMaterial3D_036b0")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Node3D/NavigationRegion3D"]
 transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 4.5, 1, -9.6)
 use_collision = true
 size = Vector3(4, 2, 3)

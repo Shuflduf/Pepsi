@@ -40,7 +40,7 @@ material = SubResource("StandardMaterial3D_onrkg")
 radius = 0.1
 height = 0.2
 
-[node name="Player" type="RigidBody3D"]
+[node name="Player" type="RigidBody3D" groups=["Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 0, 0)
 axis_lock_angular_x = true
 axis_lock_angular_y = true

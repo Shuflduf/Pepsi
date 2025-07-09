@@ -1,0 +1,130 @@
+[gd_scene load_steps=9 format=4 uid="uid://c4ouniiwlgaal"]
+
+[ext_resource type="PackedScene" uid="uid://umtp7idvlrf1" path="res://Assets/Enemies/toilet.fbx" id="1_7k104"]
+[ext_resource type="Script" uid="uid://dslttefqer12w" path="res://enemy.gd" id="1_qi2p4"]
+[ext_resource type="Texture2D" uid="uid://cmpsl73l1fpvk" path="res://Assets/texture.png" id="2_4gyqm"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qi2p4"]
+friction = 0.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_7xaro"]
+height = 3.0
+radius = 0.783203
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8us7g"]
+resource_name = "Material"
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_4gyqm")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_pvmss"]
+_surfaces = [{
+"aabb": AABB(-0.01, 0.00236186, -0.000518136, 0.02, 0.00611393, 0.0515743),
+"format": 34359742465,
+"index_count": 96,
+"index_data": PackedByteArray("BwAGAAgABgAHAAIACAAGAAMAAgADAAYACAAJAAcAAgAHAAkACgAJAAgACQALAAIACwAJAAoACAAMAAoAAgALAAAADAAIAA0AAwANAAgAAwACAAEAAAABAAIAAQAEAAMABAABAAAAAwAEAAUAAAAFAAQABQANAAMADgAAAAsABQAAAA4ACwAPAA4ACgAPAAsADgAQAAUADQAFABAAEAAOAA8AEAARAA0ADwARABAAEQAPAAoADQARAAwACgAMABEA"),
+"lods": [0.0122279, PackedByteArray("AAABAAIAAwACAAEAAQAEAAMABAABAAAAAwAEAAUAAAAFAAQABQAGAAMAAAAGAAUAAgADAAYAAAAHAAYABgAHAAIABwAAAAIA")],
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 18,
+"vertex_data": PackedByteArray("CtcjPBDeCjzmEPc7CtcjPBDeCjxIIFE9AAAAABDeCjwbMi49AAAAAHjJGjsbMi49CtcjPHjJGjtIIFE9CtcjPHjJGjvmEPc7CtcjvHjJGjtIIFE9CtcjvBDeCjxIIFE9CtcjvHjJGjvmEPc7CtcjvBDeCjzmEPc7aaiGu5E+2zuF0we6AAAAABDeCjzmEPc7aaiGu3jJGjuF0we6AAAAAHjJGjvmEPc7aaiGO5E+2zuF0we6AAAAAJE+2zuF0we6aaiGO3jJGjuF0we6AAAAAHjJGjuF0we6")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_j38ca"]
+resource_name = "Cube_004"
+_surfaces = [{
+"aabb": AABB(-0.01, 0.00236186, -0.000518136, 0.02, 0.00611393, 0.0515743),
+"attribute_data": PackedByteArray("fprrPtB2/D1+mus+wHIWPH6a6z5AMQE9fprrPsByFjx+mus+wHIWPH6a6z7AchY8fprrPtB2/D1+mus+0Hb8PX6a6z7AchY8fprrPsByFjx+mus+wHIWPH6a6z7AchY8fprrPkAxAT1+mus+QDEBPX6a6z5AMQE9fprrPkAxAT1+mus+wHIWPH6a6z7AchY8fprrPkAxAT1+mus+wHIWPH6a6z7Qdvw9fprrPsByFjx+mus+0Hb8PX6a6z7Qdvw9fprrPtB2/D1+mus+0Hb8PX6a6z7Qdvw9fprrPtB2/D1+mus+kN0TPn6a6z6Q3RM+fprrPpDdEz5+mus+kN0TPn6a6z6Q3RM+fprrPpDdEz5+mus+kN0TPn6a6z6Q3RM+fprrPpDdEz5+mus+0Hb8PX6a6z7Qdvw9fprrPpDdEz5+mus+kN0TPn6a6z7Qdvw9fprrPtB2/D1+mus+kN0TPn6a6z6Q3RM+fprrPpDdEz5+mus+0Hb8PX6a6z7Qdvw9fprrPpDdEz5+mus+kN0TPn6a6z7Qdvw9fprrPtB2/D1+mus+kN0TPg=="),
+"format": 34359742487,
+"index_count": 96,
+"index_data": PackedByteArray("CQAIABYAFgAXAAkAAAABAAIAAgAYAAAAGQAYAAIAAgADABkABAAFAAYABgAHAAQAGgAVABIAEgAbABoAHAAaABsAGwAdABwAHgAdABsAGwAUAB4AFAAbABIAEgATABQAHwAgACEAIQAiAB8AIgAhACMAIwAkACIACgALAAwADAANAAoADgAPABAAEAARAA4AJQAmACcAJwAoACUAKQAqACsAKwAsACkALQAuAC8ALwAwAC0AMQAyADMAMwA0ADEA"),
+"lods": [0.0122279, PackedByteArray("AAABAAIAAwAAAAIABAAFAAYABgAHAAQABgAIAAcABgAJAAgACgALAAwADAANAAoADgAPABAAEAARAA4AEgATABQAFAAVABIA")],
+"material": SubResource("StandardMaterial3D_8us7g"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 53,
+"vertex_data": PackedByteArray("CtcjPBDeCjzmEPc7CtcjPBDeCjxIIFE9AAAAABDeCjwbMi49CtcjvBDeCjxIIFE9CtcjPHjJGjtIIFE9CtcjPBDeCjxIIFE9CtcjPBDeCjzmEPc7CtcjPHjJGjvmEPc7CtcjvHjJGjtIIFE9CtcjvBDeCjxIIFE9CtcjvHjJGjtIIFE9CtcjvBDeCjxIIFE9AAAAABDeCjwbMi49AAAAAHjJGjsbMi49AAAAAHjJGjsbMi49AAAAABDeCjwbMi49CtcjPBDeCjxIIFE9CtcjPHjJGjtIIFE9AAAAAHjJGjsbMi49CtcjPHjJGjtIIFE9CtcjPHjJGjvmEPc7CtcjvHjJGjtIIFE9CtcjvHjJGjvmEPc7CtcjvBDeCjzmEPc7AAAAABDeCjzmEPc7CtcjvBDeCjzmEPc7CtcjvHjJGjvmEPc7AAAAAHjJGjvmEPc7aaiGu3jJGjuF0we6AAAAAHjJGjuF0we6aaiGO3jJGjuF0we6aaiGO3jJGjuF0we6aaiGO5E+2zuF0we6AAAAAJE+2zuF0we6AAAAAHjJGjuF0we6aaiGu5E+2zuF0we6aaiGu3jJGjuF0we6AAAAABDeCjzmEPc7CtcjvBDeCjzmEPc7aaiGu5E+2zuF0we6AAAAAJE+2zuF0we6CtcjPHjJGjvmEPc7CtcjPBDeCjzmEPc7aaiGO5E+2zuF0we6aaiGO3jJGjuF0we6aaiGO5E+2zuF0we6CtcjPBDeCjzmEPc7AAAAABDeCjzmEPc7AAAAAJE+2zuF0we6aaiGu5E+2zuF0we6CtcjvBDeCjzmEPc7CtcjvHjJGjvmEPc7aaiGu3jJGjuF0we6/3///////7//f///////v/9///////+//3///////7////9/////v////3////+/////f////7////9/////vwAA/3////+/AAD/f////7/puv9/////P+m6/3////8/6br/f////z/puv9/////PxVF/3////8/FUX/f////z8VRf9/////PxVF/3////8//38AAP///7//fwAA////v/9/AAD///+//38AAP///78AAP9/////vwAA/3////+//3///////7//f///////v/9/AAD///+//38AAP///7//fwAA////v/9/AAD///+//38AAP///7//////////v/////////+//////////7//////////v/////////+//////////781l///////vzWX//////+/NZf//////781l///////v///Dbb///+///8Ntv///7///w22////v///Dbb///+/NZf//////781l///////vzWX//////+/NZf//////78AAA22////vwAADbb///+/AAANtv///78AAA22////vw==")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_pvmss")
+
+[node name="Enemy" type="RigidBody3D"]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+physics_material_override = SubResource("PhysicsMaterial_qi2p4")
+script = ExtResource("1_qi2p4")
+walking_speed = 3000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_7xaro")
+
+[node name="Visuals" parent="." instance=ExtResource("1_7k104")]
+transform = Transform3D(0.531047, 0, 0, 0, 0.531047, 0, 0, 0, 0.531047, 0, -0.783574, -0.223879)
+
+[node name="Skeleton3D" parent="Visuals/Armature" index="0"]
+bones/0/position = Vector3(0, 0.00439701, 0.00108651)
+bones/0/rotation = Quaternion(1.94299e-07, 0.0640588, 0.997946, -1.24722e-08)
+bones/3/position = Vector3(-4.07079e-18, 0.00489474, 0.00858681)
+bones/3/rotation = Quaternion(6.06173e-07, 0.766622, 0.642099, 5.07712e-07)
+bones/7/rotation = Quaternion(-0.550306, 3.74499e-07, 8.70262e-07, 0.834963)
+bones/13/position = Vector3(0.00595212, 0.0309532, -0.000830134)
+bones/16/position = Vector3(-0.00595213, 0.0309532, -0.000830115)
+bones/16/rotation = Quaternion(4.90632e-06, -0.703245, 0.710947, -3.94977e-06)
+
+[node name="Cube" parent="Visuals/Armature/Skeleton3D" index="0"]
+transform = Transform3D(1, -1.37233e-07, -1.94208e-09, 1.36494e-07, 0.992934, 0.118666, -1.43567e-08, -0.118666, 0.992934, 2.19032e-10, 3.10699e-05, 0.00160828)
+bone_idx = 1
+
+[node name="Cube_002" parent="Visuals/Armature/Skeleton3D" index="1"]
+transform = Transform3D(1, -2.15929e-08, 2.77661e-07, -2.44288e-08, 0.986346, 0.164685, -2.77426e-07, -0.164686, 0.986347, -1.59081e-09, -0.000912411, 0.003364)
+bone_idx = 4
+
+[node name="Cube_003" type="MeshInstance3D" parent="Visuals/Armature/Skeleton3D/Cube_002" index="1"]
+mesh = SubResource("ArrayMesh_j38ca")
+skeleton = NodePath("")
+
+[node name="Cube_004" type="MeshInstance3D" parent="Visuals/Armature/Skeleton3D/Cube_002" index="2"]
+mesh = SubResource("ArrayMesh_j38ca")
+skeleton = NodePath("")
+
+[node name="Cube_004" parent="Visuals/Armature/Skeleton3D" index="2"]
+transform = Transform3D(1, -2.15928e-08, 2.77661e-07, -2.44289e-08, 0.986346, 0.164685, -2.77426e-07, -0.164686, 0.986346, -1.59081e-09, -0.00091241, 0.003364)
+bone_idx = 5
+
+[node name="Circle" parent="Visuals/Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.318995, 8.85725e-08, 6.88797e-09, -7.7927e-09, 0.0525337, -0.314639, -8.84975e-08, 0.314639, 0.0525338, 8.74737e-09, 0.00687807, 0.0399426)
+bone_idx = 6
+
+[node name="Cube_003" parent="Visuals/Armature/Skeleton3D" index="4"]
+transform = Transform3D(1, -6.25603e-07, 6.42851e-07, 1.77677e-07, 0.8406, 0.541658, -8.79242e-07, -0.541658, 0.8406, -9.24382e-09, -0.0168296, 0.00836029)
+bone_idx = 8
+
+[node name="Cube_001" parent="Visuals/Armature/Skeleton3D" index="5"]
+transform = Transform3D(1, 6.58261e-08, 2.76852e-07, -1.10521e-07, 0.986346, 0.164685, -2.62231e-07, -0.164685, 0.986346, -1.5908e-09, -0.000912404, 0.00336399)
+bone_idx = 11
+
+[node name="Circle_002" parent="Visuals/Armature/Skeleton3D" index="6"]
+transform = Transform3D(1, -2.20566e-08, 2.34816e-07, -1.69155e-08, 0.986346, 0.164685, -2.3524e-07, -0.164686, 0.986346, 0, -0.00062386, 0.00509224)
+bone_idx = 14
+
+[node name="Circle_001" parent="Visuals/Armature/Skeleton3D" index="7"]
+transform = Transform3D(1, -2.29274e-08, 1.55326e-07, -2.96632e-09, 0.986346, 0.164685, -1.56985e-07, -0.164686, 0.986346, 2.79397e-09, -0.000623861, 0.00509224)
+bone_idx = 17
+
+[node name="AnimationPlayer" parent="Visuals" index="1"]
+autoplay = "Armature|Move"
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+height = 4.0
+radius = 0.78
+use_3d_avoidance = true
+debug_enabled = true
+
+[editable path="Visuals"]

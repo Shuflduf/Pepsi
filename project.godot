@@ -33,6 +33,10 @@ folder_colors={
 "res://Assets/": "red"
 }
 
+[global_group]
+
+Player=""
+
 [input]
 
 jump={
