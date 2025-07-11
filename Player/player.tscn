@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://dwf57bj3pkrc2"]
+[gd_scene load_steps=13 format=3 uid="uid://dwf57bj3pkrc2"]
 
-[ext_resource type="Script" uid="uid://d1pngnbnlosda" path="res://player.gd" id="1_dw050"]
-[ext_resource type="PackedScene" uid="uid://cdiyjjw6fkmhl" path="res://anim_handler.tscn" id="8_606se"]
+[ext_resource type="Script" uid="uid://d1pngnbnlosda" path="res://Player/player.gd" id="1_dw050"]
+[ext_resource type="Script" uid="uid://c7x3hccqs402f" path="res://Player/bottle.gd" id="2_btcbx"]
+[ext_resource type="PackedScene" uid="uid://cdiyjjw6fkmhl" path="res://Player/bottle_visuals.tscn" id="8_606se"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_f3sb7"]
 
@@ -46,12 +47,19 @@ size = Vector3(2, 2, 2)
 [node name="Player" type="RigidBody3D" groups=["Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 0, 0)
 collision_layer = 2
+collision_mask = 9
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 script = ExtResource("1_dw050")
 mouse_sens = 0.004
 jump_height = 6.0
+
+[node name="Bottle" type="Node" parent="."]
+script = ExtResource("2_btcbx")
+
+[node name="Visuals" parent="Bottle" instance=ExtResource("8_606se")]
+unique_name_in_owner = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_f3sb7")
@@ -80,8 +88,8 @@ collision_mask = 4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CamPivot/Camera3D/MeleeHitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.78814e-07, -1.5)
 shape = SubResource("BoxShape3D_onrkg")
+debug_color = Color(0.7, 0, 0, 0.419608)
 
-[node name="AnimHandler" parent="." instance=ExtResource("8_606se")]
-unique_name_in_owner = true
-
-[connection signal="animation_finished" from="AnimHandler" to="." method="_on_anim_handler_animation_finished"]
+[connection signal="fly" from="Bottle" to="." method="_on_bottle_fly"]
+[connection signal="swung" from="Bottle" to="." method="_on_bottle_swung"]
+[connection signal="animation_finished" from="Bottle/Visuals" to="Bottle" method="_on_anim_handler_animation_finished"]

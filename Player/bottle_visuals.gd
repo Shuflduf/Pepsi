@@ -1,3 +1,4 @@
+class_name BottleVisuals
 extends Control
 
 signal animation_finished(anim_name: StringName)

@@ -1,11 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://x5imp75aoum8"]
+[gd_scene load_steps=16 format=3 uid="uid://x5imp75aoum8"]
 
 [ext_resource type="Texture2D" uid="uid://bn8wfhbs1omgo" path="res://Assets/Proto/Dark/texture_08.png" id="1_f3sb7"]
 [ext_resource type="Texture2D" uid="uid://dkt0twn82vf1n" path="res://Assets/Proto/SkyHDR.hdr" id="1_fj7yv"]
-[ext_resource type="PackedScene" uid="uid://dwf57bj3pkrc2" path="res://player.tscn" id="3_tlwt5"]
+[ext_resource type="PackedScene" uid="uid://dwf57bj3pkrc2" path="res://Player/player.tscn" id="3_tlwt5"]
 [ext_resource type="Texture2D" uid="uid://hu5rfl6qr2nv" path="res://Assets/Proto/Red/texture_09.png" id="4_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://c4ouniiwlgaal" path="res://enemy.tscn" id="5_036b0"]
 [ext_resource type="Texture2D" uid="uid://djg8y25y06h5n" path="res://Assets/Proto/Green/texture_09.png" id="6_dwbse"]
+[ext_resource type="PackedScene" uid="uid://dvqx400cgvwbo" path="res://Player/bottle_prop.tscn" id="7_pkg7o"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_tlwt5"]
 panorama = ExtResource("1_fj7yv")
@@ -52,6 +53,7 @@ environment = SubResource("Environment_036b0")
 
 [node name="Player" parent="." instance=ExtResource("3_tlwt5")]
 transform = Transform3D(1, 0, 0, 0, 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 1.3, 0)
+collision_mask = 1
 physics_material_override = SubResource("PhysicsMaterial_aqk2v")
 
 [node name="Enemy" parent="." instance=ExtResource("5_036b0")]
@@ -121,3 +123,6 @@ transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -5.5, 1, -
 use_collision = true
 size = Vector3(4, 2, 3)
 material = SubResource("StandardMaterial3D_036b0")
+
+[node name="BottleProp" parent="." instance=ExtResource("7_pkg7o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
