@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dwf57bj3pkrc2"]
+[gd_scene load_steps=12 format=3 uid="uid://dwf57bj3pkrc2"]
 
 [ext_resource type="Script" uid="uid://d1pngnbnlosda" path="res://player.gd" id="1_dw050"]
 [ext_resource type="PackedScene" uid="uid://cdiyjjw6fkmhl" path="res://anim_handler.tscn" id="8_606se"]
@@ -40,8 +40,12 @@ material = SubResource("StandardMaterial3D_onrkg")
 radius = 0.1
 height = 0.2
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_onrkg"]
+size = Vector3(2, 2, 2)
+
 [node name="Player" type="RigidBody3D" groups=["Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 0, 0)
+collision_layer = 2
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
@@ -67,6 +71,15 @@ fixed_fps = 60
 visibility_aabb = AABB(-0.540257, -5.59772, -20.0785, 1.08778, 5.80083, 20.2681)
 process_material = SubResource("ParticleProcessMaterial_onrkg")
 draw_pass_1 = SubResource("SphereMesh_i3pqv")
+
+[node name="MeleeHitbox" type="Area3D" parent="CamPivot/Camera3D"]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CamPivot/Camera3D/MeleeHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.78814e-07, -1.5)
+shape = SubResource("BoxShape3D_onrkg")
 
 [node name="AnimHandler" parent="." instance=ExtResource("8_606se")]
 unique_name_in_owner = true

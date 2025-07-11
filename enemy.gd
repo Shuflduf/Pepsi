@@ -1,3 +1,4 @@
+class_name Enemy
 extends RigidBody3D
 
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
@@ -6,17 +7,24 @@ extends RigidBody3D
 @export var max_air_speed = 6.5
 @export var drag = 0.15
 
+var hit = false
+var hit_cooldown = 0.0
+
 func _physics_process(delta: float) -> void:
+    hit_cooldown += delta
+    if is_on_floor() and hit_cooldown > 0.1:
+        hit = false
+        hit_cooldown = 0.0
+
     var player: RigidBody3D = get_tree().get_first_node_in_group(&"Player")
-    if player:
+    if player and !hit:
         agent.target_position = player.global_position
         var cur_pos = global_position
         var next_path_pos = agent.get_next_path_position()
         var dir = cur_pos.direction_to(next_path_pos)
-        print(dir)
-        if dir.y > -0.9 and is_on_floor():
-            print("JUMP")
-            apply_central_impulse(Vector3.UP * 6)
+        #if dir.y > -0.9 and is_on_floor():
+            #print("JUMP")
+            #apply_central_impulse(Vector3.UP * 6)
 
         dir.y = 0
         apply_central_force(dir * delta * walking_speed)

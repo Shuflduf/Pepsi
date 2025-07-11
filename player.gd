@@ -12,15 +12,20 @@ var pepsi_pos = Vector2.ZERO
 enum PepsiState {
     Melee,
     Ranged,
-    Aiming,
+    Firing,
 }
 
 var is_pepsi_ready = false
-var ammo = 100:
+var ammo:
     set(value):
         %AnimHandler.value = value
     get():
         return %AnimHandler.value
+var fizz:
+    set(value):
+        %AnimHandler.fizz = value
+    get():
+        return %AnimHandler.fizz
 
 var current_state = PepsiState.Ranged
 
@@ -34,9 +39,12 @@ func _process(delta: float) -> void:
         ammo -= delta * 50
         check_ammo()
 
-    if current_state == PepsiState.Aiming:
+    if current_state == PepsiState.Firing:
         ammo -= delta * 50
         check_ammo()
+        if is_pepsi_ready:
+            fizz -= delta * 2
+            fly()
 
     if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
         swing()
@@ -78,7 +86,7 @@ func switch_state():
         PepsiState.Melee:
             %AnimHandler.play_anim(&"switch_ranged")
             current_state = PepsiState.Ranged
-        PepsiState.Aiming:
+        PepsiState.Firing:
             is_pepsi_ready = true
 
 func aim():
@@ -87,12 +95,12 @@ func aim():
     if !is_pepsi_ready:
         return
 
-    current_state = PepsiState.Aiming
+    current_state = PepsiState.Firing
     is_pepsi_ready = false
     %AnimHandler.play_anim(&"aim")
 
 func unaim():
-    if current_state != PepsiState.Aiming:
+    if current_state != PepsiState.Firing:
         return
     if !is_pepsi_ready:
         return
@@ -111,6 +119,16 @@ func swing():
     is_pepsi_ready = false
     %AnimHandler.play_anim(&"swing")
 
+    if %MeleeHitbox.has_overlapping_bodies():
+        var body: Enemy = %MeleeHitbox.get_overlapping_bodies()[0]
+        var hit_dir = get_look_vec()
+        hit_dir.y = clamp(hit_dir.y, 0.3, 1)
+        var mult = 20
+        body.apply_central_impulse(hit_dir * mult)
+        body.hit = true
+
+    fizz += 0.5
+
 func _input(event: InputEvent) -> void:
     if event is InputEventMouseMotion:
         %AnimHandler.offset -= event.relative
@@ -128,6 +146,7 @@ func _on_anim_handler_animation_finished(anim_name: StringName) -> void:
             is_pepsi_ready = true
         &"reload_throw":
             ammo = 100
+            fizz = 0
             %AnimHandler.play_anim(&"reload_catch")
         &"switch_melee":
             is_pepsi_ready = true
@@ -157,6 +176,13 @@ func _physics_process(delta: float) -> void:
     )
 
     apply_central_force(move_dir * delta * walking_speed)
+
+    fizz = clamp(fizz - (delta / 2), 0, 10)
+
+func fly():
+    if !is_on_floor():
+        var fire_dir = get_look_vec()
+        apply_central_force(-fire_dir * 4 * (fizz + 1))
 
 # stolen from egress which stole it from something else idk
 func _integrate_forces(state):
@@ -189,3 +215,12 @@ func _integrate_forces(state):
     # Stop the character if speed is low enough
     if state.linear_velocity.length() < 0.1:
         state.linear_velocity = Vector3.ZERO
+
+func get_look_vec() -> Vector3:
+    var look_dir = %Camera3D.global_rotation
+    var look_vec = Vector3(
+        -sin(look_dir.y),
+        sin(look_dir.x),
+        -cos(look_dir.y)
+    ).normalized()
+    return look_vec

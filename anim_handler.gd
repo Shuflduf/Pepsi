@@ -2,7 +2,7 @@ extends Control
 
 signal animation_finished(anim_name: StringName)
 
-@export_range(0.0, 100.0, 1.0) var value = 80:
+@export_range(0.0, 100.0, 1.0) var value = 100:
     set(new):
         value = new
         calc_progress_value()
@@ -15,8 +15,14 @@ var offset = Vector2.ZERO:
         offset = new
         %Bar.position = new
 
+var fizz = 0
+
 func play_anim(anim_name: StringName):
     %Sprites.play(anim_name)
+
+func _physics_process(_delta: float) -> void:
+    var rand_vec = Vector2(randf_range(-1, 1), randf_range(-1, 1))
+    %Bar.texture_progress_offset = rand_vec * fizz
 
 func calc_progress_value():
     var progress_height = bottom_pixel - top_pixel
