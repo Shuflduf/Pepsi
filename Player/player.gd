@@ -64,4 +64,5 @@ func _on_bottle_fly(fizz: float) -> void:
 
 
 func _on_bottle_bottle_spawned(bottle: RigidBody3D) -> void:
-    bottle.linear_velocity = get_look_vec() * 20
+    bottle.linear_velocity = linear_velocity
+    bottle.linear_velocity += get_look_vec() * 20
