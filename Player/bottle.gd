@@ -1,9 +1,11 @@
 extends Node
 
 @onready var visuals: BottleVisuals = %Visuals
+@export var bottle_prop: PackedScene
 
 signal swung
 signal fly(fizz: float)
+signal bottle_spawned(bottle: RigidBody3D)
 
 var pepsi_pos = Vector2.ZERO
 
@@ -14,7 +16,7 @@ enum PepsiState {
 }
 
 var is_pepsi_ready = false
-var ammo = 100:
+var ammo = 100.0:
     set(value):
         ammo = value
         visuals.value = value
@@ -34,22 +36,23 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
     visuals.offset = lerp(visuals.offset, Vector2.ZERO, delta * 20)
-    if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and is_pepsi_ready and current_state == PepsiState.Ranged:
+    #if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and is_pepsi_ready and current_state == PepsiState.Ranged:
+
+
+    if current_state == PepsiState.Firing and is_pepsi_ready:
         ammo -= delta * 50
         check_ammo()
 
-    if current_state == PepsiState.Firing:
-        ammo -= delta * 50
-        check_ammo()
-        if is_pepsi_ready:
-            fizz -= delta * 2
-            fly.emit(fizz)
+        fizz -= delta * 2
+        fly.emit(fizz)
 
     if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
         swing()
+        drink(delta)
 
     if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
         aim()
+        throw()
     else:
         unaim()
 
@@ -79,6 +82,14 @@ func switch_state():
         PepsiState.Firing:
             is_pepsi_ready = true
 
+func drink(delta: float):
+    if current_state != PepsiState.Ranged:
+        return
+    if !is_pepsi_ready:
+        return
+
+    ammo -= delta * 50
+    check_ammo()
 
 func aim():
     if current_state != PepsiState.Ranged:
@@ -113,11 +124,35 @@ func swing():
     swung.emit()
     fizz += 0.5
 
+func throw():
+    if current_state != PepsiState.Melee:
+        return
+    if !is_pepsi_ready:
+        return
+    print("THROWWW")
+
+    is_pepsi_ready = false
+    ammo = 100
+    fizz = 0
+
+    var new_bottle: RigidBody3D = bottle_prop.instantiate()
+    add_child(new_bottle)
+    new_bottle.position = %StartPos.global_position
+    new_bottle.rotation = %StartPos.global_rotation
+    bottle_spawned.emit(new_bottle)
+
+
+    visuals.play_anim(&"reload_catch")
+
+
 func _on_anim_handler_animation_finished(anim_name: StringName) -> void:
     match anim_name:
         &"reload_catch":
             visuals.play_anim(&"ranged")
             is_pepsi_ready = true
+            current_state = PepsiState.Ranged
+            #ammo = 100
+            #fizz = 0
         &"reload_throw":
             ammo = 100
             fizz = 0

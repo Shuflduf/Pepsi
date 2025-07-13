@@ -2,17 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://devh3c7i8rrin" path="res://Assets/Pepsi/pepsi.glb" id="1_o5mf8"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_o5mf8"]
-height = 1.49707
-radius = 0.266602
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lbb36"]
+radius = 0.293739
+height = 1.42154
 
 [node name="BottleProp" type="RigidBody3D"]
-collision_layer = 0
-collision_mask = 3
+collision_layer = 8
+collision_mask = 11
 
 [node name="pepsi" parent="." instance=ExtResource("1_o5mf8")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.160889, 0)
-shape = SubResource("CylinderShape3D_o5mf8")
+shape = SubResource("CapsuleShape3D_lbb36")

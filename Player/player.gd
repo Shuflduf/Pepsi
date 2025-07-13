@@ -61,3 +61,7 @@ func _on_bottle_fly(fizz: float) -> void:
     if !is_on_floor():
         var fire_dir = get_look_vec()
         apply_central_force(-fire_dir * 4 * (fizz + 1))
+
+
+func _on_bottle_bottle_spawned(bottle: RigidBody3D) -> void:
+    bottle.linear_velocity = get_look_vec() * 20
