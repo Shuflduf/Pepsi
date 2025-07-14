@@ -54,7 +54,6 @@ axis_lock_angular_y = true
 axis_lock_angular_z = true
 script = ExtResource("1_dw050")
 mouse_sens = 0.004
-jump_height = 6.0
 
 [node name="Bottle" type="Node" parent="."]
 script = ExtResource("2_btcbx")

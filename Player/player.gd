@@ -1,7 +1,7 @@
 extends PhysicsEntity
 
 @export var mouse_sens: float = 0.01
-@export var jump_height = 5.0
+@export var jump_height = 8.0
 
 func _ready() -> void:
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -66,3 +66,4 @@ func _on_bottle_fly(fizz: float) -> void:
 func _on_bottle_bottle_spawned(bottle: RigidBody3D) -> void:
     bottle.linear_velocity = linear_velocity
     bottle.linear_velocity += get_look_vec() * 20
+    bottle.init_velocity = bottle.linear_velocity.normalized()

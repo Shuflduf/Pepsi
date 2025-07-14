@@ -123,9 +123,6 @@ bone_idx = 17
 autoplay = "Armature|Move"
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-height = 4.0
-radius = 0.78
-use_3d_avoidance = true
 debug_enabled = true
 
 [editable path="Visuals"]

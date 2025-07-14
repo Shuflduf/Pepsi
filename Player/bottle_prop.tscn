@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvqx400cgvwbo"]
+[gd_scene load_steps=4 format=3 uid="uid://dvqx400cgvwbo"]
 
 [ext_resource type="PackedScene" uid="uid://devh3c7i8rrin" path="res://Assets/Pepsi/pepsi.glb" id="1_o5mf8"]
+[ext_resource type="Script" uid="uid://b2tkpfwt71a2" path="res://Player/bottle_prop.gd" id="1_vi2qj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lbb36"]
 radius = 0.293739
@@ -8,7 +9,10 @@ height = 1.42154
 
 [node name="BottleProp" type="RigidBody3D"]
 collision_layer = 8
-collision_mask = 11
+collision_mask = 15
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_vi2qj")
 
 [node name="pepsi" parent="." instance=ExtResource("1_o5mf8")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -16,3 +20,5 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.160889, 0)
 shape = SubResource("CapsuleShape3D_lbb36")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
