@@ -67,3 +67,4 @@ func _on_bottle_bottle_spawned(bottle: RigidBody3D) -> void:
     bottle.linear_velocity = linear_velocity
     bottle.linear_velocity += get_look_vec() * 20
     bottle.init_velocity = bottle.linear_velocity.normalized()
+    bottle.angular_velocity = get_look_vec().rotated(Vector3.UP, PI/2) * 30

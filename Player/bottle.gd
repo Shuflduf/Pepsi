@@ -34,6 +34,7 @@ func _input(event: InputEvent) -> void:
     if event is InputEventMouseMotion:
         visuals.offset -= event.relative
 
+
 func _process(delta: float) -> void:
     visuals.offset = lerp(visuals.offset, Vector2.ZERO, delta * 20)
     #if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and is_pepsi_ready and current_state == PepsiState.Ranged:
@@ -56,6 +57,9 @@ func _process(delta: float) -> void:
     else:
         unaim()
 
+    if Input.is_action_pressed(&"debug_throw"):
+        throw(true)
+
 
 func check_ammo():
     if ammo < 0:
@@ -64,9 +68,8 @@ func check_ammo():
         visuals.play_anim(&"reload_throw")
 
 func _unhandled_key_input(event: InputEvent) -> void:
-    if event.is_pressed():
-        if event.is_action_pressed(&"switch"):
-            switch_state()
+    if event.is_action_pressed(&"switch"):
+        switch_state()
 
 func switch_state():
     if !is_pepsi_ready:
@@ -124,11 +127,12 @@ func swing():
     swung.emit()
     fizz += 0.5
 
-func throw():
-    if current_state != PepsiState.Melee:
-        return
-    if !is_pepsi_ready:
-        return
+func throw(debug = false):
+    if !debug:
+        if current_state != PepsiState.Melee:
+            return
+        if !is_pepsi_ready:
+            return
     print("THROWWW")
 
     is_pepsi_ready = false
