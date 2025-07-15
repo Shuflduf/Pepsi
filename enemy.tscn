@@ -66,10 +66,18 @@ script = ExtResource("1_qi2p4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CylinderShape3D_7xaro")
 
-[node name="Visuals" parent="." instance=ExtResource("1_7k104")]
-transform = Transform3D(0.531047, 0, 0, 0, 0.531047, 0, 0, 0, 0.531047, 0, -0.783574, -0.223879)
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 3.0
+path_height_offset = -1.0
+debug_enabled = true
 
-[node name="Skeleton3D" parent="Visuals/Armature" index="0"]
+[node name="Visuals" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Visuals" parent="Visuals" instance=ExtResource("1_7k104")]
+transform = Transform3D(0.531047, 0, 0, 0, 0.531047, 0, 0, 0, 0.531047, 0, -1.28357, -0.223879)
+
+[node name="Skeleton3D" parent="Visuals/Visuals/Armature" index="0"]
 bones/0/position = Vector3(0, 0.00439701, 0.00108651)
 bones/0/rotation = Quaternion(1.94299e-07, 0.0640588, 0.997946, -1.24722e-08)
 bones/3/position = Vector3(-4.07079e-18, 0.00489474, 0.00858681)
@@ -79,49 +87,47 @@ bones/13/position = Vector3(0.00595212, 0.0309532, -0.000830134)
 bones/16/position = Vector3(-0.00595213, 0.0309532, -0.000830115)
 bones/16/rotation = Quaternion(4.90632e-06, -0.703245, 0.710947, -3.94977e-06)
 
-[node name="Cube" parent="Visuals/Armature/Skeleton3D" index="0"]
+[node name="Cube" parent="Visuals/Visuals/Armature/Skeleton3D" index="0"]
 transform = Transform3D(1, -1.37233e-07, -1.94203e-09, 1.36494e-07, 0.992934, 0.118666, -1.43567e-08, -0.118666, 0.992934, 2.19032e-10, 3.10661e-05, 0.00160829)
 bone_idx = 1
 
-[node name="Cube_002" parent="Visuals/Armature/Skeleton3D" index="1"]
+[node name="Cube_002" parent="Visuals/Visuals/Armature/Skeleton3D" index="1"]
 transform = Transform3D(1, -2.15928e-08, 2.7766e-07, -2.44288e-08, 0.986346, 0.164685, -2.77425e-07, -0.164685, 0.986347, -1.5908e-09, -0.000912412, 0.003364)
 bone_idx = 4
 
-[node name="Cube_003" type="MeshInstance3D" parent="Visuals/Armature/Skeleton3D/Cube_002" index="1"]
+[node name="Cube_003" type="MeshInstance3D" parent="Visuals/Visuals/Armature/Skeleton3D/Cube_002" index="1"]
 mesh = SubResource("ArrayMesh_j38ca")
 skeleton = NodePath("")
 
-[node name="Cube_004" type="MeshInstance3D" parent="Visuals/Armature/Skeleton3D/Cube_002" index="2"]
+[node name="Cube_004" type="MeshInstance3D" parent="Visuals/Visuals/Armature/Skeleton3D/Cube_002" index="2"]
 mesh = SubResource("ArrayMesh_j38ca")
 skeleton = NodePath("")
 
-[node name="Cube_004" parent="Visuals/Armature/Skeleton3D" index="2"]
+[node name="Cube_004" parent="Visuals/Visuals/Armature/Skeleton3D" index="2"]
 transform = Transform3D(1, -2.15927e-08, 2.7766e-07, -2.44289e-08, 0.986346, 0.164685, -2.77425e-07, -0.164685, 0.986346, -1.5908e-09, -0.000912411, 0.003364)
 bone_idx = 5
 
-[node name="Circle" parent="Visuals/Armature/Skeleton3D" index="3"]
+[node name="Circle" parent="Visuals/Visuals/Armature/Skeleton3D" index="3"]
 transform = Transform3D(0.318995, 8.85721e-08, 6.88793e-09, -7.7927e-09, 0.0525335, -0.314639, -8.84971e-08, 0.314639, 0.0525335, 8.74733e-09, 0.00687805, 0.0399426)
 bone_idx = 6
 
-[node name="Cube_003" parent="Visuals/Armature/Skeleton3D" index="4"]
+[node name="Cube_003" parent="Visuals/Visuals/Armature/Skeleton3D" index="4"]
 transform = Transform3D(1, -6.25601e-07, 6.42849e-07, 1.77677e-07, 0.8406, 0.541657, -8.7924e-07, -0.541656, 0.8406, -9.24382e-09, -0.0168296, 0.00836026)
 bone_idx = 8
 
-[node name="Cube_001" parent="Visuals/Armature/Skeleton3D" index="5"]
+[node name="Cube_001" parent="Visuals/Visuals/Armature/Skeleton3D" index="5"]
 transform = Transform3D(1, 6.58262e-08, 2.7685e-07, -1.10521e-07, 0.986346, 0.164685, -2.6223e-07, -0.164685, 0.986346, -1.5908e-09, -0.000912405, 0.00336399)
 bone_idx = 11
 
-[node name="Circle_002" parent="Visuals/Armature/Skeleton3D" index="6"]
+[node name="Circle_002" parent="Visuals/Visuals/Armature/Skeleton3D" index="6"]
 transform = Transform3D(1, -2.20565e-08, 2.34814e-07, -1.69157e-08, 0.986346, 0.164685, -2.35239e-07, -0.164685, 0.986346, 2.79397e-09, -0.000623865, 0.00509223)
 bone_idx = 14
 
-[node name="Circle_001" parent="Visuals/Armature/Skeleton3D" index="7"]
+[node name="Circle_001" parent="Visuals/Visuals/Armature/Skeleton3D" index="7"]
 transform = Transform3D(1, -2.29303e-08, 1.55323e-07, -2.96245e-09, 0.986346, 0.164685, -1.56982e-07, -0.164684, 0.986346, 7.45058e-09, -0.000623854, 0.00509223)
 bone_idx = 17
 
-[node name="AnimationPlayer" parent="Visuals" index="1"]
+[node name="AnimationPlayer" parent="Visuals/Visuals" index="1"]
 autoplay = "Armature|Move"
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-
-[editable path="Visuals"]
+[editable path="Visuals/Visuals"]
