@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://djnjcqlpep1vd"]
+[gd_scene load_steps=7 format=3 uid="uid://djnjcqlpep1vd"]
 
-[ext_resource type="Script" uid="uid://c8yq6xanqa88b" path="res://wave_editor.gd" id="1_db0xc"]
-[ext_resource type="PackedScene" uid="uid://i6y0f38fbrtl" path="res://map.tscn" id="2_gtcfm"]
+[ext_resource type="Script" uid="uid://c8yq6xanqa88b" path="res://Editor/editor.gd" id="1_vl7gr"]
+[ext_resource type="PackedScene" uid="uid://i6y0f38fbrtl" path="res://map.tscn" id="2_55rxr"]
+[ext_resource type="Script" uid="uid://cqpib60ypepp2" path="res://Editor/extra.gd" id="3_jdbf7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gtcfm"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -16,14 +17,14 @@ sky = SubResource("Sky_q0n0q")
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="WaveEditor" type="Control"]
+[node name="Editor" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_db0xc")
+script = ExtResource("1_vl7gr")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 2
@@ -33,10 +34,12 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 tab_alignment = 1
-current_tab = 0
+current_tab = 3
+tab_focus_mode = 0
 
 [node name="Height" type="HBoxContainer" parent="TabContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 alignment = 1
 metadata/_tab_index = 0
@@ -541,7 +544,7 @@ handle_input_locally = false
 size = Vector2i(2, 2)
 render_target_update_mode = 0
 
-[node name="Map" parent="TabContainer/Preview/SubViewport" instance=ExtResource("2_gtcfm")]
+[node name="Map" parent="TabContainer/Preview/SubViewport" instance=ExtResource("2_55rxr")]
 unique_name_in_owner = true
 
 [node name="Camera3D" type="Camera3D" parent="TabContainer/Preview/SubViewport"]
@@ -553,3 +556,62 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="TabContainer/Preview/SubViewport"]
 environment = SubResource("Environment_74j50")
+
+[node name="Extra" type="MarginContainer" parent="TabContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("3_jdbf7")
+metadata/_tab_index = 3
+
+[node name="HBox" type="HBoxContainer" parent="TabContainer/Extra"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Extra/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="TabContainer/Extra/HBox/VBoxContainer"]
+layout_mode = 2
+text = "Waves"
+horizontal_alignment = 1
+
+[node name="Waves" type="OptionButton" parent="TabContainer/Extra/HBox/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+selected = 0
+item_count = 1
+popup/item_0/text = "Wave 1"
+popup/item_0/id = 0
+
+[node name="Button" type="Button" parent="TabContainer/Extra/HBox/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+text = "New Wave"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TabContainer/Extra/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Save" type="Button" parent="TabContainer/Extra/HBox/VBoxContainer2"]
+layout_mode = 2
+focus_mode = 0
+text = "Save To File"
+
+[node name="Copy" type="Button" parent="TabContainer/Extra/HBox/VBoxContainer2"]
+layout_mode = 2
+focus_mode = 0
+text = "Copy"
+
+[node name="Upload" type="Button" parent="TabContainer/Extra/HBox/VBoxContainer2"]
+layout_mode = 2
+focus_mode = 0
+text = "Upload"
+
+[connection signal="switched_wave" from="TabContainer/Extra" to="." method="_on_extra_switched_wave"]
+[connection signal="item_selected" from="TabContainer/Extra/HBox/VBoxContainer/Waves" to="TabContainer/Extra" method="_on_waves_item_selected"]
+[connection signal="pressed" from="TabContainer/Extra/HBox/VBoxContainer/Button" to="TabContainer/Extra" method="_on_button_pressed"]
