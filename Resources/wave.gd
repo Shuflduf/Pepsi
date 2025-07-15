@@ -3,6 +3,7 @@ extends RefCounted
 
 # 6x6 2d array of positive ints
 var heights: Array[Array]
+var name: String = "if you see this something didnt work"
 
 func _init() -> void:
     set_size()
@@ -14,19 +15,17 @@ func set_size():
         heights[x].resize(6)
         for y in col.size():
             heights[x][y] = 0
-    print(heights)
 
-func json() -> String:
-    var obj = { "heights": heights }
-    var data_str = JSON.stringify(obj)
-
-    from_json(data_str)
-    return data_str
+func obj() -> Dictionary:
+    return {
+        "heights": heights,
+        "name": name
+    }
 
 func from_json(data_str: String):
-    var obj = JSON.parse_string(data_str)
-    print(obj)
-    var new_heights = obj["heights"]
+    var data = JSON.parse_string(data_str)
+    name = data["name"]
+    var new_heights = data["heights"]
     for x in new_heights.size():
         var col = new_heights[x]
         for y in col.size():
