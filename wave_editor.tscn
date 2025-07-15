@@ -1,0 +1,555 @@
+[gd_scene load_steps=6 format=3 uid="uid://djnjcqlpep1vd"]
+
+[ext_resource type="Script" uid="uid://c8yq6xanqa88b" path="res://wave_editor.gd" id="1_db0xc"]
+[ext_resource type="PackedScene" uid="uid://i6y0f38fbrtl" path="res://map.tscn" id="2_gtcfm"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gtcfm"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_q0n0q"]
+sky_material = SubResource("ProceduralSkyMaterial_gtcfm")
+
+[sub_resource type="Environment" id="Environment_74j50"]
+background_mode = 2
+sky = SubResource("Sky_q0n0q")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="WaveEditor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_db0xc")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 2
+offset_right = 576.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+tab_alignment = 1
+current_tab = 0
+
+[node name="Height" type="HBoxContainer" parent="TabContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+metadata/_tab_index = 0
+
+[node name="0" type="VBoxContainer" parent="TabContainer/Height"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="0" type="Button" parent="TabContainer/Height/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="1" type="Button" parent="TabContainer/Height/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="2" type="Button" parent="TabContainer/Height/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="3" type="Button" parent="TabContainer/Height/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="4" type="Button" parent="TabContainer/Height/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="5" type="Button" parent="TabContainer/Height/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="1" type="VBoxContainer" parent="TabContainer/Height"]
+layout_mode = 2
+alignment = 1
+
+[node name="0" type="Button" parent="TabContainer/Height/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="1" type="Button" parent="TabContainer/Height/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="2" type="Button" parent="TabContainer/Height/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="3" type="Button" parent="TabContainer/Height/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="4" type="Button" parent="TabContainer/Height/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="5" type="Button" parent="TabContainer/Height/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="2" type="VBoxContainer" parent="TabContainer/Height"]
+layout_mode = 2
+alignment = 1
+
+[node name="0" type="Button" parent="TabContainer/Height/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="1" type="Button" parent="TabContainer/Height/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="2" type="Button" parent="TabContainer/Height/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="3" type="Button" parent="TabContainer/Height/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="4" type="Button" parent="TabContainer/Height/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="5" type="Button" parent="TabContainer/Height/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="3" type="VBoxContainer" parent="TabContainer/Height"]
+layout_mode = 2
+alignment = 1
+
+[node name="0" type="Button" parent="TabContainer/Height/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="1" type="Button" parent="TabContainer/Height/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="2" type="Button" parent="TabContainer/Height/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="3" type="Button" parent="TabContainer/Height/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="4" type="Button" parent="TabContainer/Height/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="5" type="Button" parent="TabContainer/Height/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="4" type="VBoxContainer" parent="TabContainer/Height"]
+layout_mode = 2
+alignment = 1
+
+[node name="0" type="Button" parent="TabContainer/Height/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="1" type="Button" parent="TabContainer/Height/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="2" type="Button" parent="TabContainer/Height/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="3" type="Button" parent="TabContainer/Height/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="4" type="Button" parent="TabContainer/Height/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="5" type="Button" parent="TabContainer/Height/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="5" type="VBoxContainer" parent="TabContainer/Height"]
+layout_mode = 2
+alignment = 1
+
+[node name="0" type="Button" parent="TabContainer/Height/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="1" type="Button" parent="TabContainer/Height/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="2" type="Button" parent="TabContainer/Height/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="3" type="Button" parent="TabContainer/Height/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="4" type="Button" parent="TabContainer/Height/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="5" type="Button" parent="TabContainer/Height/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="Enemies" type="HBoxContainer" parent="TabContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+alignment = 1
+metadata/_tab_index = 1
+
+[node name="0" type="VBoxContainer" parent="TabContainer/Enemies"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="0" type="Button" parent="TabContainer/Enemies/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="1" type="Button" parent="TabContainer/Enemies/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="2" type="Button" parent="TabContainer/Enemies/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="3" type="Button" parent="TabContainer/Enemies/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="4" type="Button" parent="TabContainer/Enemies/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="5" type="Button" parent="TabContainer/Enemies/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="1" type="VBoxContainer" parent="TabContainer/Enemies"]
+layout_mode = 2
+alignment = 1
+
+[node name="0" type="Button" parent="TabContainer/Enemies/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="1" type="Button" parent="TabContainer/Enemies/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="2" type="Button" parent="TabContainer/Enemies/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="3" type="Button" parent="TabContainer/Enemies/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="4" type="Button" parent="TabContainer/Enemies/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="5" type="Button" parent="TabContainer/Enemies/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="2" type="VBoxContainer" parent="TabContainer/Enemies"]
+layout_mode = 2
+alignment = 1
+
+[node name="0" type="Button" parent="TabContainer/Enemies/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="1" type="Button" parent="TabContainer/Enemies/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="2" type="Button" parent="TabContainer/Enemies/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="3" type="Button" parent="TabContainer/Enemies/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="4" type="Button" parent="TabContainer/Enemies/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="5" type="Button" parent="TabContainer/Enemies/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="3" type="VBoxContainer" parent="TabContainer/Enemies"]
+layout_mode = 2
+alignment = 1
+
+[node name="0" type="Button" parent="TabContainer/Enemies/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="1" type="Button" parent="TabContainer/Enemies/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="2" type="Button" parent="TabContainer/Enemies/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="3" type="Button" parent="TabContainer/Enemies/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="4" type="Button" parent="TabContainer/Enemies/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="5" type="Button" parent="TabContainer/Enemies/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="4" type="VBoxContainer" parent="TabContainer/Enemies"]
+layout_mode = 2
+alignment = 1
+
+[node name="0" type="Button" parent="TabContainer/Enemies/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="1" type="Button" parent="TabContainer/Enemies/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="2" type="Button" parent="TabContainer/Enemies/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="3" type="Button" parent="TabContainer/Enemies/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="4" type="Button" parent="TabContainer/Enemies/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="5" type="Button" parent="TabContainer/Enemies/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="5" type="VBoxContainer" parent="TabContainer/Enemies"]
+layout_mode = 2
+alignment = 1
+
+[node name="0" type="Button" parent="TabContainer/Enemies/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="1" type="Button" parent="TabContainer/Enemies/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="2" type="Button" parent="TabContainer/Enemies/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="3" type="Button" parent="TabContainer/Enemies/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="4" type="Button" parent="TabContainer/Enemies/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="5" type="Button" parent="TabContainer/Enemies/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="Preview" type="SubViewportContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+stretch = true
+metadata/_tab_index = 2
+
+[node name="SubViewport" type="SubViewport" parent="TabContainer/Preview"]
+handle_input_locally = false
+size = Vector2i(2, 2)
+render_target_update_mode = 0
+
+[node name="Map" parent="TabContainer/Preview/SubViewport" instance=ExtResource("2_gtcfm")]
+unique_name_in_owner = true
+
+[node name="Camera3D" type="Camera3D" parent="TabContainer/Preview/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 12, 25)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="TabContainer/Preview/SubViewport"]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="TabContainer/Preview/SubViewport"]
+environment = SubResource("Environment_74j50")
