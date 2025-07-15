@@ -2,15 +2,25 @@ class_name Enemy
 extends PhysicsEntity
 
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
+@export var immobile: bool = false
 
 var hit = false
 var hit_cooldown = 0.0
 var player: Player = null
+var original_pos: Vector3 = Vector3.ZERO
 
 func _ready() -> void:
     player = get_tree().get_first_node_in_group(&"Player")
+    original_pos = global_position
+    if immobile:
+        mass = 10000
+        collision_layer |= 0001
 
 func _physics_process(delta: float) -> void:
+    if immobile:
+        linear_velocity = Vector3.ZERO
+        return
+
     hit_cooldown += delta
     if is_on_floor() and hit_cooldown > 0.1:
         hit = false
@@ -23,7 +33,7 @@ func _physics_process(delta: float) -> void:
         var dir = cur_pos.direction_to(next_path_pos)
         DebugDraw2D.set_text("dir", dir)
         if dir.y > 0.7 and is_on_floor():
-            apply_central_impulse(Vector3.UP * 8)
+            apply_central_impulse(Vector3.UP * jump_height)
 
         dir = Vector3(dir.x, 0.0, dir.z).normalized()
 

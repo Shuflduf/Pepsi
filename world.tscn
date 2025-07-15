@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://x5imp75aoum8"]
+[gd_scene load_steps=11 format=3 uid="uid://x5imp75aoum8"]
 
 [ext_resource type="Texture2D" uid="uid://dkt0twn82vf1n" path="res://Assets/Proto/SkyHDR.hdr" id="1_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://dwf57bj3pkrc2" path="res://Player/player.tscn" id="3_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://i6y0f38fbrtl" path="res://map.tscn" id="4_aqk2v"]
-[ext_resource type="PackedScene" uid="uid://c4ouniiwlgaal" path="res://enemy.tscn" id="5_036b0"]
+[ext_resource type="PackedScene" uid="uid://c4ouniiwlgaal" path="res://Enemies/enemy.tscn" id="5_036b0"]
+[ext_resource type="PackedScene" uid="uid://4ddfnwecn8oy" path="res://Enemies/Fridge/fridge.tscn" id="5_dwbse"]
+[ext_resource type="PackedScene" uid="uid://bqnrpl3nxqqas" path="res://Enemies/Toilet/toilet.tscn" id="6_dwbse"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_tlwt5"]
 panorama = ExtResource("1_fj7yv")
@@ -38,3 +40,10 @@ physics_material_override = SubResource("PhysicsMaterial_aqk2v")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 13, -12)
 
 [node name="Map" parent="." instance=ExtResource("4_aqk2v")]
+
+[node name="Enemy2" parent="." instance=ExtResource("5_dwbse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 10, -13)
+max_speed = 0.0
+
+[node name="Enemy3" parent="." instance=ExtResource("6_dwbse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 11.5984)
