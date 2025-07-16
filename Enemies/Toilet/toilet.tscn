@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b34mesx5am3jp" path="res://Enemies/Toilet/toilet.glb" id="2_8vjro"]
 
 [node name="Enemy" instance=ExtResource("1_33klv")]
+jump_height = 10.0
 
 [node name="toilet" parent="Visuals" index="0" instance=ExtResource("2_8vjro")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.313248, 0)

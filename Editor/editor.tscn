@@ -734,7 +734,6 @@ text = "Upload"
 [connection signal="pressed" from="TabContainer/Height/VBoxContainer/HBoxContainer/Set" to="TabContainer/Height" method="_on_set_pressed"]
 [connection signal="pressed" from="TabContainer/Height/VBoxContainer/HBoxContainer/SetValue" to="TabContainer/Height" method="_on_set_value_pressed"]
 [connection signal="updated_enemies" from="TabContainer/Enemies" to="." method="_on_enemies_updated_enemies"]
-[connection signal="bake_finished" from="TabContainer/Preview/SubViewport/Map" to="." method="_on_map_bake_finished"]
 [connection signal="deleted_wave" from="TabContainer/Extra" to="." method="_on_extra_deleted_wave"]
 [connection signal="name_changed" from="TabContainer/Extra" to="." method="_on_extra_name_changed"]
 [connection signal="switched_wave" from="TabContainer/Extra" to="." method="_on_extra_switched_wave"]

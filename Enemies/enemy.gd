@@ -3,11 +3,14 @@ extends PhysicsEntity
 
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
 @export var immobile: bool = false
+@export var starting_health = 5
 
-var hit = false
+var is_hit = false
 var hit_cooldown = 0.0
 var player: Player = null
 var original_pos: Vector3 = Vector3.ZERO
+
+var health = starting_health
 
 func _ready() -> void:
     player = get_tree().get_first_node_in_group(&"Player")
@@ -23,10 +26,10 @@ func _physics_process(delta: float) -> void:
 
     hit_cooldown += delta
     if is_on_floor() and hit_cooldown > 0.1:
-        hit = false
+        is_hit = false
         hit_cooldown = 0.0
 
-    if player and !hit:
+    if player and !is_hit:
         agent.target_position = player.global_position
         var cur_pos = global_position
         var next_path_pos = agent.get_next_path_position()
@@ -43,3 +46,10 @@ func _physics_process(delta: float) -> void:
 
         var look_dir = atan2(dir.x, dir.z)
         $Visuals.rotation.y = lerp_angle($Visuals.rotation.y, look_dir, delta * 10)
+
+func hit():
+    if health <= 0:
+        die()
+
+func die():
+    queue_free()

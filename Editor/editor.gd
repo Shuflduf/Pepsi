@@ -26,10 +26,6 @@ func _on_enemies_updated_enemies(x: int, y: int, new_val: int) -> void:
     current_wave().enemies[x][y] = new_val
     update_map()
 
-# PREVIEW
-func _on_map_bake_finished() -> void:
-    pass # Replace with function body.
-
 # EXTRA
 func _on_extra_switched_wave(new_wave: int) -> void:
     wave = new_wave

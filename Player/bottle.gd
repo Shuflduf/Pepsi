@@ -2,8 +2,10 @@ extends Node
 
 @onready var visuals: BottleVisuals = %Visuals
 @export var bottle_prop: PackedScene
+@export var melee_damage = 3
+@export var throw_damage = 2
 
-signal swung
+signal swung(damage: int)
 signal fly(fizz: float)
 signal bottle_spawned(bottle: RigidBody3D)
 
@@ -124,7 +126,7 @@ func swing():
     is_pepsi_ready = false
     visuals.play_anim(&"swing")
 
-    swung.emit()
+    swung.emit(melee_damage)
     fizz += 0.5
 
 func throw(debug = false):
@@ -143,6 +145,7 @@ func throw(debug = false):
     add_child(new_bottle)
     new_bottle.position = %StartPos.global_position
     new_bottle.rotation = %StartPos.global_rotation
+    new_bottle.damage = throw_damage
     bottle_spawned.emit(new_bottle)
 
 

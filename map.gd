@@ -24,14 +24,13 @@ func set_wave(wave: Wave):
 
             if !smooth:
                 pillar.position.y = pillar_pos
-
-                spawn_enemy(wave.enemies[x][y], pillar.global_position)
+                %SpawnTimer.start(0.01)
             else:
                 var tween = get_tree().create_tween() \
                     .set_ease(Tween.EASE_IN_OUT) \
                     .set_trans(Tween.TRANS_CUBIC)
 
-                tween.tween_property(pillar, "position:y", pillar_pos, 0.5)
+                tween.tween_property(pillar, "position:y", pillar_pos, 1)
                 %SpawnTimer.start()
 
 
@@ -58,3 +57,4 @@ func spawn_all_enemies():
 
 func _on_spawn_timer_timeout() -> void:
     spawn_all_enemies()
+    bake_navigation_mesh()

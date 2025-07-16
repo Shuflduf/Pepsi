@@ -45,14 +45,17 @@ func get_look_vec() -> Vector3:
     ).normalized()
     return look_vec
 
-func _on_bottle_swung():
+func _on_bottle_swung(damage: int):
     if %MeleeHitbox.has_overlapping_bodies():
         var body: Enemy = %MeleeHitbox.get_overlapping_bodies()[0]
         var hit_dir = get_look_vec()
         hit_dir.y = clamp(hit_dir.y, 0.3, 1)
         var mult = 20
         body.apply_central_impulse(hit_dir * mult)
-        body.hit = true
+        body.is_hit = true
+        body.health -= damage
+        body.hit()
+
 
 
 func _on_bottle_fly(fizz: float) -> void:
