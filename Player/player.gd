@@ -5,14 +5,12 @@ extends PhysicsEntity
 
 func _ready() -> void:
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-    print(Input.mouse_mode)
 
 func _unhandled_key_input(event: InputEvent) -> void:
     if event.is_pressed():
         if event.is_action_pressed(&"jump") and is_on_floor():
             apply_central_impulse(Vector3.UP * jump_height)
         if event.is_action_pressed(&"ui_cancel"):
-            print(Input.mouse_mode)
             match Input.mouse_mode:
                 Input.MOUSE_MODE_VISIBLE:
                     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

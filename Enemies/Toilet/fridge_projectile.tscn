@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqfjc7q2d846h"]
+[gd_scene load_steps=5 format=3 uid="uid://bqfjc7q2d846h"]
+
+[ext_resource type="Script" uid="uid://cko134l6b8vhy" path="res://Enemies/Toilet/fridge_projectile.gd" id="1_r5css"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fw11i"]
 radius = 0.25
@@ -15,9 +17,25 @@ height = 0.5
 top_level = true
 collision_layer = 8
 collision_mask = 11
+contact_monitor = true
+max_contacts_reported = 2
+script = ExtResource("1_r5css")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_fw11i")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_r5css")
+
+[node name="FallbackTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="FallbackTimer" to="." method="_on_fallback_timer_timeout"]
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]
