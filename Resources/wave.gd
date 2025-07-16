@@ -7,6 +7,8 @@ var enemies: Array
 
 var name: String = "if you see this something didnt work"
 
+var nav_mesh: NavigationMesh
+
 func _init() -> void:
     heights = empty_2d_arr(6, 0)
     enemies = empty_2d_arr(6, -1)

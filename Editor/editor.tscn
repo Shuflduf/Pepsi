@@ -37,7 +37,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 tab_alignment = 1
-current_tab = 3
+current_tab = 2
 tab_focus_mode = 0
 
 [node name="Height" type="HBoxContainer" parent="TabContainer"]
@@ -621,7 +621,6 @@ clip_text = true
 expand_icon = true
 
 [node name="Preview" type="SubViewportContainer" parent="TabContainer"]
-visible = false
 layout_mode = 2
 stretch = true
 metadata/_tab_index = 2
@@ -629,7 +628,7 @@ metadata/_tab_index = 2
 [node name="SubViewport" type="SubViewport" parent="TabContainer/Preview"]
 handle_input_locally = false
 size = Vector2i(576, 293)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="Map" parent="TabContainer/Preview/SubViewport" instance=ExtResource("2_55rxr")]
 unique_name_in_owner = true
@@ -646,6 +645,7 @@ environment = SubResource("Environment_74j50")
 
 [node name="Extra" type="HBoxContainer" parent="TabContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 20
 script = ExtResource("3_jdbf7")
@@ -734,6 +734,7 @@ text = "Upload"
 [connection signal="pressed" from="TabContainer/Height/VBoxContainer/HBoxContainer/Set" to="TabContainer/Height" method="_on_set_pressed"]
 [connection signal="pressed" from="TabContainer/Height/VBoxContainer/HBoxContainer/SetValue" to="TabContainer/Height" method="_on_set_value_pressed"]
 [connection signal="updated_enemies" from="TabContainer/Enemies" to="." method="_on_enemies_updated_enemies"]
+[connection signal="bake_finished" from="TabContainer/Preview/SubViewport/Map" to="." method="_on_map_bake_finished"]
 [connection signal="deleted_wave" from="TabContainer/Extra" to="." method="_on_extra_deleted_wave"]
 [connection signal="name_changed" from="TabContainer/Extra" to="." method="_on_extra_name_changed"]
 [connection signal="switched_wave" from="TabContainer/Extra" to="." method="_on_extra_switched_wave"]
