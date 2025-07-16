@@ -1835,9 +1835,13 @@ _subresources={
 }
 },
 "materials": {
+"@MATERIAL:1": {
+"use_external/enabled": true,
+"use_external/path": "uid://4eufetdsfge8"
+},
 "Material": {
 "use_external/enabled": true,
-"use_external/path": "uid://dtu25bo3n62la"
+"use_external/path": "uid://4eufetdsfge8"
 }
 }
 }

@@ -6,6 +6,9 @@ extends Enemy
 
 func _on_cooldown_timeout() -> void:
     anim.play(&"Attack")
+    if player == null:
+        return
+
     await get_tree().create_timer(0.5).timeout
 
     var target_dir = calculate_lead_velocity_with_gravity(
@@ -31,8 +34,11 @@ func _physics_process(delta: float) -> void:
 
 
 func get_aim_dir() -> Vector3:
+    if player == null:
+        return Vector3.ZERO
+
     var player_move_dir = player.linear_velocity
-    var offset = player_move_dir * 1
+    var offset = player_move_dir
     var target_pos = player.global_position + offset
     var target_dir = target_pos - global_position
 
