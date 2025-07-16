@@ -28,7 +28,7 @@ func item_pressed(item: Button, x: int, y: int):
 
     updated_enemies.emit(x, y, new_val)
 
-func update_buttons(new_enemies: Array[Array]):
+func update_buttons(new_enemies: Array):
     for x in get_child_count():
         var col = get_child(x)
         for y in col.get_child_count():

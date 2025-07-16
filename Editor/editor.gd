@@ -39,8 +39,20 @@ func _on_extra_deleted_wave(del_wave: int) -> void:
 
 
 func _on_save_dialog_file_selected(path: String) -> void:
-    var file = FileAccess.open(path,FileAccess.WRITE)
+    var file = FileAccess.open(path, FileAccess.WRITE)
     file.store_string(str(current_state.map(func(w): return w.obj())))
+
+func _on_load_dialog_file_selected(path: String) -> void:
+    current_state = []
+    var file_contents = FileAccess.get_file_as_string(path)
+    var data = JSON.parse_string(file_contents)
+    for wave_data in data:
+        var new_wave = Wave.new()
+        new_wave.from_obj(wave_data)
+        current_state.push_back(new_wave)
+
+    %Extra.update_options(current_state.map(func(w): return w.name))
+    _on_extra_switched_wave(0)
 
 
 func _on_extra_name_changed(new_name: String) -> void:

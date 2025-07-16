@@ -25,7 +25,6 @@ func set_wave(wave: Wave):
                 %Enemies.add_child(enemy_node)
                 enemy_node.global_position = pillar.global_position
                 enemy_node.global_position.y += 10
-                prints("spawned", enemy_node, enemy, enemy_node.global_position)
 
 func get_wave() -> Wave:
     var new_wave = Wave.new()
