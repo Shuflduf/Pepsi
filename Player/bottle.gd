@@ -26,6 +26,7 @@ var fizz = 0.0:
     set(value):
         fizz = value
         visuals.fizz = value
+        fizz_set()
 
 var current_state = PepsiState.Ranged
 
@@ -150,6 +151,11 @@ func throw(debug = false):
 
 
     visuals.play_anim(&"reload_catch")
+
+
+func fizz_set():
+    var lifetime = clampf(fizz / 100, 0.2, 1.0)
+    %Particles
 
 
 func _on_anim_handler_animation_finished(anim_name: StringName) -> void:

@@ -4,6 +4,11 @@ extends Enemy
 
 @export var projectile: PackedScene
 
+func _ready() -> void:
+    super()
+    await get_tree().create_timer(randf_range(0.0, 1.0)).timeout
+    $Cooldown.start()
+
 func _on_cooldown_timeout() -> void:
     anim.play(&"Attack")
     if player == null:
