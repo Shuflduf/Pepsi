@@ -47,7 +47,7 @@ func _process(delta: float) -> void:
         ammo -= delta * 50
         check_ammo()
 
-        fizz -= delta * 2
+        fizz -= delta / 2
         fly.emit(fizz)
 
     if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
@@ -154,8 +154,10 @@ func throw(debug = false):
 
 
 func fizz_set():
-    var lifetime = clampf(fizz / 100, 0.2, 1.0)
-    %Particles
+    var lifetime = clampf(fizz, 0.2, 10.0)
+    print(lifetime)
+    %Particles.lifetime = lifetime
+    %Particles.speed_scale = 1/lifetime
 
 
 func _on_anim_handler_animation_finished(anim_name: StringName) -> void:
