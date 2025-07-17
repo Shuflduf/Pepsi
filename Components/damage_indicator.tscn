@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7vwh04fijnjd"]
+
+[ext_resource type="Script" uid="uid://dgj4dbpl25xf" path="res://Components/damage_indicator.gd" id="1_5vbcs"]
+
+[node name="DamageIndicator" type="Label3D"]
+billboard = 1
+render_priority = 10
+modulate = Color(1, 0, 0, 1)
+text = "1"
+font_size = 128
+outline_size = 64
+script = ExtResource("1_5vbcs")
+damage_colors = Array[Color]([Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0.783333, 0, 1), Color(1, 0.533333, 0, 1), Color(1, 0, 0, 1), Color(0.4, 0, 0, 1), Color(0.254167, 0, 0.61, 1), Color(0.983334, 0, 1, 1), Color(0, 0.883333, 1, 1), Color(0, 1, 0.283333, 1)])

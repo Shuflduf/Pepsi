@@ -6,6 +6,7 @@ signal died
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
 @export var immobile: bool = false
 @export var starting_health = 5
+@export var damage_indicator_scene: PackedScene
 
 var is_hit = false
 var hit_cooldown = 0.0
@@ -53,6 +54,11 @@ func hit(damage: int):
         return
 
     DebugDraw2D.set_text("hit", [damage, name, Time.get_ticks_msec()], 0, Color.WHITE, 1.0)
+    var damage_indic: DamageIndicator = damage_indicator_scene.instantiate()
+    damage_indic.set_damage(damage)
+    get_tree().root.add_child(damage_indic)
+    damage_indic.global_position = global_position
+
     is_hit = true
     health -= damage
     $HitCooldown.start()

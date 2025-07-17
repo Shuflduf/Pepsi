@@ -62,6 +62,7 @@ mouse_sens = 0.004
 [node name="Bottle" type="Node" parent="."]
 script = ExtResource("2_btcbx")
 bottle_prop = ExtResource("4_gwnis")
+throw_damage = 20
 
 [node name="Visuals" parent="Bottle" instance=ExtResource("8_606se")]
 unique_name_in_owner = true
