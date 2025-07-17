@@ -188,6 +188,18 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_5ipex")
 }, {
 "duration": 1.0,
@@ -227,9 +239,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_u3j2m")
-}, {
-"duration": 1.0,
-"texture": null
 }],
 "loop": false,
 "name": &"reload_throw",

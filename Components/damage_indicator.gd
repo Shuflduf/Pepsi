@@ -16,8 +16,9 @@ func set_damage(damage: int):
 
 func _ready() -> void:
     scale = Vector3.ZERO
+    position.y += 2
     var tween = get_tree().create_tween().set_trans(Tween.TRANS_CUBIC)
-    tween.tween_property(self, ^"scale", Vector3.ONE, 1.0)
+    tween.tween_property(self, ^"scale", Vector3.ONE, 0.5)
     tween \
         .parallel() \
         .tween_property(self, ^"position:y", position.y + 5, 2.0) \

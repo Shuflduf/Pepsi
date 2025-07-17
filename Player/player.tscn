@@ -62,7 +62,6 @@ mouse_sens = 0.004
 [node name="Bottle" type="Node" parent="."]
 script = ExtResource("2_btcbx")
 bottle_prop = ExtResource("4_gwnis")
-throw_damage = 20
 
 [node name="Visuals" parent="Bottle" instance=ExtResource("8_606se")]
 unique_name_in_owner = true
@@ -76,9 +75,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 [node name="Camera3D" type="Camera3D" parent="CamPivot"]
 unique_name_in_owner = true
 
-[node name="StartPos" parent="CamPivot/Camera3D" instance=ExtResource("4_gwnis")]
+[node name="MeleeStartPos" parent="CamPivot/Camera3D" instance=ExtResource("4_gwnis")]
 unique_name_in_owner = true
 transform = Transform3D(-0.984808, -0.173648, 3.03617e-08, 0.173648, -0.984808, 3.47036e-07, -3.03617e-08, 3.47036e-07, 1, 1.18986, -0.113493, -1.26137)
+visible = false
+collision_layer = 0
+collision_mask = 0
+freeze = true
+
+[node name="RangedStartPos" parent="CamPivot/Camera3D" instance=ExtResource("4_gwnis")]
+unique_name_in_owner = true
+transform = Transform3D(0.984808, 0.173648, -3.03617e-08, -0.173648, 0.984808, 2.65601e-09, 3.03616e-08, 2.65652e-09, 1, 1.08986, -0.413493, -1.26137)
 visible = false
 collision_layer = 0
 collision_mask = 0
@@ -87,6 +94,7 @@ freeze = true
 [node name="Particles" type="GPUParticles3D" parent="CamPivot/Camera3D"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.999717, -0.023804, 0, 0.023804, 0.999717, 0.3, -0.1, -0.6)
+emitting = false
 amount = 128
 fixed_fps = 60
 visibility_aabb = AABB(-1, -1, -10, 2, 2, 10)
@@ -117,6 +125,7 @@ shape = SubResource("BoxShape3D_onrkg")
 debug_color = Color(0.7, 0, 0, 0.419608)
 
 [connection signal="bottle_spawned" from="Bottle" to="." method="_on_bottle_bottle_spawned"]
+[connection signal="drank" from="Bottle" to="." method="_on_bottle_drank"]
 [connection signal="shot" from="Bottle" to="." method="_on_bottle_shot"]
 [connection signal="swung" from="Bottle" to="." method="_on_bottle_swung"]
 [connection signal="animation_finished" from="Bottle/Visuals" to="Bottle" method="_on_anim_handler_animation_finished"]

@@ -3,6 +3,8 @@ extends PhysicsEntity
 
 @export var mouse_sens: float = 0.01
 
+var speed_factor = 1.0
+
 func _ready() -> void:
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
@@ -19,6 +21,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 func _input(event: InputEvent) -> void:
     if event is InputEventMouseMotion:
+        $Bottle.fizz += event.relative.length() / 10000
         $CamPivot.rotate_y(-event.relative.x * mouse_sens)
 
         %Camera3D.rotate_x(-event.relative.y * mouse_sens)
@@ -34,7 +37,9 @@ func _physics_process(delta: float) -> void:
         direction.y
     )
 
-    apply_central_force(move_dir * delta * ground_speed)
+    apply_central_force(move_dir * delta * ground_speed * speed_factor)
+
+    $Bottle.fizz += linear_velocity.length() / 800
 
 func get_look_vec() -> Vector3:
     var look_dir = %Camera3D.global_rotation
@@ -57,13 +62,14 @@ func _on_bottle_swung(damage: int):
         body.apply_central_impulse(hit_dir * mult)
         #body.is_hit = true
         #body.health -= damage
+        body.in_hitstun = true
         body.hit(damage)
 
 
 func _on_bottle_shot(fizz: float, damage: int) -> void:
     if !is_on_floor():
         var fire_dir = get_look_vec()
-        apply_central_force(-fire_dir * 4 * (fizz + 1))
+        apply_central_force(-fire_dir * 4 * sqrt(fizz + 1))
 
     for body: Enemy in %RangedHitbox.get_overlapping_bodies():
         body.apply_central_force(get_look_vec() * 10)
@@ -75,3 +81,7 @@ func _on_bottle_bottle_spawned(bottle: RigidBody3D) -> void:
     bottle.linear_velocity += get_look_vec() * 20
     bottle.init_velocity = bottle.linear_velocity.normalized()
     bottle.angular_velocity = get_look_vec().rotated(Vector3.UP, PI/2) * 30
+
+
+func _on_bottle_drank(delta: float) -> void:
+    speed_factor += delta

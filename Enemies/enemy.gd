@@ -9,6 +9,7 @@ signal died
 @export var damage_indicator_scene: PackedScene
 
 var is_hit = false
+var in_hitstun = false
 var hit_cooldown = 0.0
 var player: Player = null
 var original_pos: Vector3 = Vector3.ZERO
@@ -27,12 +28,12 @@ func _physics_process(delta: float) -> void:
         linear_velocity = Vector3.ZERO
         return
 
-    #hit_cooldown += delta
-    #if is_on_floor() and hit_cooldown > 1.0:
-        #is_hit = false
-        #hit_cooldown = 0.0
+    hit_cooldown += delta
+    if is_on_floor() and hit_cooldown > 0.1:
+        in_hitstun = false
+        hit_cooldown = 0.0
 
-    if player and !is_hit:
+    if player and !is_hit and !in_hitstun:
         agent.target_position = player.global_position
         var cur_pos = global_position
         var next_path_pos = agent.get_next_path_position()
