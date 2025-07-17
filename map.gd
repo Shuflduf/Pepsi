@@ -1,6 +1,8 @@
 class_name Map
 extends NavigationRegion3D
 
+signal wave_complete
+
 @export var enemies: AllEnemyData
 @export var smooth = false
 
@@ -34,8 +36,6 @@ func set_wave(wave: Wave):
                 %SpawnTimer.start()
 
 
-
-
 func spawn_enemy(enemy: int, pillar_pos: Vector3):
     #var enemy = wave.enemies[x][y]
     if enemy != -1:
@@ -43,8 +43,10 @@ func spawn_enemy(enemy: int, pillar_pos: Vector3):
         %Enemies.add_child(enemy_node)
         enemy_node.global_position = pillar_pos
         enemy_node.global_position.y += 10
+        enemy_node.died.connect(_on_enemy_died)
 
 func spawn_all_enemies():
+    print(%Enemies.get_child_count())
     for enemy in %Enemies.get_children():
         enemy.queue_free()
 
@@ -53,8 +55,18 @@ func spawn_all_enemies():
         for y in col.size():
             var pillar: AnimatableBody3D = %Parts.get_child(x).get_child(y)
             spawn_enemy(wave_to_spawn.enemies[x][y], pillar.global_position)
+    print(%Enemies.get_child_count())
 
 
 func _on_spawn_timer_timeout() -> void:
     spawn_all_enemies()
     bake_navigation_mesh()
+
+func _on_enemy_died():
+    # -1 because queuefree doesnt work fast enough
+    var enemies_alive = %Enemies.get_child_count() - 1
+    if enemies_alive >= 0:
+        wave_complete.emit()
+
+func _process(delta: float) -> void:
+    DebugDraw2D.set_text("enemies", %Enemies.get_child_count())

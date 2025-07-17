@@ -4,9 +4,10 @@ extends Node
 @export var bottle_prop: PackedScene
 @export var melee_damage = 3
 @export var throw_damage = 2
+@export var ranged_damage = 1
 
 signal swung(damage: int)
-signal fly(fizz: float)
+signal shot(fizz: float, damage: int)
 signal bottle_spawned(bottle: RigidBody3D)
 
 var pepsi_pos = Vector2.ZERO
@@ -47,8 +48,9 @@ func _process(delta: float) -> void:
         ammo -= delta * 50
         check_ammo()
 
-        fizz -= delta / 2
-        fly.emit(fizz)
+        fizz -= delta / 3
+
+        shot.emit(fizz, ranged_damage)
 
     if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
         swing()
@@ -136,7 +138,6 @@ func throw(debug = false):
             return
         if !is_pepsi_ready:
             return
-    print("THROWWW")
 
     is_pepsi_ready = false
     ammo = 100
@@ -154,11 +155,17 @@ func throw(debug = false):
 
 
 func fizz_set():
-    var lifetime = clampf(fizz, 0.2, 10.0)
-    print(lifetime)
+    var lifetime = clampf(fizz / 2, 0.2, 1.0)
     %Particles.lifetime = lifetime
-    %Particles.speed_scale = 1/lifetime
-
+    %Particles.process_material.spread = remap(lifetime, 0.2, 1.0, 5.0, 1.0)
+    var box_size = remap(lifetime, 0.2, 1.0, 2.0, 0.5)
+    var box_length = remap(lifetime, 0.2, 1.0, 10.0, 40.0)
+    (%RangedBox.shape as BoxShape3D).size = Vector3(
+        box_size,
+        box_size,
+        box_length,
+    )
+    %RangedBox.position.z = -box_length / 2
 
 func _on_anim_handler_animation_finished(anim_name: StringName) -> void:
     match anim_name:

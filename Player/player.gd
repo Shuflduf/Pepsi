@@ -50,20 +50,24 @@ func _on_bottle_swung(damage: int):
         #var body: Enemy = %MeleeHitbox.get_overlapping_bodies()[0]
         if body is not Enemy:
             continue
+
         var hit_dir = get_look_vec()
         hit_dir.y = clamp(hit_dir.y, 0.3, 1)
         var mult = 20
         body.apply_central_impulse(hit_dir * mult)
-        body.is_hit = true
-        body.health -= damage
-        body.hit()
+        #body.is_hit = true
+        #body.health -= damage
+        body.hit(damage)
 
 
-
-func _on_bottle_fly(fizz: float) -> void:
+func _on_bottle_shot(fizz: float, damage: int) -> void:
     if !is_on_floor():
         var fire_dir = get_look_vec()
         apply_central_force(-fire_dir * 4 * (fizz + 1))
+
+    for body: Enemy in %RangedHitbox.get_overlapping_bodies():
+        body.apply_central_force(get_look_vec() * 10)
+        body.hit(damage)
 
 
 func _on_bottle_bottle_spawned(bottle: RigidBody3D) -> void:

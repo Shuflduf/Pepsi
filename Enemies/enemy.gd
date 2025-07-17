@@ -1,6 +1,8 @@
 class_name Enemy
 extends PhysicsEntity
 
+signal died
+
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
 @export var immobile: bool = false
 @export var starting_health = 5
@@ -24,10 +26,10 @@ func _physics_process(delta: float) -> void:
         linear_velocity = Vector3.ZERO
         return
 
-    hit_cooldown += delta
-    if is_on_floor() and hit_cooldown > 0.1:
-        is_hit = false
-        hit_cooldown = 0.0
+    #hit_cooldown += delta
+    #if is_on_floor() and hit_cooldown > 1.0:
+        #is_hit = false
+        #hit_cooldown = 0.0
 
     if player and !is_hit:
         agent.target_position = player.global_position
@@ -40,16 +42,27 @@ func _physics_process(delta: float) -> void:
 
         dir = Vector3(dir.x, 0.0, dir.z).normalized()
 
-
         #dir.y = 0
         apply_central_force(dir * delta * ground_speed)
 
         var look_dir = atan2(dir.x, dir.z)
         $Visuals.rotation.y = lerp_angle($Visuals.rotation.y, look_dir, delta * 10)
 
-func hit():
+func hit(damage: int):
+    if $HitCooldown.time_left > 0:
+        return
+
+    DebugDraw2D.set_text("hit", [damage, name, Time.get_ticks_msec()], 0, Color.WHITE, 1.0)
+    is_hit = true
+    health -= damage
+    $HitCooldown.start()
     if health <= 0:
         die()
 
 func die():
     queue_free()
+    died.emit()
+
+
+func _on_hit_cooldown_timeout() -> void:
+    is_hit = false

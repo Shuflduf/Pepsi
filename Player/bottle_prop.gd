@@ -13,9 +13,7 @@ func _on_body_entered(body: Node) -> void:
         hit_vec.y = clamp(hit_vec.y, 0.3, 1)
         var mult = 20
         body.apply_central_impulse(hit_vec * mult)
-        body.is_hit = true
-        body.health -= damage
-        body.hit()
+        body.hit(damage)
 
     await get_tree().create_timer(0.01).timeout
     after_bounce()
