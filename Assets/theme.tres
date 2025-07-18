@@ -17,7 +17,7 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h5t51"]
 content_margin_left = 10.0
-content_margin_top = 10.0
+content_margin_top = 8.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
 bg_color = Color(0.4625, 0.25, 1, 1)

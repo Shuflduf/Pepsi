@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://csfvnniagiyos"]
+
+[ext_resource type="Script" uid="uid://b53legiuxcsnn" path="res://StartMenu/start.gd" id="1_tduel"]
+[ext_resource type="PackedScene" uid="uid://x5imp75aoum8" path="res://world.tscn" id="2_5vtl3"]
+[ext_resource type="FontFile" uid="uid://d1uuvj27pfnxa" path="res://Assets/Fonts/Arvo-BoldItalic.ttf" id="2_t5nue"]
+[ext_resource type="Theme" uid="uid://cs4ois6d3ey27" path="res://Assets/theme.tres" id="3_5vtl3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qn1rc"]
+font = ExtResource("2_t5nue")
+font_size = 60
+
+[node name="Start" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_tduel")
+world_scene = ExtResource("2_5vtl3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Pepsi Game"
+label_settings = SubResource("LabelSettings_qn1rc")
+horizontal_alignment = 1
+
+[node name="Start" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme = ExtResource("3_5vtl3")
+text = "START"
+
+[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]

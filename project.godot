@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Pepsi"
-run/main_scene="uid://x5imp75aoum8"
+run/main_scene="uid://csfvnniagiyos"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Transition="*res://Components/Transition/transition.tscn"
 
 [debug_draw_3d]
 

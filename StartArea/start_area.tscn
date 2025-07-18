@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://l8lvset0b238"]
+
+[ext_resource type="PackedScene" uid="uid://dlfyjmq6dnwut" path="res://StartArea/VendingMachine/vending_machine.gltf" id="1_xl28l"]
+[ext_resource type="PackedScene" uid="uid://cvoiesrkxfq7n" path="res://StartArea/Couch/couch.gltf" id="2_ed372"]
+[ext_resource type="PackedScene" uid="uid://ca3k5hfuubiiy" path="res://StartArea/Table/table.gltf" id="3_sfnc0"]
+[ext_resource type="PackedScene" uid="uid://b5wadk0p2y848" path="res://StartArea/Desk/desk.gltf" id="4_sfnc0"]
+[ext_resource type="PackedScene" uid="uid://drp3xrfllv168" path="res://StartArea/Board/board.gltf" id="5_eddi8"]
+
+[node name="StartArea" type="Node3D"]
+
+[node name="vending_machine" parent="." instance=ExtResource("1_xl28l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 4)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+flip_faces = true
+size = Vector3(9, 4, 15)
+
+[node name="couch" parent="." instance=ExtResource("2_ed372")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -3, 0, -5)
+
+[node name="couch2" parent="." instance=ExtResource("2_ed372")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -3, 0, -1)
+
+[node name="table" parent="." instance=ExtResource("3_sfnc0")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -2.4, 0, -3)
+
+[node name="desk" parent="." instance=ExtResource("4_sfnc0")]
+transform = Transform3D(-3.93403e-08, 0, 0.9, 0, 0.9, 0, -0.9, 0, -3.93403e-08, 2, 0, -4)
+
+[node name="board" parent="." instance=ExtResource("5_eddi8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 7.5)

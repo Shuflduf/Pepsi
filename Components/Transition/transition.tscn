@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpouwv3hsq3h3"]
+
+[ext_resource type="Script" uid="uid://jrv743t86lwv" path="res://Components/Transition/transition.gd" id="1_juro2"]
+[ext_resource type="Shader" uid="uid://cjaswrx0udfdp" path="res://Components/Transition/transition.gdshader" id="1_mfyvf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_juro2"]
+shader = ExtResource("1_mfyvf")
+shader_parameter/target_color = Color(0, 0, 0, 1)
+shader_parameter/AspectRatio = 1.5
+shader_parameter/Diamonds = 10.0
+shader_parameter/pixel_size = 0.08
+shader_parameter/height = -1.0
+shader_parameter/disable_pixel = false
+
+[node name="Transition" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_juro2")
+
+[node name="Rect" type="ColorRect" parent="."]
+z_index = 1000
+material = SubResource("ShaderMaterial_juro2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
