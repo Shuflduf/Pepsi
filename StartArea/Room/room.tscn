@@ -1,6 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b5s1854dq42o8"]
+[gd_scene load_steps=6 format=3 uid="uid://b5s1854dq42o8"]
 
 [ext_resource type="PackedScene" uid="uid://bq6yd4r7ns0oa" path="res://StartArea/Room/room.gltf" id="1_ay0mu"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ay0mu"]
+friction = 0.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ay0mu"]
 size = Vector3(9, 1, 15)
@@ -14,6 +17,7 @@ size = Vector3(9, 4, 1)
 [node name="room" instance=ExtResource("1_ay0mu")]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+physics_material_override = SubResource("PhysicsMaterial_ay0mu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)

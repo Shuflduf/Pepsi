@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcyxf87kpgyb"]
+
+[ext_resource type="PackedScene" uid="uid://b5wadk0p2y848" path="res://StartArea/Desk/desk.gltf" id="1_b43uo"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_b43uo"]
+friction = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b43uo"]
+size = Vector3(9.2, 1.7, 2.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1xdw8"]
+size = Vector3(2, 1.7, 4)
+
+[node name="Desk" instance=ExtResource("1_b43uo")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+physics_material_override = SubResource("PhysicsMaterial_b43uo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.85, 0.0499999)
+shape = SubResource("BoxShape3D_b43uo")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1, 0.85, 3.1)
+shape = SubResource("BoxShape3D_1xdw8")

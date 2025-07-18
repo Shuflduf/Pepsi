@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://b2tkpfwt71a2" path="res://Player/bottle_prop.gd" id="1_vi2qj"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vi2qj"]
+rough = true
 bounce = 0.5
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lbb36"]

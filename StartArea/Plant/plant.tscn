@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://q4s2qjk4ybn"]
+
+[ext_resource type="PackedScene" uid="uid://hb572ran06v0" path="res://StartArea/Plant/plant.gltf" id="1_bvwvk"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bvwvk"]
+friction = 0.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bvwvk"]
+radius = 1.0
+
+[node name="Plant" instance=ExtResource("1_bvwvk")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+physics_material_override = SubResource("PhysicsMaterial_bvwvk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_bvwvk")
