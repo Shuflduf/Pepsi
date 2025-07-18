@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://drp3xrfllv168"
-path="res://.godot/imported/board.gltf-0ea5feb08d0c1e7300f34c73715da972.scn"
+uid="uid://coa75s7pgkddg"
+path="res://.godot/imported/lamp.gltf-82acd5e52eb81694390985d2bb118850.scn"
 
 [deps]
 
-source_file="res://StartArea/Board/board.gltf"
-dest_files=["res://.godot/imported/board.gltf-0ea5feb08d0c1e7300f34c73715da972.scn"]
+source_file="res://StartArea/Lamp/lamp.gltf"
+dest_files=["res://.godot/imported/lamp.gltf-82acd5e52eb81694390985d2bb118850.scn"]
 
 [params]
 
@@ -35,6 +35,10 @@ import_script/path=""
 _subresources={
 "materials": {
 "Material": {
+"use_external/enabled": true,
+"use_external/path": "uid://dtu25bo3n62la"
+},
+"Material.002": {
 "use_external/enabled": true,
 "use_external/path": "uid://dtu25bo3n62la"
 }

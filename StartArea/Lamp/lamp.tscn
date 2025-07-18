@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=4 uid="uid://blna5a181gko6"]
+
+[ext_resource type="PackedScene" uid="uid://coa75s7pgkddg" path="res://StartArea/Lamp/lamp.gltf" id="1_yevvx"]
+[ext_resource type="Script" uid="uid://bl14ks6aj2phc" path="res://StartArea/Lamp/lamp.gd" id="2_bvvfp"]
+[ext_resource type="Texture2D" uid="uid://bnw4fm0iu84kn" path="res://StartArea/Lamp/texture.png" id="2_v2lt7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bvvfp"]
+resource_name = "Material"
+cull_mode = 2
+albedo_texture = ExtResource("2_v2lt7")
+roughness = 0.5
+emission_enabled = true
+emission = Color(0.63, 0.49077, 0.1386, 1)
+emission_energy_multiplier = 10.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_a3kff"]
+_surfaces = [{
+"aabb": AABB(-0.854741, -0.0329952, -0.854741, 1.70948, 1e-05, 1.70948),
+"format": 34896613377,
+"index_count": 18,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAQADAAQAAwAAAAUABQAAAAYAAwAFAAcA"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("fSUAAH0lAACB2gAAfSUAAP9/AAAAAAAAgdoAAIHaAAD//wAA/38AAH0lAACB2gAAAAAAAP9/AAD/fwAA//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_stod6"]
+resource_name = "lamp_Cylinder_007"
+_surfaces = [{
+"aabb": AABB(-0.854741, -0.0329952, -0.854741, 1.70948, 1e-05, 1.70948),
+"attribute_data": PackedByteArray("UhkVBVIZFQVSGRUFUhkVBVIZFQVSGRUFUhkVBVIZFQU="),
+"format": 34896613399,
+"index_count": 18,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAQADAAQAAwAAAAUABQAAAAYAAwAFAAcA"),
+"material": SubResource("StandardMaterial3D_bvvfp"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("fSUAAH0l/7+B2gAAfSX/v/9/AAAAAP+/gdoAAIHa/7///wAA/3//v30lAACB2v+/AAAAAP9//7//fwAA////vwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_a3kff")
+
+[node name="lamp" instance=ExtResource("1_yevvx")]
+script = ExtResource("2_bvvfp")
+
+[node name="Cylinder_005" parent="." index="1"]
+mesh = SubResource("ArrayMesh_stod6")
+
+[node name="Light" type="SpotLight3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(1, 0.930333, 0.62, 1)
+light_energy = 0.2
+light_bake_mode = 1
+spot_range = 7.0
+spot_attenuation = -1.57
+spot_angle = 85.0
