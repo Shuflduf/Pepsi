@@ -37,9 +37,13 @@ func _physics_process(delta: float) -> void:
         direction.y
     )
 
-    apply_central_force(move_dir * delta * ground_speed * speed_factor)
+    apply_central_force(move_dir * delta * ground_speed)
 
-    $Bottle.fizz += linear_velocity.length() / 800
+    var vel_length = linear_velocity.length()
+    $Bottle.fizz += vel_length / 800
+    speed_factor = clamp(speed_factor - (vel_length / 1000), 1.0, 10.0)
+    update_speed_values()
+    DebugDraw2D.set_text("speed", [speed_factor, ground_speed, max_air_speed])
 
 func get_look_vec() -> Vector3:
     var look_dir = %Camera3D.global_rotation
@@ -49,6 +53,11 @@ func get_look_vec() -> Vector3:
         -cos(look_dir.y)
     ).normalized()
     return look_vec
+
+func update_speed_values():
+    ground_speed = remap(speed_factor, 1.0, 2.0, 4500.0, 6000.0)
+    max_speed = remap(speed_factor, 1.0, 2.0, 8.5, 10.0)
+    max_air_speed = remap(speed_factor, 1.0, 2.0, 6.5, 8.0)
 
 func _on_bottle_swung(damage: int):
     for body in %MeleeHitbox.get_overlapping_bodies():
@@ -85,3 +94,4 @@ func _on_bottle_bottle_spawned(bottle: RigidBody3D) -> void:
 
 func _on_bottle_drank(delta: float) -> void:
     speed_factor += delta
+    update_speed_values()

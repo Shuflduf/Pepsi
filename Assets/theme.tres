@@ -1,0 +1,49 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://cs4ois6d3ey27"]
+
+[ext_resource type="FontFile" uid="uid://cum07t17b8mho" path="res://Assets/Fonts/Arvo-Bold.ttf" id="1_0dftj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0dftj"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.49333, 0.338762, 1, 1)
+border_width_bottom = 3
+border_color = Color(0.197111, 9.62615e-07, 0.947582, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h5t51"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.4625, 0.25, 1, 1)
+border_width_bottom = 3
+border_color = Color(0.16, 0, 0.8, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_10rey"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+bg_color = Color(0.462745, 0.25098, 1, 1)
+border_width_top = 3
+border_color = Color(0.4, 0.41, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[resource]
+Button/font_sizes/font_size = 20
+Button/fonts/font = ExtResource("1_0dftj")
+Button/styles/hover = SubResource("StyleBoxFlat_0dftj")
+Button/styles/normal = SubResource("StyleBoxFlat_h5t51")
+Button/styles/pressed = SubResource("StyleBoxFlat_10rey")
