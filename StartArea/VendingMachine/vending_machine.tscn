@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=3 uid="uid://indwglmcxev7"]
+
+[ext_resource type="PackedScene" uid="uid://dlfyjmq6dnwut" path="res://StartArea/VendingMachine/vending_machine.gltf" id="1_k0yvs"]
+[ext_resource type="Script" uid="uid://b25k2pxed7qcj" path="res://StartArea/VendingMachine/vending_machine.gd" id="2_p6wo8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p6wo8"]
+size = Vector3(0.113428, 0.248242, 0.577148)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k0yvs"]
+size = Vector3(1.5, 3.6, 2.5)
+
+[node name="VendingMachine" instance=ExtResource("1_k0yvs")]
+script = ExtResource("2_p6wo8")
+
+[node name="Area3D" type="Area3D" parent="VendingMachine/Cube_014" index="0"]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VendingMachine/Cube_014/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.794653, 2.79307, -0.962207)
+shape = SubResource("BoxShape3D_p6wo8")
+
+[node name="Area3D" type="Area3D" parent="VendingMachine/Cube_032" index="0"]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VendingMachine/Cube_032/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.794653, 2.444, -0.962207)
+shape = SubResource("BoxShape3D_p6wo8")
+
+[node name="Area3D" type="Area3D" parent="VendingMachine/Cube_033" index="0"]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VendingMachine/Cube_033/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.794653, 2.09668, -0.962207)
+shape = SubResource("BoxShape3D_p6wo8")
+
+[node name="Area3D" type="Area3D" parent="VendingMachine/Cube_034" index="0"]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VendingMachine/Cube_034/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.794653, 1.74586, -0.962207)
+shape = SubResource("BoxShape3D_p6wo8")
+
+[node name="Area3D" type="Area3D" parent="VendingMachine/Cube_035" index="0"]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VendingMachine/Cube_035/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.794653, 1.39713, -0.962207)
+shape = SubResource("BoxShape3D_p6wo8")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 1.8, 0)
+shape = SubResource("BoxShape3D_k0yvs")

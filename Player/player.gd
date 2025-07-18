@@ -1,7 +1,7 @@
 class_name Player
 extends PhysicsEntity
 
-@export var mouse_sens: float = 0.01
+@export var mouse_sens: float = 0.004
 
 var speed_factor = 1.0
 

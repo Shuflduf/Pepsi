@@ -11,14 +11,14 @@
 _data = [Vector2(0, 0.0250001), 0.0, 0.0, 0, 0, Vector2(0.103734, 0.752809), 0.0, 0.0, 0, 0, Vector2(0.858921, 0.764045), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_i3pqv"]
+[sub_resource type="CurveTexture" id="CurveTexture_gwnis"]
 curve = SubResource("Curve_onrkg")
 
 [sub_resource type="Curve" id="Curve_i3pqv"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.481328, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_hqtel"]
+[sub_resource type="CurveTexture" id="CurveTexture_k53q1"]
 curve = SubResource("Curve_i3pqv")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_onrkg"]
@@ -27,10 +27,10 @@ spread = 1.0
 initial_velocity_min = 35.0
 initial_velocity_max = 55.0
 gravity = Vector3(0, 0, 0)
-alpha_curve = SubResource("CurveTexture_i3pqv")
-emission_curve = SubResource("CurveTexture_hqtel")
+alpha_curve = SubResource("CurveTexture_gwnis")
+emission_curve = SubResource("CurveTexture_k53q1")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_onrkg"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fhl08"]
 transparency = 3
 alpha_hash_scale = 1.0
 alpha_antialiasing_mode = 0
@@ -39,7 +39,7 @@ vertex_color_use_as_albedo = true
 albedo_color = Color(0.215686, 0.145098, 0.219608, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_i3pqv"]
-material = SubResource("StandardMaterial3D_onrkg")
+material = SubResource("StandardMaterial3D_fhl08")
 radius = 0.1
 height = 0.2
 
@@ -56,7 +56,6 @@ axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 script = ExtResource("1_dw050")
-mouse_sens = 0.004
 
 [node name="Bottle" type="Node" parent="."]
 script = ExtResource("2_btcbx")
