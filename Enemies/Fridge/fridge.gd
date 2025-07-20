@@ -13,6 +13,8 @@ func _on_cooldown_timeout() -> void:
     anim.play(&"Attack")
     if player == null:
         return
+    if disabled:
+        return
 
     await get_tree().create_timer(0.5).timeout
 

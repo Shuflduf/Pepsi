@@ -7,21 +7,37 @@ signal died
 @export var immobile: bool = false
 @export var starting_health = 5
 @export var damage_indicator_scene: PackedScene
+@export var damage_indicator_offset: float = 0.0
 
 var is_hit = false
 var in_hitstun = false
 var hit_cooldown = 0.0
 var player: Player = null
-var original_pos: Vector3 = Vector3.ZERO
+var disabled = false
 
 var health = starting_health
 
 func _ready() -> void:
-    player = get_tree().get_first_node_in_group(&"Player")
-    original_pos = global_position
     if immobile:
         mass = 10000
-        collision_layer |= 0001
+        # part of the world
+        collision_layer |= 1
+    #var actual_col = collision_layer
+    #var actual_pos = position
+    #collision_layer = 0
+    $Visuals.rotate_y(randf_range(-PI, PI))
+    freeze = true
+    var vis_pos = $Visuals.position.y
+    $Visuals.position.y -= 5.0
+
+    var tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+    tween.tween_property($Visuals, ^"position:y", vis_pos, 1.0)
+    await tween.finished
+
+    $Visuals.position.y = vis_pos
+    freeze = false
+    player = get_tree().get_first_node_in_group(&"Player")
+
 
 func _physics_process(delta: float) -> void:
     if immobile:
@@ -54,11 +70,9 @@ func hit(damage: int):
     if $HitCooldown.time_left > 0:
         return
 
+    $HitParticles.restart()
     DebugDraw2D.set_text("hit", [damage, name, Time.get_ticks_msec()], 0, Color.WHITE, 1.0)
-    var damage_indic: DamageIndicator = damage_indicator_scene.instantiate()
-    damage_indic.set_damage(damage)
-    get_tree().root.add_child(damage_indic)
-    damage_indic.global_position = global_position
+    spawn_damage_indicator(damage)
 
     is_hit = true
     health -= damage
@@ -66,10 +80,23 @@ func hit(damage: int):
     if health <= 0:
         die()
 
-func die():
-    queue_free()
-    died.emit()
+func spawn_damage_indicator(damage: int):
+    var damage_indic: DamageIndicator = damage_indicator_scene.instantiate()
+    damage_indic.set_damage(damage)
+    get_tree().root.add_child(damage_indic)
+    damage_indic.global_position = global_position
+    damage_indic.global_position.y += damage_indicator_offset
 
+func die():
+    died.emit()
+    collision_layer = 0
+    collision_mask = 0
+    $Visuals.hide()
+    disabled = true
+    if $HitParticles.emitting:
+        await $HitParticles.finished
+
+    queue_free()
 
 func _on_hit_cooldown_timeout() -> void:
     is_hit = false

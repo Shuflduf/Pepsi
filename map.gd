@@ -53,8 +53,9 @@ func spawn_all_enemies():
         var col = wave_to_spawn.heights[x]
         for y in col.size():
             var pillar: AnimatableBody3D = %Parts.get_child(x).get_child(y)
-            spawn_enemy(wave_to_spawn.enemies[x][y], pillar.global_position)
-
+            get_tree().create_timer(randf_range(0.0, 1.0)).timeout.connect(func():
+                spawn_enemy(wave_to_spawn.enemies[x][y], pillar.global_position)
+            )
 
 func _on_spawn_timer_timeout() -> void:
     spawn_all_enemies()
