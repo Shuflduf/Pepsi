@@ -1,3 +1,4 @@
+class_name BottleProp
 extends RigidBody3D
 
 var init_velocity: Vector3
@@ -24,3 +25,11 @@ func after_bounce():
     physics_material_override.absorbent = true
     linear_velocity /= 2
     angular_velocity /= 20
+
+func set_size(scalar: float):
+    $pepsi.scale *= scalar
+    $CollisionShape3D.scale *= scalar
+
+func use():
+    #print("AAAAAAAAAA")
+    pass

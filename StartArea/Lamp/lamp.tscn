@@ -1,16 +1,14 @@
-[gd_scene load_steps=7 format=4 uid="uid://blna5a181gko6"]
+[gd_scene load_steps=6 format=4 uid="uid://blna5a181gko6"]
 
 [ext_resource type="PackedScene" uid="uid://coa75s7pgkddg" path="res://StartArea/Lamp/lamp.gltf" id="1_yevvx"]
 [ext_resource type="Script" uid="uid://bl14ks6aj2phc" path="res://StartArea/Lamp/lamp.gd" id="2_bvvfp"]
-[ext_resource type="Texture2D" uid="uid://bnw4fm0iu84kn" path="res://StartArea/Lamp/texture.png" id="2_v2lt7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bvvfp"]
 resource_name = "Material"
 cull_mode = 2
-albedo_texture = ExtResource("2_v2lt7")
 roughness = 0.5
 emission_enabled = true
-emission = Color(0.63, 0.49077, 0.1386, 1)
+emission = Color(0.32, 0.304213, 0.0832, 1)
 emission_energy_multiplier = 10.0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_a3kff"]
@@ -53,7 +51,7 @@ mesh = SubResource("ArrayMesh_stod6")
 
 [node name="Light" type="SpotLight3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-light_color = Color(1, 0.930333, 0.62, 1)
+light_color = Color(0.73, 0.652133, 0.146, 1)
 light_energy = 0.2
 light_bake_mode = 1
 spot_range = 7.0

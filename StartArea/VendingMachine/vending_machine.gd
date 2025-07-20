@@ -8,7 +8,9 @@ extends Node3D
     $VendingMachine/Cube_035,
 ]
 
-var being_pressed: Array[MeshInstance3D]
+@export var bottle: PackedScene
+
+var being_pressed: bool
 
 #func _physics_process(delta: float) -> void:
     #for button in buttons:
@@ -16,18 +18,21 @@ var being_pressed: Array[MeshInstance3D]
 
 
 func _on_slow_player_pressed(area: Area3D) -> void:
-    var button: MeshInstance3D = area.get_parent()
-    if button in being_pressed:
+    if being_pressed:
         return
-    being_pressed.append(button)
-    #button.position.x = -0.1
+    being_pressed = true
+
+    var button: MeshInstance3D = area.get_parent()
+
     var tween = get_tree().create_tween().set_trans(Tween.TRANS_CIRC)
-    tween.tween_property(button, ^"position:x", -0.1, 0.5).set_ease(Tween.EASE_IN)
-    tween.tween_callback(spawn_bottle)
-    # just wait
-    #tween.tween_property(button, ^"position:x", -0.1, 0.5)
+    tween.tween_property(button, ^"position:x", -0.05, 0.5).set_ease(Tween.EASE_IN)
     tween.tween_property(button, ^"position:x", 0, 0.5).set_ease(Tween.EASE_OUT)
-    tween.tween_callback(being_pressed.erase.bind(button))
+    tween.tween_callback(func(): being_pressed = false)
+    tween.tween_callback(spawn_bottle)
 
 func spawn_bottle():
-    pass
+    var new_bottle: RigidBody3D = bottle.instantiate()
+
+    add_child(new_bottle)
+    new_bottle.set_size(0.5)
+    new_bottle.global_position = $BottleSpawnPos.global_position
