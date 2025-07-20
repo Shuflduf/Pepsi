@@ -99,7 +99,6 @@ func update_speed_values():
 
 func _on_bottle_swung(damage: int):
     for body in %MeleeHitbox.get_overlapping_bodies():
-        #var body: Enemy = %MeleeHitbox.get_overlapping_bodies()[0]
         if body is not Enemy:
             continue
 

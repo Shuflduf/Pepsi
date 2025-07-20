@@ -3,7 +3,6 @@ extends Node
 @onready var visuals: BottleVisuals = %Visuals
 @export var bottle_prop: PackedScene
 @export var melee_damage = 3
-@export var throw_damage = 2
 @export var ranged_damage = 1
 @export var discard_damage = 4
 
@@ -164,6 +163,7 @@ func throw(is_discard = false, debug = false):
     fizz = 0
 
     var new_bottle: RigidBody3D = bottle_prop.instantiate()
+    var throw_damage = ceil(throw_strength / 10)
     new_bottle.damage = discard_damage if is_discard else throw_damage
     add_child(new_bottle)
     new_bottle.position = %MiddleStartPos.global_position
