@@ -28,6 +28,7 @@ var fizz = 0.0:
     set(value):
         fizz = value
         visuals.fizz = value
+        %FizzBar.value = value
         fizz_set()
 
 var current_state = PepsiState.Ranged

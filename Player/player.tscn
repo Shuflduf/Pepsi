@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://dwf57bj3pkrc2"]
+[gd_scene load_steps=24 format=3 uid="uid://dwf57bj3pkrc2"]
 
 [ext_resource type="Script" uid="uid://d1pngnbnlosda" path="res://Player/player.gd" id="1_dw050"]
 [ext_resource type="Script" uid="uid://c7x3hccqs402f" path="res://Player/bottle.gd" id="2_btcbx"]
+[ext_resource type="Texture2D" uid="uid://c8jo3i663vyoc" path="res://Assets/circle.png" id="3_fhl08"]
 [ext_resource type="PackedScene" uid="uid://dvqx400cgvwbo" path="res://Player/bottle_prop.tscn" id="4_gwnis"]
 [ext_resource type="PackedScene" uid="uid://de0gr5karpjpp" path="res://Player/crosshair.tscn" id="5_k53q1"]
 [ext_resource type="PackedScene" uid="uid://cdiyjjw6fkmhl" path="res://Player/bottle_visuals.tscn" id="8_606se"]
@@ -105,6 +106,64 @@ axis_lock_angular_y = true
 axis_lock_angular_z = true
 physics_material_override = SubResource("PhysicsMaterial_gwnis")
 script = ExtResource("1_dw050")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Crosshair" parent="Control" instance=ExtResource("5_k53q1")]
+layout_mode = 1
+
+[node name="HealthBar" type="TextureProgressBar" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+fill_mode = 5
+radial_initial_angle = 180.0
+radial_fill_degrees = 180.0
+radial_center_offset = Vector2(1, 0)
+nine_patch_stretch = true
+texture_progress = ExtResource("3_fhl08")
+tint_progress = Color(0.490196, 0.223529, 0.282353, 1)
+
+[node name="FizzBar" type="TextureProgressBar" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 5.0
+step = 0.01
+value = 5.0
+fill_mode = 4
+radial_initial_angle = 180.0
+radial_fill_degrees = 180.0
+radial_center_offset = Vector2(-1, 0)
+nine_patch_stretch = true
+texture_progress = ExtResource("3_fhl08")
 
 [node name="Bottle" type="Node" parent="."]
 script = ExtResource("2_btcbx")
@@ -210,19 +269,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1, -1.42109e-14)
 shape = SubResource("CylinderShape3D_gwnis")
 debug_color = Color(0.501667, 0.7, 0, 0.419608)
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Crosshair" parent="Control" instance=ExtResource("5_k53q1")]
-layout_mode = 1
+[node name="HitCooldown" type="Timer" parent="."]
+wait_time = 0.5
 
 [connection signal="bottle_spawned" from="Bottle" to="." method="_on_bottle_bottle_spawned"]
 [connection signal="drank" from="Bottle" to="." method="_on_bottle_drank"]
 [connection signal="shot" from="Bottle" to="." method="_on_bottle_shot"]
 [connection signal="swung" from="Bottle" to="." method="_on_bottle_swung"]
 [connection signal="animation_finished" from="Bottle/Visuals" to="Bottle" method="_on_anim_handler_animation_finished"]
+[connection signal="timeout" from="HitCooldown" to="." method="_on_hit_cooldown_timeout"]

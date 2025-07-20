@@ -6,6 +6,8 @@ extends PhysicsEntity
 var speed_factor = 1.0
 var slamming = false
 var slam_height = 0.0
+var health = 100
+var can_be_hit = true
 
 func _ready() -> void:
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -49,7 +51,6 @@ func _physics_process(delta: float) -> void:
     $Bottle.fizz += vel_length / (800 if !slamming else 1600)
     speed_factor = clamp(speed_factor - (vel_length / 1000), 1.0, 10.0)
     update_speed_values()
-    DebugDraw2D.set_text("speed", [speed_factor, ground_speed, max_air_speed])
 
     if is_on_floor():
         if slamming:
@@ -60,6 +61,8 @@ func _physics_process(delta: float) -> void:
     elif slamming:
         linear_velocity.y = -30
 
+    DebugDraw2D.set_text("health", health)
+
 func slam():
     if !slamming:
         slamming = true
@@ -67,9 +70,9 @@ func slam():
     #linear_velocity.y = -30
 
 func deal_slam_damage():
-    var slam_height = slam_height - global_position.y
-    var slam_damage = ceili(slam_height / 10.0)
-    var slam_knockback = clamp(slam_height / 20, 2.0, INF)
+    var slam_diff = slam_height - global_position.y
+    var slam_damage = ceili(slam_diff / 10.0)
+    var slam_knockback = clamp(slam_diff / 20, 2.0, INF)
     for enemy: Enemy in %SlamHitbox.get_overlapping_bodies():
         enemy.hit(slam_damage)
         var dir_to_enemy = ((enemy.position - global_position) * Vector3(1, 0, 1)).normalized()
@@ -132,3 +135,16 @@ func _on_bottle_bottle_spawned(bottle: RigidBody3D, throw_strength: float) -> vo
 func _on_bottle_drank(delta: float) -> void:
     speed_factor += delta
     update_speed_values()
+
+
+func _on_hit_cooldown_timeout() -> void:
+    can_be_hit = true
+
+func hit(damage: int):
+    if !can_be_hit:
+        return
+    health -= damage
+    %HealthBar.value = health
+    $HitCooldown.start()
+    can_be_hit = false
+    print(damage)

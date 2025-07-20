@@ -25,8 +25,6 @@ func _on_cooldown_timeout() -> void:
         40.0
     )
 
-    DebugDraw3D.draw_ray(global_position, target_dir, target_dir.length(), Color.BLUE, 2.0)
-
     var new_projectile: RigidBody3D = projectile.instantiate()
     new_projectile.linear_velocity = target_dir
     add_child(new_projectile)
