@@ -110,6 +110,7 @@ func _on_bottle_swung(damage: int):
         if body is not Enemy:
             continue
 
+        %Hit.play(0.05)
         var hit_dir = get_look_vec()
         hit_dir.y = clamp(hit_dir.y, 0.3, 1)
         var mult = 20
