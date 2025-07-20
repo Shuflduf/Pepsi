@@ -53,14 +53,9 @@ func _physics_process(delta: float) -> void:
 
     if is_on_floor():
         if slamming:
-            #DebugDraw2D.set_text(
-                #"SLAM",
-                #[%SlamHitbox.get_overlapping_bodies().size(), ],
-                #0,
-                #Color.WHITE,
-                #2.0
-            #)
+
             deal_slam_damage()
+            $SlamParticles.restart()
         slamming = false
     elif slamming:
         linear_velocity.y = -30
@@ -128,11 +123,11 @@ func _on_bottle_shot(fizz: float, damage: int) -> void:
         body.hit(damage)
 
 
-func _on_bottle_bottle_spawned(bottle: RigidBody3D) -> void:
+func _on_bottle_bottle_spawned(bottle: RigidBody3D, throw_strength: float) -> void:
     bottle.linear_velocity = linear_velocity
-    bottle.linear_velocity += get_look_vec() * 20
+    bottle.linear_velocity += get_look_vec() * throw_strength
     bottle.init_velocity = bottle.linear_velocity.normalized()
-    bottle.angular_velocity = get_look_vec().rotated(Vector3.UP, PI/2) * 30
+    bottle.angular_velocity = get_look_vec().rotated(Vector3.UP, PI/2) * throw_strength
 
 
 func _on_bottle_drank(delta: float) -> void:

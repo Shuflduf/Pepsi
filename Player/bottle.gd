@@ -9,7 +9,7 @@ extends Node
 
 signal swung(damage: int)
 signal shot(fizz: float, damage: int)
-signal bottle_spawned(bottle: RigidBody3D)
+signal bottle_spawned(bottle: RigidBody3D, throw_strength: float)
 signal drank(delta: float)
 
 var pepsi_pos = Vector2.ZERO
@@ -33,6 +33,8 @@ var fizz = 0.0:
 
 var current_state = PepsiState.Ranged
 var speed_scale = 1.0
+
+var throw_strength = 0.0
 
 func _ready() -> void:
     visuals.play_anim(&"reload_catch")
@@ -62,13 +64,18 @@ func _process(delta: float) -> void:
     if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
         aim()
         if current_state == PepsiState.Melee:
-            throw()
+            throw_strength += delta * 15
+            #throw()
     else:
         unaim()
+        if current_state == PepsiState.Melee and throw_strength:
+            throw()
+            throw_strength = 0.0
 
     if Input.is_action_pressed(&"debug_throw"):
         throw(false, true)
 
+    DebugDraw2D.set_text("throw", throw_strength)
 
 func check_ammo():
     DebugDraw2D.set_text("ammo", [ammo, current_state, is_pepsi_ready])
@@ -157,20 +164,22 @@ func throw(is_discard = false, debug = false):
     fizz = 0
 
     var new_bottle: RigidBody3D = bottle_prop.instantiate()
+    new_bottle.damage = discard_damage if is_discard else throw_damage
     add_child(new_bottle)
+    new_bottle.position = %MiddleStartPos.global_position
+    new_bottle.rotation = %MiddleStartPos.global_rotation
+
     match current_state:
         PepsiState.Melee:
-            new_bottle.position = %MeleeStartPos.global_position
-            new_bottle.rotation = %MeleeStartPos.global_rotation
+            #new_bottle.position = %MeleeStartPos.global_position
+            #new_bottle.rotation = %MeleeStartPos.global_rotation
+            bottle_spawned.emit(new_bottle, clamp(throw_strength, 5.0, INF))
         PepsiState.Ranged:
-            new_bottle.position = %RangedStartPos.global_position
-            new_bottle.rotation = %RangedStartPos.global_rotation
-
-    new_bottle.damage = throw_damage if !is_discard else discard_damage
-    bottle_spawned.emit(new_bottle)
+            #new_bottle.position = %RangedStartPos.global_position
+            #new_bottle.rotation = %RangedStartPos.global_rotation
+            bottle_spawned.emit(new_bottle, 20)
 
     visuals.play_anim(&"reload_catch")
-
 
 func fizz_set():
     var lifetime = clampf(fizz / 2, 0.2, 1.0)

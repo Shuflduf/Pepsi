@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://dwf57bj3pkrc2"]
+[gd_scene load_steps=23 format=3 uid="uid://dwf57bj3pkrc2"]
 
 [ext_resource type="Script" uid="uid://d1pngnbnlosda" path="res://Player/player.gd" id="1_dw050"]
 [ext_resource type="Script" uid="uid://c7x3hccqs402f" path="res://Player/bottle.gd" id="2_btcbx"]
 [ext_resource type="PackedScene" uid="uid://dvqx400cgvwbo" path="res://Player/bottle_prop.tscn" id="4_gwnis"]
+[ext_resource type="PackedScene" uid="uid://de0gr5karpjpp" path="res://Player/crosshair.tscn" id="5_k53q1"]
 [ext_resource type="PackedScene" uid="uid://cdiyjjw6fkmhl" path="res://Player/bottle_visuals.tscn" id="8_606se"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gwnis"]
@@ -53,8 +54,8 @@ size = Vector3(2, 2, 40)
 size = Vector3(2, 2, 2)
 
 [sub_resource type="Curve" id="Curve_gwnis"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.628319, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.137168, 1), 0.0, 0.0, 0, 0, Vector2(0.628319, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="CurveTexture" id="CurveTexture_fhl08"]
 curve = SubResource("Curve_gwnis")
@@ -77,6 +78,20 @@ scale_curve = SubResource("CurveTexture_fhl08")
 [sub_resource type="SphereMesh" id="SphereMesh_k53q1"]
 radius = 0.1
 height = 0.2
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k53q1"]
+lifetime_randomness = 0.3
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 6.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_fhl08")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_gwnis"]
 height = 2.6
@@ -106,6 +121,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CamPivot"]
 unique_name_in_owner = true
+
+[node name="MiddleStartPos" parent="CamPivot/Camera3D" instance=ExtResource("4_gwnis")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.113, -1.261)
+visible = false
+collision_layer = 0
+collision_mask = 0
+freeze = true
 
 [node name="MeleeStartPos" parent="CamPivot/Camera3D" instance=ExtResource("4_gwnis")]
 unique_name_in_owner = true
@@ -166,6 +189,16 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_gwnis")
 draw_pass_1 = SubResource("SphereMesh_k53q1")
 
+[node name="SlamParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1.74846e-07)
+emitting = false
+amount = 64
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_k53q1")
+draw_pass_1 = SubResource("SphereMesh_k53q1")
+
 [node name="SlamHitbox" type="Area3D" parent="."]
 unique_name_in_owner = true
 collision_layer = 0
@@ -176,6 +209,18 @@ monitorable = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1, -1.42109e-14)
 shape = SubResource("CylinderShape3D_gwnis")
 debug_color = Color(0.501667, 0.7, 0, 0.419608)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Crosshair" parent="Control" instance=ExtResource("5_k53q1")]
+layout_mode = 0
+anchors_preset = 0
 
 [connection signal="bottle_spawned" from="Bottle" to="." method="_on_bottle_bottle_spawned"]
 [connection signal="drank" from="Bottle" to="." method="_on_bottle_drank"]
