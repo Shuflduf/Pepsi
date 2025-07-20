@@ -50,16 +50,21 @@ func _process(delta: float) -> void:
 
 
     if current_state == PepsiState.Firing and is_pepsi_ready:
+        if !%Pour.playing:
+            %Pour.play()
+
         ammo -= delta * 50
         check_ammo()
-
         fizz -= delta / 3
-
         shot.emit(fizz, ranged_damage)
+    else:
+        %Pour.stop()
 
     if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
         swing()
         drink(delta)
+    else:
+        $Drink.stop()
 
     if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
         aim()
@@ -113,13 +118,18 @@ func switch_state():
 
 func drink(delta: float):
     if current_state != PepsiState.Ranged:
+        $Drink.stop()
         return
     if !is_pepsi_ready:
+        $Drink.stop()
         return
 
-    ammo -= delta * 100
+    if !$Drink.playing:
+        $Drink.play(0)
+
+    ammo -= delta * 30
     check_ammo()
-    drank.emit(delta * 1.5)
+    drank.emit(delta * 0.75)
 
 func aim():
     if current_state != PepsiState.Ranged:

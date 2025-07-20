@@ -3,6 +3,11 @@ extends Node3D
 @export var tutorial_scene: PackedScene
 
 var moving_liquid = false
+var started_already = false
+
+func _ready() -> void:
+    var effect: AudioEffectFilter = AudioServer.get_bus_effect(1, 0)
+    effect.cutoff_hz = 50
 
 func _physics_process(delta: float) -> void:
     if moving_liquid:
@@ -14,12 +19,20 @@ func _physics_process(delta: float) -> void:
         $SlowPlayer.fade_away()
 
 func _on_slow_player_game_started() -> void:
+    if started_already:
+        return
+    started_already = true
+
+    MusicPlayer.playing = false
+
     $WorldEnvironment.environment.sky.sky_material.energy_multiplier = 0.1
     moving_liquid = true
     $Props/Lamp.turn_purple()
     $Props/Lamp2.turn_purple()
     await get_tree().create_timer(3.0).timeout
     $WorldEnvironment.environment.sky.sky_material.energy_multiplier = 0.3
+    var tween = get_tree().create_tween()
+    tween.tween_property($Noise, ^"volume", 0.1, 10.0)
 
 
 func _on_slow_player_transition_started() -> void:

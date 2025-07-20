@@ -22,6 +22,8 @@ func _on_slow_player_pressed(area: Area3D) -> void:
         return
     being_pressed = true
 
+    get_tree().create_timer(0.3).timeout.connect($Click.play)
+
     var button: MeshInstance3D = area.get_parent()
 
     var tween = get_tree().create_tween().set_trans(Tween.TRANS_CIRC)

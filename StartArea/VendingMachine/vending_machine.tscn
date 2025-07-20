@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://indwglmcxev7"]
+[gd_scene load_steps=12 format=3 uid="uid://indwglmcxev7"]
 
 [ext_resource type="PackedScene" uid="uid://dlfyjmq6dnwut" path="res://StartArea/VendingMachine/vending_machine.gltf" id="1_k0yvs"]
 [ext_resource type="Script" uid="uid://b25k2pxed7qcj" path="res://StartArea/VendingMachine/vending_machine.gd" id="2_p6wo8"]
 [ext_resource type="PackedScene" uid="uid://dvqx400cgvwbo" path="res://Player/bottle_prop.tscn" id="3_t8ksh"]
+[ext_resource type="AudioStream" uid="uid://dyu414umlnc3y" path="res://Assets/SFX/snap.wav" id="4_54otc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p6wo8"]
 size = Vector3(0.113428, 0.248242, 0.577148)
@@ -106,3 +107,8 @@ shape = SubResource("BoxShape3D_54otc")
 
 [node name="BottleSpawnPos" type="Node3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 1.8, -0.9)
+
+[node name="Click" type="AudioStreamPlayer3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 1.9, -1)
+stream = ExtResource("4_54otc")
+pitch_scale = 0.3

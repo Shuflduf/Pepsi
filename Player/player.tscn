@@ -1,11 +1,13 @@
-[gd_scene load_steps=25 format=3 uid="uid://dwf57bj3pkrc2"]
+[gd_scene load_steps=27 format=3 uid="uid://dwf57bj3pkrc2"]
 
 [ext_resource type="Script" uid="uid://d1pngnbnlosda" path="res://Player/player.gd" id="1_dw050"]
 [ext_resource type="Script" uid="uid://c7x3hccqs402f" path="res://Player/bottle.gd" id="2_btcbx"]
 [ext_resource type="Texture2D" uid="uid://c8jo3i663vyoc" path="res://Assets/circle.png" id="3_fhl08"]
 [ext_resource type="PackedScene" uid="uid://dvqx400cgvwbo" path="res://Player/bottle_prop.tscn" id="4_gwnis"]
 [ext_resource type="PackedScene" uid="uid://de0gr5karpjpp" path="res://Player/crosshair.tscn" id="5_k53q1"]
+[ext_resource type="AudioStream" uid="uid://b5ujugfiqbdnk" path="res://Assets/SFX/drink.wav" id="7_vtle1"]
 [ext_resource type="PackedScene" uid="uid://cdiyjjw6fkmhl" path="res://Player/bottle_visuals.tscn" id="8_606se"]
+[ext_resource type="AudioStream" uid="uid://buk3d2k1q4p8a" path="res://Assets/SFX/pour.wav" id="8_od3ui"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gwnis"]
 friction = 0.0
@@ -111,7 +113,7 @@ axis_lock_angular_z = true
 physics_material_override = SubResource("PhysicsMaterial_gwnis")
 script = ExtResource("1_dw050")
 
-[node name="Control" type="Control" parent="."]
+[node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -119,10 +121,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Crosshair" parent="Control" instance=ExtResource("5_k53q1")]
+[node name="Crosshair" parent="UI" instance=ExtResource("5_k53q1")]
 layout_mode = 1
 
-[node name="HealthBar" type="TextureProgressBar" parent="Control"]
+[node name="HealthBar" type="TextureProgressBar" parent="UI"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -145,7 +147,7 @@ nine_patch_stretch = true
 texture_progress = ExtResource("3_fhl08")
 tint_progress = Color(0.490196, 0.223529, 0.282353, 1)
 
-[node name="LabelContainer" type="Control" parent="Control"]
+[node name="LabelContainer" type="Control" parent="UI"]
 unique_name_in_owner = true
 anchors_preset = 0
 offset_left = 302.0
@@ -153,7 +155,7 @@ offset_top = 149.0
 offset_right = 342.0
 offset_bottom = 178.0
 
-[node name="DamageLabel" type="Label" parent="Control/LabelContainer"]
+[node name="DamageLabel" type="Label" parent="UI/LabelContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -171,7 +173,7 @@ grow_vertical = 2
 text = "-10"
 label_settings = SubResource("LabelSettings_fhl08")
 
-[node name="FizzBar" type="TextureProgressBar" parent="Control"]
+[node name="FizzBar" type="TextureProgressBar" parent="UI"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -201,6 +203,10 @@ bottle_prop = ExtResource("4_gwnis")
 
 [node name="Visuals" parent="Bottle" instance=ExtResource("8_606se")]
 unique_name_in_owner = true
+
+[node name="Drink" type="AudioStreamPlayer" parent="Bottle"]
+stream = ExtResource("7_vtle1")
+pitch_scale = 0.6
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_f3sb7")
@@ -244,6 +250,12 @@ fixed_fps = 60
 visibility_aabb = AABB(-1, -1, -10, 2, 2, 10)
 process_material = SubResource("ParticleProcessMaterial_onrkg")
 draw_pass_1 = SubResource("SphereMesh_i3pqv")
+
+[node name="Pour" type="AudioStreamPlayer3D" parent="CamPivot/Camera3D/Particles"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 3.72529e-09, 0, -1.86265e-09, 1, 0, 0, 0)
+stream = ExtResource("8_od3ui")
+pitch_scale = 0.8
 
 [node name="RangedHitbox" type="Area3D" parent="CamPivot/Camera3D/Particles"]
 unique_name_in_owner = true

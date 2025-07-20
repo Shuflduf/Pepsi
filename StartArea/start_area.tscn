@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://l8lvset0b238"]
+[gd_scene load_steps=23 format=3 uid="uid://l8lvset0b238"]
 
 [ext_resource type="PackedScene" uid="uid://crkmu6nqbwi8o" path="res://StartArea/SlowPlayer/slow_player.tscn" id="1_0km52"]
 [ext_resource type="Script" uid="uid://b2cnas5s1q3kr" path="res://StartArea/start_area.gd" id="1_u5x8h"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://7gic174mohf" path="res://StartArea/Painting/painting.gltf" id="7_wwjl0"]
 [ext_resource type="PackedScene" uid="uid://b5s1854dq42o8" path="res://StartArea/Room/room.tscn" id="9_x12yt"]
 [ext_resource type="PackedScene" uid="uid://blna5a181gko6" path="res://StartArea/Lamp/lamp.tscn" id="10_0km52"]
+[ext_resource type="Script" uid="uid://do0ye5ewt00di" path="res://StartArea/noise.gd" id="14_iwg5w"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x12yt"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -57,6 +58,9 @@ material = SubResource("ShaderMaterial_c4pxu")
 size = Vector2(10, 20)
 subdivide_width = 10
 subdivide_depth = 20
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_1grf1"]
+mix_rate = 11025.0
 
 [node name="StartArea" type="Node3D"]
 script = ExtResource("1_u5x8h")
@@ -116,6 +120,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -4)
 
 [node name="room" parent="Props" instance=ExtResource("9_x12yt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="Noise" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamGenerator_1grf1")
+script = ExtResource("14_iwg5w")
 
 [connection signal="game_started" from="SlowPlayer" to="." method="_on_slow_player_game_started"]
 [connection signal="pressed" from="SlowPlayer" to="Props/VendingMachine" method="_on_slow_player_pressed"]
