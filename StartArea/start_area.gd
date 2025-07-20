@@ -18,14 +18,15 @@ func _on_slow_player_game_started() -> void:
     moving_liquid = true
     $Props/Lamp.turn_purple()
     $Props/Lamp2.turn_purple()
+    await get_tree().create_timer(3.0).timeout
+    $WorldEnvironment.environment.sky.sky_material.energy_multiplier = 0.3
 
 
 func _on_slow_player_transition_started() -> void:
-    print("bAAAAA")
+    await get_tree().create_timer(1.0).timeout
     var transition: SceneTransition = Transition
     transition.set_color(Color("060207"))
     transition.transition_started.connect(func():
-        print("AAAAA")
         queue_free()
-        )
+    )
     transition.transition_to(tutorial_scene)

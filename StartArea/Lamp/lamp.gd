@@ -5,7 +5,7 @@ extends Node3D
 
 var flicker_strength = 0.01
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
     $Light.light_energy = 0.2 + randf_range(-flicker_strength, flicker_strength)
 
 func turn_purple():

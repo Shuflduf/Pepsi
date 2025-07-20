@@ -52,7 +52,7 @@ mesh = SubResource("ArrayMesh_stod6")
 [node name="Light" type="SpotLight3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 light_color = Color(0.73, 0.652133, 0.146, 1)
-light_energy = 0.2
+light_energy = 0.5
 light_bake_mode = 1
 spot_range = 7.0
 spot_attenuation = -1.57
