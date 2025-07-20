@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://doimc2pvi6mtu"]
+
+[ext_resource type="AudioStream" uid="uid://lbq64yvs74b6" path="res://Assets/Music/In Dreamland.mp3" id="1_fvyft"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_fvyft")
+autoplay = true
+bus = &"Music"
