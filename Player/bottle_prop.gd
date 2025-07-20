@@ -9,6 +9,9 @@ func _on_body_entered(body: Node) -> void:
     if touched_ground:
         return
 
+    if body is Player:
+        return
+
     if body is Enemy:
         var hit_vec = init_velocity
         hit_vec.y = clamp(hit_vec.y, 0.3, 1)

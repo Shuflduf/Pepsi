@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dwf57bj3pkrc2"]
+[gd_scene load_steps=25 format=3 uid="uid://dwf57bj3pkrc2"]
 
 [ext_resource type="Script" uid="uid://d1pngnbnlosda" path="res://Player/player.gd" id="1_dw050"]
 [ext_resource type="Script" uid="uid://c7x3hccqs402f" path="res://Player/bottle.gd" id="2_btcbx"]
@@ -9,6 +9,10 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gwnis"]
 friction = 0.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_fhl08"]
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_f3sb7"]
 
@@ -140,6 +144,32 @@ radial_center_offset = Vector2(1, 0)
 nine_patch_stretch = true
 texture_progress = ExtResource("3_fhl08")
 tint_progress = Color(0.490196, 0.223529, 0.282353, 1)
+
+[node name="LabelContainer" type="Control" parent="Control"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 302.0
+offset_top = 149.0
+offset_right = 342.0
+offset_bottom = 178.0
+
+[node name="DamageLabel" type="Label" parent="Control/LabelContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -14.5
+offset_right = 20.0
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "-10"
+label_settings = SubResource("LabelSettings_fhl08")
 
 [node name="FizzBar" type="TextureProgressBar" parent="Control"]
 unique_name_in_owner = true

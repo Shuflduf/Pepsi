@@ -12,6 +12,7 @@ func _on_body_entered(body: Node) -> void:
     $FallbackTimer.start()
     if body is Player:
         body.apply_central_impulse(Vector3.UP * 4)
+        body.hit(3)
 
 
 func _on_fallback_timer_timeout() -> void:

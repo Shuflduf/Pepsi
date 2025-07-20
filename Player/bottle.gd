@@ -117,9 +117,9 @@ func drink(delta: float):
     if !is_pepsi_ready:
         return
 
-    ammo -= delta * 50
+    ammo -= delta * 100
     check_ammo()
-    drank.emit(delta)
+    drank.emit(delta * 1.5)
 
 func aim():
     if current_state != PepsiState.Ranged:
