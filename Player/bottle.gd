@@ -5,6 +5,7 @@ extends Node
 @export var melee_damage = 3
 @export var throw_damage = 2
 @export var ranged_damage = 1
+@export var discard_damage = 4
 
 signal swung(damage: int)
 signal shot(fizz: float, damage: int)
@@ -31,6 +32,7 @@ var fizz = 0.0:
         fizz_set()
 
 var current_state = PepsiState.Ranged
+var speed_scale = 1.0
 
 func _ready() -> void:
     visuals.play_anim(&"reload_catch")
@@ -65,7 +67,7 @@ func _process(delta: float) -> void:
         unaim()
 
     if Input.is_action_pressed(&"debug_throw"):
-        throw(true)
+        throw(false, true)
 
 
 func check_ammo():
@@ -74,7 +76,7 @@ func check_ammo():
         if current_state == PepsiState.Firing:
             unaim()
         else:
-            throw()
+            throw(true)
         #else:
 
         #is_pepsi_ready = false
@@ -137,12 +139,12 @@ func swing():
         return
 
     is_pepsi_ready = false
-    visuals.play_anim(&"swing")
+    visuals.play_anim(&"swing", speed_scale)
 
     swung.emit(melee_damage)
     fizz += 0.2
 
-func throw(debug = false):
+func throw(is_discard = false, debug = false):
     if !debug:
         #if current_state == current_state.Firing && ammo < 0
         #if current_state != PepsiState.Melee:
@@ -164,7 +166,7 @@ func throw(debug = false):
             new_bottle.position = %RangedStartPos.global_position
             new_bottle.rotation = %RangedStartPos.global_rotation
 
-    new_bottle.damage = throw_damage
+    new_bottle.damage = throw_damage if !is_discard else discard_damage
     bottle_spawned.emit(new_bottle)
 
     visuals.play_anim(&"reload_catch")

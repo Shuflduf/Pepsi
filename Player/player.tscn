@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dwf57bj3pkrc2"]
+[gd_scene load_steps=21 format=3 uid="uid://dwf57bj3pkrc2"]
 
 [ext_resource type="Script" uid="uid://d1pngnbnlosda" path="res://Player/player.gd" id="1_dw050"]
 [ext_resource type="Script" uid="uid://c7x3hccqs402f" path="res://Player/bottle.gd" id="2_btcbx"]
@@ -78,6 +78,10 @@ scale_curve = SubResource("CurveTexture_fhl08")
 radius = 0.1
 height = 0.2
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_gwnis"]
+height = 2.6
+radius = 3.0
+
 [node name="Player" type="RigidBody3D" groups=["Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 0, 0)
 collision_layer = 2
@@ -140,7 +144,7 @@ monitorable = false
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -20)
 shape = SubResource("BoxShape3D_gwnis")
-debug_color = Color(0.7, 0.431667, 0, 0.419608)
+debug_color = Color(0, 0.513333, 0.7, 0.419608)
 
 [node name="MeleeHitbox" type="Area3D" parent="CamPivot/Camera3D"]
 unique_name_in_owner = true
@@ -161,6 +165,17 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_gwnis")
 draw_pass_1 = SubResource("SphereMesh_k53q1")
+
+[node name="SlamHitbox" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SlamHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1, -1.42109e-14)
+shape = SubResource("CylinderShape3D_gwnis")
+debug_color = Color(0.501667, 0.7, 0, 0.419608)
 
 [connection signal="bottle_spawned" from="Bottle" to="." method="_on_bottle_bottle_spawned"]
 [connection signal="drank" from="Bottle" to="." method="_on_bottle_drank"]

@@ -37,7 +37,8 @@ func _on_cooldown_timeout() -> void:
 func _physics_process(delta: float) -> void:
     super(delta)
     var target_dir = get_aim_dir()
-    $Visuals.rotation.y = lerp_angle($Visuals.rotation.y, atan2(target_dir.x, target_dir.z), delta * 10)
+    if target_dir != Vector3.ZERO:
+        $Visuals.rotation.y = lerp_angle($Visuals.rotation.y, atan2(target_dir.x, target_dir.z), delta * 10)
 
 
 func get_aim_dir() -> Vector3:

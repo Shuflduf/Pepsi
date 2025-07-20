@@ -18,8 +18,8 @@ var offset = Vector2.ZERO:
 
 var fizz = 0
 
-func play_anim(anim_name: StringName):
-    %Sprites.play(anim_name)
+func play_anim(anim_name: StringName, custom_speed = 1.0):
+    %Sprites.play(anim_name, custom_speed)
 
 func _physics_process(_delta: float) -> void:
     var rand_vec = Vector2(randf_range(-1, 1), randf_range(-1, 1))

@@ -4,6 +4,8 @@ extends PhysicsEntity
 @export var mouse_sens: float = 0.004
 
 var speed_factor = 1.0
+var slamming = false
+var slam_height = 0.0
 
 func _ready() -> void:
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -13,12 +15,15 @@ func _unhandled_key_input(event: InputEvent) -> void:
         if event.is_action_pressed(&"jump") and is_on_floor():
             $JumpParticles.restart()
             apply_central_impulse(Vector3.UP * jump_height)
-        if event.is_action_pressed(&"ui_cancel"):
+        elif event.is_action_pressed(&"slam") and !is_on_floor():
+            slam()
+        elif event.is_action_pressed(&"ui_cancel"):
             match Input.mouse_mode:
                 Input.MOUSE_MODE_VISIBLE:
                     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
                 Input.MOUSE_MODE_CAPTURED:
                     Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
 
 func _input(event: InputEvent) -> void:
     if event is InputEventMouseMotion:
@@ -41,10 +46,46 @@ func _physics_process(delta: float) -> void:
     apply_central_force(move_dir * delta * ground_speed)
 
     var vel_length = linear_velocity.length()
-    $Bottle.fizz += vel_length / 800
+    $Bottle.fizz += vel_length / (800 if !slamming else 1600)
     speed_factor = clamp(speed_factor - (vel_length / 1000), 1.0, 10.0)
     update_speed_values()
     DebugDraw2D.set_text("speed", [speed_factor, ground_speed, max_air_speed])
+
+    if is_on_floor():
+        if slamming:
+            #DebugDraw2D.set_text(
+                #"SLAM",
+                #[%SlamHitbox.get_overlapping_bodies().size(), ],
+                #0,
+                #Color.WHITE,
+                #2.0
+            #)
+            deal_slam_damage()
+        slamming = false
+    elif slamming:
+        linear_velocity.y = -30
+
+func slam():
+    if !slamming:
+        slamming = true
+        slam_height = global_position.y
+    #linear_velocity.y = -30
+
+func deal_slam_damage():
+    var slam_height = slam_height - global_position.y
+    var slam_damage = ceili(slam_height / 10.0)
+    var slam_knockback = clamp(slam_height / 20, 2.0, INF)
+    for enemy: Enemy in %SlamHitbox.get_overlapping_bodies():
+        enemy.hit(slam_damage)
+        var dir_to_enemy = ((enemy.position - global_position) * Vector3(1, 0, 1)).normalized()
+        var knockback_dir = Vector3(
+            dir_to_enemy.x,
+            1.0,
+            dir_to_enemy.z
+        ) * slam_knockback
+        enemy.in_hitstun = true
+        enemy.apply_central_impulse(knockback_dir)
+
 
 func get_look_vec() -> Vector3:
     var look_dir = %Camera3D.global_rotation
@@ -56,6 +97,7 @@ func get_look_vec() -> Vector3:
     return look_vec
 
 func update_speed_values():
+    $Bottle.speed_scale = speed_factor
     ground_speed = remap(speed_factor, 1.0, 2.0, 4500.0, 6000.0)
     max_speed = remap(speed_factor, 1.0, 2.0, 8.5, 10.0)
     max_air_speed = remap(speed_factor, 1.0, 2.0, 6.5, 8.0)

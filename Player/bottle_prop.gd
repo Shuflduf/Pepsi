@@ -31,5 +31,4 @@ func set_size(scalar: float):
     $CollisionShape3D.scale *= scalar
 
 func use():
-    #print("AAAAAAAAAA")
     pass
