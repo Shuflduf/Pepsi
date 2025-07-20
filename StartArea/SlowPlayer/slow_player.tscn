@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://crkmu6nqbwi8o"]
+[gd_scene load_steps=4 format=3 uid="uid://crkmu6nqbwi8o"]
 
 [ext_resource type="Script" uid="uid://dcps2c3x2aiqv" path="res://StartArea/SlowPlayer/slow_player.gd" id="1_pit0l"]
+[ext_resource type="Texture2D" uid="uid://cpa0lwobrvp6b" path="res://Assets/single_pixel.png" id="2_jgdup"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_pit0l"]
 
@@ -52,14 +53,16 @@ offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Fade" type="ColorRect" parent="Control"]
+[node name="Fade" type="TextureProgressBar" parent="Control"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 324.0
-offset_bottom = 324.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.0257863, 0.016615, 0.0430212, 1)
+step = 0.01
+fill_mode = 3
+nine_patch_stretch = true
+texture_progress = ExtResource("2_jgdup")
+tint_progress = Color(0.0431373, 0.0156863, 0.0509804, 1)

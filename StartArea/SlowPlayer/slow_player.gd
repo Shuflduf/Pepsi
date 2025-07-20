@@ -2,12 +2,14 @@ extends PhysicsEntity
 
 signal pressed(area: Area3D)
 signal game_started
+signal transition_started
 
 @export var mouse_sens: float = 0.004
 @onready var camera: Camera3D = %Camera3D
 
 var selecting = false
 var fading_away = false
+var transitioning = false
 
 func _ready() -> void:
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -40,7 +42,7 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
     var input_dir = Input.get_vector(&"left", &"right", &"forward", &"backward")
-    var direction = input_dir.rotated(-$CamPivot.rotation.y)
+    var direction = input_dir.rotated(-$CamPivot.global_rotation.y)
     var move_dir = Vector3(
         direction.x,
         0,
@@ -57,11 +59,13 @@ func _physics_process(delta: float) -> void:
 
     DebugDraw2D.set_text("test", selecting)
 
-    var diff = delta * 100
+
     if fading_away:
-        if %Fade.position.y - diff >= 0.0:
-        #%Fade.color.a += delta
-            %Fade.position.y -= diff
+        %Fade.value += delta * 30
+        if %Fade.value >= 100:
+            if !transitioning:
+                transitioning = true
+                transition_started.emit()
 
 func fade_away():
     fading_away = true

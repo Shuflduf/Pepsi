@@ -2,6 +2,8 @@
 shader_type canvas_item;
 
 uniform vec3 target_color: source_color;
+uniform bool upside_down = false;
+
 uniform float AspectRatio = 1.5;
 uniform float Diamonds = 10.0;
 const float _min = -1.0;
@@ -17,6 +19,9 @@ void fragment() {
 	if(! disable_pixel)uv_grid = round(uv_grid / pixel_size) * pixel_size;
 	float grid = abs(uv_grid.x - 0.5) + abs(uv_grid.y - 0.5);
 	vec3 raw_cam_image = vec3(UV.y + height)*1.5;
+    if (upside_down) {
+        raw_cam_image = -raw_cam_image;
+    }
 	vec3 grayscale;
 	{
 		float max1 = max(raw_cam_image.r, raw_cam_image.g);

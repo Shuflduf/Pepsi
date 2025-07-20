@@ -1,9 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://dwf57bj3pkrc2"]
+[gd_scene load_steps=20 format=3 uid="uid://dwf57bj3pkrc2"]
 
 [ext_resource type="Script" uid="uid://d1pngnbnlosda" path="res://Player/player.gd" id="1_dw050"]
 [ext_resource type="Script" uid="uid://c7x3hccqs402f" path="res://Player/bottle.gd" id="2_btcbx"]
 [ext_resource type="PackedScene" uid="uid://dvqx400cgvwbo" path="res://Player/bottle_prop.tscn" id="4_gwnis"]
 [ext_resource type="PackedScene" uid="uid://cdiyjjw6fkmhl" path="res://Player/bottle_visuals.tscn" id="8_606se"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gwnis"]
+friction = 0.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_f3sb7"]
 
@@ -49,12 +52,39 @@ size = Vector3(2, 2, 40)
 [sub_resource type="BoxShape3D" id="BoxShape3D_onrkg"]
 size = Vector3(2, 2, 2)
 
+[sub_resource type="Curve" id="Curve_gwnis"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.628319, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_fhl08"]
+curve = SubResource("Curve_gwnis")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gwnis"]
+lifetime_randomness = 0.3
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 3.0
+scale_min = 0.8
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_fhl08")
+
+[sub_resource type="SphereMesh" id="SphereMesh_k53q1"]
+radius = 0.1
+height = 0.2
+
 [node name="Player" type="RigidBody3D" groups=["Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 0, 0)
 collision_layer = 2
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
+physics_material_override = SubResource("PhysicsMaterial_gwnis")
 script = ExtResource("1_dw050")
 
 [node name="Bottle" type="Node" parent="."]
@@ -121,6 +151,16 @@ collision_mask = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.78814e-07, -1.5)
 shape = SubResource("BoxShape3D_onrkg")
 debug_color = Color(0.7, 0, 0, 0.419608)
+
+[node name="JumpParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1.74846e-07)
+emitting = false
+amount = 32
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_gwnis")
+draw_pass_1 = SubResource("SphereMesh_k53q1")
 
 [connection signal="bottle_spawned" from="Bottle" to="." method="_on_bottle_bottle_spawned"]
 [connection signal="drank" from="Bottle" to="." method="_on_bottle_drank"]

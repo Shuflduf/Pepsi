@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://cp5jrnup6ktw3"]
+
+[ext_resource type="Texture2D" uid="uid://dkt0twn82vf1n" path="res://Assets/Proto/SkyHDR.hdr" id="1_7n6eb"]
+[ext_resource type="PackedScene" uid="uid://i6y0f38fbrtl" path="res://map.tscn" id="2_yb1ct"]
+[ext_resource type="PackedScene" uid="uid://dwf57bj3pkrc2" path="res://Player/player.tscn" id="3_ehuit"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_yb1ct"]
+panorama = ExtResource("1_7n6eb")
+
+[sub_resource type="Sky" id="Sky_aqk2v"]
+sky_material = SubResource("PanoramaSkyMaterial_yb1ct")
+
+[sub_resource type="Environment" id="Environment_ehuit"]
+background_mode = 2
+sky = SubResource("Sky_aqk2v")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Tutorial" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ehuit")
+
+[node name="Map" parent="." instance=ExtResource("2_yb1ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 0)
+
+[node name="Player" parent="." instance=ExtResource("3_ehuit")]
+transform = Transform3D(1, 0, 0, 0, 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 3, 0)

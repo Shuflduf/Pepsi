@@ -11,6 +11,7 @@ func _ready() -> void:
 func _unhandled_key_input(event: InputEvent) -> void:
     if event.is_pressed():
         if event.is_action_pressed(&"jump") and is_on_floor():
+            $JumpParticles.restart()
             apply_central_impulse(Vector3.UP * jump_height)
         if event.is_action_pressed(&"ui_cancel"):
             match Input.mouse_mode:
