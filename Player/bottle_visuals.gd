@@ -17,13 +17,19 @@ var offset = Vector2.ZERO:
         %Bar.position = new
 
 var fizz = 0
+var throw_strength = 0.0
 
 func play_anim(anim_name: StringName, custom_speed = 1.0):
     %Sprites.play(anim_name, custom_speed)
 
+func rand_vec() -> Vector2:
+    return Vector2(randf_range(-1, 1), randf_range(-1, 1))
+
 func _physics_process(_delta: float) -> void:
-    var rand_vec = Vector2(randf_range(-1, 1), randf_range(-1, 1))
-    %Bar.texture_progress_offset = rand_vec * fizz
+    %Bar.texture_progress_offset = rand_vec() * fizz
+
+    #position += rand_vec() * throw_strength * 10
+    #print(position)
 
 func calc_progress_value():
     var progress_height = bottom_pixel - top_pixel
@@ -88,3 +94,10 @@ func get_bounds(atlas_tex: AtlasTexture):
 
 func _on_sprites_animation_finished() -> void:
     animation_finished.emit(%Sprites.animation)
+
+func update_throw_strength(new_throw_strength: float):
+    throw_strength = new_throw_strength
+    position = Vector2(
+        new_throw_strength * 2,
+        new_throw_strength
+    ) + (rand_vec() * throw_strength / 10)

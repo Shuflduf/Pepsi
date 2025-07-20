@@ -64,6 +64,7 @@ func _process(delta: float) -> void:
         aim()
         if current_state == PepsiState.Melee:
             throw_strength += delta * 15
+            visuals.update_throw_strength(throw_strength)
             #throw()
     else:
         unaim()
@@ -96,6 +97,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func switch_state():
     if !is_pepsi_ready:
         return
+    throw_strength = 0.0
+    visuals.update_throw_strength(0.0)
     is_pepsi_ready = false
     match current_state:
         PepsiState.Ranged:
@@ -164,6 +167,7 @@ func throw(is_discard = false, debug = false):
 
     var new_bottle: RigidBody3D = bottle_prop.instantiate()
     var throw_damage = ceil(throw_strength / 10)
+
     new_bottle.damage = discard_damage if is_discard else throw_damage
     add_child(new_bottle)
     new_bottle.position = %MiddleStartPos.global_position
@@ -179,6 +183,7 @@ func throw(is_discard = false, debug = false):
             #new_bottle.rotation = %RangedStartPos.global_rotation
             bottle_spawned.emit(new_bottle, 20)
 
+    visuals.update_throw_strength(0)
     visuals.play_anim(&"reload_catch")
 
 func fizz_set():
