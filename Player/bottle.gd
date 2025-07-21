@@ -45,6 +45,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _process(delta: float) -> void:
+    DebugDraw2D.set_text("playing", [$DrinkPour.playing, $Drink.playing])
     visuals.offset = lerp(visuals.offset, Vector2.ZERO, delta * 20)
     #if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and is_pepsi_ready and current_state == PepsiState.Ranged:
 
@@ -124,7 +125,7 @@ func drink(delta: float):
         return
     if !is_pepsi_ready:
         $Drink.stop()
-        $Drink.stop()
+        $DrinkPour.stop()
         return
 
     if !$Drink.playing:

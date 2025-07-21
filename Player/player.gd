@@ -13,6 +13,9 @@ var health = 100.0:
         %HealthBar.value = value
 
 var can_be_hit = true
+var walk_sound_cooldown = 0.0
+var walk_sound_cooldown_max = 0.3
+var time_off_ground = 0.0
 
 func _ready() -> void:
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -22,6 +25,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
         if event.is_action_pressed(&"jump") and is_on_floor():
             $JumpParticles.restart()
             apply_central_impulse(Vector3.UP * jump_height)
+            %Jump.play()
         elif event.is_action_pressed(&"slam") and !is_on_floor():
             slam()
         elif event.is_action_pressed(&"ui_cancel"):
@@ -42,6 +46,8 @@ func _input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
+    walk_sound_cooldown -= delta
+
     var input_dir = Input.get_vector(&"left", &"right", &"forward", &"backward")
     var direction = input_dir.rotated(-$CamPivot.rotation.y)
     var move_dir = Vector3(
@@ -59,12 +65,40 @@ func _physics_process(delta: float) -> void:
 
     if is_on_floor():
         if slamming:
-
             deal_slam_damage()
             $SlamParticles.restart()
+
         slamming = false
+
+        if walk_sound_cooldown <= 0.0 and not direction.is_zero_approx():
+            walk_sound_cooldown = (walk_sound_cooldown_max / speed_factor)
+            %Walk.pitch_scale = randf_range(0.9, 1.1)
+            %Walk.play()
+            $RunParticles.restart()
+
+        #if $WalkTimer.is_stopped():
+            #$WalkTimer.start(0.3 * (1 / speed_factor))
+
     elif slamming:
         linear_velocity.y = -30
+
+
+    time_off_ground += delta
+
+
+
+    if time_off_ground > 0.1 and is_on_floor():
+        DebugDraw2D.set_text("LANDED", time_off_ground, 0, Color.WHITE, 1.0)
+        %Land.play()
+
+    if is_on_floor():
+        time_off_ground = 0.0
+
+    #var just_grounded = is_in_air == is_on_floor()
+    #if just_grounded:
+
+#
+    #is_in_air = !is_on_floor()
 
     DebugDraw2D.set_text("health", health)
 
@@ -75,6 +109,7 @@ func slam():
     #linear_velocity.y = -30
 
 func deal_slam_damage():
+    %Slam.play(0.08)
     var slam_diff = slam_height - global_position.y
     var slam_damage = ceili(slam_diff / 10.0)
     var slam_knockback = clamp(slam_diff / 20, 2.0, INF)

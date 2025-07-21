@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dwf57bj3pkrc2"]
+[gd_scene load_steps=32 format=3 uid="uid://dwf57bj3pkrc2"]
 
 [ext_resource type="Script" uid="uid://d1pngnbnlosda" path="res://Player/player.gd" id="1_dw050"]
 [ext_resource type="Script" uid="uid://c7x3hccqs402f" path="res://Player/bottle.gd" id="2_btcbx"]
@@ -10,6 +10,8 @@
 [ext_resource type="AudioStream" uid="uid://buk3d2k1q4p8a" path="res://Assets/SFX/pour.wav" id="8_od3ui"]
 [ext_resource type="AudioStream" uid="uid://woun3vugrho" path="res://Assets/SFX/swing.mp3" id="9_x3vf3"]
 [ext_resource type="AudioStream" uid="uid://chiul0daogcc7" path="res://Assets/SFX/hit.mp3" id="10_apopc"]
+[ext_resource type="AudioStream" uid="uid://cl5q406mkw1u8" path="res://Assets/SFX/walk.mp3" id="11_apopc"]
+[ext_resource type="AudioStream" uid="uid://bavj1e50gm7l6" path="res://Assets/SFX/jump.mp3" id="12_5htga"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gwnis"]
 friction = 0.0
@@ -87,6 +89,21 @@ scale_curve = SubResource("CurveTexture_fhl08")
 [sub_resource type="SphereMesh" id="SphereMesh_k53q1"]
 radius = 0.1
 height = 0.2
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5htga"]
+lifetime_randomness = 0.3
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 0.5
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 3.0
+scale_min = 0.4
+scale_max = 0.8
+scale_curve = SubResource("CurveTexture_fhl08")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k53q1"]
 lifetime_randomness = 0.3
@@ -312,6 +329,16 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_gwnis")
 draw_pass_1 = SubResource("SphereMesh_k53q1")
 
+[node name="RunParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1.74846e-07)
+emitting = false
+amount = 16
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_5htga")
+draw_pass_1 = SubResource("SphereMesh_k53q1")
+
 [node name="SlamParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1.74846e-07)
 emitting = false
@@ -335,6 +362,38 @@ debug_color = Color(0.501667, 0.7, 0, 0.419608)
 
 [node name="HitCooldown" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="Walk" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1.74846e-07)
+stream = ExtResource("11_apopc")
+volume_db = 60.0
+max_polyphony = 3
+
+[node name="Slam" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1.74846e-07)
+stream = ExtResource("11_apopc")
+volume_db = 80.0
+pitch_scale = 0.6
+max_polyphony = 3
+bus = &"Slam"
+
+[node name="Land" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1.74846e-07)
+stream = ExtResource("11_apopc")
+volume_db = 80.0
+pitch_scale = 0.6
+max_polyphony = 3
+bus = &"SFX"
+
+[node name="Jump" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1.74846e-07)
+stream = ExtResource("12_5htga")
+max_polyphony = 3
+bus = &"SFX"
 
 [connection signal="bottle_spawned" from="Bottle" to="." method="_on_bottle_bottle_spawned"]
 [connection signal="drank" from="Bottle" to="." method="_on_bottle_drank"]
