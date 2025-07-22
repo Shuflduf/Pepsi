@@ -82,13 +82,8 @@ func _physics_process(delta: float) -> void:
     elif slamming:
         linear_velocity.y = -30
 
-
     time_off_ground += delta
-
-
-
     if time_off_ground > 0.1 and is_on_floor():
-        DebugDraw2D.set_text("LANDED", time_off_ground, 0, Color.WHITE, 1.0)
         %Land.play()
 
     if is_on_floor():
