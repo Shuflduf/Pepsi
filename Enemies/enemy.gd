@@ -12,7 +12,7 @@ signal died
 var is_hit = false
 var in_hitstun = false
 var hit_cooldown = 0.0
-var player: Player = null
+var player: PhysicsEntity = null
 var disabled = false
 
 var health = starting_health

@@ -1,6 +1,7 @@
 extends PlayerComponent
 
 @export var slam_hitbox: Area3D
+@export var slam_sfx: AudioStreamPlayer3D
 
 var slam_height = 0.0
 var slamming = false
@@ -22,6 +23,7 @@ func _physics_process(_delta: float) -> void:
         player.linear_velocity.y = -30
 
 func deal_slam_damage():
+    slam_sfx.play(0.08)
     #%Slam.play(0.08)
     #$SlamParticles.restart()
     var slam_diff = slam_height - player.global_position.y

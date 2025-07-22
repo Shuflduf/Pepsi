@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://btsph6pq2xcxv"]
+[gd_scene load_steps=32 format=3 uid="uid://btsph6pq2xcxv"]
 
 [ext_resource type="Script" uid="uid://cro5dg075ji6x" path="res://Components/physics_entity.gd" id="1_16gp5"]
 [ext_resource type="Script" uid="uid://dof74olx8ypoq" path="res://Player/New/wasd.gd" id="2_1ks24"]
@@ -8,7 +8,10 @@
 [ext_resource type="AudioStream" uid="uid://buk3d2k1q4p8a" path="res://Assets/SFX/pour.wav" id="4_1bd46"]
 [ext_resource type="Script" uid="uid://vdcrklmdpjfi" path="res://Player/New/jump.gd" id="4_5wk2r"]
 [ext_resource type="Script" uid="uid://6nav3ony7hh6" path="res://Player/New/slam.gd" id="5_6e4jg"]
+[ext_resource type="AudioStream" uid="uid://cl5q406mkw1u8" path="res://Assets/SFX/walk.mp3" id="5_mhiq4"]
 [ext_resource type="PackedScene" uid="uid://nd62rn0fx6aw" path="res://Player/New/Bottle/bottle_2.tscn" id="6_7sntf"]
+[ext_resource type="AudioStream" uid="uid://bavj1e50gm7l6" path="res://Assets/SFX/jump.mp3" id="6_r68f0"]
+[ext_resource type="Script" uid="uid://fyfphgq75leh" path="res://Player/New/health.gd" id="12_r68f0"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_1ks24"]
 
@@ -58,7 +61,81 @@ size = Vector3(2, 2, 40)
 height = 2.6
 radius = 3.0
 
-[node name="Player2" type="RigidBody3D"]
+[sub_resource type="Curve" id="Curve_mhiq4"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.137168, 1), 0.0, 0.0, 0, 0, Vector2(0.628319, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_fhl08"]
+curve = SubResource("Curve_mhiq4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_phkkd"]
+lifetime_randomness = 0.3
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 0.5
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 3.0
+scale_min = 0.4
+scale_max = 0.8
+scale_curve = SubResource("CurveTexture_fhl08")
+
+[sub_resource type="SphereMesh" id="SphereMesh_job4i"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hgjig"]
+lifetime_randomness = 0.3
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 6.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_fhl08")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2obdw"]
+lifetime_randomness = 0.3
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 3.0
+scale_min = 0.8
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_fhl08")
+
+[sub_resource type="SphereMesh" id="SphereMesh_hgjig"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mhiq4"]
+lifetime_randomness = 0.3
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+scale_min = 0.8
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_fhl08")
+
+[node name="Player2" type="RigidBody3D" groups=["Player"]]
 collision_layer = 2
 axis_lock_angular_x = true
 axis_lock_angular_y = true
@@ -136,6 +213,74 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1, -1.42109e-14)
 shape = SubResource("CylinderShape3D_6e4jg")
 debug_color = Color(0.501667, 0.7, 0, 0.419608)
 
+[node name="RunParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1.74846e-07)
+emitting = false
+amount = 16
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_phkkd")
+draw_pass_1 = SubResource("SphereMesh_job4i")
+
+[node name="SlamParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1.74846e-07)
+emitting = false
+amount = 64
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_hgjig")
+draw_pass_1 = SubResource("SphereMesh_job4i")
+
+[node name="JumpParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1.74846e-07)
+emitting = false
+amount = 32
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_2obdw")
+draw_pass_1 = SubResource("SphereMesh_hgjig")
+
+[node name="LandParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1.74846e-07)
+emitting = false
+amount = 32
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_mhiq4")
+draw_pass_1 = SubResource("SphereMesh_hgjig")
+
+[node name="RunSFX" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1.74846e-07)
+stream = ExtResource("5_mhiq4")
+volume_db = 60.0
+max_polyphony = 3
+
+[node name="SlamSFX" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1.74846e-07)
+stream = ExtResource("5_mhiq4")
+volume_db = 80.0
+pitch_scale = 0.6
+max_polyphony = 3
+bus = &"Slam"
+
+[node name="LandSFX" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1.74846e-07)
+stream = ExtResource("5_mhiq4")
+volume_db = 80.0
+pitch_scale = 0.6
+max_polyphony = 3
+bus = &"SFX"
+
+[node name="JumpSFX" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1.74846e-07)
+stream = ExtResource("6_r68f0")
+max_polyphony = 3
+bus = &"SFX"
+
 [node name="Bottle" parent="." instance=ExtResource("6_7sntf")]
 
 [node name="Throw" parent="Bottle" index="2" node_paths=PackedStringArray("player", "bottle_prop_pos")]
@@ -167,20 +312,36 @@ camera = NodePath("../CamPivot/Camera3D")
 player = NodePath("..")
 metadata/_custom_type_script = "uid://dk30rqaghdesy"
 
-[node name="WASD" type="Node" parent="." node_paths=PackedStringArray("cam_pivot", "player")]
+[node name="WASD" type="Node" parent="." node_paths=PackedStringArray("cam_pivot", "run_particles", "run_sfx", "player")]
 script = ExtResource("2_1ks24")
 cam_pivot = NodePath("../CamPivot")
+run_particles = NodePath("../RunParticles")
+run_sfx = NodePath("../RunSFX")
 player = NodePath("..")
 
-[node name="Jump" type="Node" parent="." node_paths=PackedStringArray("player")]
-script = ExtResource("4_5wk2r")
-player = NodePath("..")
-metadata/_custom_type_script = "uid://dk30rqaghdesy"
-
-[node name="Slam" type="Node" parent="." node_paths=PackedStringArray("slam_hitbox", "player")]
+[node name="Slam" type="Node" parent="." node_paths=PackedStringArray("slam_hitbox", "slam_sfx", "player")]
 script = ExtResource("5_6e4jg")
 slam_hitbox = NodePath("../SlamHitbox")
+slam_sfx = NodePath("../SlamSFX")
 player = NodePath("..")
 metadata/_custom_type_script = "uid://dk30rqaghdesy"
+
+[node name="Jump" type="Node" parent="." node_paths=PackedStringArray("jump_sfx", "land_particles", "land_sfx", "jump_particles", "player")]
+script = ExtResource("4_5wk2r")
+jump_sfx = NodePath("../JumpSFX")
+land_particles = NodePath("../LandParticles")
+land_sfx = NodePath("../LandSFX")
+jump_particles = NodePath("../JumpParticles")
+player = NodePath("..")
+metadata/_custom_type_script = "uid://dk30rqaghdesy"
+
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("hit_cooldown")]
+script = ExtResource("12_r68f0")
+hit_cooldown = NodePath("HitCooldown")
+metadata/_custom_type_script = "uid://dk30rqaghdesy"
+
+[node name="HitCooldown" type="Timer" parent="Health"]
+wait_time = 0.5
+one_shot = true
 
 [editable path="Bottle"]
