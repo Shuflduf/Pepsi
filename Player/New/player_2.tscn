@@ -1,0 +1,106 @@
+[gd_scene load_steps=12 format=3 uid="uid://btsph6pq2xcxv"]
+
+[ext_resource type="Script" uid="uid://cro5dg075ji6x" path="res://Components/physics_entity.gd" id="1_16gp5"]
+[ext_resource type="Script" uid="uid://dof74olx8ypoq" path="res://Player/New/wasd.gd" id="2_1ks24"]
+[ext_resource type="AudioStream" uid="uid://woun3vugrho" path="res://Assets/SFX/swing.mp3" id="2_4dxgo"]
+[ext_resource type="Script" uid="uid://dhgh0aienltl1" path="res://Player/New/look_around.gd" id="2_yie63"]
+[ext_resource type="AudioStream" uid="uid://chiul0daogcc7" path="res://Assets/SFX/hit.mp3" id="3_1bd46"]
+[ext_resource type="Script" uid="uid://vdcrklmdpjfi" path="res://Player/New/jump.gd" id="4_5wk2r"]
+[ext_resource type="Script" uid="uid://6nav3ony7hh6" path="res://Player/New/slam.gd" id="5_6e4jg"]
+[ext_resource type="PackedScene" uid="uid://nd62rn0fx6aw" path="res://Player/New/Bottle/bottle_2.tscn" id="6_7sntf"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1ks24"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5qatj"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6e4jg"]
+height = 2.6
+radius = 3.0
+
+[node name="Player2" type="RigidBody3D"]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("1_16gp5")
+metadata/_custom_type_script = "uid://cro5dg075ji6x"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_1ks24")
+
+[node name="CamPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CamPivot"]
+
+[node name="BottlePropSpawn" type="Node3D" parent="CamPivot/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="MeleeHitbox" type="Area3D" parent="CamPivot/Camera3D"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CamPivot/Camera3D/MeleeHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.78814e-07, -1.5)
+shape = SubResource("BoxShape3D_5qatj")
+debug_color = Color(0.7, 0, 0, 0.419608)
+
+[node name="Swing" type="AudioStreamPlayer3D" parent="CamPivot/Camera3D/MeleeHitbox/CollisionShape3D"]
+visible = false
+stream = ExtResource("2_4dxgo")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="Hit" type="AudioStreamPlayer3D" parent="CamPivot/Camera3D/MeleeHitbox/CollisionShape3D"]
+visible = false
+stream = ExtResource("3_1bd46")
+volume_db = 35.068
+pitch_scale = 0.3
+bus = &"SFX"
+
+[node name="SlamHitbox" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SlamHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1, -1.42109e-14)
+shape = SubResource("CylinderShape3D_6e4jg")
+debug_color = Color(0.501667, 0.7, 0, 0.419608)
+
+[node name="Bottle" parent="." instance=ExtResource("6_7sntf")]
+
+[node name="Throw" parent="Bottle" index="2" node_paths=PackedStringArray("player", "bottle_prop_pos")]
+player = NodePath("../..")
+bottle_prop_pos = NodePath("../../CamPivot/Camera3D/BottlePropSpawn")
+
+[node name="PlayerInfo" parent="Bottle" index="4" node_paths=PackedStringArray("camera")]
+camera = NodePath("../../CamPivot/Camera3D")
+
+[node name="Swingable" parent="Bottle" index="6" node_paths=PackedStringArray("hitbox")]
+hitbox = NodePath("../../CamPivot/Camera3D/MeleeHitbox")
+
+[node name="LookAround" type="Node" parent="." node_paths=PackedStringArray("cam_pivot", "camera", "player")]
+script = ExtResource("2_yie63")
+cam_pivot = NodePath("../CamPivot")
+camera = NodePath("../CamPivot/Camera3D")
+player = NodePath("..")
+metadata/_custom_type_script = "uid://dk30rqaghdesy"
+
+[node name="WASD" type="Node" parent="." node_paths=PackedStringArray("cam_pivot", "player")]
+script = ExtResource("2_1ks24")
+cam_pivot = NodePath("../CamPivot")
+player = NodePath("..")
+
+[node name="Jump" type="Node" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("4_5wk2r")
+player = NodePath("..")
+metadata/_custom_type_script = "uid://dk30rqaghdesy"
+
+[node name="Slam" type="Node" parent="." node_paths=PackedStringArray("slam_hitbox", "player")]
+script = ExtResource("5_6e4jg")
+slam_hitbox = NodePath("../SlamHitbox")
+player = NodePath("..")
+metadata/_custom_type_script = "uid://dk30rqaghdesy"
+
+[editable path="Bottle"]

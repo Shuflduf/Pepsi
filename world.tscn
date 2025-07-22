@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c0ufo5455ip26" path="res://world.gd" id="1_aqk2v"]
 [ext_resource type="Texture2D" uid="uid://dkt0twn82vf1n" path="res://Assets/Proto/SkyHDR.hdr" id="1_fj7yv"]
-[ext_resource type="PackedScene" uid="uid://dwf57bj3pkrc2" path="res://Player/player.tscn" id="3_tlwt5"]
+[ext_resource type="PackedScene" uid="uid://btsph6pq2xcxv" path="res://Player/New/player_2.tscn" id="4_036b0"]
 [ext_resource type="PackedScene" uid="uid://i6y0f38fbrtl" path="res://map.tscn" id="4_aqk2v"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_tlwt5"]
@@ -31,15 +31,15 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_036b0")
 
-[node name="Player" parent="." instance=ExtResource("3_tlwt5")]
-transform = Transform3D(1, 0, 0, 0, 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 11, 0)
-physics_material_override = SubResource("PhysicsMaterial_aqk2v")
-
 [node name="Map" parent="." instance=ExtResource("4_aqk2v")]
 unique_name_in_owner = true
 
 [node name="WaitTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Player2" parent="." instance=ExtResource("4_036b0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19, 0)
+physics_material_override = SubResource("PhysicsMaterial_aqk2v")
 
 [connection signal="wave_complete" from="Map" to="." method="_on_map_wave_complete"]
 [connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]

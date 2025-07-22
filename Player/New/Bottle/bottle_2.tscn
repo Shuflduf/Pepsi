@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://nd62rn0fx6aw"]
+
+[ext_resource type="PackedScene" uid="uid://cdiyjjw6fkmhl" path="res://Player/bottle_visuals.tscn" id="1_5ll0m"]
+[ext_resource type="Script" uid="uid://dq4syq40wctjl" path="res://Player/New/Bottle/mode.gd" id="2_0issc"]
+[ext_resource type="Script" uid="uid://boplg66l3oe66" path="res://Player/New/Bottle/drinkable.gd" id="3_0issc"]
+[ext_resource type="Script" uid="uid://diygwtjl3vfn6" path="res://Player/New/Bottle/throw.gd" id="4_mymph"]
+[ext_resource type="PackedScene" uid="uid://dvqx400cgvwbo" path="res://Player/bottle_prop.tscn" id="5_f8nql"]
+[ext_resource type="Script" uid="uid://dn2ruehdfrow3" path="res://Player/New/Bottle/initial.gd" id="6_80myt"]
+[ext_resource type="Script" uid="uid://beo0h6ra8srkt" path="res://Player/New/Bottle/swingable.gd" id="8_mltuj"]
+[ext_resource type="Script" uid="uid://cdu1gma4jpmn8" path="res://Player/New/Bottle/player_info.gd" id="8_pfu20"]
+[ext_resource type="Script" uid="uid://cdii5gn8suol0" path="res://Player/New/Bottle/shoot.gd" id="9_mltuj"]
+
+[node name="Bottle" type="Node"]
+
+[node name="Visuals" parent="." instance=ExtResource("1_5ll0m")]
+
+[node name="Mode" type="Node" parent="." node_paths=PackedStringArray("visuals")]
+script = ExtResource("2_0issc")
+visuals = NodePath("../Visuals")
+
+[node name="Throw" type="Node" parent="." node_paths=PackedStringArray("mode", "drinkable", "visuals", "player_info")]
+script = ExtResource("4_mymph")
+bottle_prop = ExtResource("5_f8nql")
+mode = NodePath("../Mode")
+drinkable = NodePath("../Drinkable")
+visuals = NodePath("../Visuals")
+player_info = NodePath("../PlayerInfo")
+metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
+
+[node name="Initial" type="Node" parent="." node_paths=PackedStringArray("mode", "visuals")]
+script = ExtResource("6_80myt")
+mode = NodePath("../Mode")
+visuals = NodePath("../Visuals")
+metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
+
+[node name="PlayerInfo" type="Node" parent="."]
+script = ExtResource("8_pfu20")
+metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
+
+[node name="Drinkable" type="Node" parent="." node_paths=PackedStringArray("visuals", "mode", "throw")]
+script = ExtResource("3_0issc")
+visuals = NodePath("../Visuals")
+mode = NodePath("../Mode")
+throw = NodePath("../Throw")
+metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
+
+[node name="Swingable" type="Node" parent="." node_paths=PackedStringArray("player_info", "mode", "visuals")]
+script = ExtResource("8_mltuj")
+player_info = NodePath("../PlayerInfo")
+mode = NodePath("../Mode")
+visuals = NodePath("../Visuals")
+metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
+
+[node name="Shoot" type="Node" parent="." node_paths=PackedStringArray("mode", "drinkable", "visuals")]
+script = ExtResource("9_mltuj")
+mode = NodePath("../Mode")
+drinkable = NodePath("../Drinkable")
+visuals = NodePath("../Visuals")
+metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
