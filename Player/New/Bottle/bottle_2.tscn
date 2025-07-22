@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://nd62rn0fx6aw"]
+[gd_scene load_steps=13 format=3 uid="uid://nd62rn0fx6aw"]
 
 [ext_resource type="PackedScene" uid="uid://cdiyjjw6fkmhl" path="res://Player/bottle_visuals.tscn" id="1_5ll0m"]
 [ext_resource type="Script" uid="uid://dq4syq40wctjl" path="res://Player/New/Bottle/mode.gd" id="2_0issc"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://cdu1gma4jpmn8" path="res://Player/New/Bottle/player_info.gd" id="8_pfu20"]
 [ext_resource type="Script" uid="uid://cdii5gn8suol0" path="res://Player/New/Bottle/shoot.gd" id="9_mltuj"]
 [ext_resource type="Script" uid="uid://bkb73swhgvd5n" path="res://Player/New/Bottle/fizz.gd" id="10_2pvjw"]
+[ext_resource type="Script" uid="uid://boy6mefv2vqei" path="res://Player/New/Bottle/movement_fizz.gd" id="11_e4hki"]
+[ext_resource type="Script" uid="uid://cbdc16h57tuuo" path="res://Player/New/Bottle/looking_fizz.gd" id="12_cfpku"]
 
 [node name="Bottle" type="Node"]
 
@@ -19,13 +21,14 @@
 script = ExtResource("2_0issc")
 visuals = NodePath("../Visuals")
 
-[node name="Throw" type="Node" parent="." node_paths=PackedStringArray("mode", "drinkable", "visuals", "player_info")]
+[node name="Throw" type="Node" parent="." node_paths=PackedStringArray("mode", "drinkable", "visuals", "player_info", "fizz")]
 script = ExtResource("4_mymph")
 bottle_prop = ExtResource("5_f8nql")
 mode = NodePath("../Mode")
 drinkable = NodePath("../Drinkable")
 visuals = NodePath("../Visuals")
 player_info = NodePath("../PlayerInfo")
+fizz = NodePath("../Fizz")
 metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
 
 [node name="Initial" type="Node" parent="." node_paths=PackedStringArray("mode", "visuals", "fizz")]
@@ -46,23 +49,33 @@ mode = NodePath("../Mode")
 throw = NodePath("../Throw")
 metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
 
-[node name="Swingable" type="Node" parent="." node_paths=PackedStringArray("player_info", "mode", "visuals")]
+[node name="Swingable" type="Node" parent="." node_paths=PackedStringArray("player_info", "mode", "fizz", "visuals")]
 script = ExtResource("8_mltuj")
 player_info = NodePath("../PlayerInfo")
 mode = NodePath("../Mode")
+fizz = NodePath("../Fizz")
 visuals = NodePath("../Visuals")
 metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
 
-[node name="Shoot" type="Node" parent="." node_paths=PackedStringArray("player_info", "mode", "drinkable", "visuals", "fizz")]
+[node name="Shoot" type="Node" parent="." node_paths=PackedStringArray("player_info", "mode", "drinkable", "visuals", "fizz", "throw")]
 script = ExtResource("9_mltuj")
 player_info = NodePath("../PlayerInfo")
 mode = NodePath("../Mode")
 drinkable = NodePath("../Drinkable")
 visuals = NodePath("../Visuals")
 fizz = NodePath("../Fizz")
+throw = NodePath("../Throw")
 metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
 
 [node name="Fizz" type="Node" parent="." node_paths=PackedStringArray("visuals")]
 script = ExtResource("10_2pvjw")
 visuals = NodePath("../Visuals")
+metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
+
+[node name="MovementFizz" type="Node" parent="Fizz"]
+script = ExtResource("11_e4hki")
+metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
+
+[node name="LookingFizz" type="Node" parent="Fizz"]
+script = ExtResource("12_cfpku")
 metadata/_custom_type_script = "uid://dfb5nb7gufrjy"

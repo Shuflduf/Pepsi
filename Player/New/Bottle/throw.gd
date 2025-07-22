@@ -1,14 +1,30 @@
 extends BottleComponent
 
+signal threw
+
 @export var bottle_prop: PackedScene
 @export var mode: BottleComponent
 @export var drinkable: BottleComponent
 @export var visuals: BottleVisuals
 @export var player: PhysicsEntity
 @export var player_info: BottleComponent
+@export var fizz: BottleComponent
 @export var bottle_prop_pos: Node3D
 
-var throw_strength = 20.0
+var throw_strength = 0.0:
+    set(new):
+        throw_strength = new
+        visuals.update_throw_strength(new)
+
+func _physics_process(delta: float) -> void:
+    if mode.current_mode == mode.BottleMode.Melee:
+        if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+
+            throw_strength += delta * 15
+        elif throw_strength:
+        #if current_state == PepsiState.Melee and throw_strength:
+            throw()
+            #throw_strength = 0.0
 
 func _ready() -> void:
     visuals.animation_finished.connect(_on_visuals_animation_finished)
@@ -22,7 +38,7 @@ func throw():
 
     mode.is_ready = false
     drinkable.ammo = 100
-    #fizz = 0
+    fizz.value = 0
 
     var new_bottle: RigidBody3D = bottle_prop.instantiate()
     var throw_damage = ceil(throw_strength / 10)
@@ -51,6 +67,8 @@ func throw():
             #bottle_spawned.emit(new_bottle, 20)
 
     #visuals.update_throw_strength(0)
+    threw.emit()
+    throw_strength = 0.0
     visuals.play_anim(&"reload_catch")
 
 func _on_visuals_animation_finished(anim_name: StringName):

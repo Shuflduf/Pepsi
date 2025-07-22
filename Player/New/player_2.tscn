@@ -153,6 +153,13 @@ player = NodePath("../..")
 hitbox = NodePath("../../CamPivot/Camera3D/RangedHitbox")
 shoot_particles = NodePath("../../CamPivot/Camera3D/RangedParticles")
 
+[node name="MovementFizz" parent="Bottle/Fizz" index="0" node_paths=PackedStringArray("player", "slam")]
+player = NodePath("../../..")
+slam = NodePath("../../../Slam")
+
+[node name="LookingFizz" parent="Bottle/Fizz" index="1" node_paths=PackedStringArray("look_around")]
+look_around = NodePath("../../../LookAround")
+
 [node name="LookAround" type="Node" parent="." node_paths=PackedStringArray("cam_pivot", "camera", "player")]
 script = ExtResource("2_yie63")
 cam_pivot = NodePath("../CamPivot")

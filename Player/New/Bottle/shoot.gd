@@ -6,17 +6,18 @@ extends BottleComponent
 @export var drinkable: BottleComponent
 @export var visuals: BottleVisuals
 @export var fizz: BottleComponent
+@export var throw: BottleComponent
 @export var hitbox: Area3D
 @export var shoot_particles: GPUParticles3D
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
     if mode.current_mode == mode.BottleMode.Firing and mode.is_ready:
         #if !%Pour.playing:
             #%Pour.play()
 
         drinkable.ammo -= delta * 50
         drinkable.check_ammo()
-        fizz.value -= delta / 3
+        fizz.value -= delta
         shoot(1)
         #shot.emit(fizz, ranged_damage)
     #else:
@@ -51,6 +52,7 @@ func unaim():
 func _ready() -> void:
     visuals.animation_finished.connect(_on_visuals_animation_finished)
     fizz.fizz_changed.connect(_on_fizz_changed)
+    throw.threw.connect(_on_threw)
 
 func _on_visuals_animation_finished(anim_name: StringName) -> void:
     mode.is_ready = true
@@ -77,11 +79,14 @@ func _on_fizz_changed(new_fizz: float):
     )
     hitbox_box.position.z = -box_length / 2
 
+func _on_threw():
+    shoot_particles.emitting = false
+
 func shoot(damage: int) -> void:
     var look_vec = player_info.get_look_vec()
     if !player.is_on_floor():
-        var fire_dir = look_vec
-        player.apply_central_force(-fire_dir * 4 * sqrt(fizz.value + 1))
+        var force = -look_vec * 10 * sqrt(fizz.value + 1)
+        player.apply_central_force(force)
 
     for body: Enemy in hitbox.get_overlapping_bodies():
         body.apply_central_force(look_vec * 10)

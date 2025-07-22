@@ -21,6 +21,7 @@ func check_ammo():
         #if mode.current_state == mode.PepsiMode.Firing:
             #unaim()
         #else:
+        throw.throw_strength = 20.0
         throw.throw()
         #throw(true)
 

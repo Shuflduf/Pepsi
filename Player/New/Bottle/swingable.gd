@@ -3,6 +3,7 @@ extends BottleComponent
 @export var hitbox: Area3D
 @export var player_info: BottleComponent
 @export var mode: BottleComponent
+@export var fizz: BottleComponent
 @export var visuals: BottleVisuals
 
 func swing(damage: int):
@@ -16,7 +17,7 @@ func swing(damage: int):
     visuals.play_anim(&"swing")
 #
     #swung.emit(melee_damage)
-    #fizz += 0.2
+    fizz.value += 0.2
 
     for body in hitbox.get_overlapping_bodies():
         if body is not Enemy:

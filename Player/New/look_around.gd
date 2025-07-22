@@ -1,5 +1,7 @@
 extends PlayerComponent
 
+signal looked_around(amount: float)
+
 @export var cam_pivot: Node3D
 @export var camera: Camera3D
 @export var mouse_sens = 0.004
@@ -9,6 +11,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
     if event is InputEventMouseMotion:
+        looked_around.emit(event.relative.length())
         #$Bottle.fizz += event.relative.length() / 10000
         cam_pivot.rotate_y(-event.relative.x * mouse_sens)
 
