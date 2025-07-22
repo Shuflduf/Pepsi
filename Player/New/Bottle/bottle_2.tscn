@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://nd62rn0fx6aw"]
+[gd_scene load_steps=11 format=3 uid="uid://nd62rn0fx6aw"]
 
 [ext_resource type="PackedScene" uid="uid://cdiyjjw6fkmhl" path="res://Player/bottle_visuals.tscn" id="1_5ll0m"]
 [ext_resource type="Script" uid="uid://dq4syq40wctjl" path="res://Player/New/Bottle/mode.gd" id="2_0issc"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://beo0h6ra8srkt" path="res://Player/New/Bottle/swingable.gd" id="8_mltuj"]
 [ext_resource type="Script" uid="uid://cdu1gma4jpmn8" path="res://Player/New/Bottle/player_info.gd" id="8_pfu20"]
 [ext_resource type="Script" uid="uid://cdii5gn8suol0" path="res://Player/New/Bottle/shoot.gd" id="9_mltuj"]
+[ext_resource type="Script" uid="uid://bkb73swhgvd5n" path="res://Player/New/Bottle/fizz.gd" id="10_2pvjw"]
 
 [node name="Bottle" type="Node"]
 
@@ -27,10 +28,11 @@ visuals = NodePath("../Visuals")
 player_info = NodePath("../PlayerInfo")
 metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
 
-[node name="Initial" type="Node" parent="." node_paths=PackedStringArray("mode", "visuals")]
+[node name="Initial" type="Node" parent="." node_paths=PackedStringArray("mode", "visuals", "fizz")]
 script = ExtResource("6_80myt")
 mode = NodePath("../Mode")
 visuals = NodePath("../Visuals")
+fizz = NodePath("../Fizz")
 metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
 
 [node name="PlayerInfo" type="Node" parent="."]
@@ -51,9 +53,16 @@ mode = NodePath("../Mode")
 visuals = NodePath("../Visuals")
 metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
 
-[node name="Shoot" type="Node" parent="." node_paths=PackedStringArray("mode", "drinkable", "visuals")]
+[node name="Shoot" type="Node" parent="." node_paths=PackedStringArray("player_info", "mode", "drinkable", "visuals", "fizz")]
 script = ExtResource("9_mltuj")
+player_info = NodePath("../PlayerInfo")
 mode = NodePath("../Mode")
 drinkable = NodePath("../Drinkable")
+visuals = NodePath("../Visuals")
+fizz = NodePath("../Fizz")
+metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
+
+[node name="Fizz" type="Node" parent="." node_paths=PackedStringArray("visuals")]
+script = ExtResource("10_2pvjw")
 visuals = NodePath("../Visuals")
 metadata/_custom_type_script = "uid://dfb5nb7gufrjy"

@@ -1,8 +1,13 @@
 extends BottleComponent
 
+@export var player: PhysicsEntity
+@export var player_info: BottleComponent
 @export var mode: BottleComponent
 @export var drinkable: BottleComponent
 @export var visuals: BottleVisuals
+@export var fizz: BottleComponent
+@export var hitbox: Area3D
+@export var shoot_particles: GPUParticles3D
 
 func _process(delta: float) -> void:
     if mode.current_mode == mode.BottleMode.Firing and mode.is_ready:
@@ -11,7 +16,8 @@ func _process(delta: float) -> void:
 
         drinkable.ammo -= delta * 50
         drinkable.check_ammo()
-        #fizz -= delta / 3
+        fizz.value -= delta / 3
+        shoot(1)
         #shot.emit(fizz, ranged_damage)
     #else:
         #%Pour.stop()
@@ -37,20 +43,46 @@ func unaim():
     if !mode.is_ready:
         return
 
-    #%Particles.emitting = false
+    shoot_particles.emitting = false
     mode.current_mode = mode.BottleMode.Ranged
     mode.is_ready = false
     visuals.play_anim(&"unaim")
 
 func _ready() -> void:
     visuals.animation_finished.connect(_on_visuals_animation_finished)
+    fizz.fizz_changed.connect(_on_fizz_changed)
 
 func _on_visuals_animation_finished(anim_name: StringName) -> void:
     mode.is_ready = true
     match anim_name:
         &"aim":
             visuals.play_anim(&"firing")
-            #%Particles.emitting = true
+            shoot_particles.emitting = true
         &"unaim":
             visuals.play_anim(&"ranged")
             #drinkable.check_ammo()
+
+func _on_fizz_changed(new_fizz: float):
+    var lifetime = clampf(new_fizz / 2, 0.2, 1.0)
+    shoot_particles.lifetime = lifetime
+    shoot_particles.process_material.spread = remap(lifetime, 0.2, 1.0, 5.0, 1.0)
+    var box_size = remap(lifetime, 0.2, 1.0, 2.0, 0.5)
+    var box_length = remap(lifetime, 0.2, 1.0, 10.0, 40.0)
+    var hitbox_box = hitbox.get_child(0)
+    var hitbox_shape: BoxShape3D = hitbox_box.shape
+    hitbox_shape.size = Vector3(
+        box_size,
+        box_size,
+        box_length,
+    )
+    hitbox_box.position.z = -box_length / 2
+
+func shoot(damage: int) -> void:
+    var look_vec = player_info.get_look_vec()
+    if !player.is_on_floor():
+        var fire_dir = look_vec
+        player.apply_central_force(-fire_dir * 4 * sqrt(fizz.value + 1))
+
+    for body: Enemy in hitbox.get_overlapping_bodies():
+        body.apply_central_force(look_vec * 10)
+        body.hit(damage)
