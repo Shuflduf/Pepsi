@@ -9,19 +9,20 @@ extends BottleComponent
 @export var throw: BottleComponent
 @export var hitbox: Area3D
 @export var shoot_particles: GPUParticles3D
+@export var shoot_sfx: AudioStreamPlayer3D
 
 func _physics_process(delta: float) -> void:
     if mode.current_mode == mode.BottleMode.Firing and mode.is_ready:
-        #if !%Pour.playing:
-            #%Pour.play()
+        if !shoot_sfx.playing:
+            shoot_sfx.play()
 
         drinkable.ammo -= delta * 50
         drinkable.check_ammo()
         fizz.value -= delta
         shoot(1)
         #shot.emit(fizz, ranged_damage)
-    #else:
-        #%Pour.stop()
+    else:
+        shoot_sfx.stop()
 
     if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
         aim()

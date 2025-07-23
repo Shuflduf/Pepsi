@@ -2,6 +2,7 @@ class_name Health
 extends Node
 
 @export var hit_cooldown: Timer
+@export var health_bar: Range
 
 var can_be_hit = true
 var health = 100
@@ -19,4 +20,5 @@ func hit(damage: int):
     hit_cooldown.start()
     can_be_hit = false
     print(damage)
+    health_bar.value = health
     #show_damage_label(damage)

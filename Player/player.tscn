@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dwf57bj3pkrc2"]
+[gd_scene load_steps=35 format=3 uid="uid://dwf57bj3pkrc2"]
 
 [ext_resource type="Script" uid="uid://d1pngnbnlosda" path="res://Player/player.gd" id="1_dw050"]
 [ext_resource type="Script" uid="uid://c7x3hccqs402f" path="res://Player/bottle.gd" id="2_btcbx"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://b5ujugfiqbdnk" path="res://Assets/SFX/drink.wav" id="7_vtle1"]
 [ext_resource type="PackedScene" uid="uid://cdiyjjw6fkmhl" path="res://Player/bottle_visuals.tscn" id="8_606se"]
 [ext_resource type="AudioStream" uid="uid://buk3d2k1q4p8a" path="res://Assets/SFX/pour.wav" id="8_od3ui"]
+[ext_resource type="AudioStream" uid="uid://cdowbo8hw7d7q" path="res://Assets/SFX/pour.mp3" id="9_p5o4e"]
 [ext_resource type="AudioStream" uid="uid://woun3vugrho" path="res://Assets/SFX/swing.mp3" id="9_x3vf3"]
 [ext_resource type="AudioStream" uid="uid://chiul0daogcc7" path="res://Assets/SFX/hit.mp3" id="10_apopc"]
 [ext_resource type="AudioStream" uid="uid://cl5q406mkw1u8" path="res://Assets/SFX/walk.mp3" id="11_apopc"]
@@ -286,9 +287,9 @@ draw_pass_1 = SubResource("SphereMesh_i3pqv")
 [node name="Pour" type="AudioStreamPlayer3D" parent="CamPivot/Camera3D/Particles"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 3.72529e-09, 0, -1.86265e-09, 1, 0, 0, 0)
-stream = ExtResource("8_od3ui")
-pitch_scale = 0.8
+stream = ExtResource("9_p5o4e")
 bus = &"SFX"
+parameters/looping = true
 
 [node name="RangedHitbox" type="Area3D" parent="CamPivot/Camera3D/Particles"]
 unique_name_in_owner = true

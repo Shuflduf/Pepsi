@@ -1,17 +1,24 @@
-[gd_scene load_steps=32 format=3 uid="uid://btsph6pq2xcxv"]
+[gd_scene load_steps=37 format=3 uid="uid://btsph6pq2xcxv"]
 
 [ext_resource type="Script" uid="uid://cro5dg075ji6x" path="res://Components/physics_entity.gd" id="1_16gp5"]
 [ext_resource type="Script" uid="uid://dof74olx8ypoq" path="res://Player/New/wasd.gd" id="2_1ks24"]
+[ext_resource type="PackedScene" uid="uid://de0gr5karpjpp" path="res://Player/crosshair.tscn" id="2_2obdw"]
 [ext_resource type="AudioStream" uid="uid://woun3vugrho" path="res://Assets/SFX/swing.mp3" id="2_4dxgo"]
 [ext_resource type="Script" uid="uid://dhgh0aienltl1" path="res://Player/New/look_around.gd" id="2_yie63"]
 [ext_resource type="AudioStream" uid="uid://chiul0daogcc7" path="res://Assets/SFX/hit.mp3" id="3_1bd46"]
+[ext_resource type="Texture2D" uid="uid://c8jo3i663vyoc" path="res://Assets/circle.png" id="3_job4i"]
 [ext_resource type="AudioStream" uid="uid://buk3d2k1q4p8a" path="res://Assets/SFX/pour.wav" id="4_1bd46"]
 [ext_resource type="Script" uid="uid://vdcrklmdpjfi" path="res://Player/New/jump.gd" id="4_5wk2r"]
 [ext_resource type="Script" uid="uid://6nav3ony7hh6" path="res://Player/New/slam.gd" id="5_6e4jg"]
 [ext_resource type="AudioStream" uid="uid://cl5q406mkw1u8" path="res://Assets/SFX/walk.mp3" id="5_mhiq4"]
 [ext_resource type="PackedScene" uid="uid://nd62rn0fx6aw" path="res://Player/New/Bottle/bottle_2.tscn" id="6_7sntf"]
 [ext_resource type="AudioStream" uid="uid://bavj1e50gm7l6" path="res://Assets/SFX/jump.mp3" id="6_r68f0"]
+[ext_resource type="AudioStream" uid="uid://cdowbo8hw7d7q" path="res://Assets/SFX/pour.mp3" id="7_job4i"]
 [ext_resource type="Script" uid="uid://fyfphgq75leh" path="res://Player/New/health.gd" id="12_r68f0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hgjig"]
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_1ks24"]
 
@@ -56,6 +63,11 @@ height = 0.2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mhiq4"]
 size = Vector3(2, 2, 40)
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_hgjig"]
+stream_count = 1
+stream_0/stream = ExtResource("7_job4i")
+stream_0/volume = 0.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_6e4jg"]
 height = 2.6
@@ -143,6 +155,86 @@ axis_lock_angular_z = true
 script = ExtResource("1_16gp5")
 metadata/_custom_type_script = "uid://cro5dg075ji6x"
 
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Crosshair" parent="UI" instance=ExtResource("2_2obdw")]
+layout_mode = 1
+
+[node name="HealthBar" type="TextureProgressBar" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+fill_mode = 5
+radial_initial_angle = 180.0
+radial_fill_degrees = 180.0
+radial_center_offset = Vector2(1, 0)
+nine_patch_stretch = true
+texture_progress = ExtResource("3_job4i")
+tint_progress = Color(0.490196, 0.223529, 0.282353, 1)
+
+[node name="FizzBar" type="TextureProgressBar" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 5.0
+step = 0.01
+value = 5.0
+fill_mode = 4
+radial_initial_angle = 180.0
+radial_fill_degrees = 180.0
+radial_center_offset = Vector2(-1, 0)
+nine_patch_stretch = true
+texture_progress = ExtResource("3_job4i")
+
+[node name="LabelContainer" type="Control" parent="UI"]
+anchors_preset = 0
+offset_left = 302.0
+offset_top = 149.0
+offset_right = 342.0
+offset_bottom = 178.0
+
+[node name="DamageLabel" type="Label" parent="UI/LabelContainer"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -14.5
+offset_right = 20.0
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "-10"
+label_settings = SubResource("LabelSettings_hgjig")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_1ks24")
 
@@ -202,6 +294,10 @@ monitorable = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -20)
 shape = SubResource("BoxShape3D_mhiq4")
 debug_color = Color(0, 0.513333, 0.7, 0.419608)
+
+[node name="RangedShoot" type="AudioStreamPlayer3D" parent="CamPivot/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+stream = SubResource("AudioStreamSynchronized_hgjig")
 
 [node name="SlamHitbox" type="Area3D" parent="."]
 collision_layer = 0
@@ -293,10 +389,11 @@ camera = NodePath("../../CamPivot/Camera3D")
 [node name="Swingable" parent="Bottle" index="6" node_paths=PackedStringArray("hitbox")]
 hitbox = NodePath("../../CamPivot/Camera3D/MeleeHitbox")
 
-[node name="Shoot" parent="Bottle" index="7" node_paths=PackedStringArray("player", "hitbox", "shoot_particles")]
+[node name="Shoot" parent="Bottle" index="7" node_paths=PackedStringArray("player", "hitbox", "shoot_particles", "shoot_sfx")]
 player = NodePath("../..")
 hitbox = NodePath("../../CamPivot/Camera3D/RangedHitbox")
 shoot_particles = NodePath("../../CamPivot/Camera3D/RangedParticles")
+shoot_sfx = NodePath("../../CamPivot/Camera3D/RangedShoot")
 
 [node name="MovementFizz" parent="Bottle/Fizz" index="0" node_paths=PackedStringArray("player", "slam")]
 player = NodePath("../../..")
@@ -335,9 +432,10 @@ jump_particles = NodePath("../JumpParticles")
 player = NodePath("..")
 metadata/_custom_type_script = "uid://dk30rqaghdesy"
 
-[node name="Health" type="Node" parent="." node_paths=PackedStringArray("hit_cooldown")]
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("hit_cooldown", "health_bar")]
 script = ExtResource("12_r68f0")
 hit_cooldown = NodePath("HitCooldown")
+health_bar = NodePath("../UI/HealthBar")
 metadata/_custom_type_script = "uid://dk30rqaghdesy"
 
 [node name="HitCooldown" type="Timer" parent="Health"]
