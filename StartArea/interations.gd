@@ -9,7 +9,7 @@ signal pressed(interacted: CollisionObject3D)
 func _input(event: InputEvent) -> void:
     if raycast.is_colliding():
         crosshair.color = interacting_color
-        if event is InputEventMouseButton && event.is_pressed():
+        if event is InputEventMouseButton and event.is_pressed():
             if event.button_index == MOUSE_BUTTON_LEFT:
                 var interacted = raycast.get_collider()
                 pressed.emit(interacted)
