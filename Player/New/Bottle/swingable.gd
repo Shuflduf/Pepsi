@@ -36,7 +36,7 @@ func swing(damage: int):
 
 func _process(_delta: float) -> void:
     if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-        swing(80)
+        swing(2)
 
 func _on_anim_handler_animation_finished(anim_name: StringName) -> void:
     if anim_name == &"swing":

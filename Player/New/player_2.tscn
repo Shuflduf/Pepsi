@@ -432,10 +432,11 @@ jump_particles = NodePath("../JumpParticles")
 player = NodePath("..")
 metadata/_custom_type_script = "uid://dk30rqaghdesy"
 
-[node name="Health" type="Node" parent="." node_paths=PackedStringArray("hit_cooldown", "health_bar")]
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("hit_cooldown", "health_bar", "damage_label")]
 script = ExtResource("12_r68f0")
 hit_cooldown = NodePath("HitCooldown")
 health_bar = NodePath("../UI/HealthBar")
+damage_label = NodePath("../UI/LabelContainer/DamageLabel")
 metadata/_custom_type_script = "uid://dk30rqaghdesy"
 
 [node name="HitCooldown" type="Timer" parent="Health"]

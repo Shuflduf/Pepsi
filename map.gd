@@ -10,6 +10,7 @@ const OFFSET = -10
 const MULT = 2
 
 var wave_to_spawn: Wave
+var enemies_spawned = 0
 
 func set_wave(wave: Wave):
     for enemy in %Enemies.get_children():
@@ -32,7 +33,7 @@ func set_wave(wave: Wave):
                     .set_ease(Tween.EASE_IN_OUT) \
                     .set_trans(Tween.TRANS_CUBIC)
 
-                tween.tween_property(pillar, "position:y", pillar_pos, 1)
+                tween.tween_property(pillar, "position:y", pillar_pos, randf_range(0.7, 1.5))
                 %SpawnTimer.start()
 
 func spawn_enemy(enemy: int, pillar_pos: Vector3):
@@ -48,13 +49,21 @@ func spawn_all_enemies():
     for enemy in %Enemies.get_children():
         enemy.queue_free()
 
+    enemies_spawned = 0
+
     for x in wave_to_spawn.heights.size():
         var col = wave_to_spawn.heights[x]
         for y in col.size():
+            var enemy_to_spawn = wave_to_spawn.enemies[x][y]
+            if enemy_to_spawn != -1:
+                enemies_spawned += 1
             var pillar: AnimatableBody3D = %Parts.get_child(x).get_child(y)
-            get_tree().create_timer(randf_range(0.0, 1.0)).timeout.connect(func():
-                spawn_enemy(wave_to_spawn.enemies[x][y], pillar.global_position)
-            )
+            if smooth:
+                get_tree().create_timer(randf_range(0.0, 1.0)).timeout.connect(func():
+                    spawn_enemy(enemy_to_spawn, pillar.global_position)
+                )
+            else:
+                spawn_enemy(enemy_to_spawn, pillar.global_position)
 
 func _on_spawn_timer_timeout() -> void:
     spawn_all_enemies()
@@ -75,6 +84,8 @@ func _on_kill_barrier_body_entered(body: Node3D) -> void:
         body.global_position = Vector3.UP * 20
 
 func show_wave_info():
+    if !smooth:
+        return
     %NameLabel.text = wave_to_spawn.name
-    %EnemyLabel.text = "%d Enemies" % wave_to_spawn.enemies.size()
+    %EnemyLabel.text = "%d Enemies" % enemies_spawned
     %UIAnim.play(&"show")

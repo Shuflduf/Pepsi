@@ -33,8 +33,8 @@ func _physics_process(delta: float) -> void:
 func _on_hitstun_timer_timeout() -> void:
     in_hitstun = false
 
-func hit(damage: int):
-    super(damage)
+func hit(damage_amount: int):
+    super(damage_amount)
     $HitstunTimer.start()
 
 
