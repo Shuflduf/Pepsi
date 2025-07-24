@@ -1,6 +1,7 @@
 extends Node3D
 
 @export var tutorial_scene: PackedScene
+@export var player_cam: Camera3D
 
 var moving_liquid = false
 var started_already = false
@@ -14,9 +15,9 @@ func _physics_process(delta: float) -> void:
         $Liquid.position.y += delta / 5
 
     var liquid_pos = $Liquid.global_position.y + 0.3
-    var above_player = liquid_pos > $SlowPlayer.camera.global_position.y
-    if above_player:
-        $SlowPlayer.fade_away()
+    var above_player = liquid_pos > player_cam.global_position.y
+    #if above_player:
+        #$SlowPlayer.fade_away()
 
 func _on_slow_player_game_started() -> void:
     if started_already:
@@ -43,3 +44,11 @@ func _on_slow_player_transition_started() -> void:
         queue_free()
     )
     transition.transition_to(tutorial_scene)
+
+
+func _on_interations_pressed(interacted: CollisionObject3D) -> void:
+    if interacted is Area3D:
+        print("button")
+        %VendingMachine.button_pressed(interacted)
+    elif interacted is BottleProp:
+        print("bottle")

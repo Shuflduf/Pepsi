@@ -80,9 +80,9 @@ func hit(damage_amount: int):
     if health <= 0:
         die()
 
-func spawn_damage_indicator(damage: int):
+func spawn_damage_indicator(damage_dealt: int):
     var damage_indic: DamageIndicator = damage_indicator_scene.instantiate()
-    damage_indic.set_damage(damage)
+    damage_indic.set_damage(damage_dealt)
     get_tree().root.add_child(damage_indic)
     damage_indic.global_position = global_position
     damage_indic.global_position.y += damage_indicator_offset

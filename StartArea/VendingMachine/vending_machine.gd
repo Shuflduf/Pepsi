@@ -17,7 +17,7 @@ var being_pressed: bool
         #var tween =
 
 
-func _on_slow_player_pressed(area: Area3D) -> void:
+func button_pressed(area: Area3D) -> void:
     if being_pressed:
         return
     being_pressed = true
