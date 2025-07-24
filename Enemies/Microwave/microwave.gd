@@ -44,10 +44,8 @@ func _on_attack_cooldown_timeout() -> void:
 
 
 func _on_body_entered(body: Node) -> void:
-    var health_component = body.find_child(^"Health")
-    print(health_component)
-    if health_component is Health:
-        health_component.hit(8)
+    if body is PhysicsEntity:
+        damage(body, 8)
 
 func is_on_floor():
     return false

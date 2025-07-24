@@ -10,9 +10,10 @@ func _on_body_entered(body: Node) -> void:
 
     touched_ground = true
     $FallbackTimer.start()
-    if body is Player:
+    if body is PhysicsEntity:
         body.apply_central_impulse(Vector3.UP * 4)
-        body.hit(3)
+        #body.hit(3)
+        Enemy.damage(body, 3)
 
 
 func _on_fallback_timer_timeout() -> void:

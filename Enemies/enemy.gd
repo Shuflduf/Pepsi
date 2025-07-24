@@ -66,16 +66,16 @@ func _physics_process(delta: float) -> void:
         var look_dir = atan2(dir.x, dir.z)
         $Visuals.rotation.y = lerp_angle($Visuals.rotation.y, look_dir, delta * 10)
 
-func hit(damage: int):
+func hit(damage_amount: int):
     if $HitCooldown.time_left > 0:
         return
 
     $HitParticles.restart()
-    DebugDraw2D.set_text("hit", [damage, name, Time.get_ticks_msec()], 0, Color.WHITE, 1.0)
-    spawn_damage_indicator(damage)
+    DebugDraw2D.set_text("hit", [damage_amount, name, Time.get_ticks_msec()], 0, Color.WHITE, 1.0)
+    spawn_damage_indicator(damage_amount)
 
     is_hit = true
-    health -= damage
+    health -= damage_amount
     $HitCooldown.start()
     if health <= 0:
         die()
@@ -100,3 +100,8 @@ func die():
 
 func _on_hit_cooldown_timeout() -> void:
     is_hit = false
+
+static func damage(target_player: PhysicsEntity, amount: int):
+    var health_component = target_player.find_child(^"Health")
+    if health_component is Health:
+        health_component.hit(amount)

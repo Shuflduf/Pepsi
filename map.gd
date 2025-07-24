@@ -35,7 +35,6 @@ func set_wave(wave: Wave):
                 tween.tween_property(pillar, "position:y", pillar_pos, 1)
                 %SpawnTimer.start()
 
-
 func spawn_enemy(enemy: int, pillar_pos: Vector3):
     #var enemy = wave.enemies[x][y]
     if enemy != -1:
@@ -60,6 +59,7 @@ func spawn_all_enemies():
 func _on_spawn_timer_timeout() -> void:
     spawn_all_enemies()
     bake_navigation_mesh()
+    show_wave_info()
 
 func _on_enemy_died():
     # -1 because queuefree doesnt work fast enough
@@ -73,3 +73,8 @@ func _on_kill_barrier_body_entered(body: Node3D) -> void:
         body.die()
     elif body is Player:
         body.global_position = Vector3.UP * 20
+
+func show_wave_info():
+    %NameLabel.text = wave_to_spawn.name
+    %EnemyLabel.text = "%d Enemies" % wave_to_spawn.enemies.size()
+    %UIAnim.play(&"show")
