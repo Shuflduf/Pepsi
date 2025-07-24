@@ -3,6 +3,7 @@ extends BottleComponent
 signal fizz_changed(new_fizz: float)
 
 @export var visuals: BottleVisuals
+@export var fizz_bar: Range
 
 var value = 0.0:
     set(new):
@@ -10,6 +11,7 @@ var value = 0.0:
         value = new
         visuals.fizz = new
         #%FizzBar.value = new
+        fizz_bar.value = new
         fizz_changed.emit(new)
         #fizz_set()
 

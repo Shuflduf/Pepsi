@@ -395,6 +395,9 @@ hitbox = NodePath("../../CamPivot/Camera3D/RangedHitbox")
 shoot_particles = NodePath("../../CamPivot/Camera3D/RangedParticles")
 shoot_sfx = NodePath("../../CamPivot/Camera3D/RangedShoot")
 
+[node name="Fizz" parent="Bottle" index="8" node_paths=PackedStringArray("fizz_bar")]
+fizz_bar = NodePath("../../UI/FizzBar")
+
 [node name="MovementFizz" parent="Bottle/Fizz" index="0" node_paths=PackedStringArray("player", "slam")]
 player = NodePath("../../..")
 slam = NodePath("../../../Slam")
