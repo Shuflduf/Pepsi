@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://b878hyuvgmmds"]
+
+[ext_resource type="PackedScene" uid="uid://c4ouniiwlgaal" path="res://Enemies/enemy.tscn" id="1_knrr0"]
+[ext_resource type="Script" uid="uid://d0k7q7il08jfh" path="res://Enemies/Cooler/cooler.gd" id="2_oqtff"]
+[ext_resource type="PackedScene" uid="uid://dhrfqhdnxm3rx" path="res://Enemies/Cooler/cooler.gltf" id="2_yjfb7"]
+
+[sub_resource type="Curve" id="Curve_bxkaj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.730088, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_47qgu"]
+curve = SubResource("Curve_bxkaj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oqtff"]
+lifetime_randomness = 0.5
+emission_shape_offset = Vector3(0, 1.5, 0)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 3.0
+emission_ring_radius = 0.8
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+scale_min = 0.7
+scale_max = 1.3
+scale_curve = SubResource("CurveTexture_47qgu")
+color = Color(0.16, 0.565333, 0.8, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_oqtff"]
+radius = 10.0
+
+[node name="Cooler" instance=ExtResource("1_knrr0")]
+gravity_scale = 0.0
+script = ExtResource("2_oqtff")
+immobile = true
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.28089, 0)
+
+[node name="cooler" parent="Visuals" index="0" instance=ExtResource("2_yjfb7")]
+transform = Transform3D(0.445838, 0, 0, 0, 0.445838, 0, 0, 0, 0.445838, 0, 1.20141, 0)
+
+[node name="HitParticles" parent="." index="4"]
+process_material = SubResource("ParticleProcessMaterial_oqtff")
+
+[node name="DetectionArea" type="Area3D" parent="." index="5"]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea" index="0"]
+shape = SubResource("SphereShape3D_oqtff")

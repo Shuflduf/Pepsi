@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AllEnemyData" load_steps=12 format=3 uid="uid://crragfimbp1gw"]
+[gd_resource type="Resource" script_class="AllEnemyData" load_steps=15 format=3 uid="uid://crragfimbp1gw"]
 
 [ext_resource type="Script" uid="uid://vni38b08vtr4" path="res://Resources/enemy_data.gd" id="1_ersqn"]
 [ext_resource type="Script" uid="uid://diovikk3icseh" path="res://Resources/all_enemy_data.gd" id="1_mocip"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://4ddfnwecn8oy" path="res://Enemies/Fridge/fridge.tscn" id="5_5l5go"]
 [ext_resource type="Texture2D" uid="uid://dt0lgm07r4eui" path="res://Enemies/Microwave/icon.png" id="6_6nc1c"]
 [ext_resource type="PackedScene" uid="uid://d17x1x8ewa0aw" path="res://Enemies/Microwave/microwave.tscn" id="7_5l5go"]
+[ext_resource type="Texture2D" uid="uid://dkc1sxjc2abxd" path="res://Enemies/Cooler/icon.png" id="8_faqpk"]
+[ext_resource type="PackedScene" uid="uid://b878hyuvgmmds" path="res://Enemies/Cooler/cooler.tscn" id="9_voku5"]
 
 [sub_resource type="Resource" id="Resource_faqpk"]
 script = ExtResource("1_ersqn")
@@ -27,7 +29,13 @@ icon = ExtResource("6_6nc1c")
 scene = ExtResource("7_5l5go")
 metadata/_custom_type_script = "uid://vni38b08vtr4"
 
+[sub_resource type="Resource" id="Resource_8cnac"]
+script = ExtResource("1_ersqn")
+icon = ExtResource("8_faqpk")
+scene = ExtResource("9_voku5")
+metadata/_custom_type_script = "uid://vni38b08vtr4"
+
 [resource]
 script = ExtResource("1_mocip")
-enemies = Array[ExtResource("1_ersqn")]([SubResource("Resource_faqpk"), SubResource("Resource_voku5"), SubResource("Resource_gbkpn")])
+enemies = Array[ExtResource("1_ersqn")]([SubResource("Resource_faqpk"), SubResource("Resource_voku5"), SubResource("Resource_gbkpn"), SubResource("Resource_8cnac")])
 metadata/_custom_type_script = "uid://diovikk3icseh"
