@@ -386,6 +386,9 @@ bottle_prop_pos = NodePath("../../CamPivot/Camera3D/BottlePropSpawn")
 [node name="PlayerInfo" parent="Bottle" index="4" node_paths=PackedStringArray("camera")]
 camera = NodePath("../../CamPivot/Camera3D")
 
+[node name="Drinkable" parent="Bottle" index="5" node_paths=PackedStringArray("health")]
+health = NodePath("../../Health")
+
 [node name="Swingable" parent="Bottle" index="6" node_paths=PackedStringArray("hitbox")]
 hitbox = NodePath("../../CamPivot/Camera3D/MeleeHitbox")
 

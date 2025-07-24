@@ -6,7 +6,11 @@ extends Node
 @export var damage_label: Label
 
 var can_be_hit = true
-var health = 100
+var health = 100:
+    set(new):
+        new = clamp(new, 0, 100)
+        health = new
+        health_bar.value = new
 
 func _ready() -> void:
     hit_cooldown.timeout.connect(_on_cooldown_timeout)
@@ -21,7 +25,7 @@ func hit(damage: int):
     hit_cooldown.start()
     can_be_hit = false
     print(damage)
-    health_bar.value = health
+
     show_damage_label(damage)
 
 func show_damage_label(damage: int):

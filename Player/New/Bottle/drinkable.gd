@@ -3,6 +3,7 @@ extends BottleComponent
 @export var visuals: BottleVisuals
 @export var mode: BottleComponent
 @export var throw: BottleComponent
+@export var health: Health
 
 var ammo := 100.0:
     set(new):
@@ -41,4 +42,5 @@ func drink(delta: float):
 
     ammo -= delta * 30
     check_ammo()
+    health.health += delta * 15.0
     #drank.emit(delta * 0.75)
