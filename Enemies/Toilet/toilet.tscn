@@ -31,6 +31,10 @@ color = Color(0.490196, 0.223529, 0.282353, 1)
 contact_monitor = true
 max_contacts_reported = 5
 script = ExtResource("2_alvy8")
+base_speed = 3000.0
+boosted_speed = 5000.0
+base_damage = 5
+boosted_damage = 12
 ground_speed = 3000.0
 jump_height = 10.0
 

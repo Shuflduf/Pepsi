@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c4ouniiwlgaal"]
+[gd_scene load_steps=16 format=3 uid="uid://c4ouniiwlgaal"]
 
 [ext_resource type="Script" uid="uid://dslttefqer12w" path="res://Enemies/enemy.gd" id="1_qi2p4"]
 [ext_resource type="PackedScene" uid="uid://b7vwh04fijnjd" path="res://Components/damage_indicator.tscn" id="2_bxkaj"]
@@ -43,6 +43,37 @@ height = 0.4
 
 [sub_resource type="GDScript" id="GDScript_bxkaj"]
 
+[sub_resource type="Curve" id="Curve_47qgu"]
+_data = [Vector2(0, 0.0337079), 0.0, 0.0, 0, 0, Vector2(0.278761, 1), 0.0, 0.0, 0, 0, Vector2(0.610619, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_572h1"]
+curve = SubResource("Curve_47qgu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rt1x0"]
+lifetime_randomness = 0.5
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 1.5
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+inherit_velocity_ratio = 1.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 0.9
+initial_velocity_max = 1.1
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_572h1")
+color = Color(0, 0.766667, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8wvsg"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_gk8ng"]
+material = SubResource("StandardMaterial3D_8wvsg")
+
 [node name="Enemy" type="RigidBody3D" groups=["Enemy"]]
 collision_layer = 4
 collision_mask = 7
@@ -81,4 +112,17 @@ process_material = SubResource("ParticleProcessMaterial_bxkaj")
 draw_pass_1 = SubResource("SphereMesh_572h1")
 script = SubResource("GDScript_bxkaj")
 
+[node name="BoostedTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="BoostedParticles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 32
+lifetime = 0.5
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_rt1x0")
+draw_pass_1 = SubResource("SphereMesh_gk8ng")
+
 [connection signal="timeout" from="HitCooldown" to="." method="_on_hit_cooldown_timeout"]
+[connection signal="timeout" from="BoostedTimer" to="." method="_on_boosted_timer_timeout"]

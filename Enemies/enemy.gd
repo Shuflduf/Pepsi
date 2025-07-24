@@ -3,7 +3,9 @@ extends PhysicsEntity
 
 signal died
 
+@onready var boosted_timer: Timer = $BoostedTimer
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
+
 @export var immobile: bool = false
 @export var starting_health = 5
 @export var damage_indicator_scene: PackedScene
@@ -14,6 +16,10 @@ var in_hitstun = false
 var hit_cooldown = 0.0
 var player: PhysicsEntity = null
 var disabled = false
+var is_boosted = false:
+    set(new):
+        is_boosted = new
+        $BoostedParticles.emitting = new
 
 var health = starting_health
 
@@ -105,3 +111,7 @@ static func damage(target_player: PhysicsEntity, amount: int):
     var health_component = target_player.find_child(^"Health")
     if health_component is Health:
         health_component.hit(amount)
+
+
+func _on_boosted_timer_timeout() -> void:
+    is_boosted = false
