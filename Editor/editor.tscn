@@ -808,7 +808,7 @@ script = ExtResource("7_rw8kj")
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 195.0
-offset_bottom = 211.0
+offset_bottom = 367.0
 
 [node name="Label" type="Label" parent="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel/VBoxContainer"]
 custom_minimum_size = Vector2(0.12, 0)

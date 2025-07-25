@@ -7,11 +7,14 @@ var current_wave = 0
 
 func _ready() -> void:
     var data = JSON.parse_string(FileAccess.get_file_as_string(level_path))
-    level = data.map(func(w):
+    var config = MapConfig.new()
+    config.from_obj(data["config"])
+    level = data["waves"].map(func(w):
         var new_wave = Wave.new()
         new_wave.from_obj(w)
         return new_wave
     )
+    %Map.create_from_config(config)
     $WaitTimer.start()
 
 
