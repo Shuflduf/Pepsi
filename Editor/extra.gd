@@ -6,12 +6,16 @@ signal name_changed(new_name: String)
 
 var waves_created = 0
 
-func reset():
+func reset(config: MapConfig):
     waves_created = 0
     for item in %Waves.item_count:
         %Waves.remove_item(0)
     #update_options(["Wave 1"])
     _on_new_pressed()
+    %TileSizeBox.value = config.tile_size
+    %MapSizeBox.value = config.map_size
+    %HeightScaleBox.value = config.height_scale
+
 
 func _ready() -> void:
     _on_new_pressed()

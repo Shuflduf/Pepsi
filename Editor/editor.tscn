@@ -838,6 +838,7 @@ layout_mode = 2
 text = "Tile Size"
 
 [node name="TileSizeBox" type="SpinBox" parent="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -857,6 +858,7 @@ layout_mode = 2
 text = "Map Size"
 
 [node name="MapSizeBox" type="SpinBox" parent="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel/MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -874,6 +876,7 @@ layout_mode = 2
 text = "Height Scale"
 
 [node name="HeightScaleBox" type="SpinBox" parent="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel/MarginContainer/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 10

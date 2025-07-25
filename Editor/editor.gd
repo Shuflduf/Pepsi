@@ -85,7 +85,7 @@ func _on_map_config_panel_map_config_changed(config: MapConfig) -> void:
     current_state = []
     wave = 0
     #_on_extra_switched_wave(wave)
-    %Extra.reset()
+    %Extra.reset(config)
 
     #%PreviewCam.position.x =
     #%PreviewCam.position.z = config.map_size * config.tile_size + config.tile_size
