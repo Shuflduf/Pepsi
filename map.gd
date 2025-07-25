@@ -20,7 +20,7 @@ func _ready() -> void:
 
 func create_from_config(config: MapConfig):
     for c in %Parts.get_children():
-        c.queue_free()
+        c.free()
 
     for x in config.map_size:
         var col = Node3D.new()

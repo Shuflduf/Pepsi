@@ -24,7 +24,6 @@ func bind_buttons():
         var col = %EnemyButtons.get_child(x)
         for y in col.get_child_count():
             var item: Button = col.get_child(y)
-            prints(x, y)
             item.pressed.connect(item_pressed.bind(item, x, y))
 
 

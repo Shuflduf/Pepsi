@@ -8,9 +8,10 @@ var waves_created = 0
 
 func reset():
     waves_created = 0
-    #for item in %Waves.item_count:
-        #%Waves.remove_item(0)
-    update_options(["Wave 1"])
+    for item in %Waves.item_count:
+        %Waves.remove_item(0)
+    #update_options(["Wave 1"])
+    _on_new_pressed()
 
 func _ready() -> void:
     _on_new_pressed()

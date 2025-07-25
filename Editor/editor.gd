@@ -72,12 +72,14 @@ func _on_map_config_panel_map_config_changed(config: MapConfig) -> void:
     map_config = config
     %Map.create_from_config(config)
     update_cam_pos(config)
+    %Height.create_buttons(config.map_size)
+    %Enemies.create_buttons(config.map_size)
+
     current_state = []
     wave = 0
     #_on_extra_switched_wave(wave)
     %Extra.reset()
-    %Height.create_buttons(config.map_size)
-    %Enemies.create_buttons(config.map_size)
+
     #%PreviewCam.position.x =
     #%PreviewCam.position.z = config.map_size * config.tile_size + config.tile_size
 
