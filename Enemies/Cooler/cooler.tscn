@@ -121,8 +121,10 @@ shape = SubResource("SphereShape3D_oqtff")
 
 [node name="ConnectionParticles" type="Node3D" parent="." index="8"]
 
-[node name="Template" type="GPUParticles3D" parent="ConnectionParticles" index="0"]
+[node name="TemplateParticles" type="GPUParticles3D" parent="ConnectionParticles" index="0"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4, 0)
+emitting = false
 amount = 32
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_o7lcu")

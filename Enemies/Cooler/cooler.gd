@@ -1,18 +1,30 @@
 extends Enemy
 
+var connected_enemies: Dictionary[Enemy, GPUParticles3D] = {}
+
 func _physics_process(delta: float) -> void:
     super(delta)
     var enemies = $DetectionArea.get_overlapping_bodies()
-    $ConnectionParticles/Template.emitting = false
+
+    for e in connected_enemies.keys():
+        if e not in enemies:
+            print("remove")
+            connected_enemies[e].queue_free()
+            connected_enemies.erase(e)
+
     for e: Enemy in enemies:
         if e == self:
             continue
+
         e.is_boosted = true
         e.boosted_timer.start()
-        DebugDraw3D.draw_arrow(global_position, e.global_position, Color.GREEN, 0.5, true)
-        $ConnectionParticles/Template.emitting = true
+        if e not in connected_enemies.keys():
+            var new_particles = %TemplateParticles.duplicate()
+            new_particles.emitting = true
+            %TemplateParticles.get_parent().add_child(new_particles)
+            connected_enemies[e] = new_particles
         var look_at_pos = e.global_position + Vector3(0, 1, 0)
-        $ConnectionParticles/Template.look_at(look_at_pos)
+        connected_enemies[e].look_at(look_at_pos)
 
     if player == null:
         return
