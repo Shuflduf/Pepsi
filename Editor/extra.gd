@@ -6,6 +6,12 @@ signal name_changed(new_name: String)
 
 var waves_created = 0
 
+func reset():
+    waves_created = 0
+    #for item in %Waves.item_count:
+        #%Waves.remove_item(0)
+    update_options(["Wave 1"])
+
 func _ready() -> void:
     _on_new_pressed()
 

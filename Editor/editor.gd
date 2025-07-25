@@ -6,6 +6,9 @@ var map_config: MapConfig = MapConfig.new()
 
 #_ready
     #update_map()
+func _ready() -> void:
+    update_cam_pos(map_config)
+
 
 func current_wave() -> Wave:
     if current_state.size() < wave + 1:
@@ -66,8 +69,17 @@ func _on_extra_name_changed(new_name: String) -> void:
 func _on_map_config_panel_map_config_changed(config: MapConfig) -> void:
     map_config = config
     %Map.create_from_config(config)
+    update_cam_pos(config)
+    current_state = []
+    wave = 0
+    _on_extra_switched_wave(wave)
+    %Extra.reset()
+    %Height.create_buttons(config.map_size)
+    #%PreviewCam.position.x =
+    #%PreviewCam.position.z = config.map_size * config.tile_size + config.tile_size
+
+
+func update_cam_pos(config: MapConfig):
     var center = (config.map_size * config.tile_size / 2.0) - config.tile_size / 2.0
     var center_pos = Vector3(center, 0.0, center)
     %CamOrbit.position = center_pos
-    #%PreviewCam.position.x =
-    #%PreviewCam.position.z = config.map_size * config.tile_size + config.tile_size

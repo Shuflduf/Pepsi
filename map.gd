@@ -8,14 +8,17 @@ signal wave_complete
 @export var map_pillar: PackedScene
 
 const OFFSET = -10
-const MULT = 2
 
 var wave_to_spawn: Wave
 var enemies_spawned = 0
 
 var current_config: MapConfig
-var tile_res = MULT
+var tile_res = 2
 var tile_size = 6
+
+func _ready() -> void:
+    create_from_config(MapConfig.new())
+
 
 func create_from_config(config: MapConfig):
     for c in %Parts.get_children():
@@ -44,7 +47,7 @@ func set_wave(wave: Wave):
             var value = col[y]
 
             var pillar: AnimatableBody3D = %Parts.get_child(x).get_child(y)
-            var pillar_pos = (value * MULT) + OFFSET
+            var pillar_pos = (value * tile_res)
 
             if !smooth:
                 pillar.position.y = pillar_pos

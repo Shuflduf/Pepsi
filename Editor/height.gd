@@ -11,13 +11,32 @@ enum Mode {
 var current_mode: Mode = Mode.Increase
 var set_value = 0
 
-func _ready() -> void:
+func create_buttons(map_size: int):
+    for col in %Buttons.get_children():
+        col.free()
+
+    for col in map_size:
+        var new_col = %TemplateCol.duplicate()
+        %Buttons.add_child(new_col)
+        new_col.show()
+        for button in map_size - 1:
+            var new_button = new_col.get_child(0).duplicate()
+            new_col.add_child(new_button)
+            #new_button.text = str(Vector2(col, button))
+
+    bind_buttons()
+
+func bind_buttons():
     for x in %Buttons.get_child_count():
         var col = %Buttons.get_child(x)
         for y in col.get_child_count():
             var item: Button = col.get_child(y)
-
+            prints(x, y)
             item.pressed.connect(item_pressed.bind(item, x, y))
+
+
+func _ready() -> void:
+    create_buttons(6)
 
 func item_pressed(item: Button, x: int, y: int):
     var old_val = int(item.text)

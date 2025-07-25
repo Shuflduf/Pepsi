@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://djnjcqlpep1vd"]
+[gd_scene load_steps=12 format=3 uid="uid://djnjcqlpep1vd"]
 
 [ext_resource type="Script" uid="uid://c8yq6xanqa88b" path="res://Editor/editor.gd" id="1_vl7gr"]
 [ext_resource type="Script" uid="uid://fp0klv2ogoqq" path="res://Editor/height.gd" id="2_8ctag"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://x7gbwlu5b3mf" path="res://Editor/enemies.gd" id="2_o8ses"]
 [ext_resource type="Script" uid="uid://cqpib60ypepp2" path="res://Editor/extra.gd" id="3_jdbf7"]
 [ext_resource type="Resource" uid="uid://crragfimbp1gw" path="res://Enemies/enemies.tres" id="3_rw8kj"]
+[ext_resource type="Script" uid="uid://bfix5wa3osduk" path="res://Editor/cam_orbit.gd" id="6_8ctag"]
 [ext_resource type="Script" uid="uid://bnfhytbl34p0s" path="res://Editor/map_config_panel.gd" id="7_rw8kj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gtcfm"]
@@ -38,12 +39,11 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 tab_alignment = 1
-current_tab = 3
+current_tab = 0
 tab_focus_mode = 0
 
 [node name="Height" type="HBoxContainer" parent="TabContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 alignment = 1
 script = ExtResource("2_8ctag")
@@ -88,248 +88,265 @@ layout_mode = 2
 focus_mode = 0
 text = "0"
 
-[node name="Buttons" type="HBoxContainer" parent="TabContainer/Height"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Height"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Buttons" type="HBoxContainer" parent="TabContainer/Height/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 6
 alignment = 1
 
-[node name="0" type="VBoxContainer" parent="TabContainer/Height/Buttons"]
+[node name="0" type="VBoxContainer" parent="TabContainer/Height/ScrollContainer/Buttons"]
+layout_mode = 2
+alignment = 1
+
+[node name="0" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="1" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="2" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="3" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="4" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="5" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="1" type="VBoxContainer" parent="TabContainer/Height/ScrollContainer/Buttons"]
+layout_mode = 2
+alignment = 1
+
+[node name="0" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="1" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="2" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="3" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="4" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="5" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="2" type="VBoxContainer" parent="TabContainer/Height/ScrollContainer/Buttons"]
+layout_mode = 2
+alignment = 1
+
+[node name="0" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="1" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="2" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="3" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="4" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="5" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="3" type="VBoxContainer" parent="TabContainer/Height/ScrollContainer/Buttons"]
+layout_mode = 2
+alignment = 1
+
+[node name="0" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="1" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="2" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="3" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="4" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="5" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="4" type="VBoxContainer" parent="TabContainer/Height/ScrollContainer/Buttons"]
+layout_mode = 2
+alignment = 1
+
+[node name="0" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="1" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="2" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="3" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="4" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="5" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="5" type="VBoxContainer" parent="TabContainer/Height/ScrollContainer/Buttons"]
+layout_mode = 2
+alignment = 1
+
+[node name="0" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="1" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="2" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="3" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="4" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="5" type="Button" parent="TabContainer/Height/ScrollContainer/Buttons/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+text = "0"
+
+[node name="TemplateCol" type="VBoxContainer" parent="TabContainer/Height"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
 
-[node name="0" type="Button" parent="TabContainer/Height/Buttons/0"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="1" type="Button" parent="TabContainer/Height/Buttons/0"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="2" type="Button" parent="TabContainer/Height/Buttons/0"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="3" type="Button" parent="TabContainer/Height/Buttons/0"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="4" type="Button" parent="TabContainer/Height/Buttons/0"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="5" type="Button" parent="TabContainer/Height/Buttons/0"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="1" type="VBoxContainer" parent="TabContainer/Height/Buttons"]
-layout_mode = 2
-alignment = 1
-
-[node name="0" type="Button" parent="TabContainer/Height/Buttons/1"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="1" type="Button" parent="TabContainer/Height/Buttons/1"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="2" type="Button" parent="TabContainer/Height/Buttons/1"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="3" type="Button" parent="TabContainer/Height/Buttons/1"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="4" type="Button" parent="TabContainer/Height/Buttons/1"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="5" type="Button" parent="TabContainer/Height/Buttons/1"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="2" type="VBoxContainer" parent="TabContainer/Height/Buttons"]
-layout_mode = 2
-alignment = 1
-
-[node name="0" type="Button" parent="TabContainer/Height/Buttons/2"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="1" type="Button" parent="TabContainer/Height/Buttons/2"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="2" type="Button" parent="TabContainer/Height/Buttons/2"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="3" type="Button" parent="TabContainer/Height/Buttons/2"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="4" type="Button" parent="TabContainer/Height/Buttons/2"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="5" type="Button" parent="TabContainer/Height/Buttons/2"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="3" type="VBoxContainer" parent="TabContainer/Height/Buttons"]
-layout_mode = 2
-alignment = 1
-
-[node name="0" type="Button" parent="TabContainer/Height/Buttons/3"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="1" type="Button" parent="TabContainer/Height/Buttons/3"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="2" type="Button" parent="TabContainer/Height/Buttons/3"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="3" type="Button" parent="TabContainer/Height/Buttons/3"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="4" type="Button" parent="TabContainer/Height/Buttons/3"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="5" type="Button" parent="TabContainer/Height/Buttons/3"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="4" type="VBoxContainer" parent="TabContainer/Height/Buttons"]
-layout_mode = 2
-alignment = 1
-
-[node name="0" type="Button" parent="TabContainer/Height/Buttons/4"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="1" type="Button" parent="TabContainer/Height/Buttons/4"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="2" type="Button" parent="TabContainer/Height/Buttons/4"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="3" type="Button" parent="TabContainer/Height/Buttons/4"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="4" type="Button" parent="TabContainer/Height/Buttons/4"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="5" type="Button" parent="TabContainer/Height/Buttons/4"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="5" type="VBoxContainer" parent="TabContainer/Height/Buttons"]
-layout_mode = 2
-alignment = 1
-
-[node name="0" type="Button" parent="TabContainer/Height/Buttons/5"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="1" type="Button" parent="TabContainer/Height/Buttons/5"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="2" type="Button" parent="TabContainer/Height/Buttons/5"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="3" type="Button" parent="TabContainer/Height/Buttons/5"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="4" type="Button" parent="TabContainer/Height/Buttons/5"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-text = "0"
-
-[node name="5" type="Button" parent="TabContainer/Height/Buttons/5"]
+[node name="0" type="Button" parent="TabContainer/Height/TemplateCol"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 focus_mode = 0
@@ -629,7 +646,7 @@ metadata/_tab_index = 2
 
 [node name="SubViewport" type="SubViewport" parent="TabContainer/Preview"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(576, 293)
 render_target_update_mode = 0
 
 [node name="Map" parent="TabContainer/Preview/SubViewport" instance=ExtResource("2_55rxr")]
@@ -653,13 +670,18 @@ environment = SubResource("Environment_74j50")
 
 [node name="CamOrbit" type="Node3D" parent="TabContainer/Preview/SubViewport"]
 unique_name_in_owner = true
+script = ExtResource("6_8ctag")
 
-[node name="PreviewCam" type="Camera3D" parent="TabContainer/Preview/SubViewport/CamOrbit"]
+[node name="Pivot" type="Node3D" parent="TabContainer/Preview/SubViewport/CamOrbit"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0)
+
+[node name="PreviewCam" type="Camera3D" parent="TabContainer/Preview/SubViewport/CamOrbit/Pivot"]
 unique_name_in_owner = true
-transform = Transform3D(1, 3.59993e-09, -1.34351e-08, 3.59993e-09, 0.866025, 0.5, 1.34351e-08, -0.5, 0.866025, 0, 16, 15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15)
 
 [node name="Extra" type="HBoxContainer" parent="TabContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 20
 script = ExtResource("3_jdbf7")
@@ -713,7 +735,6 @@ text = "Map Config"
 unique_name_in_owner = true
 initial_position = 1
 size = Vector2i(199, 371)
-visible = true
 script = ExtResource("7_rw8kj")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel"]
