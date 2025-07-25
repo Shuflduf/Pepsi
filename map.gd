@@ -12,6 +12,10 @@ var enemies_spawned = 0
 
 var current_config: MapConfig
 
+func get_center_pos() -> float:
+    var center_pos = (current_config.tile_size * current_config.map_size / 2.0) - current_config.tile_size / 2.0
+    return center_pos
+
 func _ready() -> void:
     create_from_config(MapConfig.new())
 
@@ -32,9 +36,8 @@ func create_from_config(config: MapConfig):
             pillar.set_size(config.tile_size)
             pillar.position.z = config.tile_size * y
 
-    config.height_scale
-
-    var center_pos = (config.tile_size * config.map_size / 2.0) - config.tile_size / 2.0
+    #config.height_scale
+    var center_pos = get_center_pos()
     $Base.position = Vector3(center_pos, -500, center_pos)
     $Base.size.x = config.tile_size * config.map_size
     $Base.size.z = $Base.size.x
@@ -95,7 +98,7 @@ func spawn_all_enemies():
             var pillar: AnimatableBody3D = %Parts.get_child(x).get_child(y)
             if smooth:
                 get_tree().create_timer(randf_range(0.0, 1.0)).timeout.connect(func():
-                    spawn_enemy(enemy_to_spawn, pillar.position)
+                    spawn_enemy(enemy_to_spawn, pillar.global_position + Vector3(0, 45, 0))
                 )
             else:
                 spawn_enemy(enemy_to_spawn, pillar.global_position + Vector3(0, 45, 0))
@@ -115,8 +118,8 @@ func _on_enemy_died():
 func _on_kill_barrier_body_entered(body: Node3D) -> void:
     if body is Enemy:
         body.die()
-    elif body is Player:
-        body.global_position = Vector3.UP * 20
+    elif body is PhysicsEntity and body.has_component("Player"):
+        body.global_position = player_spawn_pos()
 
 func show_wave_info():
     if !smooth:
@@ -124,3 +127,11 @@ func show_wave_info():
     %NameLabel.text = wave_to_spawn.name
     %EnemyLabel.text = "%d Enemies" % enemies_spawned
     %UIAnim.play(&"show")
+
+func player_spawn_pos() -> Vector3:
+    var center_pos = get_center_pos()
+    return Vector3(
+        center_pos,
+        20.0,
+        center_pos
+    )

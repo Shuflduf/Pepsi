@@ -111,7 +111,7 @@ func _on_hit_cooldown_timeout() -> void:
     is_hit = false
 
 static func damage(target_player: PhysicsEntity, amount: int):
-    var health_component = target_player.find_child(^"Health")
+    var health_component = target_player.find_child("Health")
     if health_component is Health:
         health_component.hit(amount)
 

@@ -7,6 +7,9 @@ extends RigidBody3D
 @export var drag = 0.15
 @export var jump_height = 8.0
 
+func has_component(component: String) -> bool:
+    return self.find_child(component) != null
+
 func is_on_floor() -> bool:
     if test_move(transform, Vector3.DOWN*0.1 * get_physics_process_delta_time()):
         return true

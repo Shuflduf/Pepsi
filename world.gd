@@ -16,6 +16,7 @@ func _ready() -> void:
     )
     %Map.create_from_config(config)
     $WaitTimer.start()
+    $Player2.global_position = %Map.player_spawn_pos()
 
 
 func _on_wait_timer_timeout() -> void:

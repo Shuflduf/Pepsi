@@ -56,7 +56,6 @@ func _on_load_dialog_file_selected(path: String) -> void:
     var data = JSON.parse_string(file_contents)
     var config = MapConfig.new()
     config.from_obj(data["config"])
-    #%Map.create_from_config(config)
     _on_map_config_panel_map_config_changed(config)
     current_state = []
 

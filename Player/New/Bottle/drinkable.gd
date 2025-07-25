@@ -40,7 +40,7 @@ func drink(delta: float):
         #$Drink.play()
         #$DrinkPour.play()
 
-    ammo -= delta * 30
+    ammo -= delta * 60.0
     check_ammo()
-    health.health += delta * 15.0
+    health.health += delta * 30.0
     #drank.emit(delta * 0.75)

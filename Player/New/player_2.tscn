@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://btsph6pq2xcxv"]
+[gd_scene load_steps=39 format=3 uid="uid://btsph6pq2xcxv"]
 
 [ext_resource type="Script" uid="uid://cro5dg075ji6x" path="res://Components/physics_entity.gd" id="1_16gp5"]
 [ext_resource type="Script" uid="uid://dof74olx8ypoq" path="res://Player/New/wasd.gd" id="2_1ks24"]
@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://cdowbo8hw7d7q" path="res://Assets/SFX/pour.mp3" id="7_job4i"]
 [ext_resource type="Script" uid="uid://8s18m5pfmnfo" path="res://Player/New/sway.gd" id="11_hgjig"]
 [ext_resource type="Script" uid="uid://fyfphgq75leh" path="res://Player/New/health.gd" id="12_r68f0"]
+[ext_resource type="Script" uid="uid://dk30rqaghdesy" path="res://Player/New/player_component.gd" id="17_opynp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_hgjig"]
 outline_size = 5
@@ -454,5 +455,9 @@ metadata/_custom_type_script = "uid://dk30rqaghdesy"
 [node name="HitCooldown" type="Timer" parent="Health"]
 wait_time = 0.5
 one_shot = true
+
+[node name="Player" type="Node" parent="."]
+script = ExtResource("17_opynp")
+metadata/_custom_type_script = "uid://dk30rqaghdesy"
 
 [editable path="Bottle"]
