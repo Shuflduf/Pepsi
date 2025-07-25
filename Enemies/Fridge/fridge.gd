@@ -4,6 +4,10 @@ extends Enemy
 
 @export var projectile: PackedScene
 
+@export var base_proj_speed = 40.0
+@export var boosted_proj_speed = 80.0
+
+
 func _ready() -> void:
     super()
     await get_tree().create_timer(randf_range(0.0, 1.0)).timeout
@@ -22,7 +26,7 @@ func _on_cooldown_timeout() -> void:
         player.global_position,
         player.linear_velocity,
         global_position,
-        40.0
+        boosted_proj_speed if is_boosted else base_proj_speed
     )
 
     var new_projectile: RigidBody3D = projectile.instantiate()

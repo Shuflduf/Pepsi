@@ -1,5 +1,10 @@
 extends Enemy
 
+@export var base_speed = 1000.0
+@export var boosted_speed = 3000.0
+@export var base_damage = 8
+@export var boosted_damage = 12
+
 var can_attack = true
 
 func _physics_process(delta: float) -> void:
@@ -29,6 +34,8 @@ func _physics_process(delta: float) -> void:
         var look_dir = atan2(dir.x, dir.z)
         $Visuals.rotation.y = lerp_angle($Visuals.rotation.y, look_dir, delta * 10)
 
+    ground_speed = boosted_speed if is_boosted else base_speed
+
 
 func _on_hitstun_timer_timeout() -> void:
     in_hitstun = false
@@ -45,7 +52,7 @@ func _on_attack_cooldown_timeout() -> void:
 
 func _on_body_entered(body: Node) -> void:
     if body is PhysicsEntity:
-        damage(body, 8)
+        damage(body, boosted_damage if is_boosted else base_damage)
 
 func is_on_floor():
     return false

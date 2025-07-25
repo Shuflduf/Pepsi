@@ -68,6 +68,10 @@ gravity_scale = 0.0
 contact_monitor = true
 max_contacts_reported = 5
 script = ExtResource("2_maa7f")
+base_speed = 1000.0
+boosted_speed = 3000.0
+base_damage = 8
+boosted_damage = 20
 ground_speed = 1000.0
 
 [node name="CollisionShape3D" parent="." index="0"]
