@@ -23,6 +23,11 @@ var is_boosted = false:
 
 var health = starting_health
 
+var current_wave_heights: Array
+var map_tile_size = 5
+var map_size = 6
+var map_resolution = 2
+
 func _ready() -> void:
     if immobile:
         mass = 10000

@@ -12,6 +12,9 @@ const MULT = 2
 var wave_to_spawn: Wave
 var enemies_spawned = 0
 
+var tile_res = MULT
+var tile_size = 6
+
 func set_wave(wave: Wave):
     for enemy in %Enemies.get_children():
         enemy.queue_free()
@@ -41,6 +44,7 @@ func spawn_enemy(enemy: int, pillar_pos: Vector3):
     if enemy != -1:
         var enemy_node: Enemy = enemies.enemies[enemy].scene.instantiate()
         %Enemies.add_child(enemy_node)
+        enemy_node.current_wave_heights = wave_to_spawn.heights
         enemy_node.global_position = pillar_pos
         enemy_node.global_position.y += 10
         enemy_node.died.connect(_on_enemy_died)
