@@ -11,7 +11,7 @@ func _input(event: InputEvent) -> void:
             %PreviewCam.position.z += event.factor
         elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
             %PreviewCam.position.z -= event.factor
-        %PreviewCam.position.z = clampf(%PreviewCam.position.z, 0.0, 100.0)
+        %PreviewCam.position.z = clampf(%PreviewCam.position.z, 0.0, 300.0)
 
     if event is InputEventMouseMotion and is_moving:
         $Pivot.rotate_x(-event.relative.y / 100.0)

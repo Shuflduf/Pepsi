@@ -13,8 +13,9 @@ func create_buttons(map_size: int):
         %EnemyButtons.add_child(new_col)
         new_col.show()
         for button in map_size - 1:
-            var new_button = new_col.get_child(0).duplicate()
+            var new_button: Button = new_col.get_child(0).duplicate()
             new_col.add_child(new_button)
+
             #new_button.text = str(Vector2(col, button))
 
     bind_buttons()
@@ -24,6 +25,7 @@ func bind_buttons():
         var col = %EnemyButtons.get_child(x)
         for y in col.get_child_count():
             var item: Button = col.get_child(y)
+            item.tooltip_text = "%d, %d" % [x, y]
             item.pressed.connect(item_pressed.bind(item, x, y))
 
 

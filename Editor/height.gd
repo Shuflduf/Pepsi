@@ -2,6 +2,8 @@ extends HBoxContainer
 
 signal updated_height(x: int, y: int, new_val: int)
 
+@export var limit = 30
+
 enum Mode {
     Increase,
     Decrease,
@@ -31,6 +33,7 @@ func bind_buttons():
         var col = %HeightButtons.get_child(x)
         for y in col.get_child_count():
             var item: Button = col.get_child(y)
+            item.tooltip_text = "%d, %d" % [x, y]
             item.pressed.connect(item_pressed.bind(item, x, y))
 
 
@@ -43,10 +46,10 @@ func item_pressed(item: Button, x: int, y: int):
 
     match current_mode:
         Mode.Increase:
-            new_val = (old_val + 1) % 10
+            new_val = (old_val + 1) % limit
         Mode.Decrease:
             # i love modulus
-            new_val = (old_val + 9) % 10
+            new_val = (old_val + limit - 1) % limit
         Mode.Set:
             new_val = set_value
 
@@ -65,7 +68,7 @@ func update_buttons(heights: Array):
 func _on_set_value_pressed() -> void:
     current_mode = Mode.Set
     var old_value = int(%SetValue.text)
-    set_value = (old_value + 1) % 10
+    set_value = (old_value + 1) % limit
     %SetValue.text = str(set_value)
     %ModeLabel.text = "Set (%d)" % set_value
 

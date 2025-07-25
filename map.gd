@@ -11,14 +11,13 @@ var wave_to_spawn: Wave
 var enemies_spawned = 0
 
 var current_config: MapConfig
-var tile_res = 2
-var tile_size = 6
 
 func _ready() -> void:
     create_from_config(MapConfig.new())
 
 
 func create_from_config(config: MapConfig):
+    current_config = config
     for c in %Parts.get_children():
         c.free()
 
@@ -33,10 +32,12 @@ func create_from_config(config: MapConfig):
             pillar.set_size(config.tile_size)
             pillar.position.z = config.tile_size * y
 
-    tile_res = config.height_scale
+    config.height_scale
 
     var center_pos = (config.tile_size * config.map_size / 2.0) - config.tile_size / 2.0
     $Base.position = Vector3(center_pos, -500, center_pos)
+    $Base.size.x = config.tile_size * config.map_size
+    $Base.size.z = $Base.size.x
 
     for enemy in %Enemies.get_children():
         enemy.queue_free()
@@ -56,7 +57,7 @@ func set_wave(wave: Wave):
             var value = col[y]
 
             var pillar: AnimatableBody3D = %Parts.get_child(x).get_child(y)
-            var pillar_pos = (value * tile_res)
+            var pillar_pos = (value * current_config.height_scale)
 
             if !smooth:
                 pillar.position.y = pillar_pos
@@ -69,14 +70,15 @@ func set_wave(wave: Wave):
                 tween.tween_property(pillar, "position:y", pillar_pos, randf_range(0.7, 1.5))
                 %SpawnTimer.start()
 
-func spawn_enemy(enemy: int, pillar_pos: Vector3):
+func spawn_enemy(enemy: int, spawn_pos: Vector3):
+    print(spawn_pos)
     #var enemy = wave.enemies[x][y]
     if enemy != -1:
         var enemy_node: Enemy = enemies.enemies[enemy].scene.instantiate()
         %Enemies.add_child(enemy_node)
+        enemy_node.map_config = current_config
         enemy_node.current_wave_heights = wave_to_spawn.heights
-        enemy_node.global_position = pillar_pos
-        enemy_node.global_position.y += 10
+        enemy_node.global_position = spawn_pos
         enemy_node.died.connect(_on_enemy_died)
 
 func spawn_all_enemies():
@@ -94,10 +96,10 @@ func spawn_all_enemies():
             var pillar: AnimatableBody3D = %Parts.get_child(x).get_child(y)
             if smooth:
                 get_tree().create_timer(randf_range(0.0, 1.0)).timeout.connect(func():
-                    spawn_enemy(enemy_to_spawn, pillar.global_position)
+                    spawn_enemy(enemy_to_spawn, pillar.position)
                 )
             else:
-                spawn_enemy(enemy_to_spawn, pillar.global_position)
+                spawn_enemy(enemy_to_spawn, pillar.global_position + Vector3(0, 45, 0))
 
 func _on_spawn_timer_timeout() -> void:
     spawn_all_enemies()

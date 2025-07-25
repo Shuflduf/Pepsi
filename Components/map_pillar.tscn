@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bn8wfhbs1omgo" path="res://Assets/Proto/Dark/texture_08.png" id="1_s40lu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s40lu"]
-size = Vector3(5, 20, 5)
+size = Vector3(5, 90, 5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_beuar"]
 albedo_texture = ExtResource("1_s40lu")
@@ -13,7 +13,7 @@ uv1_world_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_s40lu"]
 material = SubResource("StandardMaterial3D_beuar")
-size = Vector3(5, 20, 5)
+size = Vector3(5, 90, 5)
 
 [node name="0" type="AnimatableBody3D"]
 sync_to_physics = false

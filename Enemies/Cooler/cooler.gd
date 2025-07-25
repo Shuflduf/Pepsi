@@ -35,14 +35,14 @@ func _physics_process(delta: float) -> void:
 func hit(damage_amount: int):
     super(damage_amount)
     var random_tile_pos = Vector2i(
-        randi_range(0, map_size - 1),
-        randi_range(0, map_size - 1)
+        randi_range(0, map_config.map_size - 1),
+        randi_range(0, map_config.map_size - 1)
     )
     var tile_height = current_wave_heights[random_tile_pos.x][random_tile_pos.y]
     var new_real_pos = Vector3(
-        (random_tile_pos.x - 3) * map_tile_size + map_tile_size / 2.0,
-        tile_height * map_resolution,
-        (random_tile_pos.y - 3) * map_tile_size + map_tile_size / 2.0,
+        random_tile_pos.x * map_config.tile_size,
+        tile_height * map_config.height_scale,
+        random_tile_pos.y * map_config.tile_size,
     )
     global_position = new_real_pos
     # add like fx when tp, like a line connecting old pos to new pos
