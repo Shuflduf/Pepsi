@@ -12,12 +12,12 @@ var current_mode: Mode = Mode.Increase
 var set_value = 0
 
 func create_buttons(map_size: int):
-    for col in %Buttons.get_children():
+    for col in %HeightButtons.get_children():
         col.free()
 
     for col in map_size:
-        var new_col = %TemplateCol.duplicate()
-        %Buttons.add_child(new_col)
+        var new_col = %HeightTemplate.duplicate()
+        %HeightButtons.add_child(new_col)
         new_col.show()
         for button in map_size - 1:
             var new_button = new_col.get_child(0).duplicate()
@@ -27,8 +27,8 @@ func create_buttons(map_size: int):
     bind_buttons()
 
 func bind_buttons():
-    for x in %Buttons.get_child_count():
-        var col = %Buttons.get_child(x)
+    for x in %HeightButtons.get_child_count():
+        var col = %HeightButtons.get_child(x)
         for y in col.get_child_count():
             var item: Button = col.get_child(y)
             prints(x, y)
@@ -55,8 +55,8 @@ func item_pressed(item: Button, x: int, y: int):
     updated_height.emit(x, y, new_val)
 
 func update_buttons(heights: Array):
-    for x in %Buttons.get_child_count():
-        var col = %Buttons.get_child(x)
+    for x in %HeightButtons.get_child_count():
+        var col = %HeightButtons.get_child(x)
         for y in col.get_child_count():
             var item: Button = col.get_child(y)
 

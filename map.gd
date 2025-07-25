@@ -7,8 +7,6 @@ signal wave_complete
 @export var smooth = false
 @export var map_pillar: PackedScene
 
-const OFFSET = -10
-
 var wave_to_spawn: Wave
 var enemies_spawned = 0
 
@@ -34,6 +32,13 @@ func create_from_config(config: MapConfig):
             col.add_child(pillar)
             pillar.set_size(config.tile_size)
             pillar.position.z = config.tile_size * y
+
+    tile_res = config.height_scale
+    for enemy in %Enemies.get_children():
+        enemy.queue_free()
+    #var new_wave = Wave.new()
+    #new_wave.resize(config.map_size)
+    #set_wave(new_wave)
 
 
 func set_wave(wave: Wave):

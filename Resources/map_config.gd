@@ -3,7 +3,7 @@ extends Resource
 
 var tile_size: int = 5
 var map_size: int = 6
-var height_scale: int = 2
+var height_scale: int = 1
 
 func obj() -> Dictionary:
     return {
