@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://djnjcqlpep1vd"]
+[gd_scene load_steps=11 format=3 uid="uid://djnjcqlpep1vd"]
 
 [ext_resource type="Script" uid="uid://c8yq6xanqa88b" path="res://Editor/editor.gd" id="1_vl7gr"]
 [ext_resource type="Script" uid="uid://fp0klv2ogoqq" path="res://Editor/height.gd" id="2_8ctag"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://x7gbwlu5b3mf" path="res://Editor/enemies.gd" id="2_o8ses"]
 [ext_resource type="Script" uid="uid://cqpib60ypepp2" path="res://Editor/extra.gd" id="3_jdbf7"]
 [ext_resource type="Resource" uid="uid://crragfimbp1gw" path="res://Enemies/enemies.tres" id="3_rw8kj"]
+[ext_resource type="Script" uid="uid://bnfhytbl34p0s" path="res://Editor/map_config_panel.gd" id="7_rw8kj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gtcfm"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -37,7 +38,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 tab_alignment = 1
-current_tab = 2
+current_tab = 3
 tab_focus_mode = 0
 
 [node name="Height" type="HBoxContainer" parent="TabContainer"]
@@ -621,14 +622,15 @@ clip_text = true
 expand_icon = true
 
 [node name="Preview" type="SubViewportContainer" parent="TabContainer"]
+visible = false
 layout_mode = 2
 stretch = true
 metadata/_tab_index = 2
 
 [node name="SubViewport" type="SubViewport" parent="TabContainer/Preview"]
 handle_input_locally = false
-size = Vector2i(576, 293)
-render_target_update_mode = 4
+size = Vector2i(2, 2)
+render_target_update_mode = 0
 
 [node name="Map" parent="TabContainer/Preview/SubViewport" instance=ExtResource("2_55rxr")]
 unique_name_in_owner = true
@@ -646,7 +648,6 @@ environment = SubResource("Environment_74j50")
 
 [node name="Extra" type="HBoxContainer" parent="TabContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 20
 script = ExtResource("3_jdbf7")
@@ -689,6 +690,81 @@ text = "Delete Wave"
 layout_mode = 2
 size_flags_horizontal = 6
 alignment = 1
+
+[node name="MapConfig" type="Button" parent="TabContainer/Extra/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+focus_mode = 0
+text = "Map Config"
+
+[node name="MapConfigPanel" type="PopupPanel" parent="TabContainer/Extra/VBoxContainer2/MapConfig"]
+unique_name_in_owner = true
+initial_position = 1
+size = Vector2i(199, 215)
+visible = true
+script = ExtResource("7_rw8kj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 195.0
+offset_bottom = 211.0
+
+[node name="Label" type="Label" parent="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0.12, 0)
+layout_mode = 2
+text = "Changing the map config will reset the wave data"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Tile Size"
+
+[node name="TileSizeBox" type="SpinBox" parent="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 10
+min_value = 1.0
+value = 5.0
+suffix = "m"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Map Size"
+
+[node name="MapSizeBox" type="SpinBox" parent="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 10
+min_value = 1.0
+value = 6.0
+suffix = "x"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Height Scale"
+
+[node name="HeightScaleBox" type="SpinBox" parent="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 10
+min_value = 1.0
+max_value = 10.0
+value = 2.0
+suffix = "x"
 
 [node name="Save" type="Button" parent="TabContainer/Extra/VBoxContainer2"]
 custom_minimum_size = Vector2(160, 40)
@@ -742,6 +818,11 @@ text = "Upload"
 [connection signal="text_submitted" from="TabContainer/Extra/VBoxContainer/NameEdit" to="TabContainer/Extra" method="_on_name_edit_text_submitted"]
 [connection signal="pressed" from="TabContainer/Extra/VBoxContainer/New" to="TabContainer/Extra" method="_on_new_pressed"]
 [connection signal="pressed" from="TabContainer/Extra/VBoxContainer/Delete" to="TabContainer/Extra" method="_on_delete_pressed"]
+[connection signal="pressed" from="TabContainer/Extra/VBoxContainer2/MapConfig" to="TabContainer/Extra" method="_on_map_config_pressed"]
+[connection signal="map_config_changed" from="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel" to="." method="_on_map_config_panel_map_config_changed"]
+[connection signal="value_changed" from="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel/VBoxContainer/HBoxContainer/TileSizeBox" to="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel" method="_on_tile_size_box_value_changed"]
+[connection signal="value_changed" from="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel/VBoxContainer/HBoxContainer2/MapSizeBox" to="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel" method="_on_map_size_box_value_changed"]
+[connection signal="value_changed" from="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel/VBoxContainer/HBoxContainer3/HeightScaleBox" to="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel" method="_on_height_scale_box_value_changed"]
 [connection signal="pressed" from="TabContainer/Extra/VBoxContainer2/Save" to="TabContainer/Extra" method="_on_save_pressed"]
 [connection signal="file_selected" from="TabContainer/Extra/VBoxContainer2/Save/SaveDialog" to="." method="_on_save_dialog_file_selected"]
 [connection signal="pressed" from="TabContainer/Extra/VBoxContainer2/Load" to="TabContainer/Extra" method="_on_load_pressed"]

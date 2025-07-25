@@ -62,3 +62,7 @@ func update_options(waves: Array):
         %Waves.add_item(wave)
 
     %NameEdit.text = %Waves.get_item_text(%Waves.selected)
+
+
+func _on_map_config_pressed() -> void:
+    %MapConfigPanel.show()

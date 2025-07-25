@@ -2,7 +2,7 @@ extends Control
 
 var wave = 0
 var current_state: Array[Wave] = []
-
+var map_config: MapConfig = MapConfig.new()
 
 #_ready
     #update_map()
@@ -40,7 +40,11 @@ func _on_extra_deleted_wave(del_wave: int) -> void:
 
 func _on_save_dialog_file_selected(path: String) -> void:
     var file = FileAccess.open(path, FileAccess.WRITE)
-    file.store_string(str(current_state.map(func(w): return w.obj())))
+    var data = {
+        "waves": current_state.map(func(w): return w.obj()),
+        "config": map_config.obj()
+    }
+    file.store_string(str(data))
 
 func _on_load_dialog_file_selected(path: String) -> void:
     current_state = []
@@ -57,3 +61,7 @@ func _on_load_dialog_file_selected(path: String) -> void:
 
 func _on_extra_name_changed(new_name: String) -> void:
     current_wave().name = new_name
+
+
+func _on_map_config_panel_map_config_changed(config: MapConfig) -> void:
+    map_config = config

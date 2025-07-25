@@ -1,7 +1,7 @@
 class_name Wave
 extends Resource
 
-# 6x6 2d array of positive ints
+# 2d array of positive ints
 var heights: Array
 var enemies: Array
 
@@ -10,8 +10,13 @@ var name: String = "if you see this something didnt work"
 var nav_mesh: NavigationMesh
 
 func _init() -> void:
-    heights = empty_2d_arr(6, 0)
-    enemies = empty_2d_arr(6, -1)
+    resize(6)
+
+
+func resize(size: int):
+    heights = empty_2d_arr(size, 0)
+    enemies = empty_2d_arr(size, -1)
+
 
 func empty_2d_arr(size: int, val: Variant) -> Array:
     var new_arr = []

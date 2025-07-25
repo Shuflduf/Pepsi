@@ -141,6 +141,7 @@ navigation_mesh = SubResource("NavigationMesh_036b0")
 script = ExtResource("1_wijl4")
 enemies = ExtResource("2_e0an3")
 smooth = true
+map_pillar = ExtResource("4_p5pve")
 
 [node name="Base" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -500, 0)

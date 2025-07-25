@@ -5,6 +5,7 @@ signal wave_complete
 
 @export var enemies: AllEnemyData
 @export var smooth = false
+@export var map_pillar: PackedScene
 
 const OFFSET = -10
 const MULT = 2
@@ -12,8 +13,12 @@ const MULT = 2
 var wave_to_spawn: Wave
 var enemies_spawned = 0
 
+var config: MapConfig
 var tile_res = MULT
 var tile_size = 6
+
+func create_from_config(config: MapConfig):
+    pass
 
 func set_wave(wave: Wave):
     for enemy in %Enemies.get_children():
