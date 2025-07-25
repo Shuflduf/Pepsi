@@ -63,6 +63,7 @@ func update_buttons(heights: Array):
 
 # Tools
 func _on_set_value_pressed() -> void:
+    current_mode = Mode.Set
     var old_value = int(%SetValue.text)
     set_value = (old_value + 1) % 10
     %SetValue.text = str(set_value)

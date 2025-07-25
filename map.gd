@@ -34,6 +34,10 @@ func create_from_config(config: MapConfig):
             pillar.position.z = config.tile_size * y
 
     tile_res = config.height_scale
+
+    var center_pos = (config.tile_size * config.map_size / 2.0) - config.tile_size / 2.0
+    $Base.position = Vector3(center_pos, -500, center_pos)
+
     for enemy in %Enemies.get_children():
         enemy.queue_free()
     #var new_wave = Wave.new()
