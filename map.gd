@@ -71,7 +71,6 @@ func set_wave(wave: Wave):
                 %SpawnTimer.start()
 
 func spawn_enemy(enemy: int, spawn_pos: Vector3):
-    print(spawn_pos)
     #var enemy = wave.enemies[x][y]
     if enemy != -1:
         var enemy_node: Enemy = enemies.enemies[enemy].scene.instantiate()

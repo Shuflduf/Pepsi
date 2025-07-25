@@ -52,13 +52,20 @@ func _on_save_dialog_file_selected(path: String) -> void:
     file.store_string(str(data))
 
 func _on_load_dialog_file_selected(path: String) -> void:
-    current_state = []
     var file_contents = FileAccess.get_file_as_string(path)
     var data = JSON.parse_string(file_contents)
-    for wave_data in data:
+    var config = MapConfig.new()
+    config.from_obj(data["config"])
+    #%Map.create_from_config(config)
+    _on_map_config_panel_map_config_changed(config)
+    current_state = []
+
+    for wave_data in data["waves"]:
         var new_wave = Wave.new()
         new_wave.from_obj(wave_data)
         current_state.push_back(new_wave)
+
+    %Map.set_wave(current_wave())
 
     %Extra.update_options(current_state.map(func(w): return w.name))
     _on_extra_switched_wave(0)
