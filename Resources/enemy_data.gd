@@ -1,4 +1,4 @@
-class_name EnemyData
+class_name MapEntity
 extends Resource
 
 @export var icon: Texture2D

@@ -98,6 +98,7 @@ material = SubResource("StandardMaterial3D_o7lcu")
 gravity_scale = 0.0
 script = ExtResource("2_oqtff")
 immobile = true
+starting_health = 7
 
 [node name="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.28089, 0)
