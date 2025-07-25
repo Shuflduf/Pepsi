@@ -646,7 +646,7 @@ metadata/_tab_index = 2
 
 [node name="SubViewport" type="SubViewport" parent="TabContainer/Preview"]
 handle_input_locally = false
-size = Vector2i(576, 293)
+size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="Map" parent="TabContainer/Preview/SubViewport" instance=ExtResource("2_55rxr")]

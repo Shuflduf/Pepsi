@@ -12,7 +12,9 @@ func _ready() -> void:
 
 func current_wave() -> Wave:
     if current_state.size() < wave + 1:
-        current_state.push_back(Wave.new())
+        var new_wave = Wave.new()
+        new_wave.resize(map_config.map_size)
+        current_state.push_back(new_wave)
 
     return current_state[wave]
 
@@ -72,7 +74,7 @@ func _on_map_config_panel_map_config_changed(config: MapConfig) -> void:
     update_cam_pos(config)
     current_state = []
     wave = 0
-    _on_extra_switched_wave(wave)
+    #_on_extra_switched_wave(wave)
     %Extra.reset()
     %Height.create_buttons(config.map_size)
     #%PreviewCam.position.x =
