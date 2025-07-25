@@ -636,8 +636,13 @@ render_target_update_mode = 0
 unique_name_in_owner = true
 smooth = false
 
-[node name="Camera3D" type="Camera3D" parent="TabContainer/Preview/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 12, 25)
+[node name="NameLabel" parent="TabContainer/Preview/SubViewport/Map/UI" index="1"]
+offset_right = 342.0
+offset_bottom = 87.0
+
+[node name="EnemyLabel" parent="TabContainer/Preview/SubViewport/Map/UI" index="2"]
+offset_right = 261.0
+offset_bottom = 107.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="TabContainer/Preview/SubViewport"]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
@@ -645,6 +650,13 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="TabContainer/Preview/SubViewport"]
 environment = SubResource("Environment_74j50")
+
+[node name="CamOrbit" type="Node3D" parent="TabContainer/Preview/SubViewport"]
+unique_name_in_owner = true
+
+[node name="PreviewCam" type="Camera3D" parent="TabContainer/Preview/SubViewport/CamOrbit"]
+unique_name_in_owner = true
+transform = Transform3D(1, 3.59993e-09, -1.34351e-08, 3.59993e-09, 0.866025, 0.5, 1.34351e-08, -0.5, 0.866025, 0, 16, 15)
 
 [node name="Extra" type="HBoxContainer" parent="TabContainer"]
 unique_name_in_owner = true
@@ -700,7 +712,7 @@ text = "Map Config"
 [node name="MapConfigPanel" type="PopupPanel" parent="TabContainer/Extra/VBoxContainer2/MapConfig"]
 unique_name_in_owner = true
 initial_position = 1
-size = Vector2i(199, 215)
+size = Vector2i(199, 371)
 visible = true
 script = ExtResource("7_rw8kj")
 
@@ -708,7 +720,7 @@ script = ExtResource("7_rw8kj")
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 195.0
-offset_bottom = 211.0
+offset_bottom = 367.0
 
 [node name="Label" type="Label" parent="TabContainer/Extra/VBoxContainer2/MapConfig/MapConfigPanel/VBoxContainer"]
 custom_minimum_size = Vector2(0.12, 0)
@@ -827,3 +839,5 @@ text = "Upload"
 [connection signal="file_selected" from="TabContainer/Extra/VBoxContainer2/Save/SaveDialog" to="." method="_on_save_dialog_file_selected"]
 [connection signal="pressed" from="TabContainer/Extra/VBoxContainer2/Load" to="TabContainer/Extra" method="_on_load_pressed"]
 [connection signal="file_selected" from="TabContainer/Extra/VBoxContainer2/Load/LoadDialog" to="." method="_on_load_dialog_file_selected"]
+
+[editable path="TabContainer/Preview/SubViewport/Map"]

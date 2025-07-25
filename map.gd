@@ -13,12 +13,25 @@ const MULT = 2
 var wave_to_spawn: Wave
 var enemies_spawned = 0
 
-var config: MapConfig
+var current_config: MapConfig
 var tile_res = MULT
 var tile_size = 6
 
 func create_from_config(config: MapConfig):
-    pass
+    for c in %Parts.get_children():
+        c.queue_free()
+
+    for x in config.map_size:
+        var col = Node3D.new()
+        %Parts.add_child(col)
+        col.position.x = config.tile_size * x
+
+        for y in config.map_size:
+            var pillar: MapPillar = map_pillar.instantiate()
+            col.add_child(pillar)
+            pillar.set_size(config.tile_size)
+            pillar.position.z = config.tile_size * y
+
 
 func set_wave(wave: Wave):
     for enemy in %Enemies.get_children():

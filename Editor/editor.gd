@@ -65,3 +65,9 @@ func _on_extra_name_changed(new_name: String) -> void:
 
 func _on_map_config_panel_map_config_changed(config: MapConfig) -> void:
     map_config = config
+    %Map.create_from_config(config)
+    var center = (config.map_size * config.tile_size / 2.0) - config.tile_size / 2.0
+    var center_pos = Vector3(center, 0.0, center)
+    %CamOrbit.position = center_pos
+    #%PreviewCam.position.x =
+    #%PreviewCam.position.z = config.map_size * config.tile_size + config.tile_size
