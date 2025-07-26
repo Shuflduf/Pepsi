@@ -1,4 +1,4 @@
-class_name AllEnemyData
+class_name EntityList
 extends Resource
 
-@export var enemies: Array[MapEntity]
+@export var entities: Array[MapEntity]

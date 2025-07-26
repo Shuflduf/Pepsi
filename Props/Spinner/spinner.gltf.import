@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bdv4laek8dytr"
-path="res://.godot/imported/spinner.gltf-509075edd70da58adf9e4054247be50e.scn"
+uid="uid://b1h7w42uu2ijk"
+path="res://.godot/imported/spinner.gltf-d16e8156054a9dcbbeb6e6701ca474ed.scn"
 
 [deps]
 
-source_file="res://Props/spinner.gltf"
-dest_files=["res://.godot/imported/spinner.gltf-509075edd70da58adf9e4054247be50e.scn"]
+source_file="res://Props/Spinner/spinner.gltf"
+dest_files=["res://.godot/imported/spinner.gltf-d16e8156054a9dcbbeb6e6701ca474ed.scn"]
 
 [params]
 

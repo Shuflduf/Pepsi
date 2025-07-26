@@ -1,0 +1,357 @@
+[gd_scene load_steps=2 format=3 uid="uid://xrbddk7754nf"]
+
+[ext_resource type="Script" uid="uid://x7gbwlu5b3mf" path="res://Editor/entities.gd" id="1_tp3n1"]
+
+[node name="Entities" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("1_tp3n1")
+metadata/_tab_index = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 6
+alignment = 1
+
+[node name="ModeLabel" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+text = "TODO"
+horizontal_alignment = 1
+
+[node name="Increase" type="Button" parent="VBoxContainer2"]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+focus_mode = 0
+disabled = true
+text = "Increase"
+
+[node name="Decrease" type="Button" parent="VBoxContainer2"]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+focus_mode = 0
+disabled = true
+text = "Decrease"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+
+[node name="Set" type="Button" parent="VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+focus_mode = 0
+disabled = true
+text = "Set"
+
+[node name="SetValue" type="Button" parent="VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+focus_mode = 0
+disabled = true
+text = "0"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Buttons" type="HBoxContainer" parent="ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="0" type="VBoxContainer" parent="ScrollContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="0" type="Button" parent="ScrollContainer/Buttons/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="1" type="Button" parent="ScrollContainer/Buttons/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="2" type="Button" parent="ScrollContainer/Buttons/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="3" type="Button" parent="ScrollContainer/Buttons/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="4" type="Button" parent="ScrollContainer/Buttons/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="5" type="Button" parent="ScrollContainer/Buttons/0"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="1" type="VBoxContainer" parent="ScrollContainer/Buttons"]
+layout_mode = 2
+alignment = 1
+
+[node name="0" type="Button" parent="ScrollContainer/Buttons/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="1" type="Button" parent="ScrollContainer/Buttons/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="2" type="Button" parent="ScrollContainer/Buttons/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="3" type="Button" parent="ScrollContainer/Buttons/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="4" type="Button" parent="ScrollContainer/Buttons/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="5" type="Button" parent="ScrollContainer/Buttons/1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="2" type="VBoxContainer" parent="ScrollContainer/Buttons"]
+layout_mode = 2
+alignment = 1
+
+[node name="0" type="Button" parent="ScrollContainer/Buttons/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="1" type="Button" parent="ScrollContainer/Buttons/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="2" type="Button" parent="ScrollContainer/Buttons/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="3" type="Button" parent="ScrollContainer/Buttons/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="4" type="Button" parent="ScrollContainer/Buttons/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="5" type="Button" parent="ScrollContainer/Buttons/2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="3" type="VBoxContainer" parent="ScrollContainer/Buttons"]
+layout_mode = 2
+alignment = 1
+
+[node name="0" type="Button" parent="ScrollContainer/Buttons/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="1" type="Button" parent="ScrollContainer/Buttons/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="2" type="Button" parent="ScrollContainer/Buttons/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="3" type="Button" parent="ScrollContainer/Buttons/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="4" type="Button" parent="ScrollContainer/Buttons/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="5" type="Button" parent="ScrollContainer/Buttons/3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="4" type="VBoxContainer" parent="ScrollContainer/Buttons"]
+layout_mode = 2
+alignment = 1
+
+[node name="0" type="Button" parent="ScrollContainer/Buttons/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="1" type="Button" parent="ScrollContainer/Buttons/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="2" type="Button" parent="ScrollContainer/Buttons/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="3" type="Button" parent="ScrollContainer/Buttons/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="4" type="Button" parent="ScrollContainer/Buttons/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="5" type="Button" parent="ScrollContainer/Buttons/4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="5" type="VBoxContainer" parent="ScrollContainer/Buttons"]
+layout_mode = 2
+alignment = 1
+
+[node name="0" type="Button" parent="ScrollContainer/Buttons/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="1" type="Button" parent="ScrollContainer/Buttons/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="2" type="Button" parent="ScrollContainer/Buttons/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="3" type="Button" parent="ScrollContainer/Buttons/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="4" type="Button" parent="ScrollContainer/Buttons/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="5" type="Button" parent="ScrollContainer/Buttons/5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+focus_mode = 0
+clip_text = true
+expand_icon = true
+
+[node name="Template" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="0" type="Button" parent="Template"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+tooltip_text = "0, 0"
+focus_mode = 0
+clip_text = true
+expand_icon = true

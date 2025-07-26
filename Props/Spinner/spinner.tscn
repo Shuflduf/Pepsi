@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dls545cn465me"]
+
+[ext_resource type="PackedScene" uid="uid://b1h7w42uu2ijk" path="res://Props/Spinner/spinner.gltf" id="1_ip7pq"]
+
+[node name="Spinner" type="Node3D" groups=["Prop"]]
+transform = Transform3D(1.728, 0, 0, 0, 1.728, 0, 0, 0, 1.728, 0, 0, 0)
+
+[node name="spinner" parent="." instance=ExtResource("1_ip7pq")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.1, 0)

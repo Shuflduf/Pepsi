@@ -3,7 +3,8 @@ extends NavigationRegion3D
 
 signal wave_complete
 
-@export var enemies: AllEnemyData
+@export var enemies: EntityList
+@export var props: EntityList
 @export var smooth = false
 @export var map_pillar: PackedScene
 
@@ -42,16 +43,22 @@ func create_from_config(config: MapConfig):
     $Base.size.x = config.tile_size * config.map_size
     $Base.size.z = $Base.size.x
 
-    for enemy in %Enemies.get_children():
-        enemy.queue_free()
+    reset_enemies()
     #var new_wave = Wave.new()
     #new_wave.resize(config.map_size)
     #set_wave(new_wave)
 
-
-func set_wave(wave: Wave):
+func reset_enemies():
+    print("deleting")
     for enemy in %Enemies.get_children():
         enemy.queue_free()
+
+
+
+func set_wave(wave: Wave):
+    #reset_entites()
+    for prop in get_tree().get_nodes_in_group(&"Prop"):
+        prop.queue_free()
 
     wave_to_spawn = wave
     for x in wave.heights.size():
@@ -60,6 +67,13 @@ func set_wave(wave: Wave):
             var value = col[y]
 
             var pillar: AnimatableBody3D = %Parts.get_child(x).get_child(y)
+            var prop = wave.props[x][y]
+            if prop != -1:
+                var new_prop = props.entities[prop].scene.instantiate()
+                new_prop.position.y = 45.0
+                pillar.add_child(new_prop)
+                print(new_prop.global_position)
+
             var pillar_pos = (value * current_config.height_scale)
 
             if !smooth:
@@ -76,7 +90,7 @@ func set_wave(wave: Wave):
 func spawn_enemy(enemy: int, spawn_pos: Vector3):
     #var enemy = wave.enemies[x][y]
     if enemy != -1:
-        var enemy_node: Enemy = enemies.enemies[enemy].scene.instantiate()
+        var enemy_node: Enemy = enemies.entities[enemy].scene.instantiate()
         %Enemies.add_child(enemy_node)
         enemy_node.map_config = current_config
         enemy_node.current_wave_heights = wave_to_spawn.heights
@@ -84,8 +98,7 @@ func spawn_enemy(enemy: int, spawn_pos: Vector3):
         enemy_node.died.connect(_on_enemy_died)
 
 func spawn_all_enemies():
-    for enemy in %Enemies.get_children():
-        enemy.queue_free()
+    reset_enemies()
 
     enemies_spawned = 0
 

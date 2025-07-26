@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AllEnemyData" load_steps=15 format=3 uid="uid://crragfimbp1gw"]
+[gd_resource type="Resource" script_class="EntityList" load_steps=15 format=3 uid="uid://crragfimbp1gw"]
 
 [ext_resource type="Script" uid="uid://vni38b08vtr4" path="res://Resources/enemy_data.gd" id="1_ersqn"]
 [ext_resource type="Script" uid="uid://diovikk3icseh" path="res://Resources/all_enemy_data.gd" id="1_mocip"]
@@ -37,5 +37,5 @@ metadata/_custom_type_script = "uid://vni38b08vtr4"
 
 [resource]
 script = ExtResource("1_mocip")
-enemies = Array[ExtResource("1_ersqn")]([SubResource("Resource_faqpk"), SubResource("Resource_voku5"), SubResource("Resource_gbkpn"), SubResource("Resource_8cnac")])
+entities = Array[ExtResource("1_ersqn")]([SubResource("Resource_faqpk"), SubResource("Resource_voku5"), SubResource("Resource_gbkpn"), SubResource("Resource_8cnac")])
 metadata/_custom_type_script = "uid://diovikk3icseh"

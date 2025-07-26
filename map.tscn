@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://i6y0f38fbrtl"]
+[gd_scene load_steps=16 format=3 uid="uid://i6y0f38fbrtl"]
 
 [ext_resource type="Texture2D" uid="uid://bn8wfhbs1omgo" path="res://Assets/Proto/Dark/texture_08.png" id="1_c7s6e"]
 [ext_resource type="Script" uid="uid://dohkxpoy6iw2f" path="res://map.gd" id="1_wijl4"]
 [ext_resource type="Resource" uid="uid://crragfimbp1gw" path="res://Enemies/enemies.tres" id="2_e0an3"]
+[ext_resource type="Resource" uid="uid://5lrwk2wc2sho" path="res://Props/props.tres" id="3_71pa8"]
 [ext_resource type="PackedScene" uid="uid://bm1tgd5w565e5" path="res://Components/map_pillar.tscn" id="4_p5pve"]
 [ext_resource type="FontFile" uid="uid://cum07t17b8mho" path="res://Assets/Fonts/Arvo-Bold.ttf" id="5_urblq"]
 [ext_resource type="FontFile" uid="uid://bl4sgd85ioqb" path="res://Assets/Fonts/Arvo-Italic.ttf" id="6_iw27f"]
@@ -140,6 +141,7 @@ font = ExtResource("6_iw27f")
 navigation_mesh = SubResource("NavigationMesh_036b0")
 script = ExtResource("1_wijl4")
 enemies = ExtResource("2_e0an3")
+props = ExtResource("3_71pa8")
 smooth = true
 map_pillar = ExtResource("4_p5pve")
 

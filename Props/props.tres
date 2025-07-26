@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EntityList" load_steps=6 format=3 uid="uid://5lrwk2wc2sho"]
+
+[ext_resource type="Script" uid="uid://vni38b08vtr4" path="res://Resources/enemy_data.gd" id="1_5lckd"]
+[ext_resource type="Texture2D" uid="uid://bfn10jellltl0" path="res://Props/Spinner/icon.png" id="2_uo8l1"]
+[ext_resource type="PackedScene" uid="uid://dls545cn465me" path="res://Props/Spinner/spinner.tscn" id="3_crkrh"]
+[ext_resource type="Script" uid="uid://diovikk3icseh" path="res://Resources/all_enemy_data.gd" id="10_wkgis"]
+
+[sub_resource type="Resource" id="Resource_g55qs"]
+script = ExtResource("1_5lckd")
+icon = ExtResource("2_uo8l1")
+scene = ExtResource("3_crkrh")
+metadata/_custom_type_script = "uid://vni38b08vtr4"
+
+[resource]
+script = ExtResource("10_wkgis")
+entities = Array[ExtResource("1_5lckd")]([SubResource("Resource_g55qs")])
+metadata/_custom_type_script = "uid://diovikk3icseh"

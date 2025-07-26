@@ -4,10 +4,9 @@ extends Resource
 # 2d array of positive ints
 var heights: Array
 var enemies: Array
+var props: Array
 
 var name: String = "if you see this something didnt work"
-
-var nav_mesh: NavigationMesh
 
 func _init() -> void:
     resize(6)
@@ -16,6 +15,7 @@ func _init() -> void:
 func resize(size: int):
     heights = empty_2d_arr(size, 0)
     enemies = empty_2d_arr(size, -1)
+    props = empty_2d_arr(size, -1)
 
 
 func empty_2d_arr(size: int, val: Variant) -> Array:
@@ -32,12 +32,14 @@ func obj() -> Dictionary:
     return {
         "heights": heights,
         "enemies": enemies,
+        "props": props,
         "name": name
     }
 
 func from_obj(data: Dictionary):
     heights = data["heights"].map(func(col): return col.map(func(val): return int(val)))
     enemies = data["enemies"].map(func(col): return col.map(func(val): return int(val)))
+    props = data["props"].map(func(col): return col.map(func(val): return int(val)))
     name = data["name"]
 
 #func from_json(data_str: String):

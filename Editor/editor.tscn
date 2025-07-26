@@ -1,11 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://djnjcqlpep1vd"]
+[gd_scene load_steps=13 format=3 uid="uid://djnjcqlpep1vd"]
 
 [ext_resource type="Script" uid="uid://c8yq6xanqa88b" path="res://Editor/editor.gd" id="1_vl7gr"]
 [ext_resource type="Script" uid="uid://fp0klv2ogoqq" path="res://Editor/height.gd" id="2_8ctag"]
 [ext_resource type="PackedScene" uid="uid://i6y0f38fbrtl" path="res://map.tscn" id="2_55rxr"]
-[ext_resource type="Script" uid="uid://x7gbwlu5b3mf" path="res://Editor/enemies.gd" id="2_o8ses"]
 [ext_resource type="Script" uid="uid://cqpib60ypepp2" path="res://Editor/extra.gd" id="3_jdbf7"]
-[ext_resource type="Resource" uid="uid://crragfimbp1gw" path="res://Enemies/enemies.tres" id="3_rw8kj"]
+[ext_resource type="PackedScene" uid="uid://xrbddk7754nf" path="res://Editor/entities.tscn" id="3_rw8kj"]
+[ext_resource type="Resource" uid="uid://5lrwk2wc2sho" path="res://Props/props.tres" id="4_8ctag"]
+[ext_resource type="Resource" uid="uid://crragfimbp1gw" path="res://Enemies/enemies.tres" id="4_i43t3"]
 [ext_resource type="Script" uid="uid://bfix5wa3osduk" path="res://Editor/cam_orbit.gd" id="6_8ctag"]
 [ext_resource type="Script" uid="uid://bnfhytbl34p0s" path="res://Editor/map_config_panel.gd" id="7_rw8kj"]
 
@@ -39,11 +40,12 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 tab_alignment = 1
-current_tab = 0
+current_tab = 1
 tab_focus_mode = 0
 
 [node name="Height" type="HBoxContainer" parent="TabContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 alignment = 1
 script = ExtResource("2_8ctag")
@@ -352,364 +354,23 @@ layout_mode = 2
 focus_mode = 0
 text = "0"
 
-[node name="Enemies" type="HBoxContainer" parent="TabContainer"]
+[node name="Enemies" parent="TabContainer" instance=ExtResource("3_rw8kj")]
+unique_name_in_owner = true
+layout_mode = 2
+entities = ExtResource("4_i43t3")
+
+[node name="Props" parent="TabContainer" instance=ExtResource("3_rw8kj")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-alignment = 1
-script = ExtResource("2_o8ses")
-enemies = ExtResource("3_rw8kj")
-metadata/_tab_index = 1
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="TabContainer/Enemies"]
-layout_mode = 2
-size_flags_horizontal = 6
-alignment = 1
-
-[node name="ModeLabel" type="Label" parent="TabContainer/Enemies/VBoxContainer2"]
-layout_mode = 2
-text = "TODO"
-horizontal_alignment = 1
-
-[node name="Increase" type="Button" parent="TabContainer/Enemies/VBoxContainer2"]
-custom_minimum_size = Vector2(80, 40)
-layout_mode = 2
-focus_mode = 0
-disabled = true
-text = "Increase"
-
-[node name="Decrease" type="Button" parent="TabContainer/Enemies/VBoxContainer2"]
-custom_minimum_size = Vector2(80, 40)
-layout_mode = 2
-focus_mode = 0
-disabled = true
-text = "Decrease"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Enemies/VBoxContainer2"]
-layout_mode = 2
-
-[node name="Set" type="Button" parent="TabContainer/Enemies/VBoxContainer2/HBoxContainer"]
-custom_minimum_size = Vector2(80, 40)
-layout_mode = 2
-focus_mode = 0
-disabled = true
-text = "Set"
-
-[node name="SetValue" type="Button" parent="TabContainer/Enemies/VBoxContainer2/HBoxContainer"]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-focus_mode = 0
-disabled = true
-text = "0"
-
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Enemies"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="EnemyButtons" type="HBoxContainer" parent="TabContainer/Enemies/ScrollContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-
-[node name="0" type="VBoxContainer" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons"]
-layout_mode = 2
-size_flags_horizontal = 4
-alignment = 1
-
-[node name="0" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/0"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="1" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/0"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="2" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/0"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="3" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/0"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="4" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/0"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="5" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/0"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="1" type="VBoxContainer" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons"]
-layout_mode = 2
-alignment = 1
-
-[node name="0" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/1"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="1" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/1"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="2" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/1"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="3" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/1"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="4" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/1"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="5" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/1"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="2" type="VBoxContainer" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons"]
-layout_mode = 2
-alignment = 1
-
-[node name="0" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/2"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="1" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/2"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="2" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/2"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="3" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/2"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="4" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/2"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="5" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/2"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="3" type="VBoxContainer" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons"]
-layout_mode = 2
-alignment = 1
-
-[node name="0" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/3"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="1" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/3"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="2" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/3"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="3" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/3"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="4" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/3"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="5" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/3"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="4" type="VBoxContainer" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons"]
-layout_mode = 2
-alignment = 1
-
-[node name="0" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/4"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="1" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/4"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="2" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/4"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="3" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/4"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="4" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/4"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="5" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/4"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="5" type="VBoxContainer" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons"]
-layout_mode = 2
-alignment = 1
-
-[node name="0" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/5"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="1" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/5"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="2" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/5"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="3" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/5"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="4" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/5"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="5" type="Button" parent="TabContainer/Enemies/ScrollContainer/EnemyButtons/5"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-focus_mode = 0
-clip_text = true
-expand_icon = true
-
-[node name="EnemyTemplate" type="VBoxContainer" parent="TabContainer/Enemies"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_horizontal = 4
-alignment = 1
-
-[node name="0" type="Button" parent="TabContainer/Enemies/EnemyTemplate"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-tooltip_text = "0, 0"
-focus_mode = 0
-clip_text = true
-expand_icon = true
+entities = ExtResource("4_8ctag")
+metadata/_tab_index = 2
 
 [node name="Preview" type="SubViewportContainer" parent="TabContainer"]
 visible = false
 layout_mode = 2
 stretch = true
-metadata/_tab_index = 2
+metadata/_tab_index = 3
 
 [node name="SubViewport" type="SubViewport" parent="TabContainer/Preview"]
 handle_input_locally = false
@@ -752,7 +413,7 @@ visible = false
 layout_mode = 2
 theme_override_constants/separation = 20
 script = ExtResource("3_jdbf7")
-metadata/_tab_index = 3
+metadata/_tab_index = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Extra"]
 layout_mode = 2
@@ -929,11 +590,8 @@ text = "Upload"
 [connection signal="pressed" from="TabContainer/Height/VBoxContainer/Decrease" to="TabContainer/Height" method="_on_decrease_pressed"]
 [connection signal="pressed" from="TabContainer/Height/VBoxContainer/HBoxContainer/Set" to="TabContainer/Height" method="_on_set_pressed"]
 [connection signal="pressed" from="TabContainer/Height/VBoxContainer/HBoxContainer/SetValue" to="TabContainer/Height" method="_on_set_value_pressed"]
-[connection signal="updated_enemies" from="TabContainer/Enemies" to="." method="_on_enemies_updated_enemies"]
-[connection signal="pressed" from="TabContainer/Enemies/VBoxContainer2/Increase" to="TabContainer/Height" method="_on_increase_pressed"]
-[connection signal="pressed" from="TabContainer/Enemies/VBoxContainer2/Decrease" to="TabContainer/Height" method="_on_decrease_pressed"]
-[connection signal="pressed" from="TabContainer/Enemies/VBoxContainer2/HBoxContainer/Set" to="TabContainer/Height" method="_on_set_pressed"]
-[connection signal="pressed" from="TabContainer/Enemies/VBoxContainer2/HBoxContainer/SetValue" to="TabContainer/Height" method="_on_set_value_pressed"]
+[connection signal="updated" from="TabContainer/Enemies" to="." method="_on_enemies_updated"]
+[connection signal="updated" from="TabContainer/Props" to="." method="_on_props_updated"]
 [connection signal="deleted_wave" from="TabContainer/Extra" to="." method="_on_extra_deleted_wave"]
 [connection signal="name_changed" from="TabContainer/Extra" to="." method="_on_extra_name_changed"]
 [connection signal="switched_wave" from="TabContainer/Extra" to="." method="_on_extra_switched_wave"]

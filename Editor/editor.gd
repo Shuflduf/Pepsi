@@ -27,8 +27,13 @@ func _on_height_updated_height(x: int, y: int, new_val: int) -> void:
     update_map()
 
 # ENEMIES
-func _on_enemies_updated_enemies(x: int, y: int, new_val: int) -> void:
+func _on_enemies_updated(x: int, y: int, new_val: int) -> void:
     current_wave().enemies[x][y] = new_val
+    update_map()
+
+# PROPS
+func _on_props_updated(x: int, y: int, new_val: int) -> void:
+    current_wave().props[x][y] = new_val
     update_map()
 
 # EXTRA
@@ -37,6 +42,7 @@ func _on_extra_switched_wave(new_wave: int) -> void:
     update_map()
     %Height.update_buttons(current_wave().heights)
     %Enemies.update_buttons(current_wave().enemies)
+    %Props.update_buttons(current_wave().props)
 
 
 func _on_extra_deleted_wave(del_wave: int) -> void:
@@ -80,6 +86,7 @@ func _on_map_config_panel_map_config_changed(config: MapConfig) -> void:
     update_cam_pos(config)
     %Height.create_buttons(config.map_size)
     %Enemies.create_buttons(config.map_size)
+    %Props.create_buttons(config.map_size)
 
     current_state = []
     wave = 0
