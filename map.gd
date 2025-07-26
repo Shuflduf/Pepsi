@@ -133,6 +133,7 @@ func _on_kill_barrier_body_entered(body: Node3D) -> void:
         body.die()
     elif body is PhysicsEntity and body.has_component("Player"):
         body.global_position = player_spawn_pos()
+        body.linear_velocity = Vector3(0.0, body.linear_velocity.y, 0.0)
 
 func show_wave_info():
     if !smooth:
@@ -145,6 +146,6 @@ func player_spawn_pos() -> Vector3:
     var center_pos = get_center_pos()
     return Vector3(
         center_pos,
-        20.0,
+        90.0,
         center_pos
     )

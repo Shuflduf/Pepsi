@@ -15,7 +15,7 @@ func _ready() -> void:
         return new_wave
     )
     %Map.create_from_config(config)
-    $WaitTimer.start()
+    $WaitTimer.start(3.0)
     $Player2.global_position = %Map.player_spawn_pos()
 
 
