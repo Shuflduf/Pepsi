@@ -99,7 +99,12 @@ debug_enabled = true
 [node name="Visuals" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="HitCooldown" type="Timer" parent="."]
+[node name="HitImmunity" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true
+
+[node name="HitstunTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 0.5
 one_shot = true
@@ -127,5 +132,6 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_rt1x0")
 draw_pass_1 = SubResource("SphereMesh_gk8ng")
 
-[connection signal="timeout" from="HitCooldown" to="." method="_on_hit_cooldown_timeout"]
+[connection signal="timeout" from="HitImmunity" to="." method="_on_hit_cooldown_timeout"]
+[connection signal="timeout" from="HitstunTimer" to="." method="_on_hitstun_timer_timeout"]
 [connection signal="timeout" from="BoostedTimer" to="." method="_on_boosted_timer_timeout"]

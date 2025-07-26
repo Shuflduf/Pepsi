@@ -12,7 +12,7 @@ func _physics_process(delta: float) -> void:
         linear_velocity = Vector3.ZERO
         return
 
-    if player and !is_hit and !in_hitstun:
+    if player and !in_hitstun:
         var dist = global_position.distance_to(player.global_position)
 
         var target = player.global_position
@@ -36,9 +36,6 @@ func _physics_process(delta: float) -> void:
 
     ground_speed = boosted_speed if is_boosted else base_speed
 
-
-func _on_hitstun_timer_timeout() -> void:
-    in_hitstun = false
 
 func hit(damage_amount: int):
     super(damage_amount)

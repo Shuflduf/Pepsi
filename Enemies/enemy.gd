@@ -11,7 +11,7 @@ signal died
 @export var damage_indicator_scene: PackedScene
 @export var damage_indicator_offset: float = 0.0
 
-var is_hit = false
+var can_take_damage = true
 var in_hitstun = false
 var hit_cooldown = 0.0
 var player: PhysicsEntity = null
@@ -58,7 +58,7 @@ func _physics_process(delta: float) -> void:
         in_hitstun = false
         hit_cooldown = 0.0
 
-    if player and !is_hit and !in_hitstun:
+    if player and !in_hitstun:
         agent.target_position = player.global_position
         var cur_pos = global_position
         var next_path_pos = agent.get_next_path_position()
@@ -76,22 +76,24 @@ func _physics_process(delta: float) -> void:
         $Visuals.rotation.y = lerp_angle($Visuals.rotation.y, look_dir, delta * 10)
 
 func hit_immunity():
-    if $HitCooldown.time_left > 0:
+    if !can_take_damage:
         return
-    $HitCooldown.start()
+    can_take_damage = false
+    %HitImmunity.start()
 
 func hit(damage_amount: int):
-    if $HitCooldown.time_left > 0:
+    if %HitImmunity.time_left > 0:
         return
 
     $HitParticles.restart()
-    DebugDraw2D.set_text("hit", [damage_amount, name, Time.get_ticks_msec()], 0, Color.WHITE, 1.0)
-    spawn_damage_indicator(damage_amount)
 
-    is_hit = true
-    health -= damage_amount
-    if health <= 0:
-        die()
+    if can_take_damage:
+        %HitstunTimer.start()
+        in_hitstun = true
+        spawn_damage_indicator(damage_amount)
+        health -= damage_amount
+        if health <= 0:
+            die()
 
 func spawn_damage_indicator(damage_dealt: int):
     var damage_indic: DamageIndicator = damage_indicator_scene.instantiate()
@@ -112,7 +114,7 @@ func die():
     queue_free()
 
 func _on_hit_cooldown_timeout() -> void:
-    is_hit = false
+    can_take_damage = true
 
 static func damage(target_player: PhysicsEntity, amount: int):
     var health_component = target_player.find_child("Health")
@@ -122,3 +124,7 @@ static func damage(target_player: PhysicsEntity, amount: int):
 
 func _on_boosted_timer_timeout() -> void:
     is_boosted = false
+
+
+func _on_hitstun_timer_timeout() -> void:
+    in_hitstun = false

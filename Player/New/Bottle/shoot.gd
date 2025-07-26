@@ -18,7 +18,7 @@ func _physics_process(delta: float) -> void:
 
         drinkable.ammo -= delta * 50
         drinkable.check_ammo()
-        fizz.value -= delta
+        fizz.value -= delta * 3.0
         shoot(1)
         #shot.emit(fizz, ranged_damage)
     else:
