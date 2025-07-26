@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://nd62rn0fx6aw"]
+[gd_scene load_steps=15 format=3 uid="uid://nd62rn0fx6aw"]
 
 [ext_resource type="PackedScene" uid="uid://cdiyjjw6fkmhl" path="res://Player/bottle_visuals.tscn" id="1_5ll0m"]
 [ext_resource type="Script" uid="uid://dq4syq40wctjl" path="res://Player/New/Bottle/mode.gd" id="2_0issc"]
@@ -12,6 +12,8 @@
 [ext_resource type="Script" uid="uid://bkb73swhgvd5n" path="res://Player/New/Bottle/fizz.gd" id="10_2pvjw"]
 [ext_resource type="Script" uid="uid://boy6mefv2vqei" path="res://Player/New/Bottle/movement_fizz.gd" id="11_e4hki"]
 [ext_resource type="Script" uid="uid://cbdc16h57tuuo" path="res://Player/New/Bottle/looking_fizz.gd" id="12_cfpku"]
+[ext_resource type="Script" uid="uid://8s18m5pfmnfo" path="res://Player/New/sway.gd" id="13_vnk3n"]
+[ext_resource type="Script" uid="uid://bj632k3ol872o" path="res://Player/New/speed_increase.gd" id="14_3cd4n"]
 
 [node name="Bottle" type="Node"]
 
@@ -42,11 +44,12 @@ metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
 script = ExtResource("8_pfu20")
 metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
 
-[node name="Drinkable" type="Node" parent="." node_paths=PackedStringArray("visuals", "mode", "throw")]
+[node name="Drinkable" type="Node" parent="." node_paths=PackedStringArray("visuals", "mode", "throw", "speed_increase")]
 script = ExtResource("3_0issc")
 visuals = NodePath("../Visuals")
 mode = NodePath("../Mode")
 throw = NodePath("../Throw")
+speed_increase = NodePath("../SpeedIncrease")
 metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
 
 [node name="Swingable" type="Node" parent="." node_paths=PackedStringArray("player_info", "mode", "fizz", "visuals")]
@@ -78,4 +81,12 @@ metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
 
 [node name="LookingFizz" type="Node" parent="Fizz"]
 script = ExtResource("12_cfpku")
+metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
+
+[node name="Sway" type="Node" parent="."]
+script = ExtResource("13_vnk3n")
+metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
+
+[node name="SpeedIncrease" type="Node" parent="."]
+script = ExtResource("14_3cd4n")
 metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
