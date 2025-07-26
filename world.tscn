@@ -1,35 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://x5imp75aoum8"]
+[gd_scene load_steps=6 format=3 uid="uid://x5imp75aoum8"]
 
 [ext_resource type="Script" uid="uid://c0ufo5455ip26" path="res://world.gd" id="1_aqk2v"]
-[ext_resource type="Texture2D" uid="uid://dkt0twn82vf1n" path="res://Assets/Proto/SkyHDR.hdr" id="1_fj7yv"]
-[ext_resource type="Shader" uid="uid://idmbedyoc4sc" path="res://starrysky.gdshader" id="2_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://btsph6pq2xcxv" path="res://Player/New/player_2.tscn" id="4_036b0"]
 [ext_resource type="PackedScene" uid="uid://i6y0f38fbrtl" path="res://map.tscn" id="4_aqk2v"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_036b0"]
-shader = ExtResource("2_aqk2v")
-shader_parameter/source_panorama = ExtResource("1_fj7yv")
-shader_parameter/sky_color = Color(0.03, 0.05, 0.11, 1)
-shader_parameter/star_base_color = Color(0.8, 1, 0.3, 1)
-shader_parameter/star_hue_offset = 0.6
-shader_parameter/star_intensity = 0.08
-shader_parameter/star_twinkle_speed = 0.8
-shader_parameter/star_twinkle_intensity = 0.2
-shader_parameter/layer_scale = 20.0
-shader_parameter/layer_scale_step = 10.0
-shader_parameter/layers_count = 3
-
-[sub_resource type="Sky" id="Sky_aqk2v"]
-sky_material = SubResource("ShaderMaterial_036b0")
-
-[sub_resource type="Environment" id="Environment_036b0"]
-background_mode = 2
-sky = SubResource("Sky_aqk2v")
-ambient_light_source = 2
-ambient_light_color = Color(0.423651, 0.423651, 0.423651, 1)
-ambient_light_energy = 5.82
-tonemap_mode = 2
-glow_enabled = true
+[ext_resource type="PackedScene" uid="uid://stneqj7qt42d" path="res://environment.tscn" id="4_dwbse"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_aqk2v"]
 friction = 0.0
@@ -37,13 +11,6 @@ friction = 0.0
 [node name="World" type="Node3D"]
 script = ExtResource("1_aqk2v")
 level_path = "res://simple.pepsi"
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
-shadow_enabled = true
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_036b0")
 
 [node name="Map" parent="." instance=ExtResource("4_aqk2v")]
 unique_name_in_owner = true
@@ -54,6 +21,8 @@ one_shot = true
 [node name="Player2" parent="." instance=ExtResource("4_036b0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19, 0)
 physics_material_override = SubResource("PhysicsMaterial_aqk2v")
+
+[node name="Environment" parent="." instance=ExtResource("4_dwbse")]
 
 [connection signal="wave_complete" from="Map" to="." method="_on_map_wave_complete"]
 [connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]
