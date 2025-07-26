@@ -117,7 +117,8 @@ collision_layer = 0
 collision_mask = 4
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea" index="0"]
+[node name="DetectionShape" type="CollisionShape3D" parent="DetectionArea" index="0"]
+unique_name_in_owner = true
 shape = SubResource("SphereShape3D_oqtff")
 
 [node name="ConnectionParticles" type="Node3D" parent="." index="8"]

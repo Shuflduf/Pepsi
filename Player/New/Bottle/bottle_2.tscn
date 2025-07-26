@@ -52,12 +52,13 @@ throw = NodePath("../Throw")
 speed_increase = NodePath("../SpeedIncrease")
 metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
 
-[node name="Swingable" type="Node" parent="." node_paths=PackedStringArray("player_info", "mode", "fizz", "visuals")]
+[node name="Swingable" type="Node" parent="." node_paths=PackedStringArray("player_info", "mode", "fizz", "visuals", "speed_increase")]
 script = ExtResource("8_mltuj")
 player_info = NodePath("../PlayerInfo")
 mode = NodePath("../Mode")
 fizz = NodePath("../Fizz")
 visuals = NodePath("../Visuals")
+speed_increase = NodePath("../SpeedIncrease")
 metadata/_custom_type_script = "uid://dfb5nb7gufrjy"
 
 [node name="Shoot" type="Node" parent="." node_paths=PackedStringArray("player_info", "mode", "drinkable", "visuals", "fizz", "throw")]

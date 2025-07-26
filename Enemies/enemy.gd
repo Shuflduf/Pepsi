@@ -75,6 +75,11 @@ func _physics_process(delta: float) -> void:
         var look_dir = atan2(dir.x, dir.z)
         $Visuals.rotation.y = lerp_angle($Visuals.rotation.y, look_dir, delta * 10)
 
+func hit_immunity():
+    if $HitCooldown.time_left > 0:
+        return
+    $HitCooldown.start()
+
 func hit(damage_amount: int):
     if $HitCooldown.time_left > 0:
         return
@@ -85,7 +90,6 @@ func hit(damage_amount: int):
 
     is_hit = true
     health -= damage_amount
-    $HitCooldown.start()
     if health <= 0:
         die()
 

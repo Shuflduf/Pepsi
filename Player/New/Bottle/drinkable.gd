@@ -45,5 +45,5 @@ func drink(delta: float):
     ammo -= delta * 60.0
     check_ammo()
     health.health += delta * 30.0
-    speed_increase.speed_factor += delta
+    speed_increase.factor += delta
     #drank.emit(delta * 0.75)

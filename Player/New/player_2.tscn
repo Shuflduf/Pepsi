@@ -24,7 +24,7 @@ outline_color = Color(0, 0, 0, 1)
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_1ks24"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5qatj"]
-size = Vector3(2, 2, 2)
+size = Vector3(2, 2, 3)
 
 [sub_resource type="Curve" id="Curve_4dxgo"]
 _data = [Vector2(0, 0.0250001), 0.0, 0.0, 0, 0, Vector2(0.103734, 0.752809), 0.0, 0.0, 0, 0, Vector2(0.858921, 0.764045), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -243,6 +243,7 @@ shape = SubResource("CylinderShape3D_1ks24")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CamPivot"]
+fov = 90.0
 
 [node name="BottlePropSpawn" type="Node3D" parent="CamPivot/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
@@ -252,7 +253,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CamPivot/Camera3D/MeleeHitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.78814e-07, -1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.78814e-07, -2)
 shape = SubResource("BoxShape3D_5qatj")
 debug_color = Color(0.7, 0, 0, 0.419608)
 

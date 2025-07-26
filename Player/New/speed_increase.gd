@@ -9,14 +9,14 @@ extends BottleComponent
 @onready var max_speed = player.max_speed
 @onready var max_air_speed = player.max_air_speed
 
-var speed_factor = 1.0
+var factor = 1.0
 
 func _physics_process(_delta: float) -> void:
-    player.ground_speed = remap(speed_factor, 1.0, 2.0, base_speed, increased_speed)
-    player.max_speed = remap(speed_factor, 1.0, 2.0, max_speed, increased_max)
-    player.max_air_speed = remap(speed_factor, 1.0, 2.0, max_air_speed, increased_max_air)
+    player.ground_speed = remap(factor, 1.0, 2.0, base_speed, increased_speed)
+    player.max_speed = remap(factor, 1.0, 2.0, max_speed, increased_max)
+    player.max_air_speed = remap(factor, 1.0, 2.0, max_air_speed, increased_max_air)
 
     var vel_length = player.linear_velocity.length()
-    speed_factor = clamp(speed_factor - (vel_length / 1500), 1.0, 10.0)
+    factor = clamp(factor - (vel_length / 1500), 1.0, 10.0)
 
-    DebugDraw2D.set_text("speed", speed_factor)
+    DebugDraw2D.set_text("speed", factor)

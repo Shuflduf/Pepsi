@@ -5,17 +5,18 @@ extends BottleComponent
 @export var mode: BottleComponent
 @export var fizz: BottleComponent
 @export var visuals: BottleVisuals
+@export var speed_increase: BottleComponent
 
 func swing(damage: int):
     if mode.current_mode != mode.BottleMode.Melee:
         return
     if !mode.is_ready:
         return
-#
+
     #%Swing.play()
     mode.is_ready = false
-    visuals.play_anim(&"swing")
-#
+    visuals.play_anim(&"swing", speed_increase.factor)
+
     #swung.emit(melee_damage)
     fizz.value += 0.2
 

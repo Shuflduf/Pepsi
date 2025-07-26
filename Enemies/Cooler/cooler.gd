@@ -32,6 +32,8 @@ func _physics_process(delta: float) -> void:
     var look_dir = atan2(look_vec.x, look_vec.z)
     $Visuals.rotation.y = lerp_angle($Visuals.rotation.y, look_dir, delta * 10)
 
+    %DetectionShape.shape.radius = 15.0 if is_boosted else 10.0
+
 func hit(damage_amount: int):
     super(damage_amount)
     var random_tile_pos = Vector2i(

@@ -92,3 +92,4 @@ func shoot(damage: int) -> void:
     for body: Enemy in hitbox.get_overlapping_bodies():
         body.apply_central_force(look_vec * 10)
         body.hit(damage)
+        body.hit_immunity()
