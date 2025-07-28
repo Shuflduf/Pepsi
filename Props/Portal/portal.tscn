@@ -1,19 +1,61 @@
-[gd_scene load_steps=5 format=3 uid="uid://c37n4d7i7rqpf"]
+[gd_scene load_steps=10 format=3 uid="uid://c37n4d7i7rqpf"]
 
 [ext_resource type="Script" uid="uid://i4xuav4x4qf0" path="res://Props/Portal/portal.gd" id="1_bk3pt"]
+[ext_resource type="Shader" uid="uid://bl44w60nojejj" path="res://Props/Portal/portal.gdshader" id="2_4y2f4"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_mepnw"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_4y2f4"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bk3pt"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ekrnl"]
 resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_mepnw")
+render_priority = 0
+shader = ExtResource("2_4y2f4")
+shader_parameter/portal_texture = SubResource("ViewportTexture_4y2f4")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_4y2f4"]
 resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_bk3pt")
-size = Vector2(0.9, 1.9)
+material = SubResource("ShaderMaterial_ekrnl")
+size = Vector2(1.435, 2.769)
 orientation = 2
+
+[sub_resource type="Animation" id="Animation_4y2f4"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hinge:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -2.35619, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ekrnl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hinge:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w1uea"]
+_data = {
+&"RESET": SubResource("Animation_ekrnl"),
+&"open": SubResource("Animation_4y2f4")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4y2f4"]
+size = Vector3(1, 1, 0.001)
 
 [node name="Portal" type="Node3D" node_paths=PackedStringArray("destination", "portal_cam")]
 script = ExtResource("1_bk3pt")
@@ -21,33 +63,49 @@ destination = NodePath("PortalPos")
 portal_cam = NodePath("SubViewport/Camera3D")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 0, 0)
-size = Vector3(0.1, 2, 0.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0.0500001, 0)
+size = Vector3(0.1, 2.9, 0.2)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
-size = Vector3(0.8, 0.1, 0.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, 0)
+size = Vector3(1.4, 0.1, 0.2)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0, 0)
-size = Vector3(0.1, 2, 0.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0.0500001, 0)
+size = Vector3(0.1, 2.9, 0.2)
 
-[node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(-0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866026, -0.5, 0, 0)
+[node name="Hinge" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.4, 0)
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, -0.05, -0.05)
-size = Vector3(0.9, 1.9, 0.1)
+[node name="CSGBox3D4" type="CSGBox3D" parent="Hinge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.4, -0.040625)
+size = Vector3(1.4, 2.8, 0.1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0466792, -0.1)
+[node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_4y2f4")
 
 [node name="SubViewport" type="SubViewport" parent="."]
-size = Vector2i(45, 95)
+size = Vector2i(602, 421)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
-transform = Transform3D(-0.480974, -0.0833356, 0.872765, 0, 0.995472, 0.0950523, -0.876735, 0.0457177, -0.478797, 7.45238, 0.264712, -4.29014)
+transform = Transform3D(0.0967134, 0.0347386, -0.994706, 0, 0.999391, 0.0349022, 0.995312, -0.00337551, 0.0966544, -3.7628, 0.629912, -0.0998856)
 
 [node name="PortalPos" type="Node3D" parent="."]
-transform = Transform3D(-0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, -0.866025, 5, 0, -3)
+transform = Transform3D(0.907777, 0, 0.419452, 0, 1, 0, -0.419452, 0, 0.907777, 0, 0, 0)
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_w1uea")
+}
+
+[node name="PlayerArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0995)
+shape = SubResource("BoxShape3D_4y2f4")
+
+[connection signal="body_entered" from="PlayerArea" to="." method="_on_player_area_body_entered"]

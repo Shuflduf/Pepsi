@@ -1,11 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://cp5jrnup6ktw3"]
+[gd_scene load_steps=18 format=3 uid="uid://cp5jrnup6ktw3"]
 
 [ext_resource type="Script" uid="uid://duqxls23317vi" path="res://tutorial.gd" id="1_4t6hg"]
 [ext_resource type="PackedScene" uid="uid://stneqj7qt42d" path="res://environment.tscn" id="2_yb1ct"]
 [ext_resource type="Texture2D" uid="uid://bn8wfhbs1omgo" path="res://Assets/Proto/Dark/texture_08.png" id="3_5mrt3"]
 [ext_resource type="FontFile" uid="uid://cum07t17b8mho" path="res://Assets/Fonts/Arvo-Bold.ttf" id="4_5mrt3"]
+[ext_resource type="PackedScene" uid="uid://c37n4d7i7rqpf" path="res://Props/Portal/portal.tscn" id="5_bhfnd"]
 [ext_resource type="PackedScene" uid="uid://btsph6pq2xcxv" path="res://Player/New/player_2.tscn" id="5_hu44a"]
 [ext_resource type="PackedScene" uid="uid://dls545cn465me" path="res://Props/Spinner/spinner.tscn" id="5_rwowx"]
+[ext_resource type="Script" uid="uid://vt56oxuaq25b" path="res://Tutorial/stage_1_end_platform.gd" id="5_tvjhf"]
 [ext_resource type="Script" uid="uid://bbohit3fws0nh" path="res://StartArea/interations.gd" id="6_0cr88"]
 [ext_resource type="PackedScene" uid="uid://indwglmcxev7" path="res://StartArea/VendingMachine/vending_machine.tscn" id="6_hu44a"]
 [ext_resource type="Script" uid="uid://cw6rf3g2mtmqx" path="res://Player/New/tutorial.gd" id="8_7vrqn"]
@@ -14,10 +16,64 @@
 albedo_texture = ExtResource("3_5mrt3")
 uv1_triplanar = true
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_tvjhf"]
+size = Vector3(6, 4, 6)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5mrt3"]
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 uv1_triplanar = true
+
+[sub_resource type="Animation" id="Animation_bhfnd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label3D4:outline_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label3D4:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label3D5:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Label3D5:outline_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_7vrqn"]
 resource_name = "drinking_intro"
@@ -71,57 +127,6 @@ tracks/3/keys = {
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_bhfnd"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Label3D4:outline_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Label3D4:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Label3D5:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Label3D5:outline_modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tvjhf"]
 _data = {
 &"RESET": SubResource("Animation_bhfnd"),
@@ -137,247 +142,274 @@ tutorial_component = NodePath("Player/Tutorial")
 
 [node name="Map" type="Node3D" parent="."]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Map"]
+[node name="Stage2" type="Node3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2000, -489.5, 8)
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="Map/Stage2"]
+use_collision = true
+size = Vector3(60, 1014, 36)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="TPSpot" type="Node3D" parent="Map/Stage2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 508, 0)
+
+[node name="Stage1" type="Node3D" parent="Map"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Map/Stage1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -497.5, -18.5)
 use_collision = true
 size = Vector3(8, 1000, 45)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="Map"]
+[node name="CSGBox3D6" type="CSGBox3D" parent="Map/Stage1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 20.5, 9.5)
 use_collision = true
 size = Vector3(8, 2000, 45)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D14" type="CSGBox3D" parent="Map"]
+[node name="CSGBox3D14" type="CSGBox3D" parent="Map/Stage1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53, 20.5, -3)
 use_collision = true
 size = Vector3(8, 2000, 20)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="Map"]
+[node name="CSGBox3D7" type="CSGBox3D" parent="Map/Stage1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -499.5, -51)
 use_collision = true
 size = Vector3(20, 1000, 6)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D9" type="CSGBox3D" parent="Map"]
+[node name="CSGBox3D9" type="CSGBox3D" parent="Map/Stage1"]
 transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 26, -498.5, -46)
 use_collision = true
 size = Vector3(8, 1000, 8)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D10" type="CSGBox3D" parent="Map"]
+[node name="CSGBox3D10" type="CSGBox3D" parent="Map/Stage1"]
 transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 37, -497.5, -35)
 use_collision = true
 size = Vector3(8, 1000, 8)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D11" type="CSGBox3D" parent="Map"]
+[node name="CSGBox3D11" type="CSGBox3D" parent="Map/Stage1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, -496.5, -22)
 use_collision = true
 size = Vector3(8, 1000, 8)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D17" type="CSGBox3D" parent="Map"]
+[node name="EndPlatform" type="CSGBox3D" parent="Map/Stage1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 125.5, 96)
 use_collision = true
 size = Vector3(10, 1, 10)
 material = SubResource("StandardMaterial3D_rwowx")
+script = ExtResource("5_tvjhf")
 
-[node name="CSGBox3D16" type="CSGBox3D" parent="Map/CSGBox3D17"]
+[node name="CSGBox3D16" type="CSGBox3D" parent="Map/Stage1/EndPlatform"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -4.5, 500.5, -4.49995)
 use_collision = true
 size = Vector3(1, 1000, 1)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D17" type="CSGBox3D" parent="Map/CSGBox3D17"]
+[node name="CSGBox3D17" type="CSGBox3D" parent="Map/Stage1/EndPlatform"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 4.5, 500.5, -4.49995)
 use_collision = true
 size = Vector3(1, 1000, 1)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D18" type="CSGBox3D" parent="Map/CSGBox3D17"]
+[node name="CSGBox3D18" type="CSGBox3D" parent="Map/Stage1/EndPlatform"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 4.5, 500.5, 4.50003)
 use_collision = true
 size = Vector3(1, 1000, 1)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D19" type="CSGBox3D" parent="Map/CSGBox3D17"]
+[node name="CSGBox3D19" type="CSGBox3D" parent="Map/Stage1/EndPlatform"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -4.5, 500.5, 4.50003)
 use_collision = true
 size = Vector3(1, 1000, 1)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D16" type="CSGBox3D" parent="Map"]
+[node name="Portal" parent="Map/Stage1/EndPlatform" node_paths=PackedStringArray("destination") instance=ExtResource("5_bhfnd")]
+transform = Transform3D(-2.98023e-08, 0, -1, 0, 1, 0, 1, 0, -2.98023e-08, 0, 1.5, 0)
+destination = NodePath("../../../Stage2/TPSpot")
+
+[node name="Area3D" type="Area3D" parent="Map/Stage1/EndPlatform"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Stage1/EndPlatform/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+shape = SubResource("BoxShape3D_tvjhf")
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="Map/Stage1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 188.5, -525.5, 103)
 use_collision = true
 size = Vector3(19, 1000, 5)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D12" type="CSGBox3D" parent="Map"]
+[node name="CSGBox3D12" type="CSGBox3D" parent="Map/Stage1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, -489.5, 8)
 use_collision = true
 size = Vector3(8, 1014, 36)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D15" type="CSGBox3D" parent="Map"]
+[node name="CSGBox3D15" type="CSGBox3D" parent="Map/Stage1"]
 transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 91.5, 17, 66)
 use_collision = true
 size = Vector3(102, 3, 15)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D16" type="CSGBox3D" parent="Map/CSGBox3D15"]
+[node name="CSGBox3D16" type="CSGBox3D" parent="Map/Stage1/CSGBox3D15"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -50, -10.5, -6.5)
 use_collision = true
 size = Vector3(2, 2000, 2)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D17" type="CSGBox3D" parent="Map/CSGBox3D15"]
+[node name="CSGBox3D17" type="CSGBox3D" parent="Map/Stage1/CSGBox3D15"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -50, -10.5, 6.5)
 use_collision = true
 size = Vector3(2, 2000, 2)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D20" type="CSGBox3D" parent="Map/CSGBox3D15"]
+[node name="CSGBox3D20" type="CSGBox3D" parent="Map/Stage1/CSGBox3D15"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -30, -10.5, -6.5)
 use_collision = true
 size = Vector3(2, 2000, 2)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D21" type="CSGBox3D" parent="Map/CSGBox3D15"]
+[node name="CSGBox3D21" type="CSGBox3D" parent="Map/Stage1/CSGBox3D15"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -30, -10.5, 6.5)
 use_collision = true
 size = Vector3(2, 2000, 2)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D22" type="CSGBox3D" parent="Map/CSGBox3D15"]
+[node name="CSGBox3D22" type="CSGBox3D" parent="Map/Stage1/CSGBox3D15"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -10, -10.5, -6.5)
 use_collision = true
 size = Vector3(2, 2000, 2)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D23" type="CSGBox3D" parent="Map/CSGBox3D15"]
+[node name="CSGBox3D23" type="CSGBox3D" parent="Map/Stage1/CSGBox3D15"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -10, -10.5, 6.5)
 use_collision = true
 size = Vector3(2, 2000, 2)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D24" type="CSGBox3D" parent="Map/CSGBox3D15"]
+[node name="CSGBox3D24" type="CSGBox3D" parent="Map/Stage1/CSGBox3D15"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 10, -10.5, -6.5)
 use_collision = true
 size = Vector3(2, 2000, 2)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D25" type="CSGBox3D" parent="Map/CSGBox3D15"]
+[node name="CSGBox3D25" type="CSGBox3D" parent="Map/Stage1/CSGBox3D15"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 10, -10.5, 6.5)
 use_collision = true
 size = Vector3(2, 2000, 2)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D26" type="CSGBox3D" parent="Map/CSGBox3D15"]
+[node name="CSGBox3D26" type="CSGBox3D" parent="Map/Stage1/CSGBox3D15"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 30, -10.5, -6.5)
 use_collision = true
 size = Vector3(2, 2000, 2)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D27" type="CSGBox3D" parent="Map/CSGBox3D15"]
+[node name="CSGBox3D27" type="CSGBox3D" parent="Map/Stage1/CSGBox3D15"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 30, -10.5, 6.5)
 use_collision = true
 size = Vector3(2, 2000, 2)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D18" type="CSGBox3D" parent="Map/CSGBox3D15"]
+[node name="CSGBox3D18" type="CSGBox3D" parent="Map/Stage1/CSGBox3D15"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -40, -10.5, -6.5)
 use_collision = true
 size = Vector3(2, 2000, 2)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D19" type="CSGBox3D" parent="Map/CSGBox3D15"]
+[node name="CSGBox3D19" type="CSGBox3D" parent="Map/Stage1/CSGBox3D15"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -40, -10.5, 6.5)
 use_collision = true
 size = Vector3(2, 2000, 2)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D28" type="CSGBox3D" parent="Map/CSGBox3D15"]
+[node name="CSGBox3D28" type="CSGBox3D" parent="Map/Stage1/CSGBox3D15"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -20, -10.5, -6.5)
 use_collision = true
 size = Vector3(2, 2000, 2)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D29" type="CSGBox3D" parent="Map/CSGBox3D15"]
+[node name="CSGBox3D29" type="CSGBox3D" parent="Map/Stage1/CSGBox3D15"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -20, -10.5, 6.5)
 use_collision = true
 size = Vector3(2, 2000, 2)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D30" type="CSGBox3D" parent="Map/CSGBox3D15"]
+[node name="CSGBox3D30" type="CSGBox3D" parent="Map/Stage1/CSGBox3D15"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, -10.5, -6.5)
 use_collision = true
 size = Vector3(2, 2000, 2)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D31" type="CSGBox3D" parent="Map/CSGBox3D15"]
+[node name="CSGBox3D31" type="CSGBox3D" parent="Map/Stage1/CSGBox3D15"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0, -10.5, 6.5)
 use_collision = true
 size = Vector3(2, 2000, 2)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D32" type="CSGBox3D" parent="Map/CSGBox3D15"]
+[node name="CSGBox3D32" type="CSGBox3D" parent="Map/Stage1/CSGBox3D15"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 20, -10.5, -6.5)
 use_collision = true
 size = Vector3(2, 2000, 2)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D33" type="CSGBox3D" parent="Map/CSGBox3D15"]
+[node name="CSGBox3D33" type="CSGBox3D" parent="Map/Stage1/CSGBox3D15"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 20, -10.5, 6.5)
 use_collision = true
 size = Vector3(2, 2000, 2)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D34" type="CSGBox3D" parent="Map/CSGBox3D15"]
+[node name="CSGBox3D34" type="CSGBox3D" parent="Map/Stage1/CSGBox3D15"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 40, -10.5, -6.50001)
 use_collision = true
 size = Vector3(2, 2000, 2)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D35" type="CSGBox3D" parent="Map/CSGBox3D15"]
+[node name="CSGBox3D35" type="CSGBox3D" parent="Map/Stage1/CSGBox3D15"]
 transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 40, -10.5, 6.5)
 use_collision = true
 size = Vector3(2, 2000, 2)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D13" type="CSGBox3D" parent="Map"]
+[node name="CSGBox3D13" type="CSGBox3D" parent="Map/Stage1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 540.5, -6)
 use_collision = true
 size = Vector3(8, 1014, 8)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="Map"]
+[node name="CSGBox3D4" type="CSGBox3D" parent="Map/Stage1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5, 3.5)
 use_collision = true
 size = Vector3(6, 9, 1)
 material = SubResource("StandardMaterial3D_5mrt3")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="Map"]
+[node name="CSGBox3D5" type="CSGBox3D" parent="Map/Stage1"]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 12, -0.366025)
 use_collision = true
 size = Vector3(6, 11, 1)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Map"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="Map/Stage1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 502, -18.5)
 use_collision = true
 size = Vector3(1, 1000, 45)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D8" type="CSGBox3D" parent="Map"]
+[node name="CSGBox3D8" type="CSGBox3D" parent="Map/Stage1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 508, -5)
 use_collision = true
 size = Vector3(6, 988, 1)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="Map"]
+[node name="CSGBox3D3" type="CSGBox3D" parent="Map/Stage1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 502, -18.5)
 use_collision = true
 size = Vector3(1, 1000, 45)
@@ -422,7 +454,7 @@ transform = Transform3D(1.728, 0, 0, 0, 1.728, 0, 0, 0, 1.728, 40, 3.5, -20)
 
 [node name="Player" parent="." instance=ExtResource("5_hu44a")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 47, 20, 5)
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 260, 139, 97)
 metadata/_edit_group_ = true
 
 [node name="Raycast" type="RayCast3D" parent="Player/CamPivot/Camera3D" index="5"]
@@ -463,6 +495,8 @@ libraries = {
 &"": SubResource("AnimationLibrary_tvjhf")
 }
 
+[connection signal="body_entered" from="Map/Stage1/EndPlatform/Area3D" to="Map/Stage1/EndPlatform" method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Map/Stage1/EndPlatform/Area3D" to="Map/Stage1/EndPlatform" method="_on_area_3d_body_exited"]
 [connection signal="pressed" from="Player/Interations" to="." method="_on_interations_pressed"]
 
 [editable path="Player"]

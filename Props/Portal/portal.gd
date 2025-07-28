@@ -6,13 +6,39 @@ extends Node3D
 
 func _process(delta: float) -> void:
     var current_cam: Camera3D
+    var viewport_size: Vector2i
+
     if Engine.is_editor_hint():
-        current_cam = EditorInterface.get_editor_viewport_3d(0).get_camera_3d()
+        var viewport = EditorInterface.get_editor_viewport_3d(0)
+        current_cam = viewport.get_camera_3d()
+        viewport_size = viewport.size
     else:
         current_cam = get_viewport().get_camera_3d()
+        viewport_size = get_viewport().size
 
-    var rel_transform = global_transform.affine_inverse() * current_cam.global_transform
+    $SubViewport.size = viewport_size / 2.0
 
-    portal_cam.global_transform = destination.global_transform * rel_transform
+    var m = destination.global_transform * $Mesh.global_transform.inverse() * current_cam.global_transform
+    portal_cam.global_transform = m
 
-    print(rel_transform)
+func open():
+    %Anim.play(&"open")
+
+func close():
+    %Anim.play_backwards(&"open")
+
+
+func _on_player_area_body_entered(body: PhysicsEntity) -> void:
+    #if body.linear_velocity
+    var flat_vel = Vector2(
+        body.linear_velocity.x,
+        body.linear_velocity.z
+    ).normalized()
+    var portal_face_dir = Vector2(
+        sin(global_rotation.y),
+        cos(global_rotation.y)
+    )
+    var dot_res = flat_vel.dot(-portal_face_dir)
+    if dot_res > 0.7:
+        body.global_position = destination.global_position
+    print(dot_res)
