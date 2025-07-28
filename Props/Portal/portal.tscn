@@ -1,3 +1,53 @@
-[gd_scene format=3 uid="uid://c37n4d7i7rqpf"]
+[gd_scene load_steps=5 format=3 uid="uid://c37n4d7i7rqpf"]
 
-[node name="Portal" type="Node3D"]
+[ext_resource type="Script" uid="uid://i4xuav4x4qf0" path="res://Props/Portal/portal.gd" id="1_bk3pt"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_mepnw"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bk3pt"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_mepnw")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4y2f4"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_bk3pt")
+size = Vector2(0.9, 1.9)
+orientation = 2
+
+[node name="Portal" type="Node3D" node_paths=PackedStringArray("destination", "portal_cam")]
+script = ExtResource("1_bk3pt")
+destination = NodePath("PortalPos")
+portal_cam = NodePath("SubViewport/Camera3D")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 0, 0)
+size = Vector3(0.1, 2, 0.2)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+size = Vector3(0.8, 0.1, 0.2)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0, 0)
+size = Vector3(0.1, 2, 0.2)
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(-0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866026, -0.5, 0, 0)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, -0.05, -0.05)
+size = Vector3(0.9, 1.9, 0.1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0466792, -0.1)
+mesh = SubResource("PlaneMesh_4y2f4")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(45, 95)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(-0.480974, -0.0833356, 0.872765, 0, 0.995472, 0.0950523, -0.876735, 0.0457177, -0.478797, 7.45238, 0.264712, -4.29014)
+
+[node name="PortalPos" type="Node3D" parent="."]
+transform = Transform3D(-0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, -0.866025, 5, 0, -3)
