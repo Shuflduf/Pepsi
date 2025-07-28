@@ -1,80 +1,112 @@
-[gd_scene load_steps=8 format=4 uid="uid://cp5jrnup6ktw3"]
+[gd_scene load_steps=12 format=3 uid="uid://cp5jrnup6ktw3"]
 
+[ext_resource type="Script" uid="uid://duqxls23317vi" path="res://tutorial.gd" id="1_4t6hg"]
 [ext_resource type="PackedScene" uid="uid://stneqj7qt42d" path="res://environment.tscn" id="2_yb1ct"]
 [ext_resource type="Texture2D" uid="uid://bn8wfhbs1omgo" path="res://Assets/Proto/Dark/texture_08.png" id="3_5mrt3"]
-[ext_resource type="PackedScene" uid="uid://dwf57bj3pkrc2" path="res://Player/player.tscn" id="3_ehuit"]
 [ext_resource type="FontFile" uid="uid://cum07t17b8mho" path="res://Assets/Fonts/Arvo-Bold.ttf" id="4_5mrt3"]
+[ext_resource type="PackedScene" uid="uid://btsph6pq2xcxv" path="res://Player/New/player_2.tscn" id="5_hu44a"]
+[ext_resource type="PackedScene" uid="uid://dls545cn465me" path="res://Props/Spinner/spinner.tscn" id="5_rwowx"]
+[ext_resource type="Script" uid="uid://bbohit3fws0nh" path="res://StartArea/interations.gd" id="6_0cr88"]
+[ext_resource type="PackedScene" uid="uid://indwglmcxev7" path="res://StartArea/VendingMachine/vending_machine.tscn" id="6_hu44a"]
+[ext_resource type="Script" uid="uid://cw6rf3g2mtmqx" path="res://Player/New/tutorial.gd" id="8_7vrqn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rwowx"]
 albedo_texture = ExtResource("3_5mrt3")
 uv1_triplanar = true
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_5mrt3"]
-_surfaces = [{
-"aabb": AABB(-4, -500, -22.5, 8, 1000, 45),
-"attribute_data": PackedByteArray("AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/"),
-"format": 34359738391,
-"material": SubResource("StandardMaterial3D_rwowx"),
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 36,
-"vertex_data": PackedByteArray("AACAwAAA+sMAALRBAACAwAAA+sMAALTBAACAwAAA+kMAALTBAACAQAAA+sMAALTBAACAwAAA+sMAALTBAACAwAAA+sMAALRBAACAwAAA+kMAALTBAACAwAAA+sMAALTBAACAQAAA+sMAALTBAACAwAAA+kMAALTBAACAwAAA+kMAALRBAACAwAAA+sMAALRBAACAwAAA+sMAALRBAACAwAAA+kMAALRBAACAQAAA+kMAALRBAACAQAAA+kMAALRBAACAwAAA+kMAALRBAACAwAAA+kMAALTBAACAwAAA+sMAALRBAACAQAAA+sMAALRBAACAQAAA+sMAALTBAACAQAAA+kMAALRBAACAQAAA+sMAALRBAACAwAAA+sMAALRBAACAQAAA+sMAALTBAACAQAAA+sMAALRBAACAQAAA+kMAALRBAACAQAAA+sMAALTBAACAQAAA+kMAALTBAACAwAAA+kMAALTBAACAwAAA+kMAALTBAACAQAAA+kMAALTBAACAQAAA+kMAALRBAACAQAAA+kMAALRBAACAQAAA+kMAALTBAACAQAAA+sMAALTBAAD/f/9//n8AAP9//3/+fwAA/3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAA/////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////AAD/f/////8AAP9//////wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9//n////9//3/+f////3//f/5//////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAA////f/9//n////9//3/+f////3//f/5/")
-}]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5mrt3"]
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 uv1_triplanar = true
 
-[node name="Tutorial" type="Node3D"]
-
-[node name="Player" parent="." instance=ExtResource("3_ehuit")]
-transform = Transform3D(1, 0, 0, 0, 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 3, 0)
+[node name="Tutorial" type="Node3D" node_paths=PackedStringArray("tutorial_component")]
+script = ExtResource("1_4t6hg")
+base_player_scene = ExtResource("5_hu44a")
+tutorial_component = NodePath("Player/Tutorial")
 
 [node name="Environment" parent="." instance=ExtResource("2_yb1ct")]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="Map" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -497.5, -18.5)
-visible = false
 use_collision = true
 size = Vector3(8, 1000, 45)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -497.5, -18.5)
-mesh = SubResource("ArrayMesh_5mrt3")
+[node name="CSGBox3D6" type="CSGBox3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 20.5, 9.5)
+use_collision = true
+size = Vector3(8, 2000, 45)
+material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="."]
+[node name="CSGBox3D14" type="CSGBox3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53, 20.5, -3)
+use_collision = true
+size = Vector3(8, 2000, 20)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -499.5, -51)
 use_collision = true
 size = Vector3(20, 1000, 6)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+[node name="CSGBox3D9" type="CSGBox3D" parent="Map"]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 26, -498.5, -46)
+use_collision = true
+size = Vector3(8, 1000, 8)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Map"]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 37, -497.5, -35)
+use_collision = true
+size = Vector3(8, 1000, 8)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, -496.5, -22)
+use_collision = true
+size = Vector3(8, 1000, 8)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, -489.5, 8)
+use_collision = true
+size = Vector3(8, 1014, 36)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 540.5, -6)
+use_collision = true
+size = Vector3(8, 1014, 8)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5, 3.5)
 use_collision = true
 size = Vector3(6, 9, 1)
 material = SubResource("StandardMaterial3D_5mrt3")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+[node name="CSGBox3D5" type="CSGBox3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 12, -0.366025)
 use_collision = true
 size = Vector3(6, 11, 1)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+[node name="CSGBox3D2" type="CSGBox3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 502, -18.5)
 use_collision = true
 size = Vector3(1, 1000, 45)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D8" type="CSGBox3D" parent="."]
+[node name="CSGBox3D8" type="CSGBox3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 508, -5)
 use_collision = true
 size = Vector3(6, 988, 1)
 material = SubResource("StandardMaterial3D_rwowx")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+[node name="CSGBox3D3" type="CSGBox3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 502, -18.5)
 use_collision = true
 size = Vector3(1, 1000, 45)
@@ -97,3 +129,44 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.9, 4
 text = "WASD to Move"
 font = ExtResource("4_5mrt3")
 font_size = 127
+
+[node name="Spinner" parent="." instance=ExtResource("5_rwowx")]
+transform = Transform3D(1.728, 0, 0, 0, 1.728, 0, 0, 0, 1.728, 40, 3.5, -20)
+
+[node name="Player" parent="." instance=ExtResource("5_hu44a")]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 46, 19, -1)
+
+[node name="Raycast" type="RayCast3D" parent="Player/CamPivot/Camera3D" index="5"]
+target_position = Vector3(0, 0, -2)
+collision_mask = 16
+collide_with_areas = true
+
+[node name="Interations" type="Node" parent="Player" node_paths=PackedStringArray("raycast", "crosshair", "player")]
+script = ExtResource("6_0cr88")
+raycast = NodePath("../CamPivot/Camera3D/Raycast")
+crosshair = NodePath("../UI/Crosshair")
+interacting_color = Color(0.59, 1, 0.931667, 1)
+player = NodePath("..")
+metadata/_custom_type_script = "uid://dk30rqaghdesy"
+
+[node name="Tutorial" type="Node" parent="Player" node_paths=PackedStringArray("mode", "visuals", "health_bar", "fizz_bar", "shoot_particles", "drinkable", "fizz", "player")]
+script = ExtResource("8_7vrqn")
+mode = NodePath("../Bottle/Mode")
+visuals = NodePath("../Bottle/Visuals")
+health_bar = NodePath("../Health/HealthBar")
+fizz_bar = NodePath("../Bottle/Fizz/FizzBar")
+shoot_particles = NodePath("../CamPivot/Camera3D/RangedParticles")
+drinkable = NodePath("../Bottle/Drinkable")
+fizz = NodePath("../Bottle/Fizz")
+player = NodePath("..")
+metadata/_custom_type_script = "uid://dk30rqaghdesy"
+
+[node name="VendingMachine" parent="." instance=ExtResource("6_hu44a")]
+unique_name_in_owner = true
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 42, 17.5, 5)
+
+[connection signal="pressed" from="Player/Interations" to="." method="_on_interations_pressed"]
+
+[editable path="Player"]
+[editable path="Player/Bottle"]

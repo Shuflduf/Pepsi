@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://btsph6pq2xcxv"]
+[gd_scene load_steps=39 format=3 uid="uid://btsph6pq2xcxv"]
 
 [ext_resource type="Script" uid="uid://cro5dg075ji6x" path="res://Components/physics_entity.gd" id="1_16gp5"]
 [ext_resource type="Script" uid="uid://dof74olx8ypoq" path="res://Player/New/wasd.gd" id="2_1ks24"]
@@ -16,6 +16,9 @@
 [ext_resource type="AudioStream" uid="uid://cdowbo8hw7d7q" path="res://Assets/SFX/pour.mp3" id="7_job4i"]
 [ext_resource type="Script" uid="uid://fyfphgq75leh" path="res://Player/New/health.gd" id="12_r68f0"]
 [ext_resource type="Script" uid="uid://dk30rqaghdesy" path="res://Player/New/player_component.gd" id="17_opynp"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hgjig"]
+friction = 0.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_hgjig"]
 outline_size = 5
@@ -153,6 +156,7 @@ collision_layer = 2
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
+physics_material_override = SubResource("PhysicsMaterial_hgjig")
 script = ExtResource("1_16gp5")
 metadata/_custom_type_script = "uid://cro5dg075ji6x"
 
@@ -166,51 +170,6 @@ grow_vertical = 2
 
 [node name="Crosshair" parent="UI" instance=ExtResource("2_2obdw")]
 layout_mode = 1
-
-[node name="HealthBar" type="TextureProgressBar" parent="UI"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-value = 100.0
-fill_mode = 5
-radial_initial_angle = 180.0
-radial_fill_degrees = 180.0
-radial_center_offset = Vector2(1, 0)
-nine_patch_stretch = true
-texture_progress = ExtResource("3_job4i")
-tint_progress = Color(0.490196, 0.223529, 0.282353, 1)
-
-[node name="FizzBar" type="TextureProgressBar" parent="UI"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-max_value = 5.0
-step = 0.01
-value = 5.0
-fill_mode = 4
-radial_initial_angle = 180.0
-radial_fill_degrees = 180.0
-radial_center_offset = Vector2(-1, 0)
-nine_patch_stretch = true
-texture_progress = ExtResource("3_job4i")
 
 [node name="LabelContainer" type="Control" parent="UI"]
 anchors_preset = 0
@@ -243,6 +202,7 @@ shape = SubResource("CylinderShape3D_1ks24")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CamPivot"]
+current = true
 fov = 90.0
 
 [node name="BottlePropSpawn" type="Node3D" parent="CamPivot/Camera3D"]
@@ -401,7 +361,7 @@ shoot_particles = NodePath("../../CamPivot/Camera3D/RangedParticles")
 shoot_sfx = NodePath("../../CamPivot/Camera3D/RangedShoot")
 
 [node name="Fizz" parent="Bottle" index="8" node_paths=PackedStringArray("fizz_bar")]
-fizz_bar = NodePath("../../UI/FizzBar")
+fizz_bar = NodePath("FizzBar")
 
 [node name="MovementFizz" parent="Bottle/Fizz" index="0" node_paths=PackedStringArray("player", "slam")]
 player = NodePath("../../..")
@@ -409,6 +369,28 @@ slam = NodePath("../../../Slam")
 
 [node name="LookingFizz" parent="Bottle/Fizz" index="1" node_paths=PackedStringArray("look_around")]
 look_around = NodePath("../../../LookAround")
+
+[node name="FizzBar" type="TextureProgressBar" parent="Bottle/Fizz" index="2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 5.0
+step = 0.01
+value = 5.0
+fill_mode = 4
+radial_initial_angle = 180.0
+radial_fill_degrees = 180.0
+radial_center_offset = Vector2(-1, 0)
+nine_patch_stretch = true
+texture_progress = ExtResource("3_job4i")
 
 [node name="Sway" parent="Bottle" index="9" node_paths=PackedStringArray("visuals")]
 visuals = NodePath("../Visuals")
@@ -449,13 +431,34 @@ metadata/_custom_type_script = "uid://dk30rqaghdesy"
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("hit_cooldown", "health_bar", "damage_label")]
 script = ExtResource("12_r68f0")
 hit_cooldown = NodePath("HitCooldown")
-health_bar = NodePath("../UI/HealthBar")
+health_bar = NodePath("HealthBar")
 damage_label = NodePath("../UI/LabelContainer/DamageLabel")
 metadata/_custom_type_script = "uid://dk30rqaghdesy"
 
 [node name="HitCooldown" type="Timer" parent="Health"]
 wait_time = 0.5
 one_shot = true
+
+[node name="HealthBar" type="TextureProgressBar" parent="Health"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+fill_mode = 5
+radial_initial_angle = 180.0
+radial_fill_degrees = 180.0
+radial_center_offset = Vector2(1, 0)
+nine_patch_stretch = true
+texture_progress = ExtResource("3_job4i")
+tint_progress = Color(0.490196, 0.223529, 0.282353, 1)
 
 [node name="Player" type="Node" parent="."]
 script = ExtResource("17_opynp")

@@ -1,9 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://dls545cn465me"]
+[gd_scene load_steps=4 format=3 uid="uid://dls545cn465me"]
 
 [ext_resource type="PackedScene" uid="uid://b1h7w42uu2ijk" path="res://Props/Spinner/spinner.gltf" id="1_ip7pq"]
+[ext_resource type="Script" uid="uid://b1vdp2i4obp6v" path="res://Props/Spinner/spinner.gd" id="1_wynjs"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wynjs"]
+height = 0.4
+radius = 0.9
 
 [node name="Spinner" type="Node3D" groups=["Prop"]]
 transform = Transform3D(1.728, 0, 0, 0, 1.728, 0, 0, 0, 1.728, 0, 0, 0)
+script = ExtResource("1_wynjs")
 
 [node name="spinner" parent="." instance=ExtResource("1_ip7pq")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.1, 0)
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("CylinderShape3D_wynjs")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

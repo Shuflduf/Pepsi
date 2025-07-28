@@ -1,5 +1,7 @@
 extends PlayerComponent
 
+signal jumped
+
 @export var jump_sfx: AudioStreamPlayer3D
 @export var land_particles: GPUParticles3D
 @export var land_sfx: AudioStreamPlayer3D
@@ -24,3 +26,4 @@ func _unhandled_key_input(event: InputEvent) -> void:
             #%Jump.play()
             jump_particles.restart()
             jump_sfx.play()
+            jumped.emit()

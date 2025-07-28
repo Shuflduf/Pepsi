@@ -12,7 +12,7 @@ var ammo := 100.0:
         ammo = new
         visuals.value = new
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
     #visuals.offset = lerp(visuals.offset, Vector2.ZERO, delta * 20)
     #if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and is_pepsi_ready and current_state == PepsiState.Ranged:
 

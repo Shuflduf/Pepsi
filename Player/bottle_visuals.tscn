@@ -335,7 +335,7 @@ script = ExtResource("1_pie2v")
 unique_name_in_owner = true
 visible = false
 sprite_frames = SubResource("SpriteFrames_d0fyo")
-animation = &"firing"
+animation = &"reload_catch"
 centered = false
 
 [node name="Bar" type="TextureProgressBar" parent="."]

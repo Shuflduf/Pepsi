@@ -44,6 +44,7 @@ func _on_animated_sprite_2d_frame_changed() -> void:
     )
 
     if tex == null:
+        #DebugDraw2D.set_text("ttttttttttttttt", tex, 0, Color.WHITE, 0.05)
         %Bar.texture_under = null
         %Bar.texture_over = null
         %Bar.texture_progress = null
