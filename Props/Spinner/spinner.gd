@@ -4,17 +4,27 @@ var active = false
 var connected_signal = false
 var jump_scale = 0.0
 var player: PhysicsEntity
+var fizz_component: BottleComponent
+var speed_component: BottleComponent
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
     if body.is_in_group(&"Player") and not connected_signal:
         player = body
+        get_relevant_components()
         body.get_component("Jump").jumped.connect(_on_player_jumped)
         connected_signal = true
 
+func get_relevant_components():
+    var bottle = player.find_child("Bottle")
+    if !bottle:
+        return
+    fizz_component = bottle.find_child("Fizz")
+    speed_component = bottle.find_child("SpeedIncrease")
+
 func _physics_process(delta: float) -> void:
     if $Area3D.has_overlapping_bodies():
-        jump_scale += delta * 8
-        jump_scale = minf(jump_scale, 20.0)
+        jump_scale += delta * 8 * speed_component.factor
+        jump_scale = minf(jump_scale, 20.0 * speed_component.factor)
         add_fizz(delta)
         DebugDraw2D.set_text("jump", jump_scale)
 
@@ -31,8 +41,5 @@ func _on_player_jumped():
     #tween.tween_property(player, ^"rotation:y", jump_scale / 40.0, 0.2).as_relative()
 
 func add_fizz(delta: float):
-    var bottle = player.find_child("Bottle")
-    if !bottle:
-        return
-    var fizz_component = bottle.find_child("Fizz")
+
     fizz_component.value += delta * jump_scale * 0.08

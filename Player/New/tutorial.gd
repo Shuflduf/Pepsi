@@ -19,10 +19,16 @@ var bottle_enabled = false:
         fizz_bar.visible = bottle_enabled
         shoot_particles.visible = bottle_enabled
 
+func _physics_process(_delta: float) -> void:
+    if not bottle_enabled:
+        mode.is_ready = false
+
 func _ready() -> void:
     bottle_enabled = false
 
-func reset_all():
+func base_bottle():
+    mode.can_switch = false
+    mode.is_ready = false
     fizz.value = 0.0
     drinkable.ammo = 100.0
     visuals.hide()

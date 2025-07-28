@@ -15,9 +15,10 @@ func _on_interations_pressed(interacted: CollisionObject3D) -> void:
         %VendingMachine.button_pressed(interacted)
     elif interacted is BottleProp and not picked_up_bottle:
         picked_up_bottle = true
+        %Anims.play(&"drinking_intro")
         interacted.queue_free()
         tutorial_component.bottle_enabled = true
-        tutorial_component.reset_all()
+        tutorial_component.base_bottle()
         print("bottle")
 
 

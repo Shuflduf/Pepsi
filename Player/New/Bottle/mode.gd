@@ -9,9 +9,12 @@ enum BottleMode {
 }
 var current_mode := BottleMode.Ranged
 var is_ready = false
+var can_switch = true
 
 func switch():
-    if !is_ready:
+    if not is_ready:
+        return
+    if not can_switch:
         return
     #throw_strength = 0.0
     #visuals.update_throw_strength(0.0)
