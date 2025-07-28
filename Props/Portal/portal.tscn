@@ -85,7 +85,7 @@ size = Vector3(1.4, 2.8, 0.1)
 mesh = SubResource("PlaneMesh_4y2f4")
 
 [node name="SubViewport" type="SubViewport" parent="."]
-size = Vector2i(602, 421)
+size = Vector2i(602, 315)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
 transform = Transform3D(0.0967134, 0.0347386, -0.994706, 0, 0.999391, 0.0349022, 0.995312, -0.00337551, 0.0966544, -3.7628, 0.629912, -0.0998856)
