@@ -9,7 +9,7 @@ extends PlayerComponent
 @export var drinkable: BottleComponent
 @export var fizz: BottleComponent
 
-var bottle_enabled = false:
+var bottle_enabled = true:
     set(new):
         bottle_enabled = new
 
@@ -24,7 +24,7 @@ func _physics_process(_delta: float) -> void:
         mode.is_ready = false
 
 func _ready() -> void:
-    bottle_enabled = false
+    bottle_enabled = true
 
 func base_bottle():
     mode.can_switch = false

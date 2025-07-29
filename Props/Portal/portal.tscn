@@ -18,21 +18,6 @@ material = SubResource("ShaderMaterial_ekrnl")
 size = Vector2(1.435, 2.769)
 orientation = 2
 
-[sub_resource type="Animation" id="Animation_4y2f4"]
-resource_name = "open"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Hinge:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, -2.35619, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_ekrnl"]
 length = 0.001
 tracks/0/type = "value"
@@ -46,6 +31,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4y2f4"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hinge:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -2.35619, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w1uea"]
@@ -88,7 +88,7 @@ mesh = SubResource("PlaneMesh_4y2f4")
 size = Vector2i(602, 315)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
-transform = Transform3D(0.0967134, 0.0347386, -0.994706, 0, 0.999391, 0.0349022, 0.995312, -0.00337551, 0.0966544, -3.7628, 0.629912, -0.0998856)
+transform = Transform3D(-0.874193, 0.226094, -0.42973, 0, 0.884986, 0.465617, 0.485578, 0.407039, -0.773649, -1.73956, 2.17236, -3.21654)
 
 [node name="PortalPos" type="Node3D" parent="."]
 transform = Transform3D(0.907777, 0, 0.419452, 0, 1, 0, -0.419452, 0, 0.907777, 0, 0, 0)

@@ -22,6 +22,7 @@ var is_boosted = false:
         $BoostedParticles.emitting = new
 
 var health = starting_health
+var death_inevitable = false
 
 var current_wave_heights: Array
 var map_config: MapConfig
@@ -29,11 +30,8 @@ var map_config: MapConfig
 func _ready() -> void:
     if immobile:
         mass = 10000
-        # part of the world
         collision_layer |= 1
-    #var actual_col = collision_layer
-    #var actual_pos = position
-    #collision_layer = 0
+
     $Visuals.rotate_y(randf_range(-PI, PI))
     freeze = true
     var vis_pos = $Visuals.position.y
@@ -76,7 +74,7 @@ func _physics_process(delta: float) -> void:
         $Visuals.rotation.y = lerp_angle($Visuals.rotation.y, look_dir, delta * 10)
 
 func hit_immunity():
-    if !can_take_damage:
+    if not can_take_damage:
         return
     can_take_damage = false
     %HitImmunity.start()
@@ -84,10 +82,11 @@ func hit_immunity():
 func hit(damage_amount: int):
     if %HitImmunity.time_left > 0:
         return
-
-    $HitParticles.restart()
+    if death_inevitable:
+        return
 
     if can_take_damage:
+        $HitParticles.restart()
         %HitstunTimer.start()
         in_hitstun = true
         spawn_damage_indicator(damage_amount)
@@ -103,6 +102,7 @@ func spawn_damage_indicator(damage_dealt: int):
     damage_indic.global_position.y += damage_indicator_offset
 
 func die():
+    death_inevitable = true
     died.emit()
     collision_layer = 0
     collision_mask = 0

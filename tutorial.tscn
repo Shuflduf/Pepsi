@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cp5jrnup6ktw3"]
+[gd_scene load_steps=20 format=3 uid="uid://cp5jrnup6ktw3"]
 
 [ext_resource type="Script" uid="uid://duqxls23317vi" path="res://tutorial.gd" id="1_4t6hg"]
 [ext_resource type="PackedScene" uid="uid://stneqj7qt42d" path="res://environment.tscn" id="2_yb1ct"]
@@ -8,8 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://btsph6pq2xcxv" path="res://Player/New/player_2.tscn" id="5_hu44a"]
 [ext_resource type="PackedScene" uid="uid://dls545cn465me" path="res://Props/Spinner/spinner.tscn" id="5_rwowx"]
 [ext_resource type="Script" uid="uid://vt56oxuaq25b" path="res://Tutorial/stage_1_end_platform.gd" id="5_tvjhf"]
+[ext_resource type="PackedScene" uid="uid://c06hpbi5plies" path="res://Props/Target/target.tscn" id="5_vmw6g"]
 [ext_resource type="Script" uid="uid://bbohit3fws0nh" path="res://StartArea/interations.gd" id="6_0cr88"]
 [ext_resource type="PackedScene" uid="uid://indwglmcxev7" path="res://StartArea/VendingMachine/vending_machine.tscn" id="6_hu44a"]
+[ext_resource type="Texture2D" uid="uid://c8jo3i663vyoc" path="res://Assets/circle.png" id="7_4hjyh"]
 [ext_resource type="Script" uid="uid://cw6rf3g2mtmqx" path="res://Player/New/tutorial.gd" id="8_7vrqn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rwowx"]
@@ -141,17 +143,6 @@ tutorial_component = NodePath("Player/Tutorial")
 [node name="Environment" parent="." instance=ExtResource("2_yb1ct")]
 
 [node name="Map" type="Node3D" parent="."]
-
-[node name="Stage2" type="Node3D" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2000, -489.5, 8)
-
-[node name="CSGBox3D18" type="CSGBox3D" parent="Map/Stage2"]
-use_collision = true
-size = Vector3(60, 1014, 36)
-material = SubResource("StandardMaterial3D_rwowx")
-
-[node name="TPSpot" type="Node3D" parent="Map/Stage2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 508, 0)
 
 [node name="Stage1" type="Node3D" parent="Map"]
 
@@ -415,6 +406,229 @@ use_collision = true
 size = Vector3(1, 1000, 45)
 material = SubResource("StandardMaterial3D_rwowx")
 
+[node name="Stage2" type="Node3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2000, -489.5, 833)
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="Map/Stage2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+use_collision = true
+size = Vector3(40, 1014, 16)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D22" type="CSGBox3D" parent="Map/Stage2"]
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -34.1, 0, 49)
+use_collision = true
+size = Vector3(40, 1014, 6)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D23" type="CSGBox3D" parent="Map/Stage2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -38, 1, 91)
+use_collision = true
+size = Vector3(20, 1014, 20)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D25" type="CSGBox3D" parent="Map/Stage2"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -38, 7, 115)
+use_collision = true
+size = Vector3(1, 1014, 1)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D26" type="CSGBox3D" parent="Map/Stage2"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -38, 514, 115)
+use_collision = true
+size = Vector3(10, 1, 10)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D27" type="CSGBox3D" parent="Map/Stage2"]
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, -32, 10, 133)
+use_collision = true
+size = Vector3(1, 1014, 1)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D28" type="CSGBox3D" parent="Map/Stage2"]
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, -32, 517, 133)
+use_collision = true
+size = Vector3(10, 1, 10)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D29" type="CSGBox3D" parent="Map/Stage2"]
+transform = Transform3D(-0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, -15, 1029, 136)
+use_collision = true
+size = Vector3(1, 1014, 1)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D30" type="CSGBox3D" parent="Map/Stage2"]
+transform = Transform3D(-0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, -15, 522, 136)
+use_collision = true
+size = Vector3(10, 1, 10)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D31" type="CSGBox3D" parent="Map/Stage2"]
+transform = Transform3D(4.47035e-08, 0, 1, 0, 1, 0, -1, 0, 4.47035e-08, 23, 1029, 136)
+use_collision = true
+size = Vector3(1, 1014, 1)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D32" type="CSGBox3D" parent="Map/Stage2"]
+transform = Transform3D(4.47035e-08, 0, 1, 0, 1, 0, -1, 0, 4.47035e-08, 23, 522, 136)
+use_collision = true
+size = Vector3(10, 1, 10)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D33" type="CSGBox3D" parent="Map/Stage2"]
+transform = Transform3D(4.47035e-08, 0, 1, 0, 1, 0, -1, 0, 4.47035e-08, 55, 522, 136)
+use_collision = true
+size = Vector3(2, 1, 30)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D34" type="CSGBox3D" parent="Map/Stage2"]
+transform = Transform3D(4.47035e-08, 0, 1, 0, 1, 0, -1, 0, 4.47035e-08, 69, 522, 136)
+use_collision = true
+size = Vector3(4, 1, 4)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D24" type="CSGBox3D" parent="Map/Stage2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -28.5, 1001, 91)
+use_collision = true
+size = Vector3(1, 1014, 20)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D21" type="CSGBox3D" parent="Map/Stage2"]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, -22, 1, 16.1)
+use_collision = true
+size = Vector3(4, 1014, 10)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D19" type="CSGBox3D" parent="Map/Stage2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 458, 0)
+use_collision = true
+size = Vector3(1, 2000, 16)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D20" type="CSGBox3D" parent="Map/Stage2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5, 508, 0)
+use_collision = true
+size = Vector3(1, 4, 4)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="TPSpot" type="Node3D" parent="Map/Stage2"]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 508, 0)
+
+[node name="Target" parent="Map/Stage2" instance=ExtResource("5_vmw6g")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 18, 507.2, 0)
+
+[node name="Label3D5" type="Label3D" parent="Map/Stage2"]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 18, 511, 0)
+text = "RMB to Shoot"
+font = ExtResource("4_5mrt3")
+font_size = 127
+
+[node name="Label3D6" type="Label3D" parent="Map/Stage2"]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -29.1, 512, 88)
+text = "Shaking the Bottle increases Fizz"
+font = ExtResource("4_5mrt3")
+font_size = 127
+
+[node name="Label3D7" type="Label3D" parent="Map/Stage2"]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -29.1, 511, 88)
+text = "Fizz increases Range and Power"
+font = ExtResource("4_5mrt3")
+font_size = 127
+
+[node name="Sprite3D" type="Sprite3D" parent="Map/Stage2"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -29.1, 511.6, 96.5)
+pixel_size = 0.1
+texture_filter = 0
+texture = ExtResource("7_4hjyh")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Label3D8" type="Label3D" parent="Map/Stage2"]
+transform = Transform3D(-1, 0, 4.37114e-08, 0, 1, 0, -4.37114e-08, 0, -1, -38.1, 510, 110)
+text = "Shooting while airborne sends you backwards"
+font = ExtResource("4_5mrt3")
+font_size = 127
+
+[node name="Label3D9" type="Label3D" parent="Map/Stage2"]
+transform = Transform3D(-1, 0, 4.37114e-08, 0, 1, 0, -4.37114e-08, 0, -1, -38.1, 509, 110)
+text = "Power increases with Fizz"
+font = ExtResource("4_5mrt3")
+font_size = 127
+
+[node name="Spinner" parent="Map/Stage2" instance=ExtResource("5_rwowx")]
+transform = Transform3D(1.728, 0, 0, 0, 1.728, 0, 0, 0, 1.728, 69, 522.5, 136)
+
+[node name="EndPlatform" type="CSGBox3D" parent="Map/Stage2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 91, 585.5, 136)
+use_collision = true
+size = Vector3(10, 1, 10)
+material = SubResource("StandardMaterial3D_rwowx")
+script = ExtResource("5_tvjhf")
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="Map/Stage2/EndPlatform"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -4.5, 500.5, -4.49995)
+use_collision = true
+size = Vector3(1, 1000, 1)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="Map/Stage2/EndPlatform"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 4.5, 500.5, -4.49995)
+use_collision = true
+size = Vector3(1, 1000, 1)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="Map/Stage2/EndPlatform"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 4.5, 500.5, 4.50003)
+use_collision = true
+size = Vector3(1, 1000, 1)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D19" type="CSGBox3D" parent="Map/Stage2/EndPlatform"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, -4.5, 500.5, 4.50003)
+use_collision = true
+size = Vector3(1, 1000, 1)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="Portal" parent="Map/Stage2/EndPlatform" node_paths=PackedStringArray("destination") instance=ExtResource("5_bhfnd")]
+transform = Transform3D(-2.98023e-08, 0, -1, 0, 1, 0, 1, 0, -2.98023e-08, 0, 1.5, 0)
+destination = NodePath("../../../Stage3/Start")
+
+[node name="Area3D" type="Area3D" parent="Map/Stage2/EndPlatform"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Stage2/EndPlatform/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+shape = SubResource("BoxShape3D_tvjhf")
+
+[node name="Stage3" type="Node3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2632)
+
+[node name="CSGBox3D27" type="CSGBox3D" parent="Map/Stage3"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 1.5, -507, -0.621338)
+use_collision = true
+size = Vector3(10, 1014, 10)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D28" type="CSGBox3D" parent="Map/Stage3"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -1.68198, 493, 2.56055)
+use_collision = true
+size = Vector3(1, 1014, 10)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D29" type="CSGBox3D" parent="Map/Stage3"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 4.68198, 493, 2.56055)
+use_collision = true
+size = Vector3(10, 1014, 1)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="Start" type="Node3D" parent="Map/Stage3"]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 1.5, 1, -5)
+
+[node name="VendingMachine" parent="Map/Stage3" instance=ExtResource("6_hu44a")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -1.2, 0, 1.19995)
+
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 4, -57.1939)
 text = "Space to Jump"
@@ -452,9 +666,22 @@ font_size = 127
 [node name="Spinner" parent="." instance=ExtResource("5_rwowx")]
 transform = Transform3D(1.728, 0, 0, 0, 1.728, 0, 0, 0, 1.728, 40, 3.5, -20)
 
+[node name="VendingMachine" parent="." instance=ExtResource("6_hu44a")]
+unique_name_in_owner = true
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 42, 17.5, 5)
+
+[node name="Spinner2" parent="." instance=ExtResource("5_rwowx")]
+transform = Transform3D(1.728, 0, 0, 0, 1.728, 0, 0, 0, 1.728, 196, -25.6, 103)
+
+[node name="Anims" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_tvjhf")
+}
+
 [node name="Player" parent="." instance=ExtResource("5_hu44a")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 260, 139, 97)
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 2088, 107.5, 969)
 metadata/_edit_group_ = true
 
 [node name="Raycast" type="RayCast3D" parent="Player/CamPivot/Camera3D" index="5"]
@@ -482,21 +709,10 @@ fizz = NodePath("../Bottle/Fizz")
 player = NodePath("..")
 metadata/_custom_type_script = "uid://dk30rqaghdesy"
 
-[node name="VendingMachine" parent="." instance=ExtResource("6_hu44a")]
-unique_name_in_owner = true
-transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 42, 17.5, 5)
-
-[node name="Spinner2" parent="." instance=ExtResource("5_rwowx")]
-transform = Transform3D(1.728, 0, 0, 0, 1.728, 0, 0, 0, 1.728, 196, -25.6, 103)
-
-[node name="Anims" type="AnimationPlayer" parent="."]
-unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_tvjhf")
-}
-
 [connection signal="body_entered" from="Map/Stage1/EndPlatform/Area3D" to="Map/Stage1/EndPlatform" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Map/Stage1/EndPlatform/Area3D" to="Map/Stage1/EndPlatform" method="_on_area_3d_body_exited"]
+[connection signal="body_entered" from="Map/Stage2/EndPlatform/Area3D" to="Map/Stage2/EndPlatform" method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Map/Stage2/EndPlatform/Area3D" to="Map/Stage2/EndPlatform" method="_on_area_3d_body_exited"]
 [connection signal="pressed" from="Player/Interations" to="." method="_on_interations_pressed"]
 
 [editable path="Player"]

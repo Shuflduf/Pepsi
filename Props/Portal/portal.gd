@@ -4,7 +4,7 @@ extends Node3D
 @export var destination: Node3D
 @export var portal_cam: Camera3D
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
     var current_cam: Camera3D
     var viewport_size: Vector2i
 
@@ -39,6 +39,21 @@ func _on_player_area_body_entered(body: PhysicsEntity) -> void:
         cos(global_rotation.y)
     )
     var dot_res = flat_vel.dot(-portal_face_dir)
+
+    var pivot: Node3D = body.find_child("CamPivot")
+    var cam: Camera3D = pivot.find_child("Camera3D")
+
+    #var cam_look_dir = Vector2(
+        #sin(cam.global_rotation.y),
+        #cos(cam.global_rotation.y)
+    #)
+
     if dot_res > 0.7:
         body.global_position = destination.global_position
-    print(dot_res)
+
+        pivot.global_rotation.y = portal_cam.global_rotation.y
+        cam.global_rotation.x = portal_cam.global_rotation.x
+
+        #pivot.global_rotation.y += destination.global_rotation.y
+        #cam.global_rotation.x = destination.global_rotation.x
+        #body.global_rotation =

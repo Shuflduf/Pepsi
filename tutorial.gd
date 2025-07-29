@@ -3,11 +3,14 @@ extends Node3D
 @export var base_player_scene: PackedScene
 @export var tutorial_component: PlayerComponent
 
-var picked_up_bottle = false
+enum TutorialState {
+    NoBottle,
+    ShootOnly,
+    FullBottle,
+}
 
-func _ready() -> void:
-    pass
-    #%Player.remove_child(%Player.find_child("Bottle"))
+var current_state := TutorialState.ShootOnly
+var picked_up_bottle = true
 
 func _on_interations_pressed(interacted: CollisionObject3D) -> void:
     if interacted is Area3D:
