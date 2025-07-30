@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b0iibgcy3rn5x"
 path.s3tc="res://.godot/imported/pepsi_texture.png-8ef769f841d5ba284bef0eb66bc131da.s3tc.ctex"
+path.etc2="res://.godot/imported/pepsi_texture.png-8ef769f841d5ba284bef0eb66bc131da.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://Assets/Pepsi/pepsi_texture.png"
-dest_files=["res://.godot/imported/pepsi_texture.png-8ef769f841d5ba284bef0eb66bc131da.s3tc.ctex"]
+dest_files=["res://.godot/imported/pepsi_texture.png-8ef769f841d5ba284bef0eb66bc131da.s3tc.ctex", "res://.godot/imported/pepsi_texture.png-8ef769f841d5ba284bef0eb66bc131da.etc2.ctex"]
 
 [params]
 

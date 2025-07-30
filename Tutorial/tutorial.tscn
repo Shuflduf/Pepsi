@@ -257,6 +257,7 @@ base_player_scene = ExtResource("5_hu44a")
 tutorial_component = NodePath("Player/Tutorial")
 first_vending_machine = NodePath("Map/Stage1/VendingMachine")
 second_vending_machine = NodePath("Map/Stage3/VendingMachine")
+current_state = 0
 
 [node name="Environment" parent="." instance=ExtResource("2_yb1ct")]
 
@@ -879,7 +880,7 @@ transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, -35.0291
 
 [node name="Label3D3" type="Label3D" parent="Map/Stage3"]
 transform = Transform3D(-0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, -0.965926, -5.81179, 11, 20.0341)
-text = "Swinging greatly increases Fizz"
+text = "Swinging increases Fizz"
 font = ExtResource("4_5mrt3")
 font_size = 127
 
@@ -970,29 +971,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_tvjhf")
 }
 
-[node name="SpawnPos" type="Node3D" parent="."]
-transform = Transform3D(1, 0, -4.26326e-13, 0, 1, 0, 4.26326e-13, 0, 1, 0, 3, 0)
-
-[node name="ExitOverlay" type="ColorRect" parent="."]
-visible = false
-z_index = 10
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="KillTrigger" type="Area3D" parent="."]
-collision_layer = 0
-collision_mask = 2
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="KillTrigger"]
-shape = SubResource("WorldBoundaryShape3D_ngs4g")
-
 [node name="Player" parent="." instance=ExtResource("5_hu44a")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, -4.26326e-13, 0, 1, 0, 4.26326e-13, 0, 1, 1200, 2, 2632)
+transform = Transform3D(1, 0, -4.26326e-13, 0, 1, 0, 4.26326e-13, 0, 1, 0, 3, 0)
 metadata/_edit_group_ = true
 
 [node name="Raycast" type="RayCast3D" parent="Player/CamPivot/Camera3D" index="5"]
@@ -1021,13 +1002,33 @@ fizz = NodePath("../Bottle/Fizz")
 player = NodePath("..")
 metadata/_custom_type_script = "uid://dk30rqaghdesy"
 
+[node name="SpawnPos" type="Node3D" parent="."]
+transform = Transform3D(1, 0, -4.26326e-13, 0, 1, 0, 4.26326e-13, 0, 1, 0, 3, 0)
+
+[node name="ExitOverlay" type="ColorRect" parent="."]
+visible = false
+z_index = 10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="KillTrigger" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillTrigger"]
+shape = SubResource("WorldBoundaryShape3D_ngs4g")
+
 [connection signal="body_entered" from="Map/Stage1/EndPlatform/Area3D" to="Map/Stage1/EndPlatform" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Map/Stage1/EndPlatform/Area3D" to="Map/Stage1/EndPlatform" method="_on_area_3d_body_exited"]
 [connection signal="body_entered" from="Map/Stage2/EndPlatform/Area3D" to="Map/Stage2/EndPlatform" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Map/Stage2/EndPlatform/Area3D" to="Map/Stage2/EndPlatform" method="_on_area_3d_body_exited"]
 [connection signal="body_entered" from="Map/Stage3/CSGSphere3D/ExitTrigger" to="." method="_on_exit_trigger_body_entered"]
-[connection signal="body_entered" from="KillTrigger" to="." method="_on_kill_trigger_body_entered"]
 [connection signal="pressed" from="Player/Interations" to="." method="_on_interations_pressed"]
+[connection signal="body_entered" from="KillTrigger" to="." method="_on_kill_trigger_body_entered"]
 
 [editable path="Player"]
 [editable path="Player/Bottle"]
