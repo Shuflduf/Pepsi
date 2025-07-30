@@ -9,7 +9,7 @@ extends BottleComponent
 @onready var max_speed = player.max_speed
 @onready var max_air_speed = player.max_air_speed
 
-var factor = 1.0
+var factor: float = 1.0
 
 func _physics_process(_delta: float) -> void:
     player.ground_speed = remap(factor, 1.0, 2.0, base_speed, increased_speed)
@@ -19,4 +19,4 @@ func _physics_process(_delta: float) -> void:
     var vel_length = player.linear_velocity.length()
     factor = clamp(factor - (vel_length / 1500), 1.0, 10.0)
 
-    DebugDraw2D.set_text("speed", factor)
+    DebugDraw2D.set_text("Speed", str(factor).pad_decimals(2) + "x")

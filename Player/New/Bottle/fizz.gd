@@ -16,8 +16,8 @@ var value = 0.0:
         #fizz_set()
 
 func _physics_process(delta: float) -> void:
-    DebugDraw2D.set_text("fizz", value)
     value -= delta / 10
+    DebugDraw2D.set_text("Fizz", str(value).pad_decimals(2))
 
 #func fizz_set():
     #var lifetime = clampf(fizz / 2, 0.2, 1.0)

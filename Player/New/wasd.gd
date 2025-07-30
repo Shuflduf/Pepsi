@@ -10,8 +10,6 @@ var walk_fx_cooldown_timer = 0.3
 var speed_factor = 1.0
 
 func _physics_process(delta: float) -> void:
-    DebugDraw2D.set_text("pos", player.global_position)
-    DebugDraw2D.set_text("cam", cam_pivot.global_rotation.y)
     var input_dir = Input.get_vector(&"left", &"right", &"forward", &"backward")
     var direction = input_dir.rotated(-cam_pivot.global_rotation.y)
     var move_dir = Vector3(

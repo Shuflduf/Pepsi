@@ -7,9 +7,7 @@ signal looked_around(amount: float)
 @export var mouse_sens = 0.004
 
 func _physics_process(_delta: float) -> void:
-    DebugDraw2D.set_text("pi/2", 1.5708)
-    DebugDraw2D.set_text("x", camera.rotation.x)
-    DebugDraw2D.set_text("x2", camera.global_rotation.x)
+    DebugDraw2D.set_text("Sensitivity (-/=)", mouse_sens)
 
 func _ready() -> void:
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -32,3 +30,10 @@ func _unhandled_key_input(event: InputEvent) -> void:
                 Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
             Input.MOUSE_MODE_CAPTURED:
                 Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+    elif event is InputEventKey and event.is_pressed():
+        if event.keycode == KEY_EQUAL:
+            mouse_sens -= 0.001
+        elif event.keycode == KEY_MINUS:
+            mouse_sens += 0.001
+        mouse_sens = clamp(mouse_sens, 0.001, 0.1)
