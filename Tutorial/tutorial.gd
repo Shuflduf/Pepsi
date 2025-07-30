@@ -14,10 +14,11 @@ enum TutorialState {
     FullBottle,
 }
 
-
+var last_checkpoint: Area3D
 
 func _ready() -> void:
     tutorial_component.bottle_state = current_state
+    connect_all_checkpoints()
 
 func _on_interations_pressed(interacted: CollisionObject3D) -> void:
     if interacted is Area3D and interacted.owner is VendingMachine:
@@ -31,6 +32,7 @@ func _on_interations_pressed(interacted: CollisionObject3D) -> void:
                 %Anims.play(&"drinking_intro")
             second_vending_machine:
                 current_state = TutorialState.FullBottle
+                %Anims.play(&"swing_intro")
 
 
         tutorial_component.bottle_state = current_state
@@ -49,3 +51,17 @@ func _on_interations_pressed(interacted: CollisionObject3D) -> void:
 
 func _on_exit_trigger_body_entered(body: Node3D) -> void:
     $ExitOverlay.show()
+
+
+func _on_kill_trigger_body_entered(body: Node3D) -> void:
+    prints("kill", body)
+    %Player.global_position = last_checkpoint.global_position
+    %Player.linear_velocity = Vector3.ZERO
+
+func connect_all_checkpoints():
+    for check: Area3D in get_tree().get_nodes_in_group(&"Checkpoint"):
+        check.body_entered.connect(_on_checkpoint_entered.bind(check))
+
+func _on_checkpoint_entered(body: PhysicsEntity, check: Area3D):
+    last_checkpoint = check
+    #prints(body, check)

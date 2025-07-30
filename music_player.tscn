@@ -1,7 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://doimc2pvi6mtu"]
+[gd_scene load_steps=3 format=3 uid="uid://doimc2pvi6mtu"]
 
 [ext_resource type="AudioStream" uid="uid://lbq64yvs74b6" path="res://Assets/Music/In Dreamland.mp3" id="1_fvyft"]
+[ext_resource type="Script" uid="uid://bha6qypbux1ny" path="res://music_player.gd" id="2_k4xj7"]
 
 [node name="MusicPlayer" type="AudioStreamPlayer"]
 stream = ExtResource("1_fvyft")
 bus = &"Music"
+script = ExtResource("2_k4xj7")

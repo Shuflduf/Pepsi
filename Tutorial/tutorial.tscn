@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cp5jrnup6ktw3"]
+[gd_scene load_steps=26 format=3 uid="uid://cp5jrnup6ktw3"]
 
 [ext_resource type="Script" uid="uid://duqxls23317vi" path="res://Tutorial/tutorial.gd" id="1_4t6hg"]
 [ext_resource type="PackedScene" uid="uid://stneqj7qt42d" path="res://environment.tscn" id="2_yb1ct"]
@@ -28,6 +28,12 @@ emission_enabled = true
 emission = Color(1, 1, 1, 1)
 uv1_triplanar = true
 proximity_fade_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ngs4g"]
+size = Vector3(6, 6, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mtfnd"]
+size = Vector3(20, 6, 6)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_bsk3x"]
 radius = 10.0
@@ -242,13 +248,16 @@ _data = {
 &"swing_intro": SubResource("Animation_bsk3x")
 }
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ngs4g"]
+plane = Plane(0, 1, 0, -30)
+
 [node name="Tutorial" type="Node3D" node_paths=PackedStringArray("tutorial_component", "first_vending_machine", "second_vending_machine")]
 script = ExtResource("1_4t6hg")
 base_player_scene = ExtResource("5_hu44a")
 tutorial_component = NodePath("Player/Tutorial")
 first_vending_machine = NodePath("Map/Stage1/VendingMachine")
 second_vending_machine = NodePath("Map/Stage3/VendingMachine")
-current_state = 2
+current_state = 0
 
 [node name="Environment" parent="." instance=ExtResource("2_yb1ct")]
 
@@ -520,6 +529,36 @@ material = SubResource("StandardMaterial3D_rwowx")
 unique_name_in_owner = true
 transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 42, 17.5, 5)
 
+[node name="Checkpoint" type="Area3D" parent="Map/Stage1" groups=["Checkpoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 5, -24)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Stage1/Checkpoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.5)
+shape = SubResource("BoxShape3D_ngs4g")
+
+[node name="Checkpoint3" type="Area3D" parent="Map/Stage1" groups=["Checkpoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -39)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Stage1/Checkpoint3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.5)
+shape = SubResource("BoxShape3D_ngs4g")
+
+[node name="Checkpoint2" type="Area3D" parent="Map/Stage1" groups=["Checkpoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 19, 21)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Stage1/Checkpoint2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.5)
+shape = SubResource("BoxShape3D_ngs4g")
+
 [node name="Stage2" type="Node3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2000, -489.5, 833)
 
@@ -716,6 +755,26 @@ monitorable = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 shape = SubResource("BoxShape3D_tvjhf")
 
+[node name="Checkpoint2" type="Area3D" parent="Map/Stage2" groups=["Checkpoint"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4, 508, 0)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Stage2/Checkpoint2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.5)
+shape = SubResource("BoxShape3D_ngs4g")
+
+[node name="Checkpoint3" type="Area3D" parent="Map/Stage2" groups=["Checkpoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39, 509, 97)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Stage2/Checkpoint3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.5)
+shape = SubResource("BoxShape3D_mtfnd")
+
 [node name="Stage3" type="Node3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1200, 0, 2632)
 
@@ -846,6 +905,26 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Stage3/CSGSphere3D/ExitTrigger"]
 shape = SubResource("SphereShape3D_bsk3x")
 
+[node name="Checkpoint2" type="Area3D" parent="Map/Stage3" groups=["Checkpoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, -4)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Stage3/Checkpoint2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.5)
+shape = SubResource("BoxShape3D_ngs4g")
+
+[node name="Checkpoint3" type="Area3D" parent="Map/Stage3" groups=["Checkpoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 13, 13)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Stage3/Checkpoint3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.5)
+shape = SubResource("BoxShape3D_ngs4g")
+
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 4, -57.1939)
 text = "Space to Jump"
@@ -894,7 +973,7 @@ libraries = {
 
 [node name="Player" parent="." instance=ExtResource("5_hu44a")]
 unique_name_in_owner = true
-transform = Transform3D(-1, 0, 8.74232e-08, 0, 1, 0, -8.74232e-08, 0, -1, 1201, 2, 2630)
+transform = Transform3D(1, 0, -4.26326e-13, 0, 1, 0, 4.26326e-13, 0, 1, 225, 88.5, 96)
 metadata/_edit_group_ = true
 
 [node name="Raycast" type="RayCast3D" parent="Player/CamPivot/Camera3D" index="5"]
@@ -931,12 +1010,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="KillTrigger" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillTrigger"]
+shape = SubResource("WorldBoundaryShape3D_ngs4g")
+
 [connection signal="body_entered" from="Map/Stage1/EndPlatform/Area3D" to="Map/Stage1/EndPlatform" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Map/Stage1/EndPlatform/Area3D" to="Map/Stage1/EndPlatform" method="_on_area_3d_body_exited"]
 [connection signal="body_entered" from="Map/Stage2/EndPlatform/Area3D" to="Map/Stage2/EndPlatform" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Map/Stage2/EndPlatform/Area3D" to="Map/Stage2/EndPlatform" method="_on_area_3d_body_exited"]
 [connection signal="body_entered" from="Map/Stage3/CSGSphere3D/ExitTrigger" to="." method="_on_exit_trigger_body_entered"]
 [connection signal="pressed" from="Player/Interations" to="." method="_on_interations_pressed"]
+[connection signal="body_entered" from="KillTrigger" to="." method="_on_kill_trigger_body_entered"]
 
 [editable path="Player"]
 [editable path="Player/Bottle"]

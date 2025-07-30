@@ -29,7 +29,7 @@ disable_fog = true
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 uv1_triplanar = true
-proximity_fade_enabled = true
+proximity_fade_distance = 0.1
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_4y2f4"]
 viewport_path = NodePath("SubViewport")
@@ -120,7 +120,7 @@ mesh = SubResource("PlaneMesh_4y2f4")
 size = Vector2i(602, 421)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
-transform = Transform3D(-0.324739, -0.00412373, -0.945794, 0, 0.999991, -0.00436003, 0.945803, -0.00141587, -0.324736, -3.58764, 0.48931, -1.60893)
+transform = Transform3D(0.878374, -0.0867308, 0.470039, 0, 0.983399, 0.181455, -0.477974, -0.159385, 0.863792, 2.71472, 1.048, 4.98885)
 
 [node name="PortalPos" type="Node3D" parent="."]
 transform = Transform3D(0.907777, 0, 0.419452, 0, 1, 0, -0.419452, 0, 0.907777, 0, 0, 0)

@@ -51,6 +51,7 @@ import/blender/enabled=false
 Player=""
 Enemy=""
 Prop=""
+Checkpoint=""
 
 [importer_defaults]
 
