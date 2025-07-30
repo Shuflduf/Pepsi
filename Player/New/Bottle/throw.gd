@@ -11,17 +11,18 @@ signal threw
 @export var fizz: BottleComponent
 @export var bottle_prop_pos: Node3D
 
-var throw_strength = 0.0:
+var starting_strength = 5.0
+var throw_strength = starting_strength:
     set(new):
         throw_strength = new
-        visuals.update_throw_strength(new)
+        visuals.update_throw_strength(new - starting_strength)
 
 func _physics_process(delta: float) -> void:
     if mode.current_mode == mode.BottleMode.Melee:
         if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 
             throw_strength += delta * 15
-        elif throw_strength:
+        elif throw_strength > starting_strength:
         #if current_state == PepsiState.Melee and throw_strength:
             throw()
             #throw_strength = 0.0
@@ -68,7 +69,7 @@ func throw():
 
     #visuals.update_throw_strength(0)
     threw.emit()
-    throw_strength = 0.0
+    throw_strength = starting_strength
     visuals.play_anim(&"reload_catch")
 
 func _on_visuals_animation_finished(anim_name: StringName):
