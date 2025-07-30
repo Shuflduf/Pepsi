@@ -1,5 +1,7 @@
 extends BottleComponent
 
+signal swung
+
 @export var hitbox: Area3D
 @export var player_info: BottleComponent
 @export var mode: BottleComponent
@@ -18,6 +20,7 @@ func swing(damage: int):
     visuals.play_anim(&"swing", speed_increase.factor)
 
     #swung.emit(melee_damage)
+    swung.emit()
     fizz.value += 0.2
 
     for body in hitbox.get_overlapping_bodies():

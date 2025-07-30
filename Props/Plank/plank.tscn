@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://dnqv3mwxxlwy2"]
+
+[ext_resource type="PackedScene" uid="uid://b7ugotw8g3nrd" path="res://Props/Plank/plank.gltf" id="1_3ni7i"]
+[ext_resource type="Script" uid="uid://5ix0fyggxrsv" path="res://Props/Plank/plank.gd" id="1_gg55l"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gg55l"]
+friction = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3ni7i"]
+size = Vector3(3.2, 0.5, 0.1)
+
+[sub_resource type="Curve" id="Curve_gg55l"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.575221, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_nwp1c"]
+curve = SubResource("Curve_gg55l")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tp8cp"]
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_box_extents = Vector3(2.68, 0.44, 0.12)
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 5.0
+scale_min = 0.2
+scale_max = 0.4
+scale_curve = SubResource("CurveTexture_nwp1c")
+color = Color(0.59, 0.42952, 0.3068, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2w3xj"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_vjdko"]
+material = SubResource("StandardMaterial3D_2w3xj")
+
+[node name="Plank" type="Node3D"]
+script = ExtResource("1_gg55l")
+
+[node name="plank" parent="." instance=ExtResource("1_3ni7i")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+
+[node name="Static" type="StaticBody3D" parent="."]
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_gg55l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Static"]
+shape = SubResource("BoxShape3D_3ni7i")
+
+[node name="Area" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area"]
+shape = SubResource("BoxShape3D_3ni7i")
+
+[node name="Particles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 64
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_tp8cp")
+draw_pass_1 = SubResource("SphereMesh_vjdko")
+
+[connection signal="finished" from="Particles" to="." method="_on_gpu_particles_3d_finished"]

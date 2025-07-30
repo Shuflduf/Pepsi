@@ -1,3 +1,4 @@
+class_name VendingMachine
 extends Node3D
 
 @onready var buttons = [

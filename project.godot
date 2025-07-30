@@ -145,6 +145,7 @@ slam={
 3d_physics/layer_3="Enemy"
 3d_physics/layer_4="Props"
 3d_physics/layer_5="Interactable"
+3d_physics/layer_6="AttackHitbox"
 
 [rendering]
 
