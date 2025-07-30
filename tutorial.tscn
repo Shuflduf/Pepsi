@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cp5jrnup6ktw3"]
+[gd_scene load_steps=22 format=3 uid="uid://cp5jrnup6ktw3"]
 
 [ext_resource type="Script" uid="uid://duqxls23317vi" path="res://tutorial.gd" id="1_4t6hg"]
 [ext_resource type="PackedScene" uid="uid://stneqj7qt42d" path="res://environment.tscn" id="2_yb1ct"]
@@ -77,10 +77,58 @@ tracks/3/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 0)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Map/Stage3/Label3D:outline_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Map/Stage3/Label3D:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Map/Stage3/Label3D2:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Map/Stage3/Label3D2:outline_modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_7vrqn"]
 resource_name = "drinking_intro"
-length = 4.0
+length = 6.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -88,7 +136,7 @@ tracks/0/path = NodePath("Label3D4:outline_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
+"times": PackedFloat32Array(2, 4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
@@ -100,7 +148,7 @@ tracks/1/path = NodePath("Label3D4:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 2),
+"times": PackedFloat32Array(2, 4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -112,7 +160,7 @@ tracks/2/path = NodePath("Label3D5:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(2, 4),
+"times": PackedFloat32Array(4, 6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -124,7 +172,59 @@ tracks/3/path = NodePath("Label3D5:outline_modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(4, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bsk3x"]
+resource_name = "swing_intro"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Map/Stage3/Label3D:outline_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
 "times": PackedFloat32Array(2, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Map/Stage3/Label3D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Map/Stage3/Label3D2:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(4, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Map/Stage3/Label3D2:outline_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(4, 6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
@@ -133,7 +233,8 @@ tracks/3/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tvjhf"]
 _data = {
 &"RESET": SubResource("Animation_bhfnd"),
-&"drinking_intro": SubResource("Animation_7vrqn")
+&"drinking_intro": SubResource("Animation_7vrqn"),
+&"swing_intro": SubResource("Animation_bsk3x")
 }
 
 [node name="Tutorial" type="Node3D" node_paths=PackedStringArray("tutorial_component", "first_vending_machine", "second_vending_machine")]
@@ -610,7 +711,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 shape = SubResource("BoxShape3D_tvjhf")
 
 [node name="Stage3" type="Node3D" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2632)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1200, 0, 2632)
 
 [node name="CSGBox3D27" type="CSGBox3D" parent="Map/Stage3"]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 1.5, -507, -0.621338)
@@ -660,6 +761,22 @@ transform = Transform3D(0.696364, 0.122788, 0.707107, -0.173648, 0.984808, 0, -0
 [node name="Plank2" parent="Map/Stage3" instance=ExtResource("12_bsk3x")]
 transform = Transform3D(0.704416, -0.0616284, 0.707107, 0.0871557, 0.996195, 0, -0.704416, 0.0616284, 0.707107, 4.88172, 1.89723, 1.4823)
 
+[node name="Label3D" type="Label3D" parent="Map/Stage3"]
+transform = Transform3D(1, 0, -5.76204e-08, 0, 1, 0, 5.76204e-08, 0, 1, 1.82843, 2, -10.8284)
+modulate = Color(1, 1, 1, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "E to switch Modes"
+font = ExtResource("4_5mrt3")
+font_size = 127
+
+[node name="Label3D2" type="Label3D" parent="Map/Stage3"]
+transform = Transform3D(1, 0, -5.76204e-08, 0, 1, 0, 5.76204e-08, 0, 1, 1.82843, 1, -10.8284)
+modulate = Color(1, 1, 1, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "LMB to Swing"
+font = ExtResource("4_5mrt3")
+font_size = 127
+
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 4, -57.1939)
 text = "Space to Jump"
@@ -708,7 +825,7 @@ libraries = {
 
 [node name="Player" parent="." instance=ExtResource("5_hu44a")]
 unique_name_in_owner = true
-transform = Transform3D(-1, 0, 8.74232e-08, 0, 1, 0, -8.74232e-08, 0, -1, 1, 2, 2630)
+transform = Transform3D(-1, 0, 8.74232e-08, 0, 1, 0, -8.74232e-08, 0, -1, 1201, 2, 2630)
 metadata/_edit_group_ = true
 
 [node name="Raycast" type="RayCast3D" parent="Player/CamPivot/Camera3D" index="5"]

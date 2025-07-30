@@ -1,3 +1,4 @@
+class_name BMode
 extends BottleComponent
 
 @export var visuals: BottleVisuals
