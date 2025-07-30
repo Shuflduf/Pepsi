@@ -7,10 +7,20 @@ var swung_connect = false
     #print(area.owner)
 
 func attempt_break(tutorial_component: PlayerComponent):
-    print(tutorial_component.swingable)
-    if not swung_connect:
-        tutorial_component.swingable.swung.connect(_on_swung)
-        swung_connect = true
+    if tutorial_component.bottle_state != Tutorial.TutorialState.FullBottle:
+        return
+
+    await tutorial_component.swingable.swung
+    _on_swung()
+    #print(tutorial_component.swingable)
+    #if not swung_connect:
+        ## disconnect all other signals
+        #for sig: Dictionary in tutorial_component.swingable.swung.get_connections():
+            #var sig_call = sig["callable"]
+            #tutorial_component.swingable.swung.disconnect(sig_call)
+#
+        #tutorial_component.swingable.swung.connect(_on_swung)
+        #swung_connect = true
 
 func _on_swung():
     $Particles.restart()
