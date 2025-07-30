@@ -11,7 +11,7 @@ signal threw
 @export var fizz: BottleComponent
 @export var bottle_prop_pos: Node3D
 
-var starting_strength = 5.0
+var starting_strength = 3.0
 var throw_strength = starting_strength:
     set(new):
         throw_strength = new

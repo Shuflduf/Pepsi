@@ -3,13 +3,14 @@ extends PhysicsEntity
 
 signal died
 
-@onready var boosted_timer: Timer = $BoostedTimer
-@onready var agent: NavigationAgent3D = $NavigationAgent3D
-
 @export var immobile: bool = false
 @export var starting_health = 5
 @export var damage_indicator_scene: PackedScene
 @export var damage_indicator_offset: float = 0.0
+
+@onready var boosted_timer: Timer = $BoostedTimer
+@onready var agent: NavigationAgent3D = $NavigationAgent3D
+@onready var health = starting_health
 
 var can_take_damage = true
 var in_hitstun = false
@@ -21,7 +22,7 @@ var is_boosted = false:
         is_boosted = new
         $BoostedParticles.emitting = new
 
-var health = starting_health
+
 var death_inevitable = false
 
 var current_wave_heights: Array
@@ -86,6 +87,7 @@ func hit(damage_amount: int):
         return
 
     if can_take_damage:
+        prints("health", health)
         $HitParticles.restart()
         %HitstunTimer.start()
         in_hitstun = true

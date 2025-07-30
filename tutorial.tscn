@@ -243,6 +243,7 @@ base_player_scene = ExtResource("5_hu44a")
 tutorial_component = NodePath("Player/Tutorial")
 first_vending_machine = NodePath("Map/Stage1/VendingMachine")
 second_vending_machine = NodePath("Map/Stage3/VendingMachine")
+current_state = 2
 
 [node name="Environment" parent="." instance=ExtResource("2_yb1ct")]
 
@@ -719,6 +720,30 @@ use_collision = true
 size = Vector3(10, 1014, 10)
 material = SubResource("StandardMaterial3D_rwowx")
 
+[node name="CSGBox3D33" type="CSGBox3D" parent="Map/Stage3"]
+transform = Transform3D(0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866026, 10.5, -504, 8.37866)
+use_collision = true
+size = Vector3(3, 1014, 3)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D34" type="CSGBox3D" parent="Map/Stage3"]
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 0.568148, -500, 12.8963)
+use_collision = true
+size = Vector3(8, 1014, 3)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D35" type="CSGBox3D" parent="Map/Stage3"]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -14.9561, -495, 12.9148)
+use_collision = true
+size = Vector3(6, 1014, 4)
+material = SubResource("StandardMaterial3D_rwowx")
+
+[node name="CSGBox3D36" type="CSGBox3D" parent="Map/Stage3"]
+transform = Transform3D(0.5, 0, -0.866026, 0, 1, 0, 0.866026, 0, 0.5, -26.5541, -489, -2.97754)
+use_collision = true
+size = Vector3(8, 1014, 8)
+material = SubResource("StandardMaterial3D_rwowx")
+
 [node name="CSGBox3D32" type="CSGBox3D" parent="Map/Stage3"]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 14.935, -507, -7.69241)
 use_collision = true
@@ -774,6 +799,30 @@ transform = Transform3D(1, 0, -5.76204e-08, 0, 1, 0, 5.76204e-08, 0, 1, 1.82843,
 modulate = Color(1, 1, 1, 0)
 outline_modulate = Color(0, 0, 0, 0)
 text = "LMB to Swing"
+font = ExtResource("4_5mrt3")
+font_size = 127
+
+[node name="Target" parent="Map/Stage3" instance=ExtResource("5_vmw6g")]
+transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, -1.99311, 7, 13.5523)
+
+[node name="Target2" parent="Map/Stage3" instance=ExtResource("5_vmw6g")]
+transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, -32.9932, 19, -9.44775)
+
+[node name="Target3" parent="Map/Stage3" instance=ExtResource("5_vmw6g")]
+transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, -34.2611, 19, -15.6439)
+
+[node name="Target4" parent="Map/Stage3" instance=ExtResource("5_vmw6g")]
+transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, -35.0291, 19, -20.974)
+
+[node name="Label3D3" type="Label3D" parent="Map/Stage3"]
+transform = Transform3D(-0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, -0.965926, -5.81179, 11, 20.0341)
+text = "Swinging greatly increases Fizz"
+font = ExtResource("4_5mrt3")
+font_size = 127
+
+[node name="Label3D4" type="Label3D" parent="Map/Stage3"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -21.8118, 20, -5.96582)
+text = "Hold RMB to charge Throw"
 font = ExtResource("4_5mrt3")
 font_size = 127
 
