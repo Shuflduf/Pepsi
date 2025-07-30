@@ -6,7 +6,8 @@ signal looked_around(amount: float)
 @export var camera: Camera3D
 @export var mouse_sens = 0.004
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
+    DebugDraw2D.set_text("pi/2", 1.5708)
     DebugDraw2D.set_text("x", camera.rotation.x)
     DebugDraw2D.set_text("x2", camera.global_rotation.x)
 
@@ -20,7 +21,9 @@ func _input(event: InputEvent) -> void:
         cam_pivot.rotate_y(-event.relative.x * mouse_sens)
 
         camera.rotate_x(-event.relative.y * mouse_sens)
-        camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-87), deg_to_rad(87))
+        camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
+        camera.rotation.y = 0.0
+        camera.rotation.z = 0.0
 
 func _unhandled_key_input(event: InputEvent) -> void:
     if event.is_action_pressed(&"ui_cancel"):

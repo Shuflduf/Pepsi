@@ -49,7 +49,7 @@ func _on_interations_pressed(interacted: CollisionObject3D) -> void:
         #start_game()
 
 
-func _on_exit_trigger_body_entered(body: Node3D) -> void:
+func _on_exit_trigger_body_entered(_body: Node3D) -> void:
     $ExitOverlay.show()
 
 
@@ -62,6 +62,6 @@ func connect_all_checkpoints():
     for check: Area3D in get_tree().get_nodes_in_group(&"Checkpoint"):
         check.body_entered.connect(_on_checkpoint_entered.bind(check))
 
-func _on_checkpoint_entered(body: PhysicsEntity, check: Area3D):
+func _on_checkpoint_entered(_body: PhysicsEntity, check: Area3D):
     last_checkpoint = check
     #prints(body, check)
