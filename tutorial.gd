@@ -45,3 +45,8 @@ func _on_interations_pressed(interacted: CollisionObject3D) -> void:
         #%Player.add_child(bottle)
         #temp_player.free()
         #start_game()
+
+
+func _on_exit_trigger_body_entered(body: Node3D) -> void:
+    #%Player
+    $ExitOverlay.show()

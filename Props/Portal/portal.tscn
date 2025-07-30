@@ -1,7 +1,35 @@
-[gd_scene load_steps=10 format=3 uid="uid://c37n4d7i7rqpf"]
+[gd_scene load_steps=14 format=3 uid="uid://c37n4d7i7rqpf"]
 
 [ext_resource type="Script" uid="uid://i4xuav4x4qf0" path="res://Props/Portal/portal.gd" id="1_bk3pt"]
 [ext_resource type="Shader" uid="uid://bl44w60nojejj" path="res://Props/Portal/portal.gdshader" id="2_4y2f4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4y2f4"]
+disable_fog = true
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+uv1_triplanar = true
+proximity_fade_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ekrnl"]
+disable_fog = true
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+uv1_triplanar = true
+proximity_fade_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w1uea"]
+disable_fog = true
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+uv1_triplanar = true
+proximity_fade_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a3wjj"]
+disable_fog = true
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+uv1_triplanar = true
+proximity_fade_enabled = true
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_4y2f4"]
 viewport_path = NodePath("SubViewport")
@@ -65,14 +93,17 @@ portal_cam = NodePath("SubViewport/Camera3D")
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0.0500001, 0)
 size = Vector3(0.1, 2.9, 0.2)
+material = SubResource("StandardMaterial3D_4y2f4")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, 0)
 size = Vector3(1.4, 0.1, 0.2)
+material = SubResource("StandardMaterial3D_ekrnl")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0.0500001, 0)
 size = Vector3(0.1, 2.9, 0.2)
+material = SubResource("StandardMaterial3D_w1uea")
 
 [node name="Hinge" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.4, 0)
@@ -80,15 +111,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.4, 0)
 [node name="CSGBox3D4" type="CSGBox3D" parent="Hinge"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.4, -0.040625)
 size = Vector3(1.4, 2.8, 0.1)
+material = SubResource("StandardMaterial3D_a3wjj")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_4y2f4")
 
 [node name="SubViewport" type="SubViewport" parent="."]
-size = Vector2i(602, 315)
+size = Vector2i(602, 421)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
-transform = Transform3D(-0.874193, 0.226094, -0.42973, 0, 0.884986, 0.465617, 0.485578, 0.407039, -0.773649, -1.73956, 2.17236, -3.21654)
+transform = Transform3D(-0.324739, -0.00412373, -0.945794, 0, 0.999991, -0.00436003, 0.945803, -0.00141587, -0.324736, -3.58764, 0.48931, -1.60893)
 
 [node name="PortalPos" type="Node3D" parent="."]
 transform = Transform3D(0.907777, 0, 0.419452, 0, 1, 0, -0.419452, 0, 0.907777, 0, 0, 0)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cp5jrnup6ktw3"]
+[gd_scene load_steps=23 format=3 uid="uid://cp5jrnup6ktw3"]
 
 [ext_resource type="Script" uid="uid://duqxls23317vi" path="res://tutorial.gd" id="1_4t6hg"]
 [ext_resource type="PackedScene" uid="uid://stneqj7qt42d" path="res://environment.tscn" id="2_yb1ct"]
@@ -23,9 +23,14 @@ uv1_triplanar = true
 size = Vector3(6, 4, 6)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5mrt3"]
+disable_fog = true
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 uv1_triplanar = true
+proximity_fade_enabled = true
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bsk3x"]
+radius = 10.0
 
 [sub_resource type="Animation" id="Animation_bhfnd"]
 length = 0.001
@@ -826,6 +831,21 @@ text = "Hold RMB to charge Throw"
 font = ExtResource("4_5mrt3")
 font_size = 127
 
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Map/Stage3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.5411, -42.0493, -55.7466)
+radius = 10.0
+radial_segments = 24
+rings = 12
+material = SubResource("StandardMaterial3D_5mrt3")
+
+[node name="ExitTrigger" type="Area3D" parent="Map/Stage3/CSGSphere3D"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Stage3/CSGSphere3D/ExitTrigger"]
+shape = SubResource("SphereShape3D_bsk3x")
+
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 4, -57.1939)
 text = "Space to Jump"
@@ -903,10 +923,19 @@ fizz = NodePath("../Bottle/Fizz")
 player = NodePath("..")
 metadata/_custom_type_script = "uid://dk30rqaghdesy"
 
+[node name="ExitOverlay" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [connection signal="body_entered" from="Map/Stage1/EndPlatform/Area3D" to="Map/Stage1/EndPlatform" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Map/Stage1/EndPlatform/Area3D" to="Map/Stage1/EndPlatform" method="_on_area_3d_body_exited"]
 [connection signal="body_entered" from="Map/Stage2/EndPlatform/Area3D" to="Map/Stage2/EndPlatform" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Map/Stage2/EndPlatform/Area3D" to="Map/Stage2/EndPlatform" method="_on_area_3d_body_exited"]
+[connection signal="body_entered" from="Map/Stage3/CSGSphere3D/ExitTrigger" to="." method="_on_exit_trigger_body_entered"]
 [connection signal="pressed" from="Player/Interations" to="." method="_on_interations_pressed"]
 
 [editable path="Player"]
