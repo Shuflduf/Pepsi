@@ -48,5 +48,4 @@ func _on_interations_pressed(interacted: CollisionObject3D) -> void:
 
 
 func _on_exit_trigger_body_entered(body: Node3D) -> void:
-    #%Player
     $ExitOverlay.show()

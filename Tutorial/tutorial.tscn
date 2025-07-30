@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://cp5jrnup6ktw3"]
 
-[ext_resource type="Script" uid="uid://duqxls23317vi" path="res://tutorial.gd" id="1_4t6hg"]
+[ext_resource type="Script" uid="uid://duqxls23317vi" path="res://Tutorial/tutorial.gd" id="1_4t6hg"]
 [ext_resource type="PackedScene" uid="uid://stneqj7qt42d" path="res://environment.tscn" id="2_yb1ct"]
 [ext_resource type="Texture2D" uid="uid://bn8wfhbs1omgo" path="res://Assets/Proto/Dark/texture_08.png" id="3_5mrt3"]
 [ext_resource type="FontFile" uid="uid://cum07t17b8mho" path="res://Assets/Fonts/Arvo-Bold.ttf" id="4_5mrt3"]
