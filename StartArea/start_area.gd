@@ -15,9 +15,14 @@ enum States {
     DidTutorial,
 }
 var current_state = States.NoNothing
+var liquid_amount = 0.0:
+    set(new):
+        liquid_amount = new
+        $Fade.material.set_shader_parameter(&"progress", new / 3.0)
 
 func _ready() -> void:
     tutorial_component.handicap()
+    tutorial_component.drinkable.drank.connect(_on_drank)
     tutorial_component.bottle_state = Tutorial.TutorialState.NoBottle
     var effect: AudioEffectFilter = AudioServer.get_bus_effect(1, 0)
     effect.cutoff_hz = 50
@@ -38,12 +43,14 @@ func _physics_process(delta: float) -> void:
         fading_away = true
 
     if fading_away:
-        %Fade.value += delta * 30
-        if %Fade.value >= 100:
-            if !transitioning:
-                transitioning = true
-                start_transition()
-                #transition_started.emit()
+        liquid_amount += delta
+    if liquid_amount >= 3.0:
+    #%Fade.value += delta * 30
+    #if %Fade.value >= 100:
+        if !transitioning:
+            transitioning = true
+            start_transition()
+            #transition_started.emit()
 
 func start_game() -> void:
     if started_already:
@@ -78,4 +85,13 @@ func _on_interations_pressed(interacted: CollisionObject3D) -> void:
         %VendingMachine.button_pressed(interacted)
     elif interacted is BottleProp:
         print("bottle")
-        start_game()
+        #start_game()
+        if current_state == States.DidTutorial:
+            tutorial_component.bottle_state = Tutorial.TutorialState.ShootOnly
+            interacted.queue_free()
+        else:
+            start_game()
+
+func _on_drank(amount: float):
+    liquid_amount += amount
+    print(amount)

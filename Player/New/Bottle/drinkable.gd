@@ -1,11 +1,12 @@
 extends BottleComponent
 
+signal drank(amount: float)
+
 @export var visuals: BottleVisuals
 @export var mode: BottleComponent
 @export var throw: BottleComponent
 @export var speed_increase: BottleComponent
 @export var health: Health
-
 
 var ammo := 100.0:
     set(new):
@@ -46,4 +47,4 @@ func drink(delta: float):
     check_ammo()
     health.health += delta * 30.0
     speed_increase.factor += delta
-    #drank.emit(delta * 0.75)
+    drank.emit(delta)

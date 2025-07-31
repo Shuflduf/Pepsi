@@ -16,9 +16,10 @@ vec4 wave( vec2 uv, vec4 wave_color, float level, float freq, float amp, float s
 
 void fragment() {
 	
-	vec4 wave1 = wave(UV, wave_1_color, progress, 2.5, 0.13, 0.0, wave_1_speed);
-	vec4 wave2 = wave(UV, wave_2_color, progress, 2.0, 0.1, 0.7785*TIME, wave_2_speed);
+	vec4 wave1 = wave(UV, wave_1_color, progress, 2.5, 0.07, 0.0, wave_1_speed);
+	vec4 wave2 = wave(UV, wave_2_color, progress, 2.0, 0.05, 0.7785*TIME, wave_2_speed);
 	
 	vec4 combined_waves = mix(wave1, wave2, wave2.a);
-	COLOR.rgb = mix( bg_color, combined_waves, combined_waves.a ).rgb;
+	COLOR = mix( bg_color, combined_waves, combined_waves.a );
+    //COLOR = wave1;
 }
