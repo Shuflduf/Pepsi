@@ -5,6 +5,7 @@ signal transition_started
 signal transition_finished
 
 var transitioning = false
+var transition_data = {}
 
 func set_color(col: Color):
     $Rect.material.set_shader_parameter(&"target_color", col)

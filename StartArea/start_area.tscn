@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://l8lvset0b238"]
+[gd_scene load_steps=29 format=3 uid="uid://l8lvset0b238"]
 
 [ext_resource type="Script" uid="uid://b2cnas5s1q3kr" path="res://StartArea/start_area.gd" id="1_u5x8h"]
 [ext_resource type="PackedScene" uid="uid://dhhoq1yl7v7rw" path="res://StartArea/Couch/couch.tscn" id="2_0km52"]
@@ -13,27 +13,20 @@
 [ext_resource type="PackedScene" uid="uid://7gic174mohf" path="res://StartArea/Painting/painting.gltf" id="7_wwjl0"]
 [ext_resource type="PackedScene" uid="uid://b5s1854dq42o8" path="res://StartArea/Room/room.tscn" id="9_x12yt"]
 [ext_resource type="PackedScene" uid="uid://blna5a181gko6" path="res://StartArea/Lamp/lamp.tscn" id="10_0km52"]
-[ext_resource type="Script" uid="uid://cro5dg075ji6x" path="res://Components/physics_entity.gd" id="14_ba3t7"]
 [ext_resource type="Script" uid="uid://do0ye5ewt00di" path="res://StartArea/noise.gd" id="14_iwg5w"]
-[ext_resource type="PackedScene" uid="uid://de0gr5karpjpp" path="res://Player/crosshair.tscn" id="15_lsxms"]
-[ext_resource type="AudioStream" uid="uid://cl5q406mkw1u8" path="res://Assets/SFX/walk.mp3" id="16_2c24a"]
-[ext_resource type="Script" uid="uid://dhgh0aienltl1" path="res://Player/New/look_around.gd" id="17_a3sj4"]
-[ext_resource type="Script" uid="uid://dof74olx8ypoq" path="res://Player/New/wasd.gd" id="18_wegam"]
+[ext_resource type="PackedScene" uid="uid://btsph6pq2xcxv" path="res://Player/New/player_2.tscn" id="15_1grf1"]
+[ext_resource type="Script" uid="uid://cw6rf3g2mtmqx" path="res://Player/New/tutorial.gd" id="17_vgl7t"]
 [ext_resource type="Script" uid="uid://bbohit3fws0nh" path="res://StartArea/interations.gd" id="19_lsxms"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x12yt"]
-sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-energy_multiplier = 2.0
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2c24a"]
 
 [sub_resource type="Sky" id="Sky_0km52"]
-sky_material = SubResource("ProceduralSkyMaterial_x12yt")
+sky_material = SubResource("ProceduralSkyMaterial_2c24a")
 
 [sub_resource type="Environment" id="Environment_u5x8h"]
 background_mode = 2
 sky = SubResource("Sky_0km52")
 tonemap_mode = 2
-ssao_enabled = true
 glow_enabled = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_u5x8h"]
@@ -68,38 +61,48 @@ subdivide_depth = 20
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_1grf1"]
 mix_rate = 11025.0
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_1ks24"]
+[sub_resource type="Animation" id="Animation_2c24a"]
+resource_name = "fade_in"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnterOverlay:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
 
-[sub_resource type="Curve" id="Curve_mhiq4"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.137168, 1), 0.0, 0.0, 0, 0, Vector2(0.628319, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
+[sub_resource type="Animation" id="Animation_a3sj4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnterOverlay:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
-[sub_resource type="CurveTexture" id="CurveTexture_fhl08"]
-curve = SubResource("Curve_mhiq4")
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wegam"]
+_data = {
+&"RESET": SubResource("Animation_a3sj4"),
+&"fade_in": SubResource("Animation_2c24a")
+}
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lsxms"]
-lifetime_randomness = 0.3
-emission_shape = 6
-emission_ring_axis = Vector3(0, 1, 0)
-emission_ring_height = 0.0
-emission_ring_radius = 0.1
-emission_ring_inner_radius = 0.0
-emission_ring_cone_angle = 90.0
-direction = Vector3(0, 1, 0)
-initial_velocity_min = 1.0
-initial_velocity_max = 1.0
-scale_min = 0.4
-scale_max = 0.8
-scale_curve = SubResource("CurveTexture_fhl08")
-
-[sub_resource type="SphereMesh" id="SphereMesh_job4i"]
-radius = 0.1
-height = 0.2
-
-[node name="StartArea" type="Node3D" node_paths=PackedStringArray("player_cam")]
+[node name="StartArea" type="Node3D" node_paths=PackedStringArray("player_cam", "tutorial_component")]
 script = ExtResource("1_u5x8h")
 tutorial_scene = ExtResource("2_n3sx0")
-player_cam = NodePath("Player/CamPivot/Camera3D")
+player_cam = NodePath("Player2/CamPivot/Camera3D")
+tutorial_component = NodePath("Player2/Tutorial")
 
 [node name="Fade" type="TextureProgressBar" parent="."]
 unique_name_in_owner = true
@@ -171,71 +174,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamGenerator_1grf1")
 script = ExtResource("14_iwg5w")
 
-[node name="Player" type="RigidBody3D" parent="." groups=["Player"]]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1, -6)
-collision_layer = 2
-axis_lock_angular_x = true
-axis_lock_angular_y = true
-axis_lock_angular_z = true
-script = ExtResource("14_ba3t7")
-ground_speed = 1500.0
-metadata/_custom_type_script = "uid://cro5dg075ji6x"
-
-[node name="UI" type="Control" parent="Player"]
-layout_mode = 3
+[node name="EnterOverlay" type="ColorRect" parent="."]
+z_index = 10
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(1, 1, 1, 0)
 
-[node name="Crosshair" parent="Player/UI" instance=ExtResource("15_lsxms")]
-layout_mode = 1
+[node name="Anim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_wegam")
+}
+autoplay = "RESET"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-shape = SubResource("CylinderShape3D_1ks24")
+[node name="Player2" parent="." instance=ExtResource("15_1grf1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="CamPivot" type="Node3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
-
-[node name="Camera3D" type="Camera3D" parent="Player/CamPivot"]
-
-[node name="Raycast" type="RayCast3D" parent="Player/CamPivot/Camera3D"]
+[node name="Raycast" type="RayCast3D" parent="Player2/CamPivot/Camera3D" index="5"]
 target_position = Vector3(0, 0, -2)
 collision_mask = 16
 collide_with_areas = true
 
-[node name="RunParticles" type="GPUParticles3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1.74846e-07)
-emitting = false
-lifetime = 0.3
-one_shot = true
-explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_lsxms")
-draw_pass_1 = SubResource("SphereMesh_job4i")
-
-[node name="RunSFX" type="AudioStreamPlayer3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1.74846e-07)
-stream = ExtResource("16_2c24a")
-volume_db = -30.0
-max_polyphony = 3
-
-[node name="LookAround" type="Node" parent="Player" node_paths=PackedStringArray("cam_pivot", "camera", "player")]
-script = ExtResource("17_a3sj4")
-cam_pivot = NodePath("../CamPivot")
-camera = NodePath("../CamPivot/Camera3D")
-player = NodePath("..")
-metadata/_custom_type_script = "uid://dk30rqaghdesy"
-
-[node name="WASD" type="Node" parent="Player" node_paths=PackedStringArray("cam_pivot", "run_particles", "run_sfx", "player")]
-script = ExtResource("18_wegam")
-cam_pivot = NodePath("../CamPivot")
-run_particles = NodePath("../RunParticles")
-run_sfx = NodePath("../RunSFX")
-walk_fx_speed = 0.6
-player = NodePath("..")
-
-[node name="Interations" type="Node" parent="Player" node_paths=PackedStringArray("raycast", "crosshair", "player")]
+[node name="Interations" type="Node" parent="Player2" node_paths=PackedStringArray("raycast", "crosshair", "player")]
 script = ExtResource("19_lsxms")
 raycast = NodePath("../CamPivot/Camera3D/Raycast")
 crosshair = NodePath("../UI/Crosshair")
@@ -243,6 +205,24 @@ interacting_color = Color(0.59, 1, 0.931667, 1)
 player = NodePath("..")
 metadata/_custom_type_script = "uid://dk30rqaghdesy"
 
-[connection signal="pressed" from="Player/Interations" to="." method="_on_interations_pressed"]
+[node name="Tutorial" type="Node" parent="Player2" node_paths=PackedStringArray("mode", "visuals", "health_bar", "fizz_bar", "shoot_particles", "swingable", "drinkable", "fizz", "speed_increase", "wasd", "jump", "player")]
+script = ExtResource("17_vgl7t")
+mode = NodePath("../Bottle/Mode")
+visuals = NodePath("../Bottle/Visuals")
+health_bar = NodePath("../Health/HealthBar")
+fizz_bar = NodePath("../Bottle/Fizz/FizzBar")
+shoot_particles = NodePath("../CamPivot/Camera3D/RangedParticles")
+swingable = NodePath("../Bottle/Swingable")
+drinkable = NodePath("../Bottle/Drinkable")
+fizz = NodePath("../Bottle/Fizz")
+speed_increase = NodePath("../Bottle/SpeedIncrease")
+wasd = NodePath("../WASD")
+jump = NodePath("../Jump")
+player = NodePath("..")
+metadata/_custom_type_script = "uid://dk30rqaghdesy"
+
+[connection signal="pressed" from="Player2/Interations" to="." method="_on_interations_pressed"]
 
 [editable path="Props/Lamp"]
+[editable path="Player2"]
+[editable path="Player2/Bottle"]

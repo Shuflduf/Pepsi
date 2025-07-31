@@ -1,6 +1,7 @@
 class_name Tutorial
 extends Node3D
 
+@export var start_area_scene: PackedScene
 @export var base_player_scene: PackedScene
 @export var tutorial_component: PlayerComponent
 @export var first_vending_machine: VendingMachine
@@ -51,7 +52,12 @@ func _on_interations_pressed(interacted: CollisionObject3D) -> void:
 
 func _on_exit_trigger_body_entered(_body: Node3D) -> void:
     $ExitOverlay.show()
-
+    #await get_tree().create_timer(2.0).timeout
+    var transition = Transition
+    transition.transition_data = { "from": "tutorial" }
+    transition.set_color(Color.WHITE)
+    transition.transition_to(start_area_scene)
+    transition.transition_started.connect(queue_free)
 
 func _on_kill_trigger_body_entered(body: Node3D) -> void:
     prints("kill", body)

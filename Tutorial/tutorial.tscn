@@ -1,6 +1,7 @@
-[gd_scene load_steps=26 format=3 uid="uid://cp5jrnup6ktw3"]
+[gd_scene load_steps=27 format=3 uid="uid://cp5jrnup6ktw3"]
 
 [ext_resource type="Script" uid="uid://duqxls23317vi" path="res://Tutorial/tutorial.gd" id="1_4t6hg"]
+[ext_resource type="PackedScene" uid="uid://l8lvset0b238" path="res://StartArea/start_area.tscn" id="2_mtfnd"]
 [ext_resource type="PackedScene" uid="uid://stneqj7qt42d" path="res://environment.tscn" id="2_yb1ct"]
 [ext_resource type="Texture2D" uid="uid://bn8wfhbs1omgo" path="res://Assets/Proto/Dark/texture_08.png" id="3_5mrt3"]
 [ext_resource type="FontFile" uid="uid://cum07t17b8mho" path="res://Assets/Fonts/Arvo-Bold.ttf" id="4_5mrt3"]
@@ -253,11 +254,12 @@ plane = Plane(0, 1, 0, -30)
 
 [node name="Tutorial" type="Node3D" node_paths=PackedStringArray("tutorial_component", "first_vending_machine", "second_vending_machine")]
 script = ExtResource("1_4t6hg")
+start_area_scene = ExtResource("2_mtfnd")
 base_player_scene = ExtResource("5_hu44a")
 tutorial_component = NodePath("Player/Tutorial")
 first_vending_machine = NodePath("Map/Stage1/VendingMachine")
 second_vending_machine = NodePath("Map/Stage3/VendingMachine")
-current_state = 0
+current_state = 2
 
 [node name="Environment" parent="." instance=ExtResource("2_yb1ct")]
 
@@ -971,9 +973,29 @@ libraries = {
 &"": SubResource("AnimationLibrary_tvjhf")
 }
 
+[node name="SpawnPos" type="Node3D" parent="."]
+transform = Transform3D(1, 0, -4.26326e-13, 0, 1, 0, 4.26326e-13, 0, 1, 0, 3, 0)
+
+[node name="ExitOverlay" type="ColorRect" parent="."]
+visible = false
+z_index = 10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="KillTrigger" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillTrigger"]
+shape = SubResource("WorldBoundaryShape3D_ngs4g")
+
 [node name="Player" parent="." instance=ExtResource("5_hu44a")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, -4.26326e-13, 0, 1, 0, 4.26326e-13, 0, 1, 0, 3, 0)
+transform = Transform3D(1, 0, -4.26326e-13, 0, 1, 0, 4.26326e-13, 0, 1, 1200, 3, 2632)
 metadata/_edit_group_ = true
 
 [node name="Raycast" type="RayCast3D" parent="Player/CamPivot/Camera3D" index="5"]
@@ -1002,33 +1024,13 @@ fizz = NodePath("../Bottle/Fizz")
 player = NodePath("..")
 metadata/_custom_type_script = "uid://dk30rqaghdesy"
 
-[node name="SpawnPos" type="Node3D" parent="."]
-transform = Transform3D(1, 0, -4.26326e-13, 0, 1, 0, 4.26326e-13, 0, 1, 0, 3, 0)
-
-[node name="ExitOverlay" type="ColorRect" parent="."]
-visible = false
-z_index = 10
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="KillTrigger" type="Area3D" parent="."]
-collision_layer = 0
-collision_mask = 2
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="KillTrigger"]
-shape = SubResource("WorldBoundaryShape3D_ngs4g")
-
 [connection signal="body_entered" from="Map/Stage1/EndPlatform/Area3D" to="Map/Stage1/EndPlatform" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Map/Stage1/EndPlatform/Area3D" to="Map/Stage1/EndPlatform" method="_on_area_3d_body_exited"]
 [connection signal="body_entered" from="Map/Stage2/EndPlatform/Area3D" to="Map/Stage2/EndPlatform" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Map/Stage2/EndPlatform/Area3D" to="Map/Stage2/EndPlatform" method="_on_area_3d_body_exited"]
 [connection signal="body_entered" from="Map/Stage3/CSGSphere3D/ExitTrigger" to="." method="_on_exit_trigger_body_entered"]
-[connection signal="pressed" from="Player/Interations" to="." method="_on_interations_pressed"]
 [connection signal="body_entered" from="KillTrigger" to="." method="_on_kill_trigger_body_entered"]
+[connection signal="pressed" from="Player/Interations" to="." method="_on_interations_pressed"]
 
 [editable path="Player"]
 [editable path="Player/Bottle"]

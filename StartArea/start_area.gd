@@ -1,17 +1,32 @@
+class_name StartArea
 extends Node3D
 
 @export var tutorial_scene: PackedScene
 @export var player_cam: Camera3D
+@export var tutorial_component: PlayerComponent
 
 var moving_liquid = false
 var started_already = false
 var fading_away = false
 var transitioning = false
 
+enum States {
+    NoNothing,
+    DidTutorial,
+}
+var current_state = States.NoNothing
 
 func _ready() -> void:
+    tutorial_component.handicap()
+    tutorial_component.bottle_state = Tutorial.TutorialState.NoBottle
     var effect: AudioEffectFilter = AudioServer.get_bus_effect(1, 0)
     effect.cutoff_hz = 50
+
+    var transition_data = Transition.transition_data
+    if transition_data.has("from"):
+        if transition_data["from"] == "tutorial":
+            current_state = States.DidTutorial
+            $Anim.play(&"fade_in")
 
 func _physics_process(delta: float) -> void:
     if moving_liquid:

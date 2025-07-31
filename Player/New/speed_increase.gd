@@ -9,9 +9,13 @@ extends BottleComponent
 @onready var max_speed = player.max_speed
 @onready var max_air_speed = player.max_air_speed
 
+var disabled = false
 var factor: float = 1.0
 
 func _physics_process(_delta: float) -> void:
+    if disabled:
+        return
+
     player.ground_speed = remap(factor, 1.0, 2.0, base_speed, increased_speed)
     player.max_speed = remap(factor, 1.0, 2.0, max_speed, increased_max)
     player.max_air_speed = remap(factor, 1.0, 2.0, max_air_speed, increased_max_air)

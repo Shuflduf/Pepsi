@@ -9,6 +9,10 @@ extends PlayerComponent
 @export var swingable: BottleComponent
 @export var drinkable: BottleComponent
 @export var fizz: BottleComponent
+@export var speed_increase: BottleComponent
+
+@export var wasd: PlayerComponent
+@export var jump: PlayerComponent
 
 var bottle_state = Tutorial.TutorialState.NoBottle:
     set(new):
@@ -39,6 +43,11 @@ var bottle_state = Tutorial.TutorialState.NoBottle:
 
         print(new)
 
+func handicap():
+    speed_increase.disabled = true
+    player.ground_speed = 1500.0
+    wasd.speed_factor = 0.5
+    jump.jump_enabled = false
 
 func _physics_process(_delta: float) -> void:
     if bottle_state == Tutorial.TutorialState.NoBottle:
