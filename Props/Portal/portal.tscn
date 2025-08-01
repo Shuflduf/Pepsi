@@ -117,10 +117,10 @@ material = SubResource("StandardMaterial3D_a3wjj")
 mesh = SubResource("PlaneMesh_4y2f4")
 
 [node name="SubViewport" type="SubViewport" parent="."]
-size = Vector2i(602, 421)
+size = Vector2i(602, 315)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
-transform = Transform3D(0.878374, -0.0867308, 0.470039, 0, 0.983399, 0.181455, -0.477974, -0.159385, 0.863792, 2.71472, 1.048, 4.98885)
+transform = Transform3D(0.878373, -0.0867309, 0.470039, 0, 0.983399, 0.181455, -0.477974, -0.159385, 0.863792, 2.71802, 1.04927, 4.9949)
 
 [node name="PortalPos" type="Node3D" parent="."]
 transform = Transform3D(0.907777, 0, 0.419452, 0, 1, 0, -0.419452, 0, 0.907777, 0, 0, 0)

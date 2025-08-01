@@ -1,12 +1,12 @@
-[gd_scene load_steps=29 format=3 uid="uid://l8lvset0b238"]
+[gd_scene load_steps=30 format=3 uid="uid://l8lvset0b238"]
 
 [ext_resource type="Script" uid="uid://b2cnas5s1q3kr" path="res://StartArea/start_area.gd" id="1_u5x8h"]
 [ext_resource type="PackedScene" uid="uid://dhhoq1yl7v7rw" path="res://StartArea/Couch/couch.tscn" id="2_0km52"]
 [ext_resource type="PackedScene" uid="uid://x5imp75aoum8" path="res://world.tscn" id="2_n3sx0"]
 [ext_resource type="PackedScene" uid="uid://indwglmcxev7" path="res://StartArea/VendingMachine/vending_machine.tscn" id="2_u5x8h"]
 [ext_resource type="PackedScene" uid="uid://bkjtx16cxdod2" path="res://StartArea/Table/table.tscn" id="3_0km52"]
-[ext_resource type="Texture2D" uid="uid://cpa0lwobrvp6b" path="res://Assets/single_pixel.png" id="3_2c24a"]
 [ext_resource type="Shader" uid="uid://brwq5jfi7eoh5" path="res://StartArea/liquid.gdshader" id="3_c4pxu"]
+[ext_resource type="Shader" uid="uid://bdemgum5xbdrg" path="res://StartMenu/wave.gdshader" id="4_ba3t7"]
 [ext_resource type="PackedScene" uid="uid://bcyxf87kpgyb" path="res://StartArea/Desk/desk.tscn" id="4_x12yt"]
 [ext_resource type="PackedScene" uid="uid://drp3xrfllv168" path="res://StartArea/Board/board.gltf" id="5_eddi8"]
 [ext_resource type="PackedScene" uid="uid://q4s2qjk4ybn" path="res://StartArea/Plant/plant.tscn" id="6_x12yt"]
@@ -17,6 +17,15 @@
 [ext_resource type="PackedScene" uid="uid://btsph6pq2xcxv" path="res://Player/New/player_2.tscn" id="15_1grf1"]
 [ext_resource type="Script" uid="uid://cw6rf3g2mtmqx" path="res://Player/New/tutorial.gd" id="17_vgl7t"]
 [ext_resource type="Script" uid="uid://bbohit3fws0nh" path="res://StartArea/interations.gd" id="19_lsxms"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vgl7t"]
+shader = ExtResource("4_ba3t7")
+shader_parameter/progress = 0.0
+shader_parameter/bg_color = Color(0.09785, 0.057, 0.1, 0)
+shader_parameter/wave_1_color = Color(0.0770324, 0.0320053, 0.0875757, 1)
+shader_parameter/wave_2_color = Color(0.043, 0.015, 0.05, 1)
+shader_parameter/wave_1_speed = -1.0
+shader_parameter/wave_2_speed = 0.333
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2c24a"]
 
@@ -61,6 +70,21 @@ subdivide_depth = 20
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_1grf1"]
 mix_rate = 11025.0
 
+[sub_resource type="Animation" id="Animation_a3sj4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnterOverlay:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_2c24a"]
 resource_name = "fade_in"
 length = 3.0
@@ -77,21 +101,6 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_a3sj4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("EnterOverlay:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wegam"]
 _data = {
 &"RESET": SubResource("Animation_a3sj4"),
@@ -104,18 +113,14 @@ tutorial_scene = ExtResource("2_n3sx0")
 player_cam = NodePath("Player2/CamPivot/Camera3D")
 tutorial_component = NodePath("Player2/Tutorial")
 
-[node name="Fade" type="TextureProgressBar" parent="."]
-unique_name_in_owner = true
+[node name="Fade" type="ColorRect" parent="."]
+z_index = 5
+material = SubResource("ShaderMaterial_vgl7t")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-step = 0.01
-fill_mode = 3
-nine_patch_stretch = true
-texture_progress = ExtResource("3_2c24a")
-tint_progress = Color(0.0431373, 0.0156863, 0.0509804, 1)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_u5x8h")
@@ -190,7 +195,7 @@ libraries = {
 autoplay = "RESET"
 
 [node name="Player2" parent="." instance=ExtResource("15_1grf1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1, -6)
 
 [node name="Raycast" type="RayCast3D" parent="Player2/CamPivot/Camera3D" index="5"]
 target_position = Vector3(0, 0, -2)

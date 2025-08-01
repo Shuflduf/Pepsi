@@ -1,9 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://4ddfnwecn8oy"]
+[gd_scene load_steps=9 format=3 uid="uid://4ddfnwecn8oy"]
 
 [ext_resource type="PackedScene" uid="uid://c4ouniiwlgaal" path="res://Enemies/enemy.tscn" id="1_xkyup"]
 [ext_resource type="PackedScene" uid="uid://b8et7y5a5ye3q" path="res://Enemies/Fridge/fridge.glb" id="2_6axru"]
 [ext_resource type="Script" uid="uid://cf6ogmeqr3h2y" path="res://Enemies/Fridge/fridge.gd" id="2_r6aku"]
 [ext_resource type="PackedScene" uid="uid://bqfjc7q2d846h" path="res://Enemies/Toilet/fridge_projectile.tscn" id="3_r6aku"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_r6aku"]
+height = 2.85
+radius = 0.7
 
 [sub_resource type="Curve" id="Curve_bxkaj"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.730088, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -37,7 +41,8 @@ immobile = true
 damage_indicator_offset = 3.0
 
 [node name="CollisionShape3D" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45569, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38069, 0)
+shape = SubResource("CylinderShape3D_r6aku")
 
 [node name="fridge" parent="Visuals" index="0" instance=ExtResource("2_6axru")]
 transform = Transform3D(0.395778, 0, 0, 0, 0.395778, 0, 0, 0, 0.395778, 0, -0.341559, 0)
@@ -61,10 +66,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01067, 2.274)
 [node name="Cooldown" type="Timer" parent="." index="3"]
 wait_time = 2.0
 
-[node name="HitCooldown" parent="." index="4"]
-wait_time = 0.25
-
-[node name="HitParticles" parent="." index="5"]
+[node name="HitParticles" parent="." index="6"]
 process_material = SubResource("ParticleProcessMaterial_r6aku")
 script = null
 
