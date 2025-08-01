@@ -15,7 +15,7 @@ enum TutorialState {
     FullBottle,
 }
 
-var last_checkpoint: Area3D
+var last_checkpoint: Checkpoint
 
 func _ready() -> void:
     tutorial_component.bottle_state = current_state
@@ -61,6 +61,7 @@ func _on_exit_trigger_body_entered(_body: Node3D) -> void:
 
 func _on_kill_trigger_body_entered(body: Node3D) -> void:
     prints("kill", body)
+    last_checkpoint.show_labels()
     %Player.global_position = last_checkpoint.global_position
     %Player.linear_velocity = Vector3.ZERO
 

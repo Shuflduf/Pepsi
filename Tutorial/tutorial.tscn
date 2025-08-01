@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cp5jrnup6ktw3"]
+[gd_scene load_steps=30 format=3 uid="uid://cp5jrnup6ktw3"]
 
 [ext_resource type="Script" uid="uid://duqxls23317vi" path="res://Tutorial/tutorial.gd" id="1_4t6hg"]
 [ext_resource type="PackedScene" uid="uid://l8lvset0b238" path="res://StartArea/start_area.tscn" id="2_mtfnd"]
@@ -14,7 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://indwglmcxev7" path="res://StartArea/VendingMachine/vending_machine.tscn" id="6_hu44a"]
 [ext_resource type="Texture2D" uid="uid://c8jo3i663vyoc" path="res://Assets/circle.png" id="7_4hjyh"]
 [ext_resource type="Script" uid="uid://cw6rf3g2mtmqx" path="res://Player/New/tutorial.gd" id="8_7vrqn"]
+[ext_resource type="Script" uid="uid://cbbdid7v1x175" path="res://Tutorial/checkpoint.gd" id="9_2134p"]
 [ext_resource type="PackedScene" uid="uid://dnqv3mwxxlwy2" path="res://Props/Plank/plank.tscn" id="12_bsk3x"]
+[ext_resource type="Texture2D" uid="uid://del88kd0uaawp" path="res://Assets/guide.png" id="14_y527w"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rwowx"]
 albedo_texture = ExtResource("3_5mrt3")
@@ -36,6 +38,9 @@ size = Vector3(6, 6, 6)
 [sub_resource type="BoxShape3D" id="BoxShape3D_mtfnd"]
 size = Vector3(20, 6, 6)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_y527w"]
+size = Vector3(20, 6, 3)
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_bsk3x"]
 radius = 10.0
 
@@ -44,7 +49,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Label3D4:outline_modulate")
+tracks/0/path = NodePath("Map/Stage1/Label3D4:outline_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -56,7 +61,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Label3D4:modulate")
+tracks/1/path = NodePath("Map/Stage1/Label3D4:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -68,7 +73,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Label3D5:modulate")
+tracks/2/path = NodePath("Map/Stage1/Label3D5:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -80,7 +85,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Label3D5:outline_modulate")
+tracks/3/path = NodePath("Map/Stage1/Label3D5:outline_modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -144,7 +149,7 @@ length = 6.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Label3D4:outline_modulate")
+tracks/0/path = NodePath("Map/Stage1/Label3D4:outline_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -156,7 +161,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Label3D4:modulate")
+tracks/1/path = NodePath("Map/Stage1/Label3D4:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -168,7 +173,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Label3D5:modulate")
+tracks/2/path = NodePath("Map/Stage1/Label3D5:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -180,7 +185,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Label3D5:outline_modulate")
+tracks/3/path = NodePath("Map/Stage1/Label3D5:outline_modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -536,6 +541,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 5, -24)
 collision_layer = 0
 collision_mask = 2
 monitorable = false
+script = ExtResource("9_2134p")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Stage1/Checkpoint"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.5)
@@ -546,6 +552,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -39)
 collision_layer = 0
 collision_mask = 2
 monitorable = false
+script = ExtResource("9_2134p")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Stage1/Checkpoint3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.5)
@@ -556,10 +563,63 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 19, 21)
 collision_layer = 0
 collision_mask = 2
 monitorable = false
+script = ExtResource("9_2134p")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Stage1/Checkpoint2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.5)
 shape = SubResource("BoxShape3D_ngs4g")
+
+[node name="Checkpoint4" type="Area3D" parent="Map/Stage1" node_paths=PackedStringArray("hint_labels") groups=["Checkpoint"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 172, -24, 103)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("9_2134p")
+hint_labels = NodePath("../Label3D6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Stage1/Checkpoint4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.5)
+shape = SubResource("BoxShape3D_ngs4g")
+
+[node name="Label3D" type="Label3D" parent="Map/Stage1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 4, -57.1939)
+text = "Space to Jump"
+font = ExtResource("4_5mrt3")
+font_size = 127
+
+[node name="Label3D2" type="Label3D" parent="Map/Stage1"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.9, 4, -6.19389)
+text = "Mouse to Look"
+font = ExtResource("4_5mrt3")
+font_size = 127
+
+[node name="Label3D3" type="Label3D" parent="Map/Stage1"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.9, 4, -6.09389)
+text = "WASD to Move"
+font = ExtResource("4_5mrt3")
+font_size = 127
+
+[node name="Label3D4" type="Label3D" parent="Map/Stage1"]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 51.1, 21, 19.9061)
+modulate = Color(1, 1, 1, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "LMB to Drink"
+font = ExtResource("4_5mrt3")
+font_size = 127
+
+[node name="Label3D5" type="Label3D" parent="Map/Stage1"]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 51.1, 20, 19.9061)
+modulate = Color(1, 1, 1, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "Drinking increases Speed"
+font = ExtResource("4_5mrt3")
+font_size = 127
+
+[node name="Label3D6" type="Label3D" parent="Map/Stage1"]
+transform = Transform3D(4.37114e-08, 0, -1, 0, 1, 0, 1, 0, 4.37114e-08, 186.1, -22, 102.906)
+text = "Speed gives increased height"
+font = ExtResource("4_5mrt3")
+font_size = 127
 
 [node name="Stage2" type="Node3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2000, -489.5, 833)
@@ -704,6 +764,12 @@ text = "Shooting while airborne sends you backwards"
 font = ExtResource("4_5mrt3")
 font_size = 127
 
+[node name="Label3D10" type="Label3D" parent="Map/Stage2"]
+transform = Transform3D(-1, 0, 4.37114e-08, 0, 1, 0, -4.37114e-08, 0, -1, -38.1, 510, 110)
+text = "Shooting while airborne sends you backwards"
+font = ExtResource("4_5mrt3")
+font_size = 127
+
 [node name="Label3D9" type="Label3D" parent="Map/Stage2"]
 transform = Transform3D(-1, 0, 4.37114e-08, 0, 1, 0, -4.37114e-08, 0, -1, -38.1, 509, 110)
 text = "Power increases with Fizz"
@@ -762,20 +828,54 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4, 50
 collision_layer = 0
 collision_mask = 2
 monitorable = false
+script = ExtResource("9_2134p")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Stage2/Checkpoint2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.5)
 shape = SubResource("BoxShape3D_ngs4g")
 
-[node name="Checkpoint3" type="Area3D" parent="Map/Stage2" groups=["Checkpoint"]]
+[node name="Checkpoint3" type="Area3D" parent="Map/Stage2" node_paths=PackedStringArray("hint_labels") groups=["Checkpoint"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39, 509, 97)
 collision_layer = 0
 collision_mask = 2
 monitorable = false
+script = ExtResource("9_2134p")
+hint_labels = NodePath("../Sprite3D2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Stage2/Checkpoint3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.5)
 shape = SubResource("BoxShape3D_mtfnd")
+
+[node name="Checkpoint4" type="Area3D" parent="Map/Stage2" node_paths=PackedStringArray("hint_labels") groups=["Checkpoint"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51, 524, 136)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("9_2134p")
+hint_labels = NodePath("../Label3D11")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Stage2/Checkpoint4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_y527w")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Map/Stage2"]
+transform = Transform3D(-0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, -0.5, -53, 510, 96)
+pixel_size = 0.1
+texture_filter = 0
+texture = ExtResource("14_y527w")
+
+[node name="Label3D11" type="Label3D" parent="Map/Stage2/Sprite3D2"]
+transform = Transform3D(1, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 1, 0.0499268, 3, -0.0864258)
+text = "Shoot for vertical mobility
+Drink for horizontal mobility"
+font = ExtResource("4_5mrt3")
+font_size = 127
+
+[node name="Label3D11" type="Label3D" parent="Map/Stage2"]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 75.0498, 524, 131.914)
+text = "Spinners are the best source of Fizz"
+font = ExtResource("4_5mrt3")
+font_size = 127
 
 [node name="Stage3" type="Node3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1200, 0, 2632)
@@ -912,6 +1012,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, -4)
 collision_layer = 0
 collision_mask = 2
 monitorable = false
+script = ExtResource("9_2134p")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Stage3/Checkpoint2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.5)
@@ -922,44 +1023,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 13, 13)
 collision_layer = 0
 collision_mask = 2
 monitorable = false
+script = ExtResource("9_2134p")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Stage3/Checkpoint3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.5)
 shape = SubResource("BoxShape3D_ngs4g")
-
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 4, -57.1939)
-text = "Space to Jump"
-font = ExtResource("4_5mrt3")
-font_size = 127
-
-[node name="Label3D2" type="Label3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.9, 4, -6.19389)
-text = "Mouse to Look"
-font = ExtResource("4_5mrt3")
-font_size = 127
-
-[node name="Label3D3" type="Label3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.9, 4, -6.09389)
-text = "WASD to Move"
-font = ExtResource("4_5mrt3")
-font_size = 127
-
-[node name="Label3D4" type="Label3D" parent="."]
-transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 51.1, 21, 19.9061)
-modulate = Color(1, 1, 1, 0)
-outline_modulate = Color(0, 0, 0, 0)
-text = "LMB to Drink"
-font = ExtResource("4_5mrt3")
-font_size = 127
-
-[node name="Label3D5" type="Label3D" parent="."]
-transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 51.1, 20, 19.9061)
-modulate = Color(1, 1, 1, 0)
-outline_modulate = Color(0, 0, 0, 0)
-text = "Drinking increases Speed"
-font = ExtResource("4_5mrt3")
-font_size = 127
 
 [node name="Spinner" parent="." instance=ExtResource("5_rwowx")]
 transform = Transform3D(1.728, 0, 0, 0, 1.728, 0, 0, 0, 1.728, 40, 3.5, -20)
@@ -985,17 +1053,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="KillTrigger" type="Area3D" parent="."]
-collision_layer = 0
-collision_mask = 2
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="KillTrigger"]
-shape = SubResource("WorldBoundaryShape3D_ngs4g")
-
 [node name="Player" parent="." instance=ExtResource("5_hu44a")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, -4.26326e-13, 0, 1, 0, 4.26326e-13, 0, 1, 1200, 3, 2632)
+transform = Transform3D(1, 0, -4.26326e-13, 0, 1, 0, 4.26326e-13, 0, 1, 1200, 3, 2630)
 metadata/_edit_group_ = true
 
 [node name="Raycast" type="RayCast3D" parent="Player/CamPivot/Camera3D" index="5"]
@@ -1024,13 +1084,21 @@ fizz = NodePath("../Bottle/Fizz")
 player = NodePath("..")
 metadata/_custom_type_script = "uid://dk30rqaghdesy"
 
+[node name="KillTrigger" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillTrigger"]
+shape = SubResource("WorldBoundaryShape3D_ngs4g")
+
 [connection signal="body_entered" from="Map/Stage1/EndPlatform/Area3D" to="Map/Stage1/EndPlatform" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Map/Stage1/EndPlatform/Area3D" to="Map/Stage1/EndPlatform" method="_on_area_3d_body_exited"]
 [connection signal="body_entered" from="Map/Stage2/EndPlatform/Area3D" to="Map/Stage2/EndPlatform" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Map/Stage2/EndPlatform/Area3D" to="Map/Stage2/EndPlatform" method="_on_area_3d_body_exited"]
 [connection signal="body_entered" from="Map/Stage3/CSGSphere3D/ExitTrigger" to="." method="_on_exit_trigger_body_entered"]
-[connection signal="body_entered" from="KillTrigger" to="." method="_on_kill_trigger_body_entered"]
 [connection signal="pressed" from="Player/Interations" to="." method="_on_interations_pressed"]
+[connection signal="body_entered" from="KillTrigger" to="." method="_on_kill_trigger_body_entered"]
 
 [editable path="Player"]
 [editable path="Player/Bottle"]

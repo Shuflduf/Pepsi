@@ -10,7 +10,7 @@ extends BottleComponent
 @onready var max_air_speed = player.max_air_speed
 
 var disabled = false
-var factor: float = 8.0
+var factor: float = 1.0
 
 func _physics_process(_delta: float) -> void:
     if disabled:

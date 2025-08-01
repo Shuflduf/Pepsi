@@ -131,7 +131,7 @@ func _on_enemy_died():
 func _on_kill_barrier_body_entered(body: Node3D) -> void:
     if body is Enemy:
         body.die()
-    elif body is PhysicsEntity and body.has_component("Player"):
+    elif body is PhysicsEntity and body.is_in_group(&"Player"):
         body.global_position = player_spawn_pos()
         body.linear_velocity = Vector3(0.0, body.linear_velocity.y, 0.0)
 
