@@ -18,16 +18,18 @@ var throw_strength = starting_strength:
         visuals.update_throw_strength(new - starting_strength)
 
 func _physics_process(delta: float) -> void:
+    DebugDraw2D.set_text("throw", throw_strength)
     if mode.current_mode == mode.BottleMode.Melee:
         if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+            if mode.is_ready:
+            #mode.is_ready = false
+                throw_strength += delta * 15
 
-            throw_strength += delta * 15
         elif throw_strength > starting_strength:
-        #if current_state == PepsiState.Melee and throw_strength:
             throw()
-            #throw_strength = 0.0
 
 func _ready() -> void:
+    mode.switched.connect(_on_mode_switched)
     visuals.animation_finished.connect(_on_visuals_animation_finished)
 
 func throw():
@@ -77,3 +79,6 @@ func _on_visuals_animation_finished(anim_name: StringName):
         mode.is_ready = true
         mode.current_mode = mode.BottleMode.Ranged
         visuals.play_anim(&"ranged")
+
+func _on_mode_switched():
+    throw_strength = starting_strength

@@ -1,6 +1,8 @@
 class_name BMode
 extends BottleComponent
 
+signal switched
+
 @export var visuals: BottleVisuals
 
 enum BottleMode {
@@ -18,6 +20,7 @@ func switch():
     if not can_switch:
         return
     #throw_strength = 0.0
+    switched.emit()
     #visuals.update_throw_strength(0.0)
     is_ready = false
     match current_mode:
