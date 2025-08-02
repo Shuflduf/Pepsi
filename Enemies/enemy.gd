@@ -2,6 +2,7 @@ class_name Enemy
 extends PhysicsEntity
 
 signal died
+signal on_hit
 
 @export var immobile: bool = false
 @export var starting_health = 5
@@ -25,8 +26,8 @@ var is_boosted = false:
 
 var death_inevitable = false
 
-var current_wave_heights: Array
-var map_config: MapConfig
+var current_wave_heights: Array = Wave.empty_2d_arr(6, 0)
+var map_config: MapConfig = MapConfig.new()
 
 func _ready() -> void:
     if immobile:
@@ -87,6 +88,7 @@ func hit(damage_amount: int):
         return
 
     if can_take_damage:
+        on_hit.emit()
         prints("health", health)
         $HitParticles.restart()
         %HitstunTimer.start()

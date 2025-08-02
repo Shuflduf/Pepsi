@@ -17,18 +17,12 @@ var messages = [
         "(Drinking restores health)"
     ],
     [
-        "This game revolves around beating\nhordes of enemies in Waves",
-        "The most basic enemy is the Toilet"
+        "todo",
+        "todo"
     ],
 ]
 
 var current_wave = 3
-
-func empty_map_config() -> MapConfig:
-    var conf = MapConfig.new()
-    conf.map_size = 5
-    conf.tile_size = 4
-    return conf
 
 func spawn_next_wave():
     print("spawning")
@@ -36,14 +30,26 @@ func spawn_next_wave():
         var new_enemy: Enemy = enemies.entities[enemy.enemy_id].scene.instantiate()
         new_enemy.position = enemy.pos
         new_enemy.died.connect(_on_enemy_died)
-        new_enemy.map_config = empty_map_config()
-        new_enemy.current_wave_heights = Wave.empty_2d_arr(5, 0)
+        if enemy.enemy_id == 3:
+             print("yea thats a cooler")
+             new_enemy.on_hit.connect(_on_cooler_hit.bind(new_enemy))
         $Enemies.add_child(new_enemy)
 
 #func spawn_enemy(index: int):
     #var new_enemy
     #
     #$Enemies.add_child(new_enemy)
+
+func _on_cooler_hit(cooler: Enemy):
+    print("AAAAAAAAAAAAA")
+    #cooler.global_position.y += 10.0
+    var real_pos = Vector3(
+        4.0 * randi_range(0, 4),
+        0.0,
+        4.0 * randi_range(0, 4)
+    )
+    real_pos -= Vector3(8, 0, 8)
+    cooler.global_position = real_pos
 
 func _on_enemy_died():
     print($Enemies.get_child_count())

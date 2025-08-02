@@ -47,4 +47,5 @@ func hit(damage_amount: int):
         random_tile_pos.y * map_config.tile_size,
     )
     global_position = new_real_pos
+    on_hit.emit()
     # add like fx when tp, like a line connecting old pos to new pos
