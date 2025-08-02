@@ -1,18 +1,262 @@
-[gd_scene load_steps=5 format=3 uid="uid://btqnnxh88yfa7"]
+[gd_scene load_steps=25 format=3 uid="uid://btqnnxh88yfa7"]
 
 [ext_resource type="PackedScene" uid="uid://stneqj7qt42d" path="res://environment.tscn" id="1_0sppy"]
+[ext_resource type="Script" uid="uid://b7wx3yrxjckhu" path="res://Tutorial/enemy_tutorial.gd" id="1_itq02"]
 [ext_resource type="Texture2D" uid="uid://bn8wfhbs1omgo" path="res://Assets/Proto/Dark/texture_08.png" id="2_523p4"]
+[ext_resource type="Resource" uid="uid://crragfimbp1gw" path="res://Enemies/enemies.tres" id="2_le3fn"]
 [ext_resource type="PackedScene" uid="uid://btsph6pq2xcxv" path="res://Player/New/player_2.tscn" id="3_q3g4g"]
+[ext_resource type="Script" uid="uid://qp6tx6l5yos1" path="res://Tutorial/basic_wave.gd" id="3_v3sty"]
+[ext_resource type="NavigationMesh" uid="uid://ip1320edg75b" path="res://Resources/nav_mesh.tres" id="4_5wkb6"]
+[ext_resource type="Script" uid="uid://dhjnqpbwamhvt" path="res://Tutorial/basic_wave_enemy.gd" id="4_bdllx"]
+[ext_resource type="FontFile" uid="uid://cum07t17b8mho" path="res://Assets/Fonts/Arvo-Bold.ttf" id="5_xoi2k"]
+
+[sub_resource type="Resource" id="Resource_elj4g"]
+script = ExtResource("4_bdllx")
+enemy_id = 0
+pos = Vector3(0, 0, -4)
+metadata/_custom_type_script = "uid://dhjnqpbwamhvt"
+
+[sub_resource type="Resource" id="Resource_0t2ev"]
+script = ExtResource("3_v3sty")
+list = Array[ExtResource("4_bdllx")]([SubResource("Resource_elj4g")])
+metadata/_custom_type_script = "uid://qp6tx6l5yos1"
+
+[sub_resource type="Resource" id="Resource_v3sty"]
+script = ExtResource("4_bdllx")
+enemy_id = 1
+pos = Vector3(8, 0, -8)
+metadata/_custom_type_script = "uid://dhjnqpbwamhvt"
+
+[sub_resource type="Resource" id="Resource_bdllx"]
+script = ExtResource("4_bdllx")
+enemy_id = 1
+pos = Vector3(-8, 0, -8)
+metadata/_custom_type_script = "uid://dhjnqpbwamhvt"
+
+[sub_resource type="Resource" id="Resource_7sxyv"]
+script = ExtResource("3_v3sty")
+list = Array[ExtResource("4_bdllx")]([SubResource("Resource_v3sty"), SubResource("Resource_bdllx")])
+metadata/_custom_type_script = "uid://qp6tx6l5yos1"
+
+[sub_resource type="Resource" id="Resource_on2du"]
+script = ExtResource("4_bdllx")
+enemy_id = 2
+pos = Vector3(-10, 30, -8)
+metadata/_custom_type_script = "uid://dhjnqpbwamhvt"
+
+[sub_resource type="Resource" id="Resource_p5l06"]
+script = ExtResource("4_bdllx")
+enemy_id = 2
+pos = Vector3(0, 30, -8)
+metadata/_custom_type_script = "uid://dhjnqpbwamhvt"
+
+[sub_resource type="Resource" id="Resource_15ugv"]
+script = ExtResource("4_bdllx")
+enemy_id = 2
+pos = Vector3(10, 30, -8)
+metadata/_custom_type_script = "uid://dhjnqpbwamhvt"
+
+[sub_resource type="Resource" id="Resource_4owan"]
+script = ExtResource("3_v3sty")
+list = Array[ExtResource("4_bdllx")]([SubResource("Resource_on2du"), SubResource("Resource_p5l06"), SubResource("Resource_15ugv")])
+metadata/_custom_type_script = "uid://qp6tx6l5yos1"
+
+[sub_resource type="Resource" id="Resource_201mw"]
+script = ExtResource("4_bdllx")
+enemy_id = 3
+pos = Vector3(0, 0, -4)
+metadata/_custom_type_script = "uid://dhjnqpbwamhvt"
+
+[sub_resource type="Resource" id="Resource_sytix"]
+script = ExtResource("3_v3sty")
+list = Array[ExtResource("4_bdllx")]([SubResource("Resource_201mw")])
+metadata/_custom_type_script = "uid://qp6tx6l5yos1"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q3g4g"]
 albedo_texture = ExtResource("2_523p4")
 uv1_triplanar = true
 
+[sub_resource type="Animation" id="Animation_sm3g7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MainLabel:outline_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MainLabel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-4, 4, -11)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SubLabel:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SubLabel:outline_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SubLabel:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 2, -11)]
+}
+
+[sub_resource type="Animation" id="Animation_5wkb6"]
+resource_name = "show"
+length = 4.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainLabel:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 2.3, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MainLabel:outline_modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7, 2.3, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MainLabel:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.7, 2.3, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-4, 3, -11), Vector3(0, 3, -11), Vector3(0, 3, -11), Vector3(4, 3, -11)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SubLabel:modulate")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 0.8, 2.2, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SubLabel:outline_modulate")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.2, 0.8, 2.2, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SubLabel:position")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.2, 0.8, 2.2, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-3, 2, -11), Vector3(0, 2, -11), Vector3(0, 2, -11), Vector3(3, 2, -11)]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"spawn_next_wave"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sm3g7"]
+_data = {
+&"RESET": SubResource("Animation_sm3g7"),
+&"show": SubResource("Animation_5wkb6")
+}
+
 [node name="EnemyTutorial" type="Node3D"]
+script = ExtResource("1_itq02")
+enemies = ExtResource("2_le3fn")
+waves = Array[ExtResource("3_v3sty")]([SubResource("Resource_0t2ev"), SubResource("Resource_7sxyv"), SubResource("Resource_4owan"), SubResource("Resource_sytix")])
 
 [node name="Environment" parent="." instance=ExtResource("1_0sppy")]
 
-[node name="Map" type="Node3D" parent="."]
+[node name="Map" type="NavigationRegion3D" parent="."]
+navigation_mesh = ExtResource("4_5wkb6")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -500, 0)
@@ -21,4 +265,35 @@ size = Vector3(20, 1000, 20)
 material = SubResource("StandardMaterial3D_q3g4g")
 
 [node name="Player2" parent="." instance=ExtResource("3_q3g4g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_sm3g7")
+}
+
+[node name="MainLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, 1, -4, 4, -11)
+modulate = Color(1, 1, 1, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "This game revolves around beating hordes of enemies in Waves"
+font = ExtResource("5_xoi2k")
+font_size = 127
+
+[node name="SubLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, 1, 0, 2, -11)
+pixel_size = 0.004
+modulate = Color(1, 1, 1, 0)
+outline_modulate = Color(0, 0, 0, 0)
+text = "The most basic enemy is the Toilet"
+font = ExtResource("5_xoi2k")
+font_size = 127
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

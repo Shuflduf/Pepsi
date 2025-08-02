@@ -18,7 +18,7 @@ func resize(size: int):
     props = empty_2d_arr(size, -1)
 
 
-func empty_2d_arr(size: int, val: Variant) -> Array:
+static func empty_2d_arr(size: int, val: Variant) -> Array:
     var new_arr = []
     for x in range(size):
         var row = []
