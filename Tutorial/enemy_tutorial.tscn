@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://btqnnxh88yfa7"]
+
+[ext_resource type="PackedScene" uid="uid://stneqj7qt42d" path="res://environment.tscn" id="1_0sppy"]
+[ext_resource type="Texture2D" uid="uid://bn8wfhbs1omgo" path="res://Assets/Proto/Dark/texture_08.png" id="2_523p4"]
+[ext_resource type="PackedScene" uid="uid://btsph6pq2xcxv" path="res://Player/New/player_2.tscn" id="3_q3g4g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q3g4g"]
+albedo_texture = ExtResource("2_523p4")
+uv1_triplanar = true
+
+[node name="EnemyTutorial" type="Node3D"]
+
+[node name="Environment" parent="." instance=ExtResource("1_0sppy")]
+
+[node name="Map" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -500, 0)
+use_collision = true
+size = Vector3(20, 1000, 20)
+material = SubResource("StandardMaterial3D_q3g4g")
+
+[node name="Player2" parent="." instance=ExtResource("3_q3g4g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 4)

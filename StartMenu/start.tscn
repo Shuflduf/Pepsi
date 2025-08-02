@@ -45,6 +45,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 59.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -55,6 +56,10 @@ text = "Pepsi Limbo"
 label_settings = SubResource("LabelSettings_qn1rc")
 horizontal_alignment = 1
 
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
 [node name="Start" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -62,5 +67,13 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 theme = ExtResource("3_5vtl3")
 text = "START"
+
+[node name="Settings" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme = ExtResource("3_5vtl3")
+text = "SETTINGS"
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]

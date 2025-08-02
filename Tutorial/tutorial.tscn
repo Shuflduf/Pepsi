@@ -988,12 +988,13 @@ font_size = 127
 
 [node name="Label3D4" type="Label3D" parent="Map/Stage3"]
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -21.8118, 20, -5.96582)
+double_sided = false
 text = "Hold RMB to charge Throw"
 font = ExtResource("4_5mrt3")
 font_size = 127
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Map/Stage3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.5411, -24.0493, -39.7466)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -72.5411, -24.0493, -25.7466)
 radius = 10.0
 radial_segments = 24
 rings = 12
