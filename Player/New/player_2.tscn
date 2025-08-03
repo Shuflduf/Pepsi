@@ -15,14 +15,11 @@
 [ext_resource type="AudioStream" uid="uid://bavj1e50gm7l6" path="res://Assets/SFX/jump.mp3" id="6_r68f0"]
 [ext_resource type="AudioStream" uid="uid://cdowbo8hw7d7q" path="res://Assets/SFX/pour.mp3" id="7_job4i"]
 [ext_resource type="Script" uid="uid://fyfphgq75leh" path="res://Player/New/health.gd" id="12_r68f0"]
+[ext_resource type="PackedScene" uid="uid://iry74eecihxq" path="res://Player/player_damage_indicator.tscn" id="16_opynp"]
 [ext_resource type="Script" uid="uid://dk30rqaghdesy" path="res://Player/New/player_component.gd" id="17_opynp"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hgjig"]
 friction = 0.0
-
-[sub_resource type="LabelSettings" id="LabelSettings_hgjig"]
-outline_size = 5
-outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_1ks24"]
 
@@ -177,23 +174,6 @@ offset_left = 302.0
 offset_top = 149.0
 offset_right = 342.0
 offset_bottom = 178.0
-
-[node name="DamageLabel" type="Label" parent="UI/LabelContainer"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -14.5
-offset_right = 20.0
-offset_bottom = 8.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "-10"
-label_settings = SubResource("LabelSettings_hgjig")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_1ks24")
@@ -428,11 +408,12 @@ jump_particles = NodePath("../JumpParticles")
 player = NodePath("..")
 metadata/_custom_type_script = "uid://dk30rqaghdesy"
 
-[node name="Health" type="Node" parent="." node_paths=PackedStringArray("hit_cooldown", "health_bar", "damage_label")]
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("hit_cooldown", "health_bar", "label_container")]
 script = ExtResource("12_r68f0")
 hit_cooldown = NodePath("HitCooldown")
 health_bar = NodePath("HealthBar")
-damage_label = NodePath("../UI/LabelContainer/DamageLabel")
+damage_label = ExtResource("16_opynp")
+label_container = NodePath("../UI/LabelContainer")
 metadata/_custom_type_script = "uid://dk30rqaghdesy"
 
 [node name="HitCooldown" type="Timer" parent="Health"]
