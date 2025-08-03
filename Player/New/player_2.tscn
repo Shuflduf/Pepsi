@@ -375,8 +375,9 @@ texture_progress = ExtResource("3_job4i")
 [node name="Sway" parent="Bottle" index="9" node_paths=PackedStringArray("visuals")]
 visuals = NodePath("../Visuals")
 
-[node name="SpeedIncrease" parent="Bottle" index="10" node_paths=PackedStringArray("player")]
+[node name="SpeedIncrease" parent="Bottle" index="10" node_paths=PackedStringArray("player", "cam")]
 player = NodePath("../..")
+cam = NodePath("../../CamPivot/Camera3D")
 
 [node name="LookAround" type="Node" parent="." node_paths=PackedStringArray("cam_pivot", "camera", "player")]
 script = ExtResource("2_yie63")
