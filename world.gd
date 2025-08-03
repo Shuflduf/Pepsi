@@ -6,6 +6,18 @@ extends Node3D
 var level: Array
 var current_wave = 0
 
+var time_on_map = 0.0
+var time_on_waves = []
+var current_wave_time = 0.0
+
+var counting = false
+
+func _physics_process(delta: float) -> void:
+    DebugDraw2D.set_text("time", [time_on_map, current_wave_time])
+    if counting:
+        time_on_map += delta
+        current_wave_time += delta
+
 func _ready() -> void:
     var data = JSON.parse_string(FileAccess.get_file_as_string(level_path))
     var config = MapConfig.new()
@@ -22,10 +34,14 @@ func _ready() -> void:
 
 func _on_wait_timer_timeout() -> void:
     %Map.set_wave(level[current_wave])
+    counting = true
 
 
 func _on_map_wave_complete() -> void:
+    counting = false
     if current_wave + 1 < level.size():
+        time_on_waves.append({ "wave_name": level[current_wave].name, "value": current_wave_time })
+        current_wave_time = 0.0
         current_wave += 1
         $WaitTimer.start()
     else:
@@ -37,6 +53,7 @@ func _on_player_death_handler_transitioned() -> void:
 
 
 func _on_map_map_complete() -> void:
+    return
     var transition = Transition
     transition.set_color(Color.AZURE)
     transition.transition_to(start_area)

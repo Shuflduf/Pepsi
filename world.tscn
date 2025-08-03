@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://x5imp75aoum8"]
+[gd_scene load_steps=12 format=3 uid="uid://x5imp75aoum8"]
 
 [ext_resource type="Script" uid="uid://c0ufo5455ip26" path="res://world.gd" id="1_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://l8lvset0b238" path="res://StartArea/start_area.tscn" id="2_dwbse"]
@@ -6,9 +6,18 @@
 [ext_resource type="PackedScene" uid="uid://i6y0f38fbrtl" path="res://map.tscn" id="4_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://stneqj7qt42d" path="res://environment.tscn" id="4_dwbse"]
 [ext_resource type="PackedScene" uid="uid://bnky4c06vmgtv" path="res://player_death_handler.tscn" id="5_036b0"]
+[ext_resource type="Script" uid="uid://cpsctnwbeknfh" path="res://end_screen.gd" id="7_pkg7o"]
+[ext_resource type="PackedScene" uid="uid://ducobsdxbkamb" path="res://wave_time.tscn" id="8_gbfbk"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_aqk2v"]
 friction = 0.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_dwbse"]
+font_size = 36
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_pkg7o"]
+font_color = Color(0, 0, 0, 1)
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_aqk2v")
@@ -30,6 +39,88 @@ physics_material_override = SubResource("PhysicsMaterial_aqk2v")
 [node name="PlayerDeathHandler" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_036b0")]
 player = NodePath("../Player2")
 from = "world"
+
+[node name="EndScreen" type="Control" parent="."]
+z_index = 20
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_pkg7o")
+wave_time_scene = ExtResource("8_gbfbk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EndScreen"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -202.0
+offset_right = 203.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="EndScreen/VBoxContainer"]
+layout_mode = 2
+text = "[MAP NAME] Complete!"
+label_settings = SubResource("LabelSettings_dwbse")
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EndScreen/VBoxContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EndScreen/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EndScreen/VBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="EndScreen/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Time:"
+label_settings = SubResource("LabelSettings_pkg7o")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="EndScreen/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "5:23"
+label_settings = SubResource("LabelSettings_pkg7o")
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="EndScreen/VBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="WaveTimes" type="VBoxContainer" parent="EndScreen/VBoxContainer/VBoxContainer/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="WaveTime" parent="EndScreen/VBoxContainer/VBoxContainer/VBoxContainer/MarginContainer/WaveTimes" instance=ExtResource("8_gbfbk")]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="EndScreen/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="EndScreen/VBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Damage:"
+label_settings = SubResource("LabelSettings_pkg7o")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="EndScreen/VBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "42"
+label_settings = SubResource("LabelSettings_pkg7o")
+horizontal_alignment = 1
 
 [connection signal="map_complete" from="Map" to="." method="_on_map_map_complete"]
 [connection signal="wave_complete" from="Map" to="." method="_on_map_wave_complete"]
