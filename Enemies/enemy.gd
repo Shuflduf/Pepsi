@@ -2,7 +2,6 @@ class_name Enemy
 extends PhysicsEntity
 
 signal died
-signal on_hit
 
 @export var immobile: bool = false
 @export var starting_health = 5
@@ -88,8 +87,6 @@ func hit(damage_amount: int):
         return
 
     if can_take_damage:
-        on_hit.emit()
-        prints("health", health)
         $HitParticles.restart()
         %HitstunTimer.start()
         in_hitstun = true

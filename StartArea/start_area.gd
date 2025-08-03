@@ -2,6 +2,8 @@ class_name StartArea
 extends Node3D
 
 @export var tutorial_scene: PackedScene
+@export var enemy_tutorial_scene: PackedScene
+@export var world_scene: PackedScene
 @export var player_cam: Camera3D
 @export var tutorial_component: PlayerComponent
 
@@ -13,6 +15,7 @@ var transitioning = false
 enum States {
     NoNothing,
     DidTutorial,
+    ReadyForActualGame
 }
 var current_state = States.NoNothing
 var liquid_amount = 0.0:
@@ -29,9 +32,11 @@ func _ready() -> void:
 
     var transition_data = Transition.transition_data
     if transition_data.has("from"):
+        $Anim.play(&"fade_in")
         if transition_data["from"] == "tutorial":
             current_state = States.DidTutorial
-            $Anim.play(&"fade_in")
+        elif transition_data["from"] == "enemy_tutorial":
+            current_state = States.ReadyForActualGame
 
 func _physics_process(delta: float) -> void:
     if moving_liquid:
@@ -76,6 +81,14 @@ func start_transition() -> void:
     transition.transition_started.connect(func():
         queue_free()
     )
+    var target_scene: PackedScene
+    match current_state:
+        States.NoNothing:
+            target_scene = tutorial_scene
+        States.DidTutorial:
+            target_scene = enemy_tutorial_scene
+        States.ReadyForActualGame:
+            pass
     transition.transition_to(tutorial_scene)
 
 
@@ -86,7 +99,7 @@ func _on_interations_pressed(interacted: CollisionObject3D) -> void:
     elif interacted is BottleProp:
         print("bottle")
         #start_game()
-        if current_state == States.DidTutorial:
+        if current_state in [States.DidTutorial, States.ReadyForActualGame]:
             tutorial_component.bottle_state = Tutorial.TutorialState.ShootOnly
             interacted.queue_free()
         else:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://btqnnxh88yfa7"]
+[gd_scene load_steps=33 format=3 uid="uid://btqnnxh88yfa7"]
 
 [ext_resource type="PackedScene" uid="uid://stneqj7qt42d" path="res://environment.tscn" id="1_0sppy"]
 [ext_resource type="Script" uid="uid://b7wx3yrxjckhu" path="res://Tutorial/enemy_tutorial.gd" id="1_itq02"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://qp6tx6l5yos1" path="res://Tutorial/basic_wave.gd" id="3_v3sty"]
 [ext_resource type="NavigationMesh" uid="uid://ip1320edg75b" path="res://Resources/nav_mesh.tres" id="4_5wkb6"]
 [ext_resource type="Script" uid="uid://dhjnqpbwamhvt" path="res://Tutorial/basic_wave_enemy.gd" id="4_bdllx"]
+[ext_resource type="PackedScene" uid="uid://l8lvset0b238" path="res://StartArea/start_area.tscn" id="5_bdllx"]
 [ext_resource type="FontFile" uid="uid://cum07t17b8mho" path="res://Assets/Fonts/Arvo-Bold.ttf" id="5_xoi2k"]
 
 [sub_resource type="Resource" id="Resource_elj4g"]
@@ -67,9 +68,27 @@ enemy_id = 3
 pos = Vector3(0, 0, -4)
 metadata/_custom_type_script = "uid://dhjnqpbwamhvt"
 
+[sub_resource type="Resource" id="Resource_35wka"]
+script = ExtResource("4_bdllx")
+enemy_id = 0
+pos = Vector3(8, 0, -8)
+metadata/_custom_type_script = "uid://dhjnqpbwamhvt"
+
+[sub_resource type="Resource" id="Resource_5t4c7"]
+script = ExtResource("4_bdllx")
+enemy_id = 1
+pos = Vector3(-8, 0, -8)
+metadata/_custom_type_script = "uid://dhjnqpbwamhvt"
+
+[sub_resource type="Resource" id="Resource_eoxwx"]
+script = ExtResource("4_bdllx")
+enemy_id = 2
+pos = Vector3(0, 20, -8)
+metadata/_custom_type_script = "uid://dhjnqpbwamhvt"
+
 [sub_resource type="Resource" id="Resource_sytix"]
 script = ExtResource("3_v3sty")
-list = Array[ExtResource("4_bdllx")]([SubResource("Resource_201mw")])
+list = Array[ExtResource("4_bdllx")]([SubResource("Resource_201mw"), SubResource("Resource_35wka"), SubResource("Resource_5t4c7"), SubResource("Resource_eoxwx")])
 metadata/_custom_type_script = "uid://qp6tx6l5yos1"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q3g4g"]
@@ -149,6 +168,59 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 2, -11)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CSGSphere3D/ExitTrigger:monitoring")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CSGSphere3D:radius")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.001]
+}
+
+[sub_resource type="Animation" id="Animation_v3sty"]
+resource_name = "finish"
+length = 3.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGSphere3D/ExitTrigger:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CSGSphere3D:radius")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.001, 20.0]
 }
 
 [sub_resource type="Animation" id="Animation_5wkb6"]
@@ -245,13 +317,28 @@ tracks/6/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sm3g7"]
 _data = {
 &"RESET": SubResource("Animation_sm3g7"),
+&"finish": SubResource("Animation_v3sty"),
 &"show": SubResource("Animation_5wkb6")
 }
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_v3sty"]
+plane = Plane(0, 1, 0, -50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v3sty"]
+disable_fog = true
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+uv1_triplanar = true
+proximity_fade_enabled = true
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bdllx"]
+radius = 10.0
 
 [node name="EnemyTutorial" type="Node3D"]
 script = ExtResource("1_itq02")
 enemies = ExtResource("2_le3fn")
 waves = Array[ExtResource("3_v3sty")]([SubResource("Resource_0t2ev"), SubResource("Resource_7sxyv"), SubResource("Resource_4owan"), SubResource("Resource_sytix")])
+start_area_scene = ExtResource("5_bdllx")
 
 [node name="Environment" parent="." instance=ExtResource("1_0sppy")]
 
@@ -296,4 +383,44 @@ autostart = true
 
 [node name="Enemies" type="Node3D" parent="."]
 
+[node name="KillBarrier" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 6
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillBarrier"]
+shape = SubResource("WorldBoundaryShape3D_v3sty")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -17, -51)
+radius = 0.001
+radial_segments = 24
+rings = 12
+material = SubResource("StandardMaterial3D_v3sty")
+
+[node name="ExitTrigger" type="Area3D" parent="CSGSphere3D"]
+collision_layer = 0
+collision_mask = 2
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGSphere3D/ExitTrigger"]
+shape = SubResource("SphereShape3D_bdllx")
+
+[node name="ExitOverlay" type="ColorRect" parent="."]
+visible = false
+z_index = 10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CheckTimer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="body_entered" from="KillBarrier" to="." method="_on_kill_barrier_body_entered"]
+[connection signal="body_entered" from="CSGSphere3D/ExitTrigger" to="." method="_on_exit_trigger_body_entered"]
+[connection signal="timeout" from="CheckTimer" to="." method="_on_check_timer_timeout"]

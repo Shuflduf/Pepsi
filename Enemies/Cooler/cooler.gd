@@ -1,5 +1,7 @@
 extends Enemy
 
+signal on_hit
+
 var connected_enemies: Dictionary[Enemy, GPUParticles3D] = {}
 
 func _physics_process(delta: float) -> void:
