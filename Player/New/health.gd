@@ -9,7 +9,7 @@ signal died
 @export var label_container: Control
 
 var can_be_hit = true
-var health = 10:
+var health = 100:
     set(new):
         new = min(new, 100)
         health = new

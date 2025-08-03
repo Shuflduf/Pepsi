@@ -22,16 +22,19 @@ func get_relevant_components():
     speed_component = bottle.find_child("SpeedIncrease")
 
 func _physics_process(delta: float) -> void:
+    $spinner.rotate_y(delta * 10)
     if $Area3D.has_overlapping_bodies():
+        $Grind.emitting = true
         jump_scale += delta * 8 * speed_component.factor
         jump_scale = minf(jump_scale, 20.0 * speed_component.factor)
         add_fizz(delta)
         DebugDraw2D.set_text("jump", jump_scale)
 
         #player.linear_velocity = Vector3.ZERO
-        player.global_rotation.y += jump_scale * delta
+        player.global_rotation.y += -jump_scale * delta
         player.global_position = lerp(player.global_position, global_position, delta * 3)
     else:
+        $Grind.emitting = false
         jump_scale = 0.0
 
 func _on_player_jumped():

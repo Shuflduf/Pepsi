@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://btsph6pq2xcxv"]
+[gd_scene load_steps=45 format=3 uid="uid://btsph6pq2xcxv"]
 
 [ext_resource type="Script" uid="uid://cro5dg075ji6x" path="res://Components/physics_entity.gd" id="1_16gp5"]
 [ext_resource type="Script" uid="uid://dof74olx8ypoq" path="res://Player/New/wasd.gd" id="2_1ks24"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://fyfphgq75leh" path="res://Player/New/health.gd" id="12_r68f0"]
 [ext_resource type="PackedScene" uid="uid://iry74eecihxq" path="res://Player/player_damage_indicator.tscn" id="16_opynp"]
 [ext_resource type="Script" uid="uid://dk30rqaghdesy" path="res://Player/New/player_component.gd" id="17_opynp"]
+[ext_resource type="Script" uid="uid://blx8n2jniuo31" path="res://Player/New/speed_lines.gd" id="18_0xode"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hgjig"]
 friction = 0.0
@@ -69,6 +70,46 @@ size = Vector3(2, 2, 40)
 stream_count = 1
 stream_0/stream = ExtResource("7_job4i")
 stream_0/volume = 0.0
+
+[sub_resource type="Curve" id="Curve_opynp"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.632911, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_0xode"]
+curve = SubResource("Curve_opynp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_opynp"]
+lifetime_randomness = 0.8
+particle_flag_align_y = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 1.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 0, 1)
+spread = 0.0
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+orbit_velocity_min = 1.298
+orbit_velocity_max = 1.298
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_0xode")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xode"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.2)
+distance_fade_mode = 2
+distance_fade_min_distance = 0.1
+distance_fade_max_distance = 5.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bvotu"]
+material = SubResource("StandardMaterial3D_0xode")
+radius = 0.1
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_6e4jg"]
 height = 2.6
@@ -240,6 +281,15 @@ debug_color = Color(0, 0.513333, 0.7, 0.419608)
 [node name="RangedShoot" type="AudioStreamPlayer3D" parent="CamPivot/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 stream = SubResource("AudioStreamSynchronized_hgjig")
+
+[node name="FastParticles" type="GPUParticles3D" parent="CamPivot/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6)
+amount = 32
+lifetime = 0.2
+visibility_aabb = AABB(-2.9999, -2.99982, -2.47789, 5.99989, 5.99898, 5.84778)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_opynp")
+draw_pass_1 = SubResource("CapsuleMesh_bvotu")
 
 [node name="SlamHitbox" type="Area3D" parent="."]
 collision_layer = 0
@@ -444,6 +494,12 @@ tint_progress = Color(0.490196, 0.223529, 0.282353, 1)
 
 [node name="Player" type="Node" parent="."]
 script = ExtResource("17_opynp")
+metadata/_custom_type_script = "uid://dk30rqaghdesy"
+
+[node name="SpeedLines" type="Node" parent="." node_paths=PackedStringArray("speed_particles", "player")]
+script = ExtResource("18_0xode")
+speed_particles = NodePath("../CamPivot/Camera3D/FastParticles")
+player = NodePath("..")
 metadata/_custom_type_script = "uid://dk30rqaghdesy"
 
 [editable path="Bottle"]
