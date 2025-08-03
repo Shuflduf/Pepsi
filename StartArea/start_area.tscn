@@ -109,7 +109,9 @@ _data = {
 
 [node name="StartArea" type="Node3D" node_paths=PackedStringArray("player_cam", "tutorial_component")]
 script = ExtResource("1_u5x8h")
-tutorial_scene = ExtResource("2_n3sx0")
+tutorial_scene = "uid://cp5jrnup6ktw3"
+enemy_tutorial_scene = "uid://btqnnxh88yfa7"
+world_scene = ExtResource("2_n3sx0")
 player_cam = NodePath("Player2/CamPivot/Camera3D")
 tutorial_component = NodePath("Player2/Tutorial")
 

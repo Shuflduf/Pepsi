@@ -264,7 +264,7 @@ base_player_scene = ExtResource("5_hu44a")
 tutorial_component = NodePath("Player/Tutorial")
 first_vending_machine = NodePath("Map/Stage1/VendingMachine")
 second_vending_machine = NodePath("Map/Stage3/VendingMachine")
-current_state = 2
+current_state = 0
 
 [node name="Environment" parent="." instance=ExtResource("2_yb1ct")]
 
@@ -1042,21 +1042,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_tvjhf")
 }
 
-[node name="SpawnPos" type="Node3D" parent="."]
-transform = Transform3D(1, 0, -4.26326e-13, 0, 1, 0, 4.26326e-13, 0, 1, 0, 3, 0)
-
-[node name="ExitOverlay" type="ColorRect" parent="."]
-visible = false
-z_index = 10
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="Player" parent="." instance=ExtResource("5_hu44a")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, -4.26326e-13, 0, 1, 0, 4.26326e-13, 0, 1, 1200, 3, 2630)
+transform = Transform3D(1, 0, -4.26326e-13, 0, 1, 0, 4.26326e-13, 0, 1, 0, 3, 0)
 metadata/_edit_group_ = true
 
 [node name="Raycast" type="RayCast3D" parent="Player/CamPivot/Camera3D" index="5"]
@@ -1084,6 +1072,18 @@ drinkable = NodePath("../Bottle/Drinkable")
 fizz = NodePath("../Bottle/Fizz")
 player = NodePath("..")
 metadata/_custom_type_script = "uid://dk30rqaghdesy"
+
+[node name="SpawnPos" type="Node3D" parent="."]
+transform = Transform3D(1, 0, -4.26326e-13, 0, 1, 0, 4.26326e-13, 0, 1, 0, 3, 0)
+
+[node name="ExitOverlay" type="ColorRect" parent="."]
+visible = false
+z_index = 10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="KillTrigger" type="Area3D" parent="."]
 collision_layer = 0

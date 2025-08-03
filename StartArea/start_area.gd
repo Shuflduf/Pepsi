@@ -1,8 +1,9 @@
 class_name StartArea
 extends Node3D
 
-@export var tutorial_scene: PackedScene
-@export var enemy_tutorial_scene: PackedScene
+# cant do recursize packedscene exports
+@export_file("*.tscn") var tutorial_scene
+@export_file("*.tscn") var enemy_tutorial_scene
 @export var world_scene: PackedScene
 @export var player_cam: Camera3D
 @export var tutorial_component: PlayerComponent
@@ -81,15 +82,17 @@ func start_transition() -> void:
     transition.transition_started.connect(func():
         queue_free()
     )
+
     var target_scene: PackedScene
     match current_state:
         States.NoNothing:
-            target_scene = tutorial_scene
+            target_scene = load(tutorial_scene)
         States.DidTutorial:
-            target_scene = enemy_tutorial_scene
+            target_scene = load(enemy_tutorial_scene)
         States.ReadyForActualGame:
-            pass
-    transition.transition_to(tutorial_scene)
+            target_scene = world_scene
+
+    transition.transition_to(target_scene)
 
 
 func _on_interations_pressed(interacted: CollisionObject3D) -> void:
