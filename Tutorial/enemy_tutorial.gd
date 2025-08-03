@@ -23,8 +23,11 @@ var messages = [
     ],
 ]
 
-var current_wave = 0
+var current_wave = 3
 var fighting_enemies = false
+
+#func _ready() -> void:
+    #$Anim.play("finish")
 
 func spawn_next_wave():
     print("spawning")
@@ -92,3 +95,7 @@ func _on_exit_trigger_body_entered(_body: Node3D) -> void:
 func _on_check_timer_timeout() -> void:
     if $Enemies.get_child_count() <= 0 and fighting_enemies:
         finish_wave()
+
+
+func _on_player_death_handler_transitioned() -> void:
+    queue_free()

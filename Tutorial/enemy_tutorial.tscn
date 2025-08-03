@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://btqnnxh88yfa7"]
+[gd_scene load_steps=34 format=3 uid="uid://btqnnxh88yfa7"]
 
 [ext_resource type="PackedScene" uid="uid://stneqj7qt42d" path="res://environment.tscn" id="1_0sppy"]
 [ext_resource type="Script" uid="uid://b7wx3yrxjckhu" path="res://Tutorial/enemy_tutorial.gd" id="1_itq02"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://dhjnqpbwamhvt" path="res://Tutorial/basic_wave_enemy.gd" id="4_bdllx"]
 [ext_resource type="PackedScene" uid="uid://l8lvset0b238" path="res://StartArea/start_area.tscn" id="5_bdllx"]
 [ext_resource type="FontFile" uid="uid://cum07t17b8mho" path="res://Assets/Fonts/Arvo-Bold.ttf" id="5_xoi2k"]
+[ext_resource type="PackedScene" uid="uid://bnky4c06vmgtv" path="res://player_death_handler.tscn" id="10_bdllx"]
 
 [sub_resource type="Resource" id="Resource_elj4g"]
 script = ExtResource("4_bdllx")
@@ -226,7 +227,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(1, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.001, 20.0]
+"values": [0.001, 10.0]
 }
 
 [sub_resource type="Animation" id="Animation_5wkb6"]
@@ -426,7 +427,13 @@ grow_vertical = 2
 wait_time = 0.2
 autostart = true
 
+[node name="PlayerDeathHandler" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_bdllx")]
+player = NodePath("../Player2")
+from = "tutorial"
+
+[connection signal="current_animation_changed" from="Anim" to="." method="_on_anim_current_animation_changed"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="body_entered" from="KillBarrier" to="." method="_on_kill_barrier_body_entered"]
 [connection signal="body_entered" from="CSGSphere3D/ExitTrigger" to="." method="_on_exit_trigger_body_entered"]
 [connection signal="timeout" from="CheckTimer" to="." method="_on_check_timer_timeout"]
+[connection signal="transitioned" from="PlayerDeathHandler" to="." method="_on_player_death_handler_transitioned"]
