@@ -4,7 +4,7 @@ extends Node3D
 # cant do recursize packedscene exports
 @export_file("*.tscn") var tutorial_scene
 @export_file("*.tscn") var enemy_tutorial_scene
-@export var world_scene: PackedScene
+@export_file("*.tscn") var world_scene
 @export var player_cam: Camera3D
 @export var tutorial_component: PlayerComponent
 

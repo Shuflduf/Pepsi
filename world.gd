@@ -1,6 +1,7 @@
 extends Node3D
 
 @export_file("*.pepsi") var level_path: String
+@export var start_area: PackedScene
 
 var level: Array
 var current_wave = 0
@@ -27,7 +28,17 @@ func _on_map_wave_complete() -> void:
     if current_wave + 1 < level.size():
         current_wave += 1
         $WaitTimer.start()
+    else:
+        %Map.finish()
 
 
 func _on_player_death_handler_transitioned() -> void:
     queue_free()
+
+
+func _on_map_map_complete() -> void:
+    var transition = Transition
+    transition.set_color(Color.AZURE)
+    transition.transition_to(start_area)
+    transition.transition_started.connect(queue_free)
+    transition.transition_data = { "from": "world" }

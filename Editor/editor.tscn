@@ -381,11 +381,11 @@ render_target_update_mode = 0
 unique_name_in_owner = true
 smooth = false
 
-[node name="NameLabel" parent="TabContainer/Preview/SubViewport/Map/UI" index="1"]
+[node name="NameLabel" parent="TabContainer/Preview/SubViewport/Map/UI" index="0"]
 offset_right = 342.0
 offset_bottom = 87.0
 
-[node name="EnemyLabel" parent="TabContainer/Preview/SubViewport/Map/UI" index="2"]
+[node name="EnemyLabel" parent="TabContainer/Preview/SubViewport/Map/UI" index="1"]
 offset_right = 261.0
 offset_bottom = 107.0
 

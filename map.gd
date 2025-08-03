@@ -2,6 +2,7 @@ class_name Map
 extends NavigationRegion3D
 
 signal wave_complete
+signal map_complete
 
 @export var enemies: EntityList
 @export var props: EntityList
@@ -19,7 +20,8 @@ func get_center_pos() -> float:
 
 func _ready() -> void:
     create_from_config(MapConfig.new())
-
+    $Orb.position.z = get_center_pos()
+    $Orb.position.x -= current_config.tile_size
 
 func create_from_config(config: MapConfig):
     current_config = config
@@ -143,7 +145,7 @@ func show_wave_info():
         return
     %NameLabel.text = wave_to_spawn.name
     %EnemyLabel.text = "%d Enemies" % enemies_spawned
-    %UIAnim.play(&"show")
+    %Anim.play(&"show")
 
 func player_spawn_pos() -> Vector3:
     var center_pos = get_center_pos()
@@ -152,3 +154,11 @@ func player_spawn_pos() -> Vector3:
         90.0,
         center_pos
     )
+
+func finish():
+    %Anim.play(&"orb")
+
+
+func _on_exit_trigger_body_entered(_body: Node3D) -> void:
+    $ExitOverlay.show()
+    map_complete.emit()

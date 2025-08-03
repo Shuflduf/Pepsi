@@ -23,7 +23,7 @@ var messages = [
     ],
 ]
 
-var current_wave = 3
+var current_wave = 0
 var fighting_enemies = false
 
 #func _ready() -> void:
