@@ -14,11 +14,11 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
     if event is InputEventMouseMotion:
-        looked_around.emit(event.relative.length())
+        looked_around.emit(event.relative.length() * Engine.time_scale)
         #$Bottle.fizz += event.relative.length() / 10000
-        cam_pivot.rotate_y(-event.relative.x * mouse_sens)
+        cam_pivot.rotate_y(-event.relative.x * mouse_sens * Engine.time_scale)
 
-        camera.rotate_x(-event.relative.y * mouse_sens)
+        camera.rotate_x(-event.relative.y * mouse_sens * Engine.time_scale)
         camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
         camera.rotation.y = 0.0
         camera.rotation.z = 0.0

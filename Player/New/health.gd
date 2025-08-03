@@ -1,15 +1,17 @@
 class_name Health
 extends Node
 
+signal died
+
 @export var hit_cooldown: Timer
 @export var health_bar: Range
 @export var damage_label: PackedScene
 @export var label_container: Control
 
 var can_be_hit = true
-var health = 100:
+var health = 10:
     set(new):
-        new = clamp(new, 0, 100)
+        new = min(new, 100)
         health = new
         health_bar.value = new
 
@@ -26,6 +28,8 @@ func hit(damage: int):
     hit_cooldown.start()
     can_be_hit = false
     print(damage)
+    if health <= 0:
+        died.emit()
 
     show_damage_label(damage)
 

@@ -7,4 +7,4 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
     if event is InputEventMouseMotion:
-        visuals.offset -= event.relative
+        visuals.offset -= event.relative * Engine.time_scale

@@ -27,3 +27,7 @@ func _on_map_wave_complete() -> void:
     if current_wave + 1 < level.size():
         current_wave += 1
         $WaitTimer.start()
+
+
+func _on_player_death_handler_transitioned() -> void:
+    queue_free()
