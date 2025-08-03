@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dls545cn465me"]
+[gd_scene load_steps=9 format=3 uid="uid://dls545cn465me"]
 
 [ext_resource type="PackedScene" uid="uid://b1h7w42uu2ijk" path="res://Props/Spinner/spinner.gltf" id="1_ip7pq"]
 [ext_resource type="Script" uid="uid://b1vdp2i4obp6v" path="res://Props/Spinner/spinner.gd" id="1_wynjs"]
@@ -6,6 +6,35 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_wynjs"]
 height = 0.4
 radius = 0.9
+
+[sub_resource type="Curve" id="Curve_wynjs"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.487342, 1), 0.0, 0.0, 0, 0, Vector2(0.756329, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_vo366"]
+curve = SubResource("Curve_wynjs")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l3piy"]
+emission_shape_offset = Vector3(0, 0.2, 0)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 0.0
+emission_ring_radius = 0.8
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+gravity = Vector3(0, 5, 0)
+scale_curve = SubResource("CurveTexture_vo366")
+color = Color(0.94902, 0.819608, 0.584314, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_71qtq"]
+vertex_color_use_as_albedo = true
+emission_enabled = true
+emission = Color(0.94902, 0.819608, 0.584314, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_uytys"]
+material = SubResource("StandardMaterial3D_71qtq")
+radius = 0.05
+height = 0.5
 
 [node name="Spinner" type="Node3D" groups=["Prop"]]
 transform = Transform3D(1.728, 0, 0, 0, 1.728, 0, 0, 0, 1.728, 0, 0, 0)
@@ -22,5 +51,10 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 shape = SubResource("CylinderShape3D_wynjs")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_l3piy")
+draw_pass_1 = SubResource("CapsuleMesh_uytys")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

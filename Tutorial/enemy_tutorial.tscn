@@ -6,7 +6,6 @@
 [ext_resource type="Resource" uid="uid://crragfimbp1gw" path="res://Enemies/enemies.tres" id="2_le3fn"]
 [ext_resource type="PackedScene" uid="uid://btsph6pq2xcxv" path="res://Player/New/player_2.tscn" id="3_q3g4g"]
 [ext_resource type="Script" uid="uid://qp6tx6l5yos1" path="res://Tutorial/basic_wave.gd" id="3_v3sty"]
-[ext_resource type="NavigationMesh" uid="uid://ip1320edg75b" path="res://Resources/nav_mesh.tres" id="4_5wkb6"]
 [ext_resource type="Script" uid="uid://dhjnqpbwamhvt" path="res://Tutorial/basic_wave_enemy.gd" id="4_bdllx"]
 [ext_resource type="PackedScene" uid="uid://l8lvset0b238" path="res://StartArea/start_area.tscn" id="5_bdllx"]
 [ext_resource type="FontFile" uid="uid://cum07t17b8mho" path="res://Assets/Fonts/Arvo-Bold.ttf" id="5_xoi2k"]
@@ -90,6 +89,13 @@ metadata/_custom_type_script = "uid://dhjnqpbwamhvt"
 script = ExtResource("3_v3sty")
 list = Array[ExtResource("4_bdllx")]([SubResource("Resource_201mw"), SubResource("Resource_35wka"), SubResource("Resource_5t4c7"), SubResource("Resource_eoxwx")])
 metadata/_custom_type_script = "uid://qp6tx6l5yos1"
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_v3sty"]
+vertices = PackedVector3Array(-9.25, 0.5, -9.25, -9.25, 0.5, 9.25, 9.25, 0.5, 9.25, 9.25, 0.5, -9.25)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+agent_height = 2.0
+agent_radius = 0.75
+agent_max_climb = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q3g4g"]
 albedo_texture = ExtResource("2_523p4")
@@ -343,7 +349,7 @@ start_area_scene = ExtResource("5_bdllx")
 [node name="Environment" parent="." instance=ExtResource("1_0sppy")]
 
 [node name="Map" type="NavigationRegion3D" parent="."]
-navigation_mesh = ExtResource("4_5wkb6")
+navigation_mesh = SubResource("NavigationMesh_v3sty")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -500, 0)
