@@ -6,11 +6,19 @@ signal looked_around(amount: float)
 @export var camera: Camera3D
 @export var mouse_sens = 0.004
 
+func switch_modes():
+    match Input.mouse_mode:
+        Input.MOUSE_MODE_VISIBLE:
+            Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+        Input.MOUSE_MODE_CAPTURED:
+            Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
 func _physics_process(_delta: float) -> void:
     DebugDraw2D.set_text("Sensitivity (-/=)", mouse_sens)
 
 func _ready() -> void:
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+    add_to_group(&"LookAround")
 
 func _input(event: InputEvent) -> void:
     if event is InputEventMouseMotion:
@@ -25,11 +33,7 @@ func _input(event: InputEvent) -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
     if event.is_action_pressed(&"ui_cancel"):
-        match Input.mouse_mode:
-            Input.MOUSE_MODE_VISIBLE:
-                Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-            Input.MOUSE_MODE_CAPTURED:
-                Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+        switch_modes()
 
     elif event is InputEventKey and event.is_pressed():
         if event.keycode == KEY_EQUAL:

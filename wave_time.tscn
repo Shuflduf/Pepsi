@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://om6nophoyigt" path="res://wave_time.gd" id="1_px7hf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pkg7o"]
-font_color = Color(0, 0, 0, 1)
+font_color = Color(0.188235, 0.12549, 0.192157, 1)
 
 [node name="WaveTime" type="HBoxContainer"]
 theme_override_constants/separation = 20

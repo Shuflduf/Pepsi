@@ -10,8 +10,9 @@ var config: MapConfig
 var time_on_waves = []
 var current_wave_time = 0.0
 var all_damage_taken = 0
-
 var counting = false
+
+var can_transition = false
 
 func _physics_process(delta: float) -> void:
     DebugDraw2D.set_text("time", [time_on_waves, current_wave_time])
@@ -62,11 +63,19 @@ func _on_map_map_complete() -> void:
     $EndScreen.wave_times = time_on_waves
     $EndScreen.level_name = config.level_name
     $EndScreen.damage_taken = all_damage_taken
+    get_tree().get_first_node_in_group(&"LookAround").switch_modes()
+    %Anim.play(&"end_screen")
+    can_transition = true
 
-    return
-    @warning_ignore("unreachable_code")
+func finish():
     var transition = Transition
     transition.set_color(Color.AZURE)
     transition.transition_to(start_area)
     transition.transition_started.connect(queue_free)
     transition.transition_data = { "from": "world" }
+
+
+func _on_finish_pressed() -> void:
+    if not can_transition:
+        return
+    finish()
