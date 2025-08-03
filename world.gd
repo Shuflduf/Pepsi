@@ -5,22 +5,22 @@ extends Node3D
 
 var level: Array
 var current_wave = 0
+var config: MapConfig
 
-var time_on_map = 0.0
 var time_on_waves = []
 var current_wave_time = 0.0
+var all_damage_taken = 0
 
 var counting = false
 
 func _physics_process(delta: float) -> void:
-    DebugDraw2D.set_text("time", [time_on_map, current_wave_time])
+    DebugDraw2D.set_text("time", [time_on_waves, current_wave_time])
     if counting:
-        time_on_map += delta
         current_wave_time += delta
 
 func _ready() -> void:
     var data = JSON.parse_string(FileAccess.get_file_as_string(level_path))
-    var config = MapConfig.new()
+    config = MapConfig.new()
     config.from_obj(data["config"])
     level = data["waves"].map(func(w):
         var new_wave = Wave.new()
@@ -30,7 +30,13 @@ func _ready() -> void:
     %Map.create_from_config(config)
     $WaitTimer.start(3.0)
     $Player2.global_position = %Map.player_spawn_pos()
+    var health_comp = $Player2.get_component("Health")
+    if health_comp:
+        health_comp.damage_taken.connect(_on_player_damage_taken)
 
+func _on_player_damage_taken(damage: int):
+    all_damage_taken += damage
+    print(all_damage_taken)
 
 func _on_wait_timer_timeout() -> void:
     %Map.set_wave(level[current_wave])
@@ -39,8 +45,8 @@ func _on_wait_timer_timeout() -> void:
 
 func _on_map_wave_complete() -> void:
     counting = false
+    time_on_waves.append({ "wave_name": level[current_wave].name, "value": current_wave_time })
     if current_wave + 1 < level.size():
-        time_on_waves.append({ "wave_name": level[current_wave].name, "value": current_wave_time })
         current_wave_time = 0.0
         current_wave += 1
         $WaitTimer.start()
@@ -53,7 +59,12 @@ func _on_player_death_handler_transitioned() -> void:
 
 
 func _on_map_map_complete() -> void:
+    $EndScreen.wave_times = time_on_waves
+    $EndScreen.level_name = config.level_name
+    $EndScreen.damage_taken = all_damage_taken
+
     return
+    @warning_ignore("unreachable_code")
     var transition = Transition
     transition.set_color(Color.AZURE)
     transition.transition_to(start_area)

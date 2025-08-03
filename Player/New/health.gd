@@ -2,6 +2,7 @@ class_name Health
 extends Node
 
 signal died
+signal damage_taken(damage: int)
 
 @export var hit_cooldown: Timer
 @export var health_bar: Range
@@ -28,6 +29,7 @@ func hit(damage: int):
     hit_cooldown.start()
     can_be_hit = false
     print(damage)
+    damage_taken.emit(damage)
     if health <= 0:
         died.emit()
 

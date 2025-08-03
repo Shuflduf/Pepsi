@@ -63,9 +63,10 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="EndScreen/VBoxContainer"]
+[node name="LevelComplete" type="Label" parent="EndScreen/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-text = "[MAP NAME] Complete!"
+text = "[LEVEL NAME] Complete!"
 label_settings = SubResource("LabelSettings_dwbse")
 horizontal_alignment = 1
 
@@ -87,7 +88,8 @@ text = "Time:"
 label_settings = SubResource("LabelSettings_pkg7o")
 horizontal_alignment = 1
 
-[node name="Label3" type="Label" parent="EndScreen/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="FullLevelTime" type="Label" parent="EndScreen/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "5:23"
 label_settings = SubResource("LabelSettings_pkg7o")
@@ -116,7 +118,8 @@ text = "Damage:"
 label_settings = SubResource("LabelSettings_pkg7o")
 horizontal_alignment = 1
 
-[node name="Label3" type="Label" parent="EndScreen/VBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="DamageLabel" type="Label" parent="EndScreen/VBoxContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "42"
 label_settings = SubResource("LabelSettings_pkg7o")
