@@ -36,7 +36,7 @@ func switch():
 func _ready() -> void:
     visuals.animation_finished.connect(_on_visuals_animation_finished)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
     if Input.is_action_pressed(&"switch"):
         switch()
 

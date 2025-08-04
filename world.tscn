@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://x5imp75aoum8"]
+[gd_scene load_steps=17 format=3 uid="uid://x5imp75aoum8"]
 
 [ext_resource type="Script" uid="uid://c0ufo5455ip26" path="res://world.gd" id="1_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://l8lvset0b238" path="res://StartArea/start_area.tscn" id="2_dwbse"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cpsctnwbeknfh" path="res://end_screen.gd" id="7_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://ducobsdxbkamb" path="res://wave_time.tscn" id="8_gbfbk"]
 [ext_resource type="Theme" uid="uid://cs4ois6d3ey27" path="res://Assets/theme.tres" id="9_ioo17"]
+[ext_resource type="FontFile" uid="uid://cum07t17b8mho" path="res://Assets/Fonts/Arvo-Bold.ttf" id="9_wse8f"]
 
 [sub_resource type="Animation" id="Animation_ioo17"]
 length = 0.001
@@ -52,6 +53,7 @@ _data = {
 friction = 0.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_dwbse"]
+font = ExtResource("9_wse8f")
 font_size = 36
 font_color = Color(0.188235, 0.12549, 0.192157, 1)
 

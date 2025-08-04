@@ -19,6 +19,7 @@ func _physics_process(delta: float) -> void:
         current_wave_time += delta
 
 func _ready() -> void:
+    DebugDraw2D.config
     var load_path = Transition.transition_data["level_path"] if Transition.transition_data.has("level_path") else level_path
 
     var data = JSON.parse_string(FileAccess.get_file_as_string(load_path))

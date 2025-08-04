@@ -15,12 +15,12 @@ extends BottleComponent
 var disabled = false
 var factor: float = 1.0
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
     if disabled:
         return
 
-    if Input.is_action_pressed(&"debug"):
-        factor += delta * 8.0
+    #if Input.is_action_pressed(&"debug"):
+        #factor += delta * 8.0
 
     cam.fov = min(remap(factor, 1.0, 2.0, base_fov, increased_fov), 170.0)
     player.ground_speed = remap(factor, 1.0, 2.0, base_speed, increased_speed)
