@@ -1,4 +1,3 @@
-@tool
 extends Node3D
 
 @export var destination: Node3D
@@ -8,18 +7,14 @@ func _process(_delta: float) -> void:
     var current_cam: Camera3D
     var viewport_size: Vector2i
 
-    if Engine.is_editor_hint():
-        var viewport = EditorInterface.get_editor_viewport_3d(0)
-        current_cam = viewport.get_camera_3d()
-        viewport_size = viewport.size
-    else:
-        current_cam = get_viewport().get_camera_3d()
-        viewport_size = get_viewport().size
+    current_cam = get_viewport().get_camera_3d()
+    viewport_size = get_viewport().size
 
     $SubViewport.size = viewport_size / 2.0
 
     var m = destination.global_transform * $Mesh.global_transform.inverse() * current_cam.global_transform
     portal_cam.global_transform = m
+    portal_cam.fov = current_cam.fov
 
 func open():
     %Anim.play(&"open")
