@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://l8lvset0b238"]
+[gd_scene load_steps=32 format=3 uid="uid://l8lvset0b238"]
 
 [ext_resource type="Script" uid="uid://b2cnas5s1q3kr" path="res://StartArea/start_area.gd" id="1_u5x8h"]
 [ext_resource type="PackedScene" uid="uid://dhhoq1yl7v7rw" path="res://StartArea/Couch/couch.tscn" id="2_0km52"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://blna5a181gko6" path="res://StartArea/Lamp/lamp.tscn" id="10_0km52"]
 [ext_resource type="Script" uid="uid://do0ye5ewt00di" path="res://StartArea/noise.gd" id="14_iwg5w"]
 [ext_resource type="PackedScene" uid="uid://btsph6pq2xcxv" path="res://Player/New/player_2.tscn" id="15_1grf1"]
+[ext_resource type="FontFile" uid="uid://cum07t17b8mho" path="res://Assets/Fonts/Arvo-Bold.ttf" id="17_ba3t7"]
 [ext_resource type="Script" uid="uid://cw6rf3g2mtmqx" path="res://Player/New/tutorial.gd" id="17_vgl7t"]
 [ext_resource type="Script" uid="uid://bbohit3fws0nh" path="res://StartArea/interations.gd" id="19_lsxms"]
 
@@ -105,6 +106,17 @@ _data = {
 &"RESET": SubResource("Animation_a3sj4"),
 &"fade_in": SubResource("Animation_2c24a")
 }
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lsxms"]
+bg_color = Color(0, 0, 0, 0.581)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_2c24a"]
+font = ExtResource("17_ba3t7")
+font_size = 20
 
 [node name="StartArea" type="Node3D" node_paths=PackedStringArray("player_cam", "tutorial_component")]
 script = ExtResource("1_u5x8h")
@@ -227,7 +239,124 @@ jump = NodePath("../Jump")
 player = NodePath("..")
 metadata/_custom_type_script = "uid://dk30rqaghdesy"
 
+[node name="DemoText" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="DemoText"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="PanelContainer" type="PanelContainer" parent="DemoText/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lsxms")
+
+[node name="MarginContainer" type="MarginContainer" parent="DemoText/MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="ScrollContainer" type="ScrollContainer" parent="DemoText/MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+follow_focus = true
+scroll_vertical = 226
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DemoText/MarginContainer/PanelContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="DemoText/MarginContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Thanks for playing the Pepsi Limbo demo!"
+label_settings = SubResource("LabelSettings_2c24a")
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DemoText/MarginContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]This game was made for the [url=https://summer.hackclub.com/projects/3605]Summer of Making[/url] event, hosted by Hack Club."
+fit_content = true
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="DemoText/MarginContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]It took about 95 hours of work, which includes everything excluding the music (Credits on main menu)"
+fit_content = true
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="DemoText/MarginContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]Planned features, in case I work on this game more:"
+fit_content = true
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="DemoText/MarginContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[ul] More levels"
+fit_content = true
+
+[node name="RichTextLabel9" type="RichTextLabel" parent="DemoText/MarginContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[ul] Better tutorial"
+fit_content = true
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="DemoText/MarginContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[ul] Leaderboard"
+fit_content = true
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="DemoText/MarginContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[ul] Level browser"
+fit_content = true
+
+[node name="RichTextLabel7" type="RichTextLabel" parent="DemoText/MarginContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[ul] Sound effects (The current ones are so bad i had to mute all game audio. Press F2 if you dare)"
+fit_content = true
+
+[node name="RichTextLabel8" type="RichTextLabel" parent="DemoText/MarginContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[ul] Better textures"
+fit_content = true
+
+[node name="RichTextLabel10" type="RichTextLabel" parent="DemoText/MarginContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "[center] Lastly, this game has a built-in editor! Press E while on the main menu to enter it. Levels are saved as \".pepsi\" files, and they can be opened by dragging them into the main menu."
+fit_content = true
+
 [connection signal="pressed" from="Player2/Interations" to="." method="_on_interations_pressed"]
+[connection signal="meta_clicked" from="DemoText/MarginContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]
 
 [editable path="Props/Lamp"]
 [editable path="Player2"]

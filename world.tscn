@@ -10,6 +10,21 @@
 [ext_resource type="PackedScene" uid="uid://ducobsdxbkamb" path="res://wave_time.tscn" id="8_gbfbk"]
 [ext_resource type="Theme" uid="uid://cs4ois6d3ey27" path="res://Assets/theme.tres" id="9_ioo17"]
 
+[sub_resource type="Animation" id="Animation_ioo17"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EndScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_gbfbk"]
 resource_name = "end_screen"
 length = 1.5
@@ -25,21 +40,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_ioo17"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("EndScreen:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wse8f"]
@@ -60,7 +60,7 @@ font_color = Color(0.188235, 0.12549, 0.192157, 1)
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_aqk2v")
-level_path = "res://shrimple.pepsi"
+level_path = "res://main.pepsi"
 start_area = ExtResource("2_dwbse")
 
 [node name="Anim" type="AnimationPlayer" parent="."]
@@ -83,7 +83,7 @@ physics_material_override = SubResource("PhysicsMaterial_aqk2v")
 
 [node name="PlayerDeathHandler" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_036b0")]
 player = NodePath("../Player2")
-from = "world"
+from = "enemy_tutorial"
 
 [node name="EndScreen" type="Control" parent="."]
 modulate = Color(1, 1, 1, 0)

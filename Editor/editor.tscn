@@ -582,6 +582,7 @@ use_native_dialog = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 focus_mode = 0
+disabled = true
 text = "Copy"
 
 [node name="Upload" type="Button" parent="TabContainer/Extra/VBoxContainer2"]

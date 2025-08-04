@@ -25,6 +25,7 @@ var liquid_amount = 0.0:
         $Fade.material.set_shader_parameter(&"progress", new / 3.0)
 
 func _ready() -> void:
+    liquid_amount = 0.0
     tutorial_component.handicap()
     tutorial_component.drinkable.drank.connect(_on_drank)
     tutorial_component.bottle_state = Tutorial.TutorialState.NoBottle
@@ -34,10 +35,17 @@ func _ready() -> void:
     var transition_data = Transition.transition_data
     if transition_data.has("from"):
         $Anim.play(&"fade_in")
-        if transition_data["from"] == "tutorial":
-            current_state = States.DidTutorial
-        elif transition_data["from"] == "enemy_tutorial":
-            current_state = States.ReadyForActualGame
+        match transition_data["from"]:
+            "tutorial":
+                 current_state = States.DidTutorial
+            "enemy_tutorial":
+                current_state = States.ReadyForActualGame
+            "world":
+                current_state = States.ReadyForActualGame
+                demo_popup()
+
+func demo_popup():
+    $DemoText.show()
 
 func _physics_process(delta: float) -> void:
     if moving_liquid:
@@ -90,7 +98,7 @@ func start_transition() -> void:
         States.DidTutorial:
             target_scene = load(enemy_tutorial_scene)
         States.ReadyForActualGame:
-            target_scene = world_scene
+            target_scene = load(world_scene)
 
     transition.transition_to(target_scene)
 
@@ -111,3 +119,7 @@ func _on_interations_pressed(interacted: CollisionObject3D) -> void:
 func _on_drank(amount: float):
     liquid_amount += amount
     print(amount)
+
+
+func _on_rich_text_label_meta_clicked(meta: Variant) -> void:
+    OS.shell_open(str(meta))

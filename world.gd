@@ -15,12 +15,13 @@ var counting = false
 var can_transition = false
 
 func _physics_process(delta: float) -> void:
-    DebugDraw2D.set_text("time", [time_on_waves, current_wave_time])
     if counting:
         current_wave_time += delta
 
 func _ready() -> void:
-    var data = JSON.parse_string(FileAccess.get_file_as_string(level_path))
+    var load_path = Transition.transition_data["level_path"] if Transition.transition_data.has("level_path") else level_path
+
+    var data = JSON.parse_string(FileAccess.get_file_as_string(load_path))
     config = MapConfig.new()
     config.from_obj(data["config"])
     level = data["waves"].map(func(w):
