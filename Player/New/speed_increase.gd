@@ -22,7 +22,7 @@ func _physics_process(delta: float) -> void:
     if Input.is_action_pressed(&"debug"):
         factor += delta * 8.0
 
-    cam.fov = remap(factor, 1.0, 2.0, base_fov, increased_fov)
+    cam.fov = min(remap(factor, 1.0, 2.0, base_fov, increased_fov), 170.0)
     player.ground_speed = remap(factor, 1.0, 2.0, base_speed, increased_speed)
     player.max_speed = remap(factor, 1.0, 2.0, max_speed, increased_max)
     player.max_air_speed = remap(factor, 1.0, 2.0, max_air_speed, increased_max_air)

@@ -7,7 +7,7 @@ extends PlayerComponent
 
 func _physics_process(_delta: float) -> void:
     var speed = player.linear_velocity.length()
-    DebugDraw2D.set_text("speed", speed)
+    DebugDraw2D.set_text("Velocity", speed)
     var alpha = remap(speed, 0.0, 12.0, -0.5, 0.3)
     alpha = min(alpha, max_alpha)
     set_alpha(alpha)

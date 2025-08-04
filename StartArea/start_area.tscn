@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://l8lvset0b238"]
+[gd_scene load_steps=35 format=4 uid="uid://l8lvset0b238"]
 
 [ext_resource type="Script" uid="uid://b2cnas5s1q3kr" path="res://StartArea/start_area.gd" id="1_u5x8h"]
 [ext_resource type="PackedScene" uid="uid://dhhoq1yl7v7rw" path="res://StartArea/Couch/couch.tscn" id="2_0km52"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://bbohit3fws0nh" path="res://StartArea/interations.gd" id="19_lsxms"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vgl7t"]
+resource_local_to_scene = true
 shader = ExtResource("4_ba3t7")
 shader_parameter/progress = 0.0
 shader_parameter/bg_color = Color(0.09785, 0.057, 0.1, 0)
@@ -28,11 +29,14 @@ shader_parameter/wave_1_speed = -1.0
 shader_parameter/wave_2_speed = 0.333
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2c24a"]
+resource_local_to_scene = true
 
 [sub_resource type="Sky" id="Sky_0km52"]
+resource_local_to_scene = true
 sky_material = SubResource("ProceduralSkyMaterial_2c24a")
 
 [sub_resource type="Environment" id="Environment_u5x8h"]
+resource_local_to_scene = true
 background_mode = 2
 sky = SubResource("Sky_0km52")
 tonemap_mode = 2
@@ -66,6 +70,48 @@ material = SubResource("ShaderMaterial_c4pxu")
 size = Vector2(10, 20)
 subdivide_width = 10
 subdivide_depth = 20
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vgl7t"]
+resource_local_to_scene = true
+resource_name = "Material"
+cull_mode = 2
+roughness = 0.5
+emission_enabled = true
+emission = Color(0.32, 0.304213, 0.0832, 1)
+emission_energy_multiplier = 10.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_a3kff"]
+_surfaces = [{
+"aabb": AABB(-0.854741, -0.0329952, -0.854741, 1.70948, 1e-05, 1.70948),
+"format": 34896613377,
+"index_count": 18,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAQADAAQAAwAAAAUABQAAAAYAAwAFAAcA"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("fSUAAH0lAACB2gAAfSUAAP9/AAAAAAAAgdoAAIHaAAD//wAA/38AAH0lAACB2gAAAAAAAP9/AAD/fwAA//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ba3t7"]
+resource_local_to_scene = true
+resource_name = "lamp_Cylinder_007"
+_surfaces = [{
+"aabb": AABB(-0.854741, -0.0329952, -0.854741, 1.70948, 1e-05, 1.70948),
+"attribute_data": PackedByteArray("UhkVBVIZFQVSGRUFUhkVBVIZFQVSGRUFUhkVBVIZFQU="),
+"format": 34896613399,
+"index_count": 18,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAQADAAQAAwAAAAUABQAAAAYAAwAFAAcA"),
+"material": SubResource("StandardMaterial3D_vgl7t"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("fSUAAH0l/7+B2gAAfSX/v/9/AAAAAP+/gdoAAIHa/7///wAA/3//v30lAACB2v+/AAAAAP9//7//fwAA////vwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_a3kff")
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_1grf1"]
 mix_rate = 11025.0
@@ -182,6 +228,9 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.6, 1
 [node name="Lamp" parent="Props" instance=ExtResource("10_0km52")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 4)
 
+[node name="Cylinder_005" parent="Props/Lamp" index="1"]
+mesh = SubResource("ArrayMesh_ba3t7")
+
 [node name="Lamp2" parent="Props" instance=ExtResource("10_0km52")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -4)
 
@@ -274,7 +323,7 @@ theme_override_constants/margin_bottom = 20
 [node name="ScrollContainer" type="ScrollContainer" parent="DemoText/MarginContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 follow_focus = true
-scroll_vertical = 226
+scroll_vertical = 100
 
 [node name="VBoxContainer" type="VBoxContainer" parent="DemoText/MarginContainer/PanelContainer/MarginContainer/ScrollContainer"]
 layout_mode = 2

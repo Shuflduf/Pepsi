@@ -25,7 +25,6 @@ var liquid_amount = 0.0:
         $Fade.material.set_shader_parameter(&"progress", new / 3.0)
 
 func _ready() -> void:
-    liquid_amount = 0.0
     tutorial_component.handicap()
     tutorial_component.drinkable.drank.connect(_on_drank)
     tutorial_component.bottle_state = Tutorial.TutorialState.NoBottle
@@ -87,9 +86,7 @@ func start_transition() -> void:
     await get_tree().create_timer(1.0).timeout
     var transition: SceneTransition = Transition
     transition.set_color(Color("060207"))
-    transition.transition_started.connect(func():
-        queue_free()
-    )
+    transition.transition_started.connect(queue_free)
 
     var target_scene: PackedScene
     match current_state:

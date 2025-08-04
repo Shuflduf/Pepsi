@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bl14ks6aj2phc" path="res://StartArea/Lamp/lamp.gd" id="2_bvvfp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bvvfp"]
+resource_local_to_scene = true
 resource_name = "Material"
 cull_mode = 2
 roughness = 0.5
@@ -26,6 +27,7 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_stod6"]
+resource_local_to_scene = true
 resource_name = "lamp_Cylinder_007"
 _surfaces = [{
 "aabb": AABB(-0.854741, -0.0329952, -0.854741, 1.70948, 1e-05, 1.70948),
