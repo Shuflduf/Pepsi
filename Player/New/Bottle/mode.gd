@@ -36,8 +36,8 @@ func switch():
 func _ready() -> void:
     visuals.animation_finished.connect(_on_visuals_animation_finished)
 
-func _unhandled_key_input(event: InputEvent) -> void:
-    if event.is_action_pressed(&"switch"):
+func _physics_process(delta: float) -> void:
+    if Input.is_action_pressed(&"switch"):
         switch()
 
 func _on_visuals_animation_finished(anim_name: StringName) -> void:

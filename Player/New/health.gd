@@ -10,9 +10,9 @@ signal damage_taken(damage: int)
 @export var label_container: Control
 
 var can_be_hit = true
-var health = 10:
+var health = 50:
     set(new):
-        new = min(new, 100)
+        new = min(new, 50)
         health = new
         health_bar.value = new
 
