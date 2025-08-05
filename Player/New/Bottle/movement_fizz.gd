@@ -5,4 +5,4 @@ extends BottleComponent
 
 func _physics_process(_delta: float) -> void:
     var vel_length = player.linear_velocity.length()
-    get_parent().value += vel_length / (2000 if !slam.slamming else 4000)
+    get_parent().value += vel_length / (1000 if !slam.slamming else 2000)

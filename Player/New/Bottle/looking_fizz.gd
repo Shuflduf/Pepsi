@@ -6,4 +6,4 @@ func _ready() -> void:
     look_around.looked_around.connect(_on_looked_around)
 
 func _on_looked_around(amount: float):
-    get_parent().value += amount / 10000
+    get_parent().value += amount / 5000
